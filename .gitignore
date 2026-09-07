@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyd
+
+# Virtual environment
+.venv/
+
+# Environment variables
+.env
+
+# Local database
+*.db
+*.sqlite
+*.sqlite3
+
+# AI models
+models/*.gguf
+models/*.bin
+models/*.safetensors
+
+# Audio
+*.wav
+*.mp3
+*.flac
+*.ogg
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
