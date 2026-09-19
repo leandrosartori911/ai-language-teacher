@@ -1,4 +1,4 @@
-from app.core.question import Question
+from ai_language_teacher.core.question import Question
 
 
 def test_question_has_a_prompt_expected_answer_and_item():

@@ -1,6 +1,5 @@
-from app.core.lesson import Lesson
-from app.core.question import Question
-
+from ai_language_teacher.core.lesson import Lesson
+from ai_language_teacher.core.question import Question
 
 HIRAGANA = {
     "あ": "a",

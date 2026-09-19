@@ -1,4 +1,4 @@
-from app.core.knowledge import Knowledge
+from ai_language_teacher.core.knowledge import Knowledge
 
 
 class Student:
