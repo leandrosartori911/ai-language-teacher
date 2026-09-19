@@ -1,5 +1,4 @@
-from app.language.japanese.hiragana import HIRAGANA
-from app.language.japanese.hiragana import HIRAGANA_VOWELS_LESSON
+from ai_language_teacher.language.japanese.hiragana import HIRAGANA, HIRAGANA_VOWELS_LESSON
 
 
 def test_hiragana_contains_basic_vowels():

@@ -1,5 +1,5 @@
-from app.core.lesson import Lesson
-from app.core.question import Question
+from ai_language_teacher.core.lesson import Lesson
+from ai_language_teacher.core.question import Question
 
 
 def test_lesson_has_a_title_and_items():

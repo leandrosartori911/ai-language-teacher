@@ -1,6 +1,8 @@
-from app.core.student import Student
-from app.core.assessment import Assessment
-from app.core.knowledge import Knowledge
+import pytest
+
+from ai_language_teacher.core.assessment import Assessment
+from ai_language_teacher.core.knowledge import Knowledge
+from ai_language_teacher.core.student import Student
 
 
 def test_student_creation():
@@ -46,11 +48,8 @@ def test_student_can_update_skill():
 def test_student_rejects_unknown_skill():
     student = Student("Test Student")
 
-    try:
+    with pytest.raises(ValueError):
         student.update_skill("unknown", 0.8)
-        assert False
-    except ValueError:
-        assert True
 
 def test_student_applies_assessment():
     student = Student("Test Student")

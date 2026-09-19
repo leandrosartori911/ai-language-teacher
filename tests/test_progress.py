@@ -1,6 +1,6 @@
-from app.core.assessment import Assessment
-from app.core.question import Question
-from app.core.student import Student
+from ai_language_teacher.core.assessment import Assessment
+from ai_language_teacher.core.question import Question
+from ai_language_teacher.core.student import Student
 
 
 def test_student_knowledge_is_updated_from_an_assessed_question():
