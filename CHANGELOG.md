@@ -7,3 +7,5 @@
   of just the last answer (spec 002).
 - Answers are now normalized (case, whitespace) and `expected_answer` can
   be a list of accepted spellings (spec 003).
+- Lesson content moves from hardcoded Python to JSON files under `data/`,
+  loaded and validated by `language.loader.load_lesson` (spec 004).
