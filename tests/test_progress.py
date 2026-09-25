@@ -12,11 +12,7 @@ def test_student_knowledge_is_updated_from_an_assessed_question():
         item="あ",
     )
 
-    assessment = Assessment(
-        skill="hiragana",
-        expected_answer=question.expected_answer,
-        item=question.item,
-    )
+    assessment = Assessment.from_question("hiragana", question)
 
     result = assessment.evaluate("a")
     student.apply_assessment(result)

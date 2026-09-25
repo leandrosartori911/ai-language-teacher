@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cd \"$CLAUDE_PROJECT_DIR\" && .venv/Scripts/python.exe -m ruff check . && .venv/Scripts/python.exe -m pytest -q"
+          }
+        ]
+      }
+    ]
+  }
+}
