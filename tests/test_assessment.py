@@ -33,3 +33,39 @@ def test_from_question_evaluates_like_a_manually_built_assessment():
     assert from_question_result.correct == manual_result.correct
     assert from_question_result.score == manual_result.score
     assert from_question_result.item == manual_result.item
+
+
+def test_answer_is_case_insensitive():
+    assessment = Assessment("hiragana", "a")
+
+    assert assessment.evaluate("A").correct is True
+
+
+def test_answer_ignores_surrounding_whitespace():
+    assessment = Assessment("hiragana", "a")
+
+    assert assessment.evaluate(" a ").correct is True
+
+
+def test_wrong_answer_is_still_wrong():
+    assessment = Assessment("hiragana", "a")
+
+    assert assessment.evaluate("i").correct is False
+
+
+def test_multiple_accepted_answers():
+    assessment = Assessment("hiragana", ["shi", "si"])
+
+    assert assessment.evaluate("si").correct is True
+
+
+def test_multiple_accepted_answers_case_insensitive():
+    assessment = Assessment("hiragana", ["shi", "si"])
+
+    assert assessment.evaluate("SHI").correct is True
+
+
+def test_multiple_accepted_answers_rejects_other_spellings():
+    assessment = Assessment("hiragana", ["shi", "si"])
+
+    assert assessment.evaluate("shu").correct is False

@@ -4,7 +4,7 @@
 - [x] Hiragana vowels lesson
 - [x] Core correctness: `Assessment.from_question`
 - [x] Mastery aggregation (skill = mean of knowledge items)
-- [ ] Answer normalization
+- [x] Answer normalization and multiple accepted answers
 - [ ] Content as data (YAML/JSON), full hiragana and katakana
 - [ ] Progression engine: unlock threshold, spaced repetition
 - [ ] CLI and SQLite persistence
