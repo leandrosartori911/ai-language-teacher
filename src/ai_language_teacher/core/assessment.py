@@ -17,7 +17,12 @@ class Assessment:
         return cls(skill, question.expected_answer, question.item)
 
     def evaluate(self, student_answer):
-        correct = student_answer == self.expected_answer
+        accepted = self.expected_answer
+        if isinstance(accepted, str):
+            accepted = [accepted]
+
+        normalized_answer = student_answer.strip().lower()
+        correct = any(normalized_answer == a.strip().lower() for a in accepted)
 
         if correct:
             score = 1.0
