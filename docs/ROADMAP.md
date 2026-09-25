@@ -6,7 +6,7 @@
 - [x] Mastery aggregation (skill = mean of knowledge items)
 - [x] Answer normalization and multiple accepted answers
 - [x] Content as data (JSON) with a validating loader
-- [ ] Full hiragana and katakana
+- [x] Katakana vowels (full hiragana already existed; full katakana syllabary is later)
 - [ ] Progression engine: unlock threshold, spaced repetition
 - [ ] CLI and SQLite persistence
 - [ ] v0.1.0 release

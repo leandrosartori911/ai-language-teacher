@@ -9,3 +9,4 @@
   be a list of accepted spellings (spec 003).
 - Lesson content moves from hardcoded Python to JSON files under `data/`,
   loaded and validated by `language.loader.load_lesson` (spec 004).
+- Add Katakana vowels lesson, mirroring the Hiragana one (spec 005).
