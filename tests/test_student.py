@@ -2,6 +2,7 @@ import pytest
 
 from ai_language_teacher.core.assessment import Assessment
 from ai_language_teacher.core.knowledge import Knowledge
+from ai_language_teacher.core.question import Question
 from ai_language_teacher.core.student import Student
 
 
@@ -79,3 +80,28 @@ def test_student_has_knowledge():
     student.knowledge.update("あ", 0.8)
 
     assert student.knowledge.get_score("あ") == 0.8
+
+
+def test_skill_is_mean_of_knowledge_items_not_last_answer():
+    student = Student("Test Student")
+
+    correct = Assessment.from_question("hiragana", Question("?", "a", "あ"))
+    wrong = Assessment.from_question("hiragana", Question("?", "i", "い"))
+
+    student.apply_assessment(correct.evaluate("a"))
+    student.apply_assessment(wrong.evaluate("wrong"))
+
+    assert student.skills["hiragana"] == 0.5
+
+
+def test_reanswering_same_item_does_not_double_count_in_mean():
+    student = Student("Test Student")
+
+    a = Assessment.from_question("hiragana", Question("?", "a", "あ"))
+    i = Assessment.from_question("hiragana", Question("?", "i", "い"))
+
+    student.apply_assessment(a.evaluate("a"))
+    student.apply_assessment(i.evaluate("i"))
+    student.apply_assessment(a.evaluate("wrong"))
+
+    assert student.skills["hiragana"] == 0.5

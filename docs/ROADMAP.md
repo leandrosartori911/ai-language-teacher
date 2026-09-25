@@ -3,7 +3,8 @@
 - [x] Core models: Student, Knowledge, Question, Assessment, Lesson
 - [x] Hiragana vowels lesson
 - [x] Core correctness: `Assessment.from_question`
-- [ ] Mastery aggregation, answer normalization
+- [x] Mastery aggregation (skill = mean of knowledge items)
+- [ ] Answer normalization
 - [ ] Content as data (YAML/JSON), full hiragana and katakana
 - [ ] Progression engine: unlock threshold, spaced repetition
 - [ ] CLI and SQLite persistence

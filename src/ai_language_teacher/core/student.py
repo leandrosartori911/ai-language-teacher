@@ -25,7 +25,14 @@ class Student:
         self.skills[skill] = score
 
     def apply_assessment(self, result):
-        self.update_skill(result.skill, result.score)
+        if result.item is None:
+            self.update_skill(result.skill, result.score)
+            return
 
-        if result.item is not None:
-            self.knowledge.update(result.item, result.score)
+        self.knowledge.update(result.item, result.score)
+        # ponytail: Knowledge is one flat map for all skills, so this mean
+        # mixes items across skills once a second skill (e.g. katakana)
+        # starts sharing it. Fine while only hiragana has items; split
+        # Knowledge per skill if that changes.
+        scores = self.knowledge.items.values()
+        self.update_skill(result.skill, sum(scores) / len(scores))
