@@ -12,6 +12,10 @@ class Assessment:
         self.expected_answer = expected_answer
         self.item = item
 
+    @classmethod
+    def from_question(cls, skill, question):
+        return cls(skill, question.expected_answer, question.item)
+
     def evaluate(self, student_answer):
         correct = student_answer == self.expected_answer
 
