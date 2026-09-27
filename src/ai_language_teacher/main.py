@@ -1,4 +1,4 @@
-def main():
+def main() -> None:
     print("Japanese AI Teacher")
     print("Local AI language tutor")
     print("Environment: OK")

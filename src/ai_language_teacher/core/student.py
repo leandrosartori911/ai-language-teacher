@@ -1,30 +1,33 @@
+from dataclasses import dataclass, field
+
+from ai_language_teacher.core.assessment import AssessmentResult
 from ai_language_teacher.core.knowledge import Knowledge
 
+SKILLS = (
+    "hiragana",
+    "katakana",
+    "kanji",
+    "vocabulary",
+    "grammar",
+    "listening",
+    "speaking",
+)
 
+
+@dataclass
 class Student:
-    def __init__(self, name):
-        self.name = name
-        self.level = "beginner"
+    name: str
+    level: str = "beginner"
+    skills: dict[str, float] = field(default_factory=lambda: dict.fromkeys(SKILLS, 0.0))
+    knowledge: Knowledge = field(default_factory=Knowledge)
 
-        self.skills = {
-            "hiragana": 0.0,
-            "katakana": 0.0,
-            "kanji": 0.0,
-            "vocabulary": 0.0,
-            "grammar": 0.0,
-            "listening": 0.0,
-            "speaking": 0.0,
-        }
-
-        self.knowledge = Knowledge()
-
-    def update_skill(self, skill, score):
+    def update_skill(self, skill: str, score: float) -> None:
         if skill not in self.skills:
             raise ValueError(f"Unknown skill: {skill}")
 
         self.skills[skill] = score
 
-    def apply_assessment(self, result):
+    def apply_assessment(self, result: AssessmentResult) -> None:
         if result.item is None:
             self.update_skill(result.skill, result.score)
             return
