@@ -15,3 +15,6 @@
 - Lesson JSON files now live inside the package
   (`ai_language_teacher/data/`) and load via `importlib.resources`, so a
   normally installed wheel works; CI checks it (spec 007).
+- Fix: knowledge is tracked per skill, so a skill's mastery is the mean of
+  its own items only; studying katakana no longer changes hiragana scores
+  and vice versa (spec 008).

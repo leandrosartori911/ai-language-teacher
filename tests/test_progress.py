@@ -18,4 +18,4 @@ def test_student_knowledge_is_updated_from_an_assessed_question():
     student.apply_assessment(result)
 
     assert student.skills["hiragana"] == 1.0
-    assert student.knowledge.get_score("あ") == 1.0
+    assert student.knowledge["hiragana"].get_score("あ") == 1.0
