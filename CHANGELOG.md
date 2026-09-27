@@ -12,3 +12,6 @@
 - Add Katakana vowels lesson, mirroring the Hiragana one (spec 005).
 - Core models are now typed dataclasses (value equality, readable repr);
   `mypy --strict` runs in CI (spec 006).
+- Lesson JSON files now live inside the package
+  (`ai_language_teacher/data/`) and load via `importlib.resources`, so a
+  normally installed wheel works; CI checks it (spec 007).

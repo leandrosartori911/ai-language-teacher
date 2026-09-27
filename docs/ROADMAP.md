@@ -15,7 +15,7 @@ MVP goal: a local, zero-cost AI teacher that really teaches Japanese
 
 ## Phase A: Foundation
 - [x] Typed dataclass core models, `mypy` in CI (spec 006)
-- [ ] Lesson data shipped inside the package (spec 007)
+- [x] Lesson data shipped inside the package (spec 007)
 - [ ] Knowledge tracked per skill (spec 008)
 
 ## Phase B: Teaching engine

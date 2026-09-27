@@ -17,6 +17,9 @@ dev = ["pytest>=8", "ruff>=0.6", "mypy>=1.11"]
 [tool.setuptools.packages.find]
 where = ["src"]
 
+[tool.setuptools.package-data]
+ai_language_teacher = ["data/**/*.json"]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 
