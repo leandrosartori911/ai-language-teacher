@@ -10,3 +10,5 @@
 - Lesson content moves from hardcoded Python to JSON files under `data/`,
   loaded and validated by `language.loader.load_lesson` (spec 004).
 - Add Katakana vowels lesson, mirroring the Hiragana one (spec 005).
+- Core models are now typed dataclasses (value equality, readable repr);
+  `mypy --strict` runs in CI (spec 006).

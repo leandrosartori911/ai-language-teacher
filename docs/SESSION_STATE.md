@@ -12,8 +12,33 @@ Portuguese for conversation with the user in Claude Code.
 - GitHub: https://github.com/leandrosartori911/ai-language-teacher
 - Local: `C:\Users\pc\Documents\Projects\Japanese AI\ai-language-teacher`
 - Branch: `main`
-- Full phased plan: `C:\Users\pc\.claude\plans\theres-a-paste-named-cached-panda.md`
-  (Phase 0 through Phase 5 + Later). This file tracks progress against it.
+- Original phased plan: `C:\Users\pc\.claude\plans\theres-a-paste-named-cached-panda.md`.
+  **Superseded on 2026-09-27 by `docs/ROADMAP.md`** (Phases A-E), which is
+  now the source of truth for what comes next.
+
+## MVP decisions (agreed with the user on 2026-09-27)
+
+- Goal: an AI teacher that really teaches Japanese, **language and
+  culture** (history, beliefs, stories). Japanese only for now; keep
+  language-specific code isolated so other languages can be added later.
+- Teaching approach: rule-based teacher first (hand-written explanations,
+  mnemonics, examples, culture notes, rule-based feedback, spaced
+  repetition), then a **local LLM via Ollama** on top, grounded on the
+  curated content (small models invent cultural "facts"). If the rule-based
+  version feels too thin, the LLM ships inside the MVP.
+- Interface: **web**, stack **FastAPI + Jinja2 templates + a little vanilla
+  JS**. Use CSS variables from the start so per-language theming is cheap.
+- Content for the MVP: full hiragana, full katakana, essential JLPT N5
+  kanji (~30-50), starter vocabulary (~100).
+- **Zero cost** is a hard constraint. Everything local; web app binds to
+  `127.0.0.1`; no data leaves the machine; no auth in the MVP.
+- Deferred idea (not MVP): neutral UI, pick a language, UI re-themes to the
+  country's flag colors (Japanese = red and white).
+- User hardware: RTX 5060 8 GB VRAM, 32 GB RAM, Ryzen 5 5500. Ollama is
+  installed (`llama3.1:8b`, `gemma3:4b`, `phi3:mini`, `nomic-embed-text`).
+  Compare 2-3 models for Japanese quality (e.g. Qwen family) before
+  picking one; ask before pulling models (several GB each).
+- ADRs: record the web stack and local-LLM decisions in `docs/adr/`.
 
 ## Workflow rules (the user wants these followed exactly)
 
@@ -35,7 +60,9 @@ Portuguese for conversation with the user in Claude Code.
   fine with it but asked to be told beforehand going forward.
 - **Small commits, one per spec.** Commit message: short summary + body
   explaining what changed and why. Always end with:
-  `Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>`
+  `Co-Authored-By: <model actually running the session> <noreply@anthropic.com>`
+  (e.g. `Claude Opus 5.5`; the user approved naming the real model on
+  2026-09-27 instead of the earlier fixed `Claude Sonnet 5`).
 - **`git push` after every commit** (remote `origin` is set, `gh` is
   authenticated as `leandrosartori911`).
 - Update `docs/ROADMAP.md` and `CHANGELOG.md` as part of each spec, not
@@ -56,9 +83,10 @@ Portuguese for conversation with the user in Claude Code.
   directly (Git Bash, used throughout this session).
 - Install project + dev deps: `pip install -e ".[dev]"`.
 - Run tests: `pytest` (or `.venv/Scripts/python.exe -m pytest -q`).
-- Lint: `ruff check .`.
+- Lint: `ruff check .`. Type check: `mypy` (strict, `src/` only, config in
+  `pyproject.toml`).
 - A `PostToolUse` hook in `.claude/settings.json` already runs
-  `ruff check . && pytest -q` after every Edit/Write tool call
+  `ruff check . && mypy && pytest -q` after every Edit/Write tool call
   automatically.
 - GitHub MCP server is registered for this project
   (`claude mcp add --transport http github https://api.githubcopilot.com/mcp/`)
@@ -80,7 +108,7 @@ ai-language-teacher/
   docs/
     ROADMAP.md
     SESSION_STATE.md        # this file
-    specs/001..005-*.md     # one file per implemented feature
+    specs/001..006-*.md     # one file per implemented feature
     adr/                    # empty so far, reserved for architecture decisions
   data/japanese/
     hiragana_vowels.json
@@ -101,7 +129,11 @@ ai-language-teacher/
   tests/
     test_student.py  test_assessment.py  test_question.py  test_lesson.py
     test_hiragana.py  test_katakana.py  test_loader.py  test_progress.py
+    test_models.py
 ```
+
+Since spec 006 all core models are `@dataclass`es with full type hints
+(value equality, readable repr); constructors are unchanged.
 
 ## Domain model (current)
 
@@ -164,9 +196,8 @@ If there's no `item` (skill-only assessment), it still overwrites directly
    `Student` in the tests only ever has items from one skill loaded. **If a
    real student studies both hiragana and katakana, their scores will mix
    into both `skills["hiragana"]` and `skills["katakana"]` incorrectly.**
-   This is flagged in specs 002 and 005 as deliberately out of scope — fix
-   before building the CLI/persistence layer (Phase 4) or it will produce
-   visibly wrong progress numbers.
+   This is flagged in specs 002 and 005 as deliberately out of scope.
+   **Scheduled as spec 008.**
 2. **Data file path resolution is dev-only.**
    `hiragana.py` / `katakana.py` do
    `Path(__file__).resolve().parents[4] / "data" / "japanese" / "*.json"`
@@ -174,13 +205,13 @@ If there's no `item` (skill-only assessment), it still overwrites directly
    repo root's `data/` folder. This only works for an editable/dev install
    (`pip install -e .`). A real built wheel would not include `data/`
    unless it's moved under the package or declared as `package_data`.
-   Needs fixing before any real PyPI release.
+   **Scheduled as spec 007.**
 3. **Answer matching is exact after normalization** — no fuzzy/typo
    tolerance (explicitly out of scope in spec 003, may never be needed).
 
 ## Test status
 
-34 tests passing, `ruff check` clean, as of commit `ca47e04`.
+43 tests passing, `ruff check` and `mypy` (strict) clean, as of spec 006.
 
 ```
 tests/test_student.py     — Student creation, skills, mastery aggregation
@@ -191,69 +222,30 @@ tests/test_hiragana.py    — hardcoded-content parity after moving to loader
 tests/test_katakana.py    — katakana lesson + cross-skill independence
 tests/test_loader.py      — load_lesson success + validation errors
 tests/test_progress.py    — end-to-end: question -> assessment -> student
+tests/test_models.py      — dataclass models, value equality, no shared defaults
 ```
 
-## Git log (specs completed so far, newest first)
+## Progress
 
-```
-ca47e04 Add Katakana vowels lesson (spec 005)
-190afeb Load lesson content from JSON data files (spec 004)
-8425449 Normalize answers and allow multiple accepted spellings (spec 003)
-d57e98b Fix skill mastery to average knowledge items, do not overwrite (spec 002)
-423c998 Add Assessment.from_question (spec 001)
-5b019ee Restructure to src layout and add packaging, docs, CI
-ad6cb0e Add hiragana lesson and knowledge tracking   (pre-restructure)
-c6978da Add student model and tests                  (pre-restructure)
-7b8a416 Initial project structure                    (pre-restructure)
-```
+See `docs/ROADMAP.md` for the full phase list (A: foundation, B: teaching
+engine, C: web app, D: local LLM teacher, E: release).
 
-## Plan progress vs. `theres-a-paste-named-cached-panda.md`
-
-- **Phase 0 (repo hygiene): done.** src layout, pyproject.toml, README,
-  LICENSE, CI, docs scaffolding, `.claude/` hook + skill, GitHub repo
-  created and pushed.
-- **Phase 1 (core correctness, specs 001-003): done.**
-  `Assessment.from_question`, mastery aggregation fix, answer
-  normalization + multi-answer support.
-- **Phase 2 (content as data, specs 004-005): done.** JSON loader with
-  validation, hiragana migrated to it, katakana vowels added.
-- **Phase 3 (progression engine, specs 006-007): NOT STARTED.** This is
-  the next work. Two specs planned:
-  - **006 — unlock threshold**: next lesson requires mastery ≥ some
-    threshold (plan suggested 0.8) on the prior lesson's items before it
-    unlocks. Last message before this session ended proposed: threshold
-    `0.8`, and a simple `unlocked_after: Lesson | None` field on `Lesson`
-    checked against mean mastery of the prior lesson's items — **no lesson
-    dependency graph, just a single optional predecessor link.** This was
-    proposed to the user but **not yet confirmed** — confirm this approach
-    first in the new session before writing the spec.
-  - **007 — spaced repetition**: simple algorithm (Leitner or SM-2) to
-    pick what to review next. This is explicitly the "adaptive" learning
-    piece and the main ML/algorithms learning opportunity in the project;
-    no external library needed.
-  - **Note:** before designing 006/007, the Known Issue #1 above
-    (`Knowledge` not namespaced by skill) likely needs addressing, since
-    unlock/review logic will need per-skill mastery to be correct once
-    more than one skill's content exists in the same student. Consider
-    whether it becomes spec 006 and renumber the rest, or is folded into
-    006's design — flag this to the user before deciding.
-- **Phase 4 (CLI + persistence, specs 008-009): not started.** CLI
-  (`learn`/`review`/`progress` commands, Typer or argparse — not yet
-  decided), SQLite persistence via stdlib `sqlite3`, demo GIF for README.
-- **Phase 5 (release): not started.** `v0.1.0` tag, GitHub release, badges,
-  demo GIF, LinkedIn post.
-- **Later (deferred, no specs yet):** kanji, vocabulary, grammar, local
-  LLM-generated exercises/feedback (Ollama), speech/pronunciation
-  assessment (local Whisper), web UI.
+- Old plan Phases 0-2 (repo hygiene, core correctness, content as data):
+  done, specs 001-005.
+- **Phase A:** spec 006 (typed dataclass models + mypy) done. Next:
+  - **007**: move lesson JSON under the package and load it with
+    `importlib.resources`, so a built wheel works (Known Issue #2).
+  - **008**: `Knowledge` tracked per skill (Known Issue #1).
+- **Phase B:** 009 teaching content per item (explanation, mnemonic,
+  example, culture note), 010 full kana, 011 unlock threshold (proposed:
+  `0.8`, single optional predecessor lesson, no dependency graph), 012
+  spaced repetition (Leitner or SM-2, no external library), 013 N5 kanji and
+  starter vocabulary.
+- **Phase C:** 014 SQLite persistence (stdlib `sqlite3`), 015+ web UI.
+- **Phase D:** Ollama teacher. **Phase E:** v0.1.0 release.
 
 ## Immediate next step for the new session
 
-1. Read this file plus `docs/ROADMAP.md` and the latest spec files in
-   `docs/specs/` for full technical detail.
-2. Resolve the open question above: does the `Knowledge` per-skill
-   namespacing fix happen before or as part of spec 006? Ask the user or
-   propose a default and flag it before coding (per the workflow rule
-   above).
-3. Write spec 006 (lesson unlock threshold), get approval, then follow the
-   test-first workflow as in specs 001-005.
-4. Continue to spec 007 (spaced repetition), then Phase 4.
+1. Read this file plus `docs/ROADMAP.md` and the latest specs.
+2. Write the next spec in the roadmap, get approval, then follow the
+   test-first workflow.

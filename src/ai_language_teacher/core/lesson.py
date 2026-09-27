@@ -1,5 +1,10 @@
+from dataclasses import dataclass, field
+
+from ai_language_teacher.core.question import Question
+
+
+@dataclass
 class Lesson:
-    def __init__(self, title, items, questions=None):
-        self.title = title
-        self.items = items
-        self.questions = questions if questions is not None else []
+    title: str
+    items: dict[str, str]
+    questions: list[Question] = field(default_factory=list)

@@ -1,10 +1,11 @@
 import json
+from pathlib import Path
 
 from ai_language_teacher.core.lesson import Lesson
 from ai_language_teacher.core.question import Question
 
 
-def load_lesson(path):
+def load_lesson(path: str | Path) -> Lesson:
     with open(path, encoding="utf-8") as f:
         data = json.load(f)
 

@@ -1,22 +1,27 @@
+from dataclasses import dataclass
+
+from ai_language_teacher.core.question import Question
+
+
+@dataclass
 class AssessmentResult:
-    def __init__(self, skill, correct, score, item=None):
-        self.skill = skill
-        self.correct = correct
-        self.score = score
-        self.item = item
+    skill: str
+    correct: bool
+    score: float
+    item: str | None = None
 
 
+@dataclass
 class Assessment:
-    def __init__(self, skill, expected_answer, item=None):
-        self.skill = skill
-        self.expected_answer = expected_answer
-        self.item = item
+    skill: str
+    expected_answer: str | list[str]
+    item: str | None = None
 
     @classmethod
-    def from_question(cls, skill, question):
+    def from_question(cls, skill: str, question: Question) -> "Assessment":
         return cls(skill, question.expected_answer, question.item)
 
-    def evaluate(self, student_answer):
+    def evaluate(self, student_answer: str) -> AssessmentResult:
         accepted = self.expected_answer
         if isinstance(accepted, str):
             accepted = [accepted]
