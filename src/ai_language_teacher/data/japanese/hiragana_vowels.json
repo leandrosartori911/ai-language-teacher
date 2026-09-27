@@ -1,10 +1,45 @@
 {
   "title": "Hiragana vowels",
-  "items": {
-    "あ": "a",
-    "い": "i",
-    "う": "u",
-    "え": "e",
-    "お": "o"
-  }
+  "items": [
+    {
+      "item": "あ",
+      "answer": "a",
+      "explanation": "あ is the hiragana for the vowel 'a', said like the 'a' in 'father' but short. Japanese vowels are pure: each one keeps the same sound from start to finish, with no glide at the end.",
+      "mnemonic": "The cross at the top is a stick figure standing over the big swirl below. It slips into the whirlpool and shouts 'Ahhh!'",
+      "example": {"word": "あめ", "reading": "ame", "meaning": "rain"},
+      "culture_note": "Hiragana grew out of cursive handwriting of Chinese characters around the 9th century. あ is a simplified cursive form of the kanji 安. Much of the court literature of the Heian period, including The Tale of Genji, was written largely in hiragana."
+    },
+    {
+      "item": "い",
+      "answer": "i",
+      "explanation": "い is the hiragana for 'i', said like the 'ee' in 'see' but short.",
+      "mnemonic": "Two short strokes side by side, like the letters 'ii' stretched into lines. Read them as 'ee'.",
+      "example": {"word": "いぬ", "reading": "inu", "meaning": "dog"},
+      "culture_note": "い comes from a cursive form of the kanji 以. It is also the first kana of the iroha, a classical poem that uses each of the 47 kana of its time exactly once and was long used to put things in order, the way English uses the alphabet."
+    },
+    {
+      "item": "う",
+      "answer": "u",
+      "explanation": "う is the hiragana for 'u', close to the 'oo' in 'food' but short, and with relaxed lips instead of rounded ones. In some words it is almost whispered: です (desu) often sounds like 'des'.",
+      "mnemonic": "Under the little dash of a hat, the big curve is a letter 'U' tipped onto its side.",
+      "example": {"word": "うみ", "reading": "umi", "meaning": "sea"},
+      "culture_note": "う comes from a cursive form of the kanji 宇."
+    },
+    {
+      "item": "え",
+      "answer": "e",
+      "explanation": "え is the hiragana for 'e', said like the 'e' in 'bed'.",
+      "mnemonic": "A dancer with a small hat on, kicking one leg out to the side and calling 'Eh!' to the crowd.",
+      "example": {"word": "えき", "reading": "eki", "meaning": "train station"},
+      "culture_note": "え comes from a cursive form of the kanji 衣."
+    },
+    {
+      "item": "お",
+      "answer": "o",
+      "explanation": "お is the hiragana for 'o', like the 'o' in 'go' but pure, without the 'w' sound English adds at the end. It looks like あ with an extra stroke on the right, so check for that stroke when you read.",
+      "mnemonic": "お is あ with a small piece flying off to the right: 'Oh! Something fell off!'",
+      "example": {"word": "おちゃ", "reading": "ocha", "meaning": "tea"},
+      "culture_note": "お comes from a cursive form of the kanji 於. The お in おちゃ is a polite prefix: ちゃ alone means tea, and adding お makes the word sound more refined. Many everyday words take this prefix, such as おみず (omizu, water), which is one way politeness is built into ordinary Japanese."
+    }
+  ]
 }

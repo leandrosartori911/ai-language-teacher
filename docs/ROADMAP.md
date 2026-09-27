@@ -19,7 +19,7 @@ MVP goal: a local, zero-cost AI teacher that really teaches Japanese
 - [x] Knowledge tracked per skill (spec 008)
 
 ## Phase B: Teaching engine
-- [ ] Teaching content per item: explanation, mnemonic, example, culture note (spec 009)
+- [x] Teaching content per item: explanation, mnemonic, example, culture note (spec 009)
 - [ ] Full Hiragana and Katakana (spec 010)
 - [ ] Lesson unlock threshold (spec 011)
 - [ ] Spaced repetition (spec 012)

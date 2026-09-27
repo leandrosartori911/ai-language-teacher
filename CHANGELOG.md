@@ -18,3 +18,7 @@
 - Fix: knowledge is tracked per skill, so a skill's mastery is the mean of
   its own items only; studying katakana no longer changes hiragana scores
   and vice versa (spec 008).
+- Lessons now teach, not only quiz: every item has an explanation with
+  pronunciation guidance, an original mnemonic, an example word and an
+  optional culture note. The lesson JSON format changes to a list of item
+  objects, validated by the loader (spec 009).

@@ -6,13 +6,15 @@ The goal is a tutor that checks real mastery before unlocking the next stage,
 adapts lessons to student performance, and later supports speaking practice,
 all without paid cloud services.
 
-> Status: early development (v0.1.0). Hiragana vowels only.
+> Status: early development (v0.1.0). Hiragana and katakana vowels.
 
 ## Features (current)
 
-- Item-level knowledge tracking (per character, not just per skill)
+- Teaching content for every item: explanation, mnemonic, example word
+  and culture notes, written in English for this project
+- Item-level knowledge tracking, kept separately per skill
 - Questions, assessments and lessons as small, tested building blocks
-- First lesson: Hiragana vowels (あ い う え お)
+- Lessons: Hiragana vowels (あ い う え お), Katakana vowels (ア イ ウ エ オ)
 
 ## Quickstart
 

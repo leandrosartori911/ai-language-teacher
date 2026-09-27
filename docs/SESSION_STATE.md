@@ -108,7 +108,7 @@ ai-language-teacher/
   docs/
     ROADMAP.md
     SESSION_STATE.md        # this file
-    specs/001..008-*.md     # one file per implemented feature
+    specs/001..009-*.md     # one file per implemented feature
     adr/                    # 0001 web stack, 0002 local LLM
   src/ai_language_teacher/
     main.py                 # stub: prints a banner, not a real CLI yet
@@ -155,11 +155,18 @@ Since spec 006 all core models are `@dataclass`es with full type hints
     (`.strip().lower()`), accepts `expected_answer` as a single string or a
     list of accepted spellings, returns `AssessmentResult`.
 - **`AssessmentResult`**: `skill`, `correct`, `score` (1.0 or 0.0), `item`.
-- **`Lesson`**: `title`, `items` (dict), `questions` (list, optional).
-- **`load_lesson(path)`** (spec 004): reads a JSON file shaped
-  `{"title": ..., "items": {item: romaji, ...}}`, auto-generates one
-  `Question` per item (`"What is the romaji for {item}?"`), returns a
-  `Lesson`. Raises `ValueError` if `items` is empty or any answer is blank.
+- **`Lesson`**: `title`, `items` (dict item -> answer), `questions` (list,
+  optional), `teaching` (dict item -> `Teaching`, spec 009).
+- **`Teaching`** (`core/teaching.py`, spec 009): `explanation`, `mnemonic`,
+  `example: Example(word, reading, meaning)`, `culture_note: str | None`.
+- **`load_lesson(path)`** (specs 004, 009): reads a JSON file shaped
+  `{"title": ..., "items": [{"item", "answer", "explanation", "mnemonic",
+  "example": {"word", "reading", "meaning"}, "culture_note"?}, ...]}`
+  (list order = teaching order), auto-generates one `Question` per item
+  (`"What is the romaji for {item}?"`), returns a `Lesson`. Raises
+  `ValueError` (naming file and item) for: no items, missing/blank required
+  field, blank `culture_note`, example word not containing the item,
+  duplicate item.
 
 ### Mastery aggregation (spec 002 — important, was a real bug)
 
@@ -190,6 +197,11 @@ If there's no `item` (skill-only assessment), it still overwrites directly
 
 - Hiragana vowels: あ→a, い→i, う→u, え→e, お→o (`src/ai_language_teacher/data/japanese/hiragana_vowels.json`).
 - Katakana vowels: ア→a, イ→i, ウ→u, エ→e, オ→o (`src/ai_language_teacher/data/japanese/katakana_vowels.json`).
+- Every item has English teaching content written originally for the
+  project (no text copied from other courses). Culture notes cover kana
+  origins (e.g. あ from 安, ア from the left part of 阿) and a few true,
+  useful facts. **Content is what the Phase D LLM will be grounded on, so
+  check facts carefully before adding any.**
 - Nothing else yet (no consonant rows, no kanji, no vocab, no grammar).
 
 ## Known issues / deliberate shortcuts (marked `# ponytail:` in code)
@@ -199,7 +211,7 @@ If there's no `item` (skill-only assessment), it still overwrites directly
 
 ## Test status
 
-50 tests passing, `ruff check` and `mypy` (strict) clean, as of spec 008.
+66 tests passing, `ruff check` and `mypy` (strict) clean, as of spec 009.
 
 ```
 tests/test_student.py     — Student creation, skills, mastery aggregation
@@ -212,6 +224,7 @@ tests/test_loader.py      — load_lesson success + validation errors
 tests/test_progress.py    — end-to-end: question -> assessment -> student
 tests/test_models.py      — dataclass models, value equality, no shared defaults
 tests/test_knowledge_per_skill.py — per-skill knowledge and means
+tests/test_teaching.py    — teaching content present + loader validation
 ```
 
 ## Progress
@@ -224,8 +237,8 @@ engine, C: web app, D: local LLM teacher, E: release).
 - **Phase A: done.** 006 typed dataclass models + mypy; 007 lesson data
   inside the package, loaded with `importlib.resources` (CI job `wheel`
   checks a non-editable install); 008 `Knowledge` per skill.
-- **Phase B (next):** 009 teaching content per item (explanation, mnemonic,
-  example, culture note), 010 full kana, 011 unlock threshold (proposed:
+- **Phase B (in progress):** 009 teaching content per item done. Next:
+  010 full kana, 011 unlock threshold (proposed:
   `0.8`, single optional predecessor lesson, no dependency graph), 012
   spaced repetition (Leitner or SM-2, no external library), 013 N5 kanji and
   starter vocabulary.

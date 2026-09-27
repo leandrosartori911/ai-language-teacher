@@ -33,7 +33,7 @@ def test_load_lesson_matches_hardcoded_hiragana_lesson():
 
 def test_load_lesson_rejects_empty_items(tmp_path):
     path = tmp_path / "empty.json"
-    path.write_text(json.dumps({"title": "Empty", "items": {}}), encoding="utf-8")
+    path.write_text(json.dumps({"title": "Empty", "items": []}), encoding="utf-8")
 
     with pytest.raises(ValueError):
         load_lesson(str(path))
@@ -41,9 +41,14 @@ def test_load_lesson_rejects_empty_items(tmp_path):
 
 def test_load_lesson_rejects_blank_answer(tmp_path):
     path = tmp_path / "blank.json"
-    path.write_text(
-        json.dumps({"title": "Bad", "items": {"あ": ""}}), encoding="utf-8"
-    )
+    item = {
+        "item": "あ",
+        "answer": "",
+        "explanation": "Sounds like 'a'.",
+        "mnemonic": "A hook.",
+        "example": {"word": "あめ", "reading": "ame", "meaning": "rain"},
+    }
+    path.write_text(json.dumps({"title": "Bad", "items": [item]}), encoding="utf-8")
 
     with pytest.raises(ValueError):
         load_lesson(str(path))
