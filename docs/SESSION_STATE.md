@@ -108,7 +108,7 @@ ai-language-teacher/
   docs/
     ROADMAP.md
     SESSION_STATE.md        # this file
-    specs/001..007-*.md     # one file per implemented feature
+    specs/001..008-*.md     # one file per implemented feature
     adr/                    # 0001 web stack, 0002 local LLM
   src/ai_language_teacher/
     main.py                 # stub: prints a banner, not a real CLI yet
@@ -139,13 +139,12 @@ Since spec 006 all core models are `@dataclass`es with full type hints
 
 - **`Student`**: `name`, `level` ("beginner"), `skills` dict (hiragana,
   katakana, kanji, vocabulary, grammar, listening, speaking — all start at
-  `0.0`), `knowledge: Knowledge`.
+  `0.0`), `knowledge: dict[str, Knowledge]` (one per skill, spec 008).
   - `update_skill(skill, score)`: direct set, raises `ValueError` on
     unknown skill.
   - `apply_assessment(result)`: **see mastery aggregation below.**
-- **`Knowledge`**: flat dict `items: {item_key: score}`.
+- **`Knowledge`**: dict `items: {item_key: score}` for one skill.
   `update(item, score)`, `get_score(item)` (default `0.0`).
-  ⚠️ Not namespaced by skill — see Known Issues.
 - **`Question`**: `prompt`, `expected_answer` (str or list[str] since spec
   003), `item`.
 - **`Assessment`**: `skill`, `expected_answer`, `item=None`.
@@ -171,14 +170,19 @@ def apply_assessment(self, result):
         self.update_skill(result.skill, result.score)
         return
 
-    self.knowledge.update(result.item, result.score)
-    scores = self.knowledge.items.values()
+    if result.skill not in self.knowledge:
+        raise ValueError(f"Unknown skill: {result.skill}")
+
+    knowledge = self.knowledge[result.skill]
+    knowledge.update(result.item, result.score)
+    scores = knowledge.items.values()
     self.update_skill(result.skill, sum(scores) / len(scores))
 ```
 Originally `update_skill` just overwrote the skill score with the latest
 answer — one wrong answer after 10 correct ones dropped mastery to 0.0.
 Now: if the result has an `item`, the skill score becomes the **mean of
-all `Knowledge` scores** (not just that skill's items — see Known Issues).
+that skill's `Knowledge` scores** (per skill since spec 008; before that
+it averaged every skill's items together, which was a bug).
 If there's no `item` (skill-only assessment), it still overwrites directly
 (same as before) — that path is intentionally unchanged.
 
@@ -190,20 +194,12 @@ If there's no `item` (skill-only assessment), it still overwrites directly
 
 ## Known issues / deliberate shortcuts (marked `# ponytail:` in code)
 
-1. **`Knowledge` is one flat map, not namespaced by skill.**
-   `Student.apply_assessment` averages *all* `Knowledge` scores into
-   whichever skill the current result names. Fine today because a given
-   `Student` in the tests only ever has items from one skill loaded. **If a
-   real student studies both hiragana and katakana, their scores will mix
-   into both `skills["hiragana"]` and `skills["katakana"]` incorrectly.**
-   This is flagged in specs 002 and 005 as deliberately out of scope.
-   **Scheduled as spec 008.**
-2. **Answer matching is exact after normalization** — no fuzzy/typo
+1. **Answer matching is exact after normalization** — no fuzzy/typo
    tolerance (explicitly out of scope in spec 003, may never be needed).
 
 ## Test status
 
-46 tests passing, `ruff check` and `mypy` (strict) clean, as of spec 007.
+50 tests passing, `ruff check` and `mypy` (strict) clean, as of spec 008.
 
 ```
 tests/test_student.py     — Student creation, skills, mastery aggregation
@@ -215,6 +211,7 @@ tests/test_katakana.py    — katakana lesson + cross-skill independence
 tests/test_loader.py      — load_lesson success + validation errors
 tests/test_progress.py    — end-to-end: question -> assessment -> student
 tests/test_models.py      — dataclass models, value equality, no shared defaults
+tests/test_knowledge_per_skill.py — per-skill knowledge and means
 ```
 
 ## Progress
@@ -224,11 +221,10 @@ engine, C: web app, D: local LLM teacher, E: release).
 
 - Old plan Phases 0-2 (repo hygiene, core correctness, content as data):
   done, specs 001-005.
-- **Phase A:** specs 006 (typed dataclass models + mypy) and 007 (lesson
-  data inside the package, loaded with `importlib.resources`; CI job
-  `wheel` checks a non-editable install) done. Next:
-  - **008**: `Knowledge` tracked per skill (Known Issue #1).
-- **Phase B:** 009 teaching content per item (explanation, mnemonic,
+- **Phase A: done.** 006 typed dataclass models + mypy; 007 lesson data
+  inside the package, loaded with `importlib.resources` (CI job `wheel`
+  checks a non-editable install); 008 `Knowledge` per skill.
+- **Phase B (next):** 009 teaching content per item (explanation, mnemonic,
   example, culture note), 010 full kana, 011 unlock threshold (proposed:
   `0.8`, single optional predecessor lesson, no dependency graph), 012
   spaced repetition (Leitner or SM-2, no external library), 013 N5 kanji and

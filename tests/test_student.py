@@ -77,9 +77,9 @@ def test_knowledge_can_update_item():
 def test_student_has_knowledge():
     student = Student("Test Student")
 
-    student.knowledge.update("あ", 0.8)
+    student.knowledge["hiragana"].update("あ", 0.8)
 
-    assert student.knowledge.get_score("あ") == 0.8
+    assert student.knowledge["hiragana"].get_score("あ") == 0.8
 
 
 def test_skill_is_mean_of_knowledge_items_not_last_answer():

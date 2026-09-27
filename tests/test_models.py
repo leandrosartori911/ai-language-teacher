@@ -34,7 +34,7 @@ def test_students_do_not_share_skills_or_knowledge():
     second = Student("Second")
 
     first.update_skill("hiragana", 1.0)
-    first.knowledge.update("あ", 1.0)
+    first.knowledge["hiragana"].update("あ", 1.0)
 
     assert second.skills["hiragana"] == 0.0
-    assert second.knowledge.items == {}
+    assert second.knowledge["hiragana"].items == {}
