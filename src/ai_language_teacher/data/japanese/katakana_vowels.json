@@ -1,10 +1,45 @@
 {
   "title": "Katakana vowels",
-  "items": {
-    "ア": "a",
-    "イ": "i",
-    "ウ": "u",
-    "エ": "e",
-    "オ": "o"
-  }
+  "items": [
+    {
+      "item": "ア",
+      "answer": "a",
+      "explanation": "ア is the katakana for 'a', the same sound as hiragana あ. Katakana spells exactly the same sounds as hiragana, but it is used mainly for words borrowed from other languages, foreign names, and for emphasis, a bit like italics in English.",
+      "mnemonic": "ア looks like an axe: the top stroke is the blade and the long curve is the handle. 'Ah, an axe!'",
+      "example": {"word": "アメリカ", "reading": "amerika", "meaning": "America (the United States)"},
+      "culture_note": "Katakana was developed around the 9th century by Buddhist monks, who wrote pieces of kanji as a quick shorthand when annotating Chinese texts. ア is the left part of the kanji 阿."
+    },
+    {
+      "item": "イ",
+      "answer": "i",
+      "explanation": "イ is the katakana for 'i', the same sound as hiragana い.",
+      "mnemonic": "イ is an easel: a straight post with a short leg leaning against it. 'Ea-sel' starts with the 'ee' sound.",
+      "example": {"word": "イギリス", "reading": "igirisu", "meaning": "the United Kingdom"},
+      "culture_note": "イ is the left part of the kanji 伊. The word イギリス is usually traced to the Portuguese inglês ('English'), a legacy of the Portuguese traders who reached Japan in the 16th century."
+    },
+    {
+      "item": "ウ",
+      "answer": "u",
+      "explanation": "ウ is the katakana for 'u', the same sound as hiragana う. The two look alike: ウ has a dot over an angular roof shape, where う has a dash over a single curve.",
+      "mnemonic": "ウ is う with a roof built over it: someone inside the little house says 'Ooh, cozy!'",
+      "example": {"word": "ウイルス", "reading": "uirusu", "meaning": "virus"},
+      "culture_note": "Both う and ウ come from the kanji 宇: hiragana from a cursive form of the whole character, katakana from just its top, the 'roof' part."
+    },
+    {
+      "item": "エ",
+      "answer": "e",
+      "explanation": "エ is the katakana for 'e', the same sound as hiragana え. It looks the same as the kanji 工 (craft), so context tells you which one you are reading.",
+      "mnemonic": "エ is a steel I-beam, the kind an engineer builds with. 'En-gineer' starts with the 'e' sound.",
+      "example": {"word": "エアコン", "reading": "eakon", "meaning": "air conditioner"},
+      "culture_note": "エ is the right part of the kanji 江. エアコン shows a common habit of Japanese loanwords: long English words get clipped, here 'air con(ditioner)'."
+    },
+    {
+      "item": "オ",
+      "answer": "o",
+      "explanation": "オ is the katakana for 'o', the same sound as hiragana お.",
+      "mnemonic": "オ is someone throwing their arms out and kicking one leg back after dropping something: 'Oh no!'",
+      "example": {"word": "オレンジ", "reading": "orenji", "meaning": "orange"},
+      "culture_note": "オ comes from a simplified form of the left part of the kanji 於, the same kanji that gave hiragana お."
+    }
+  ]
 }
