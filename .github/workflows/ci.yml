@@ -20,3 +20,19 @@ jobs:
       - run: ruff check .
       - run: mypy
       - run: pytest
+
+  wheel:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip wheel . --no-deps -w dist
+      - run: python -m venv /tmp/venv && /tmp/venv/bin/pip install dist/*.whl
+      - name: Import lessons from a non-editable install
+        working-directory: /tmp
+        run: >
+          /tmp/venv/bin/python -c "from ai_language_teacher.language.japanese.hiragana import HIRAGANA;
+          from ai_language_teacher.language.japanese.katakana import KATAKANA;
+          assert list(HIRAGANA.values()) == list(KATAKANA.values()) == list('aiueo')"

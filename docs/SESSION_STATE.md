@@ -108,13 +108,13 @@ ai-language-teacher/
   docs/
     ROADMAP.md
     SESSION_STATE.md        # this file
-    specs/001..006-*.md     # one file per implemented feature
-    adr/                    # empty so far, reserved for architecture decisions
-  data/japanese/
-    hiragana_vowels.json
-    katakana_vowels.json
+    specs/001..007-*.md     # one file per implemented feature
+    adr/                    # 0001 web stack, 0002 local LLM
   src/ai_language_teacher/
     main.py                 # stub: prints a banner, not a real CLI yet
+    data/japanese/          # lesson JSON, shipped as package data (spec 007)
+      hiragana_vowels.json
+      katakana_vowels.json
     core/
       student.py            # Student
       knowledge.py           # Knowledge
@@ -184,8 +184,8 @@ If there's no `item` (skill-only assessment), it still overwrites directly
 
 ## Content
 
-- Hiragana vowels: あ→a, い→i, う→u, え→e, お→o (`data/japanese/hiragana_vowels.json`).
-- Katakana vowels: ア→a, イ→i, ウ→u, エ→e, オ→o (`data/japanese/katakana_vowels.json`).
+- Hiragana vowels: あ→a, い→i, う→u, え→e, お→o (`src/ai_language_teacher/data/japanese/hiragana_vowels.json`).
+- Katakana vowels: ア→a, イ→i, ウ→u, エ→e, オ→o (`src/ai_language_teacher/data/japanese/katakana_vowels.json`).
 - Nothing else yet (no consonant rows, no kanji, no vocab, no grammar).
 
 ## Known issues / deliberate shortcuts (marked `# ponytail:` in code)
@@ -198,20 +198,12 @@ If there's no `item` (skill-only assessment), it still overwrites directly
    into both `skills["hiragana"]` and `skills["katakana"]` incorrectly.**
    This is flagged in specs 002 and 005 as deliberately out of scope.
    **Scheduled as spec 008.**
-2. **Data file path resolution is dev-only.**
-   `hiragana.py` / `katakana.py` do
-   `Path(__file__).resolve().parents[4] / "data" / "japanese" / "*.json"`
-   to climb from `src/ai_language_teacher/language/japanese/` up to the
-   repo root's `data/` folder. This only works for an editable/dev install
-   (`pip install -e .`). A real built wheel would not include `data/`
-   unless it's moved under the package or declared as `package_data`.
-   **Scheduled as spec 007.**
-3. **Answer matching is exact after normalization** — no fuzzy/typo
+2. **Answer matching is exact after normalization** — no fuzzy/typo
    tolerance (explicitly out of scope in spec 003, may never be needed).
 
 ## Test status
 
-43 tests passing, `ruff check` and `mypy` (strict) clean, as of spec 006.
+46 tests passing, `ruff check` and `mypy` (strict) clean, as of spec 007.
 
 ```
 tests/test_student.py     — Student creation, skills, mastery aggregation
@@ -232,9 +224,9 @@ engine, C: web app, D: local LLM teacher, E: release).
 
 - Old plan Phases 0-2 (repo hygiene, core correctness, content as data):
   done, specs 001-005.
-- **Phase A:** spec 006 (typed dataclass models + mypy) done. Next:
-  - **007**: move lesson JSON under the package and load it with
-    `importlib.resources`, so a built wheel works (Known Issue #2).
+- **Phase A:** specs 006 (typed dataclass models + mypy) and 007 (lesson
+  data inside the package, loaded with `importlib.resources`; CI job
+  `wheel` checks a non-editable install) done. Next:
   - **008**: `Knowledge` tracked per skill (Known Issue #1).
 - **Phase B:** 009 teaching content per item (explanation, mnemonic,
   example, culture note), 010 full kana, 011 unlock threshold (proposed:

@@ -1,13 +1,16 @@
 import json
+from importlib.resources.abc import Traversable
 from pathlib import Path
 
 from ai_language_teacher.core.lesson import Lesson
 from ai_language_teacher.core.question import Question
 
 
-def load_lesson(path: str | Path) -> Lesson:
-    with open(path, encoding="utf-8") as f:
-        data = json.load(f)
+def load_lesson(path: str | Path | Traversable) -> Lesson:
+    if isinstance(path, str):
+        path = Path(path)
+
+    data = json.loads(path.read_text(encoding="utf-8"))
 
     items = data["items"]
 
