@@ -91,7 +91,7 @@ def test_long_vowel_mark_uses_custom_prompt_and_others_keep_default():
     for question in all_questions():
         if question.item == "ー":
             assert question.prompt == "What does ー mean in katakana words?"
-        else:
+        elif question.item != "ッ":  # small tsu prompt is checked in test_combinations.py
             assert question.prompt == DEFAULT_PROMPT.format(question.item)
 
 

@@ -6,7 +6,7 @@ The goal is a tutor that checks real mastery before unlocking the next stage,
 adapts lessons to student performance, and later supports speaking practice,
 all without paid cloud services.
 
-> Status: early development (v0.1.0). Hiragana and katakana with dakuten.
+> Status: early development (v0.1.0). Complete hiragana and katakana.
 
 ## Features (current)
 
@@ -14,8 +14,8 @@ all without paid cloud services.
   and culture notes, written in English for this project
 - Item-level knowledge tracking, kept separately per skill
 - Questions, assessments and lessons as small, tested building blocks
-- Lessons: all basic hiragana and katakana plus dakuten/handakuten (が, ぱ...),
-  one lesson per row, and the katakana long vowel mark ー
+- Lessons: complete hiragana and katakana: basic rows, dakuten/handakuten
+  (が, ぱ...), combinations (きゃ, しょ...), small っ and the long vowel mark ー
 
 ## Quickstart
 

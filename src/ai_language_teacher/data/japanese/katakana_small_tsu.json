@@ -1,0 +1,22 @@
+{
+  "title": "Katakana small tsu",
+  "items": [
+    {
+      "item": "ッ",
+      "answer": "double consonant",
+      "prompt": "What does a small ッ do?",
+      "explanation": "A small ッ has no sound of its own. It doubles the consonant that follows: you pause for one beat with your mouth ready for the next sound, then say it. In romaji the consonant is written twice. Compare ベッド (beddo, bed). Before ch, romaji writes 'tch', as in マッチ (matchi, match).",
+      "mnemonic": "The small ッ is a tiny speed bump: the sound stops for a beat before the next consonant.",
+      "example": {
+        "word": "ベッド",
+        "reading": "beddo",
+        "meaning": "bed"
+      },
+      "also_accepted": [
+        "doubles the next consonant",
+        "pause"
+      ],
+      "culture_note": "Loanwords use ッ to imitate short, clipped English vowels: 'bed' becomes ベッド and 'cup' becomes カップ (kappu)."
+    }
+  ]
+}

@@ -31,3 +31,6 @@
   (spec 011).
 - Dakuten and handakuten (が, ざ, だ, ば, ぱ rows and their katakana), five
   lessons per script with teaching content; じ/ぢ/づ accept zi/di/du (spec 012).
+- Combinations (きゃ, しゅ, ちょ... and voiced ぎゃ, じゃ, びょ, ぴゃ...) and
+  small っ/ッ for both scripts, completing the kana course: 105 hiragana and
+  106 katakana items (spec 013).

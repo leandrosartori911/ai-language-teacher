@@ -1,0 +1,151 @@
+{
+  "title": "Katakana voiced combinations",
+  "items": [
+    {
+      "item": "ギャ",
+      "answer": "gya",
+      "explanation": "ギャ is 'gya': ギ ('gi') plus a small ャ ('ya'), said as one beat. It is the same sound as hiragana ぎゃ. Combinations work the same way with dakuten and handakuten kana: ぎ, じ, び or ぴ plus a small ゃ, ゅ or ょ, said as one beat.",
+      "mnemonic": "The big ギ swallows the little ャ: 'gi' and 'ya' squeeze into one beat, 'gya'.",
+      "example": {
+        "word": "ギャラリー",
+        "reading": "gyararī",
+        "meaning": "gallery"
+      }
+    },
+    {
+      "item": "ギュ",
+      "answer": "gyu",
+      "explanation": "ギュ is 'gyu': ギ ('gi') plus a small ュ ('yu'), said as one beat. It is the same sound as hiragana ぎゅ.",
+      "mnemonic": "The big ギ swallows the little ュ: 'gi' and 'yu' squeeze into one beat, 'gyu'.",
+      "example": {
+        "word": "ギュッと",
+        "reading": "gyutto",
+        "meaning": "tightly (squeezing)"
+      }
+    },
+    {
+      "item": "ギョ",
+      "answer": "gyo",
+      "explanation": "ギョ is 'gyo': ギ ('gi') plus a small ョ ('yo'), said as one beat. It is the same sound as hiragana ぎょ.",
+      "mnemonic": "The big ギ swallows the little ョ: 'gi' and 'yo' squeeze into one beat, 'gyo'.",
+      "example": {
+        "word": "ギョーザ",
+        "reading": "gyōza",
+        "meaning": "gyoza (dumplings)"
+      },
+      "culture_note": "Gyoza came to Japan from China, where they are called jiaozi."
+    },
+    {
+      "item": "ジャ",
+      "answer": "ja",
+      "explanation": "ジャ is 'ja': ジ ('ji') plus a small ャ ('ya'), said as one beat. It is the same sound as hiragana じゃ. The i sound disappears: じ + ゃ is 'ja', not 'ji-ya'.",
+      "mnemonic": "The big ジ swallows the little ャ: 'ji' and 'ya' squeeze into one beat, 'ja'.",
+      "example": {
+        "word": "ジャズ",
+        "reading": "jazu",
+        "meaning": "jazz"
+      },
+      "also_accepted": [
+        "zya",
+        "jya"
+      ]
+    },
+    {
+      "item": "ジュ",
+      "answer": "ju",
+      "explanation": "ジュ is 'ju': ジ ('ji') plus a small ュ ('yu'), said as one beat. It is the same sound as hiragana じゅ.",
+      "mnemonic": "The big ジ swallows the little ュ: 'ji' and 'yu' squeeze into one beat, 'ju'.",
+      "example": {
+        "word": "ジュース",
+        "reading": "jūsu",
+        "meaning": "juice; soft drink"
+      },
+      "also_accepted": [
+        "zyu",
+        "jyu"
+      ],
+      "culture_note": "ジュース is used for fruit juice but also, loosely, for sweet soft drinks in general."
+    },
+    {
+      "item": "ジョ",
+      "answer": "jo",
+      "explanation": "ジョ is 'jo': ジ ('ji') plus a small ョ ('yo'), said as one beat. It is the same sound as hiragana じょ.",
+      "mnemonic": "The big ジ swallows the little ョ: 'ji' and 'yo' squeeze into one beat, 'jo'.",
+      "example": {
+        "word": "ジョギング",
+        "reading": "jogingu",
+        "meaning": "jogging"
+      },
+      "also_accepted": [
+        "zyo",
+        "jyo"
+      ]
+    },
+    {
+      "item": "ビャ",
+      "answer": "bya",
+      "explanation": "ビャ is 'bya': ビ ('bi') plus a small ャ ('ya'), said as one beat. It is the same sound as hiragana びゃ.",
+      "mnemonic": "The big ビ swallows the little ャ: 'bi' and 'ya' squeeze into one beat, 'bya'.",
+      "example": {
+        "word": "サンビャク",
+        "reading": "sanbyaku",
+        "meaning": "three hundred (さんびゃく written in katakana)"
+      }
+    },
+    {
+      "item": "ビュ",
+      "answer": "byu",
+      "explanation": "ビュ is 'byu': ビ ('bi') plus a small ュ ('yu'), said as one beat. It is the same sound as hiragana びゅ.",
+      "mnemonic": "The big ビ swallows the little ュ: 'bi' and 'yu' squeeze into one beat, 'byu'.",
+      "example": {
+        "word": "レビュー",
+        "reading": "rebyū",
+        "meaning": "review"
+      }
+    },
+    {
+      "item": "ビョ",
+      "answer": "byo",
+      "explanation": "ビョ is 'byo': ビ ('bi') plus a small ョ ('yo'), said as one beat. It is the same sound as hiragana びょ.",
+      "mnemonic": "The big ビ swallows the little ョ: 'bi' and 'yo' squeeze into one beat, 'byo'.",
+      "example": {
+        "word": "ビョウイン",
+        "reading": "byōin",
+        "meaning": "hospital (びょういん written in katakana)"
+      }
+    },
+    {
+      "item": "ピャ",
+      "answer": "pya",
+      "explanation": "ピャ is 'pya': ピ ('pi') plus a small ャ ('ya'), said as one beat. It is the same sound as hiragana ぴゃ.",
+      "mnemonic": "The big ピ swallows the little ャ: 'pi' and 'ya' squeeze into one beat, 'pya'.",
+      "example": {
+        "word": "ハッピャク",
+        "reading": "happyaku",
+        "meaning": "eight hundred (はっぴゃく written in katakana)"
+      }
+    },
+    {
+      "item": "ピュ",
+      "answer": "pyu",
+      "explanation": "ピュ is 'pyu': ピ ('pi') plus a small ュ ('yu'), said as one beat. It is the same sound as hiragana ぴゅ.",
+      "mnemonic": "The big ピ swallows the little ュ: 'pi' and 'yu' squeeze into one beat, 'pyu'.",
+      "example": {
+        "word": "コンピューター",
+        "reading": "konpyūtā",
+        "meaning": "computer"
+      }
+    },
+    {
+      "item": "ピョ",
+      "answer": "pyo",
+      "explanation": "ピョ is 'pyo': ピ ('pi') plus a small ョ ('yo'), said as one beat. It is the same sound as hiragana ぴょ.",
+      "mnemonic": "The big ピ swallows the little ョ: 'pi' and 'yo' squeeze into one beat, 'pyo'.",
+      "example": {
+        "word": "ピョンピョン",
+        "reading": "pyonpyon",
+        "meaning": "hopping"
+      }
+    }
+  ]
+}

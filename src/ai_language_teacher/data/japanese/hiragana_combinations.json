@@ -1,0 +1,260 @@
+{
+  "title": "Hiragana combinations",
+  "items": [
+    {
+      "item": "きゃ",
+      "answer": "kya",
+      "explanation": "きゃ is 'kya': き ('ki') plus a small ゃ ('ya'), said as one beat. A combination is an i-column kana followed by a small ゃ, ゅ or ょ, and the two are said together as ONE beat. Size matters: きや (full-size や) is two beats, ki-ya, while きゃ (small ゃ) is one beat, kya.",
+      "mnemonic": "The big き swallows the little ゃ: 'ki' and 'ya' squeeze into one beat, 'kya'.",
+      "example": {
+        "word": "きゃく",
+        "reading": "kyaku",
+        "meaning": "guest, customer"
+      },
+      "culture_note": "Shop staff greet customers with いらっしゃいませ (irasshaimase, 'welcome'), and a customer is politely called おきゃくさま (okyakusama)."
+    },
+    {
+      "item": "きゅ",
+      "answer": "kyu",
+      "explanation": "きゅ is 'kyu': き ('ki') plus a small ゅ ('yu'), said as one beat.",
+      "mnemonic": "The big き swallows the little ゅ: 'ki' and 'yu' squeeze into one beat, 'kyu'.",
+      "example": {
+        "word": "きゅうり",
+        "reading": "kyūri",
+        "meaning": "cucumber"
+      }
+    },
+    {
+      "item": "きょ",
+      "answer": "kyo",
+      "explanation": "きょ is 'kyo': き ('ki') plus a small ょ ('yo'), said as one beat.",
+      "mnemonic": "The big き swallows the little ょ: 'ki' and 'yo' squeeze into one beat, 'kyo'.",
+      "example": {
+        "word": "きょう",
+        "reading": "kyō",
+        "meaning": "today"
+      }
+    },
+    {
+      "item": "しゃ",
+      "answer": "sha",
+      "explanation": "しゃ is 'sha': し ('shi') plus a small ゃ ('ya'), said as one beat. The i sound disappears: し + ゃ is 'sha', not 'shi-ya'.",
+      "mnemonic": "The big し swallows the little ゃ: 'shi' and 'ya' squeeze into one beat, 'sha'.",
+      "example": {
+        "word": "しゃしん",
+        "reading": "shashin",
+        "meaning": "photograph"
+      },
+      "also_accepted": [
+        "sya"
+      ]
+    },
+    {
+      "item": "しゅ",
+      "answer": "shu",
+      "explanation": "しゅ is 'shu': し ('shi') plus a small ゅ ('yu'), said as one beat.",
+      "mnemonic": "The big し swallows the little ゅ: 'shi' and 'yu' squeeze into one beat, 'shu'.",
+      "example": {
+        "word": "しゅくだい",
+        "reading": "shukudai",
+        "meaning": "homework"
+      },
+      "also_accepted": [
+        "syu"
+      ]
+    },
+    {
+      "item": "しょ",
+      "answer": "sho",
+      "explanation": "しょ is 'sho': し ('shi') plus a small ょ ('yo'), said as one beat.",
+      "mnemonic": "The big し swallows the little ょ: 'shi' and 'yo' squeeze into one beat, 'sho'.",
+      "example": {
+        "word": "しょくどう",
+        "reading": "shokudō",
+        "meaning": "cafeteria, canteen"
+      },
+      "also_accepted": [
+        "syo"
+      ]
+    },
+    {
+      "item": "ちゃ",
+      "answer": "cha",
+      "explanation": "ちゃ is 'cha': ち ('chi') plus a small ゃ ('ya'), said as one beat. The i sound disappears: ち + ゃ is 'cha', not 'chi-ya'.",
+      "mnemonic": "The big ち swallows the little ゃ: 'chi' and 'ya' squeeze into one beat, 'cha'.",
+      "example": {
+        "word": "ちゃわん",
+        "reading": "chawan",
+        "meaning": "rice bowl, tea bowl"
+      },
+      "also_accepted": [
+        "tya"
+      ],
+      "culture_note": "ちゃわん literally means 'tea bowl', but it is also the everyday word for a rice bowl."
+    },
+    {
+      "item": "ちゅ",
+      "answer": "chu",
+      "explanation": "ちゅ is 'chu': ち ('chi') plus a small ゅ ('yu'), said as one beat.",
+      "mnemonic": "The big ち swallows the little ゅ: 'chi' and 'yu' squeeze into one beat, 'chu'.",
+      "example": {
+        "word": "ちゅうい",
+        "reading": "chūi",
+        "meaning": "caution"
+      },
+      "also_accepted": [
+        "tyu"
+      ]
+    },
+    {
+      "item": "ちょ",
+      "answer": "cho",
+      "explanation": "ちょ is 'cho': ち ('chi') plus a small ょ ('yo'), said as one beat.",
+      "mnemonic": "The big ち swallows the little ょ: 'chi' and 'yo' squeeze into one beat, 'cho'.",
+      "example": {
+        "word": "ちょっと",
+        "reading": "chotto",
+        "meaning": "a little; a bit"
+      },
+      "also_accepted": [
+        "tyo"
+      ],
+      "culture_note": "ちょっと is also a polite way to say no: 'ちょっと...' with a trailing voice means 'that's a bit difficult', without saying no directly."
+    },
+    {
+      "item": "にゃ",
+      "answer": "nya",
+      "explanation": "にゃ is 'nya': に ('ni') plus a small ゃ ('ya'), said as one beat.",
+      "mnemonic": "The big に swallows the little ゃ: 'ni' and 'ya' squeeze into one beat, 'nya'.",
+      "example": {
+        "word": "にゃんこ",
+        "reading": "nyanko",
+        "meaning": "kitty (a cute word for cat)"
+      },
+      "culture_note": "Japanese cats say にゃあ (nyā), which is where にゃんこ comes from."
+    },
+    {
+      "item": "にゅ",
+      "answer": "nyu",
+      "explanation": "にゅ is 'nyu': に ('ni') plus a small ゅ ('yu'), said as one beat.",
+      "mnemonic": "The big に swallows the little ゅ: 'ni' and 'yu' squeeze into one beat, 'nyu'.",
+      "example": {
+        "word": "ぎゅうにゅう",
+        "reading": "gyūnyū",
+        "meaning": "milk"
+      }
+    },
+    {
+      "item": "にょ",
+      "answer": "nyo",
+      "explanation": "にょ is 'nyo': に ('ni') plus a small ょ ('yo'), said as one beat.",
+      "mnemonic": "The big に swallows the little ょ: 'ni' and 'yo' squeeze into one beat, 'nyo'.",
+      "example": {
+        "word": "にょろにょろ",
+        "reading": "nyoronyoro",
+        "meaning": "wriggling (like a snake)"
+      }
+    },
+    {
+      "item": "ひゃ",
+      "answer": "hya",
+      "explanation": "ひゃ is 'hya': ひ ('hi') plus a small ゃ ('ya'), said as one beat.",
+      "mnemonic": "The big ひ swallows the little ゃ: 'hi' and 'ya' squeeze into one beat, 'hya'.",
+      "example": {
+        "word": "ひゃく",
+        "reading": "hyaku",
+        "meaning": "hundred"
+      }
+    },
+    {
+      "item": "ひゅ",
+      "answer": "hyu",
+      "explanation": "ひゅ is 'hyu': ひ ('hi') plus a small ゅ ('yu'), said as one beat.",
+      "mnemonic": "The big ひ swallows the little ゅ: 'hi' and 'yu' squeeze into one beat, 'hyu'.",
+      "example": {
+        "word": "ひゅうひゅう",
+        "reading": "hyūhyū",
+        "meaning": "whistling (of the wind)"
+      }
+    },
+    {
+      "item": "ひょ",
+      "answer": "hyo",
+      "explanation": "ひょ is 'hyo': ひ ('hi') plus a small ょ ('yo'), said as one beat.",
+      "mnemonic": "The big ひ swallows the little ょ: 'hi' and 'yo' squeeze into one beat, 'hyo'.",
+      "example": {
+        "word": "ひょう",
+        "reading": "hyō",
+        "meaning": "leopard"
+      }
+    },
+    {
+      "item": "みゃ",
+      "answer": "mya",
+      "explanation": "みゃ is 'mya': み ('mi') plus a small ゃ ('ya'), said as one beat.",
+      "mnemonic": "The big み swallows the little ゃ: 'mi' and 'ya' squeeze into one beat, 'mya'.",
+      "example": {
+        "word": "みゃく",
+        "reading": "myaku",
+        "meaning": "pulse"
+      }
+    },
+    {
+      "item": "みゅ",
+      "answer": "myu",
+      "explanation": "みゅ is 'myu': み ('mi') plus a small ゅ ('yu'), said as one beat.",
+      "mnemonic": "The big み swallows the little ゅ: 'mi' and 'yu' squeeze into one beat, 'myu'.",
+      "example": {
+        "word": "みゅう",
+        "reading": "myū",
+        "meaning": "a soft mew (a kitten's cry, as written in comics)"
+      },
+      "culture_note": "みゅ almost never appears in native Japanese words; you will mostly meet it in katakana loanwords like ミュージック (music)."
+    },
+    {
+      "item": "みょ",
+      "answer": "myo",
+      "explanation": "みょ is 'myo': み ('mi') plus a small ょ ('yo'), said as one beat.",
+      "mnemonic": "The big み swallows the little ょ: 'mi' and 'yo' squeeze into one beat, 'myo'.",
+      "example": {
+        "word": "みょうじ",
+        "reading": "myōji",
+        "meaning": "family name"
+      },
+      "culture_note": "In Japanese the family name comes first: Tanaka Hana, not Hana Tanaka."
+    },
+    {
+      "item": "りゃ",
+      "answer": "rya",
+      "explanation": "りゃ is 'rya': り ('ri') plus a small ゃ ('ya'), said as one beat.",
+      "mnemonic": "The big り swallows the little ゃ: 'ri' and 'ya' squeeze into one beat, 'rya'.",
+      "example": {
+        "word": "りゃく",
+        "reading": "ryaku",
+        "meaning": "abbreviation"
+      }
+    },
+    {
+      "item": "りゅ",
+      "answer": "ryu",
+      "explanation": "りゅ is 'ryu': り ('ri') plus a small ゅ ('yu'), said as one beat.",
+      "mnemonic": "The big り swallows the little ゅ: 'ri' and 'yu' squeeze into one beat, 'ryu'.",
+      "example": {
+        "word": "りゅう",
+        "reading": "ryū",
+        "meaning": "dragon"
+      }
+    },
+    {
+      "item": "りょ",
+      "answer": "ryo",
+      "explanation": "りょ is 'ryo': り ('ri') plus a small ょ ('yo'), said as one beat.",
+      "mnemonic": "The big り swallows the little ょ: 'ri' and 'yo' squeeze into one beat, 'ryo'.",
+      "example": {
+        "word": "りょこう",
+        "reading": "ryokō",
+        "meaning": "trip, travel"
+      }
+    }
+  ]
+}

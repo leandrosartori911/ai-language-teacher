@@ -1,0 +1,155 @@
+{
+  "title": "Hiragana voiced combinations",
+  "items": [
+    {
+      "item": "ぎゃ",
+      "answer": "gya",
+      "explanation": "ぎゃ is 'gya': ぎ ('gi') plus a small ゃ ('ya'), said as one beat. Combinations work the same way with dakuten and handakuten kana: ぎ, じ, び or ぴ plus a small ゃ, ゅ or ょ, said as one beat.",
+      "mnemonic": "The big ぎ swallows the little ゃ: 'gi' and 'ya' squeeze into one beat, 'gya'.",
+      "example": {
+        "word": "ぎゃく",
+        "reading": "gyaku",
+        "meaning": "the opposite, reverse"
+      }
+    },
+    {
+      "item": "ぎゅ",
+      "answer": "gyu",
+      "explanation": "ぎゅ is 'gyu': ぎ ('gi') plus a small ゅ ('yu'), said as one beat.",
+      "mnemonic": "The big ぎ swallows the little ゅ: 'gi' and 'yu' squeeze into one beat, 'gyu'.",
+      "example": {
+        "word": "ぎゅうどん",
+        "reading": "gyūdon",
+        "meaning": "beef bowl"
+      },
+      "culture_note": "ぎゅうどん, sliced beef and onion over rice, is one of Japan's classic cheap, fast meals."
+    },
+    {
+      "item": "ぎょ",
+      "answer": "gyo",
+      "explanation": "ぎょ is 'gyo': ぎ ('gi') plus a small ょ ('yo'), said as one beat.",
+      "mnemonic": "The big ぎ swallows the little ょ: 'gi' and 'yo' squeeze into one beat, 'gyo'.",
+      "example": {
+        "word": "きんぎょ",
+        "reading": "kingyo",
+        "meaning": "goldfish"
+      },
+      "culture_note": "Scooping goldfish with a paper scoop, きんぎょすくい (kingyo sukui), is a classic game at summer festivals."
+    },
+    {
+      "item": "じゃ",
+      "answer": "ja",
+      "explanation": "じゃ is 'ja': じ ('ji') plus a small ゃ ('ya'), said as one beat. The i sound disappears: じ + ゃ is 'ja', not 'ji-ya'.",
+      "mnemonic": "The big じ swallows the little ゃ: 'ji' and 'ya' squeeze into one beat, 'ja'.",
+      "example": {
+        "word": "じゃんけん",
+        "reading": "janken",
+        "meaning": "rock-paper-scissors"
+      },
+      "also_accepted": [
+        "zya",
+        "jya"
+      ],
+      "culture_note": "じゃんけん is used everywhere in Japan to decide who goes first, often chanted as じゃんけんぽん (jan-ken-pon)."
+    },
+    {
+      "item": "じゅ",
+      "answer": "ju",
+      "explanation": "じゅ is 'ju': じ ('ji') plus a small ゅ ('yu'), said as one beat.",
+      "mnemonic": "The big じ swallows the little ゅ: 'ji' and 'yu' squeeze into one beat, 'ju'.",
+      "example": {
+        "word": "じゅぎょう",
+        "reading": "jugyō",
+        "meaning": "class, lesson"
+      },
+      "also_accepted": [
+        "zyu",
+        "jyu"
+      ]
+    },
+    {
+      "item": "じょ",
+      "answer": "jo",
+      "explanation": "じょ is 'jo': じ ('ji') plus a small ょ ('yo'), said as one beat.",
+      "mnemonic": "The big じ swallows the little ょ: 'ji' and 'yo' squeeze into one beat, 'jo'.",
+      "example": {
+        "word": "じょうず",
+        "reading": "jōzu",
+        "meaning": "skilful, good at"
+      },
+      "also_accepted": [
+        "zyo",
+        "jyo"
+      ],
+      "culture_note": "Learners often hear にほんご、じょうずですね (your Japanese is good) after saying just a few words; it is a friendly compliment rather than a real assessment."
+    },
+    {
+      "item": "びゃ",
+      "answer": "bya",
+      "explanation": "びゃ is 'bya': び ('bi') plus a small ゃ ('ya'), said as one beat.",
+      "mnemonic": "The big び swallows the little ゃ: 'bi' and 'ya' squeeze into one beat, 'bya'.",
+      "example": {
+        "word": "さんびゃく",
+        "reading": "sanbyaku",
+        "meaning": "three hundred"
+      },
+      "culture_note": "ひゃく (hundred) becomes びゃく in さんびゃく, the same voicing (rendaku) seen in はなぢ."
+    },
+    {
+      "item": "びゅ",
+      "answer": "byu",
+      "explanation": "びゅ is 'byu': び ('bi') plus a small ゅ ('yu'), said as one beat.",
+      "mnemonic": "The big び swallows the little ゅ: 'bi' and 'yu' squeeze into one beat, 'byu'.",
+      "example": {
+        "word": "びゅうびゅう",
+        "reading": "byūbyū",
+        "meaning": "howling (of a strong wind)"
+      }
+    },
+    {
+      "item": "びょ",
+      "answer": "byo",
+      "explanation": "びょ is 'byo': び ('bi') plus a small ょ ('yo'), said as one beat.",
+      "mnemonic": "The big び swallows the little ょ: 'bi' and 'yo' squeeze into one beat, 'byo'.",
+      "example": {
+        "word": "びょういん",
+        "reading": "byōin",
+        "meaning": "hospital"
+      },
+      "culture_note": "びょういん (byōin, hospital) and びよういん (biyōin, beauty salon) differ only in ょ versus a full-size よ, a classic mix-up for learners."
+    },
+    {
+      "item": "ぴゃ",
+      "answer": "pya",
+      "explanation": "ぴゃ is 'pya': ぴ ('pi') plus a small ゃ ('ya'), said as one beat.",
+      "mnemonic": "The big ぴ swallows the little ゃ: 'pi' and 'ya' squeeze into one beat, 'pya'.",
+      "example": {
+        "word": "はっぴゃく",
+        "reading": "happyaku",
+        "meaning": "eight hundred"
+      }
+    },
+    {
+      "item": "ぴゅ",
+      "answer": "pyu",
+      "explanation": "ぴゅ is 'pyu': ぴ ('pi') plus a small ゅ ('yu'), said as one beat.",
+      "mnemonic": "The big ぴ swallows the little ゅ: 'pi' and 'yu' squeeze into one beat, 'pyu'.",
+      "example": {
+        "word": "ぴゅうぴゅう",
+        "reading": "pyūpyū",
+        "meaning": "whooshing (of wind or a whistle)"
+      }
+    },
+    {
+      "item": "ぴょ",
+      "answer": "pyo",
+      "explanation": "ぴょ is 'pyo': ぴ ('pi') plus a small ょ ('yo'), said as one beat.",
+      "mnemonic": "The big ぴ swallows the little ょ: 'pi' and 'yo' squeeze into one beat, 'pyo'.",
+      "example": {
+        "word": "ぴょんぴょん",
+        "reading": "pyonpyon",
+        "meaning": "hopping"
+      }
+    }
+  ]
+}

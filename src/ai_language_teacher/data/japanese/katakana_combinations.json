@@ -1,0 +1,262 @@
+{
+  "title": "Katakana combinations",
+  "items": [
+    {
+      "item": "キャ",
+      "answer": "kya",
+      "explanation": "キャ is 'kya': キ ('ki') plus a small ャ ('ya'), said as one beat. It is the same sound as hiragana きゃ. A combination is an i-column kana followed by a small ゃ, ゅ or ょ, and the two are said together as ONE beat. Size matters: きや (full-size や) is two beats, ki-ya, while きゃ (small ゃ) is one beat, kya.",
+      "mnemonic": "The big キ swallows the little ャ: 'ki' and 'ya' squeeze into one beat, 'kya'.",
+      "example": {
+        "word": "キャンプ",
+        "reading": "kyanpu",
+        "meaning": "camping"
+      }
+    },
+    {
+      "item": "キュ",
+      "answer": "kyu",
+      "explanation": "キュ is 'kyu': キ ('ki') plus a small ュ ('yu'), said as one beat. It is the same sound as hiragana きゅ.",
+      "mnemonic": "The big キ swallows the little ュ: 'ki' and 'yu' squeeze into one beat, 'kyu'.",
+      "example": {
+        "word": "バーベキュー",
+        "reading": "bābekyū",
+        "meaning": "barbecue"
+      }
+    },
+    {
+      "item": "キョ",
+      "answer": "kyo",
+      "explanation": "キョ is 'kyo': キ ('ki') plus a small ョ ('yo'), said as one beat. It is the same sound as hiragana きょ.",
+      "mnemonic": "The big キ swallows the little ョ: 'ki' and 'yo' squeeze into one beat, 'kyo'.",
+      "example": {
+        "word": "キョロキョロ",
+        "reading": "kyorokyoro",
+        "meaning": "looking around restlessly"
+      },
+      "culture_note": "Sound-symbolic words are often written in katakana, especially in manga."
+    },
+    {
+      "item": "シャ",
+      "answer": "sha",
+      "explanation": "シャ is 'sha': シ ('shi') plus a small ャ ('ya'), said as one beat. It is the same sound as hiragana しゃ. The i sound disappears: し + ゃ is 'sha', not 'shi-ya'.",
+      "mnemonic": "The big シ swallows the little ャ: 'shi' and 'ya' squeeze into one beat, 'sha'.",
+      "example": {
+        "word": "シャツ",
+        "reading": "shatsu",
+        "meaning": "shirt"
+      },
+      "also_accepted": [
+        "sya"
+      ]
+    },
+    {
+      "item": "シュ",
+      "answer": "shu",
+      "explanation": "シュ is 'shu': シ ('shi') plus a small ュ ('yu'), said as one beat. It is the same sound as hiragana しゅ.",
+      "mnemonic": "The big シ swallows the little ュ: 'shi' and 'yu' squeeze into one beat, 'shu'.",
+      "example": {
+        "word": "シューズ",
+        "reading": "shūzu",
+        "meaning": "shoes (especially sports shoes)"
+      },
+      "also_accepted": [
+        "syu"
+      ]
+    },
+    {
+      "item": "ショ",
+      "answer": "sho",
+      "explanation": "ショ is 'sho': シ ('shi') plus a small ョ ('yo'), said as one beat. It is the same sound as hiragana しょ.",
+      "mnemonic": "The big シ swallows the little ョ: 'shi' and 'yo' squeeze into one beat, 'sho'.",
+      "example": {
+        "word": "ショッピング",
+        "reading": "shoppingu",
+        "meaning": "shopping"
+      },
+      "also_accepted": [
+        "syo"
+      ]
+    },
+    {
+      "item": "チャ",
+      "answer": "cha",
+      "explanation": "チャ is 'cha': チ ('chi') plus a small ャ ('ya'), said as one beat. It is the same sound as hiragana ちゃ. The i sound disappears: ち + ゃ is 'cha', not 'chi-ya'.",
+      "mnemonic": "The big チ swallows the little ャ: 'chi' and 'ya' squeeze into one beat, 'cha'.",
+      "example": {
+        "word": "チャンス",
+        "reading": "chansu",
+        "meaning": "chance, opportunity"
+      },
+      "also_accepted": [
+        "tya"
+      ]
+    },
+    {
+      "item": "チュ",
+      "answer": "chu",
+      "explanation": "チュ is 'chu': チ ('chi') plus a small ュ ('yu'), said as one beat. It is the same sound as hiragana ちゅ.",
+      "mnemonic": "The big チ swallows the little ュ: 'chi' and 'yu' squeeze into one beat, 'chu'.",
+      "example": {
+        "word": "チューリップ",
+        "reading": "chūrippu",
+        "meaning": "tulip"
+      },
+      "also_accepted": [
+        "tyu"
+      ]
+    },
+    {
+      "item": "チョ",
+      "answer": "cho",
+      "explanation": "チョ is 'cho': チ ('chi') plus a small ョ ('yo'), said as one beat. It is the same sound as hiragana ちょ.",
+      "mnemonic": "The big チ swallows the little ョ: 'chi' and 'yo' squeeze into one beat, 'cho'.",
+      "example": {
+        "word": "チョコレート",
+        "reading": "chokorēto",
+        "meaning": "chocolate"
+      },
+      "also_accepted": [
+        "tyo"
+      ],
+      "culture_note": "On Valentine's Day in Japan, it is traditionally women who give チョコレート, and men return the favour on White Day, 14 March."
+    },
+    {
+      "item": "ニャ",
+      "answer": "nya",
+      "explanation": "ニャ is 'nya': ニ ('ni') plus a small ャ ('ya'), said as one beat. It is the same sound as hiragana にゃ.",
+      "mnemonic": "The big ニ swallows the little ャ: 'ni' and 'ya' squeeze into one beat, 'nya'.",
+      "example": {
+        "word": "ニャー",
+        "reading": "nyā",
+        "meaning": "meow"
+      }
+    },
+    {
+      "item": "ニュ",
+      "answer": "nyu",
+      "explanation": "ニュ is 'nyu': ニ ('ni') plus a small ュ ('yu'), said as one beat. It is the same sound as hiragana にゅ.",
+      "mnemonic": "The big ニ swallows the little ュ: 'ni' and 'yu' squeeze into one beat, 'nyu'.",
+      "example": {
+        "word": "ニュース",
+        "reading": "nyūsu",
+        "meaning": "news"
+      }
+    },
+    {
+      "item": "ニョ",
+      "answer": "nyo",
+      "explanation": "ニョ is 'nyo': ニ ('ni') plus a small ョ ('yo'), said as one beat. It is the same sound as hiragana にょ.",
+      "mnemonic": "The big ニ swallows the little ョ: 'ni' and 'yo' squeeze into one beat, 'nyo'.",
+      "example": {
+        "word": "ニョッキ",
+        "reading": "nyokki",
+        "meaning": "gnocchi"
+      }
+    },
+    {
+      "item": "ヒャ",
+      "answer": "hya",
+      "explanation": "ヒャ is 'hya': ヒ ('hi') plus a small ャ ('ya'), said as one beat. It is the same sound as hiragana ひゃ.",
+      "mnemonic": "The big ヒ swallows the little ャ: 'hi' and 'ya' squeeze into one beat, 'hya'.",
+      "example": {
+        "word": "ヒャク",
+        "reading": "hyaku",
+        "meaning": "hundred (ひゃく written in katakana)"
+      },
+      "culture_note": "ヒャ is rare in loanwords; here a native word is written in katakana, which Japanese also does for emphasis."
+    },
+    {
+      "item": "ヒュ",
+      "answer": "hyu",
+      "explanation": "ヒュ is 'hyu': ヒ ('hi') plus a small ュ ('yu'), said as one beat. It is the same sound as hiragana ひゅ.",
+      "mnemonic": "The big ヒ swallows the little ュ: 'hi' and 'yu' squeeze into one beat, 'hyu'.",
+      "example": {
+        "word": "ヒューズ",
+        "reading": "hyūzu",
+        "meaning": "fuse (electrical)"
+      }
+    },
+    {
+      "item": "ヒョ",
+      "answer": "hyo",
+      "explanation": "ヒョ is 'hyo': ヒ ('hi') plus a small ョ ('yo'), said as one beat. It is the same sound as hiragana ひょ.",
+      "mnemonic": "The big ヒ swallows the little ョ: 'hi' and 'yo' squeeze into one beat, 'hyo'.",
+      "example": {
+        "word": "ヒョウ",
+        "reading": "hyō",
+        "meaning": "leopard"
+      },
+      "culture_note": "Animal and plant names are often written in katakana, especially in science and at zoos."
+    },
+    {
+      "item": "ミャ",
+      "answer": "mya",
+      "explanation": "ミャ is 'mya': ミ ('mi') plus a small ャ ('ya'), said as one beat. It is the same sound as hiragana みゃ.",
+      "mnemonic": "The big ミ swallows the little ャ: 'mi' and 'ya' squeeze into one beat, 'mya'.",
+      "example": {
+        "word": "ミャンマー",
+        "reading": "myanmā",
+        "meaning": "Myanmar"
+      }
+    },
+    {
+      "item": "ミュ",
+      "answer": "myu",
+      "explanation": "ミュ is 'myu': ミ ('mi') plus a small ュ ('yu'), said as one beat. It is the same sound as hiragana みゅ.",
+      "mnemonic": "The big ミ swallows the little ュ: 'mi' and 'yu' squeeze into one beat, 'myu'.",
+      "example": {
+        "word": "ミュージック",
+        "reading": "myūjikku",
+        "meaning": "music"
+      }
+    },
+    {
+      "item": "ミョ",
+      "answer": "myo",
+      "explanation": "ミョ is 'myo': ミ ('mi') plus a small ョ ('yo'), said as one beat. It is the same sound as hiragana みょ.",
+      "mnemonic": "The big ミ swallows the little ョ: 'mi' and 'yo' squeeze into one beat, 'myo'.",
+      "example": {
+        "word": "ミョウジ",
+        "reading": "myōji",
+        "meaning": "family name (みょうじ written in katakana)"
+      },
+      "culture_note": "Japanese forms ask you to write your name's reading in katakana in a box labelled フリガナ (furigana), so names are often seen in katakana."
+    },
+    {
+      "item": "リャ",
+      "answer": "rya",
+      "explanation": "リャ is 'rya': リ ('ri') plus a small ャ ('ya'), said as one beat. It is the same sound as hiragana りゃ.",
+      "mnemonic": "The big リ swallows the little ャ: 'ri' and 'ya' squeeze into one beat, 'rya'.",
+      "example": {
+        "word": "リャマ",
+        "reading": "ryama",
+        "meaning": "llama"
+      },
+      "culture_note": "It is also written ラマ (rama)."
+    },
+    {
+      "item": "リュ",
+      "answer": "ryu",
+      "explanation": "リュ is 'ryu': リ ('ri') plus a small ュ ('yu'), said as one beat. It is the same sound as hiragana りゅ.",
+      "mnemonic": "The big リ swallows the little ュ: 'ri' and 'yu' squeeze into one beat, 'ryu'.",
+      "example": {
+        "word": "リュック",
+        "reading": "ryukku",
+        "meaning": "backpack"
+      },
+      "culture_note": "リュック comes from the German Rucksack."
+    },
+    {
+      "item": "リョ",
+      "answer": "ryo",
+      "explanation": "リョ is 'ryo': リ ('ri') plus a small ョ ('yo'), said as one beat. It is the same sound as hiragana りょ.",
+      "mnemonic": "The big リ swallows the little ョ: 'ri' and 'yo' squeeze into one beat, 'ryo'.",
+      "example": {
+        "word": "リョウ",
+        "reading": "Ryō",
+        "meaning": "Ryō (a given name written in katakana)"
+      },
+      "culture_note": "Given names are sometimes written in katakana, for example in the フリガナ box on forms."
+    }
+  ]
+}
