@@ -10,7 +10,7 @@ def test_hiragana_contains_basic_vowels():
 
 def test_hiragana_vowels_lesson_uses_hiragana_content():
     assert HIRAGANA_VOWELS_LESSON.title == "Hiragana vowels"
-    assert HIRAGANA_VOWELS_LESSON.items == HIRAGANA
+    assert HIRAGANA_VOWELS_LESSON.items.items() <= HIRAGANA.items()
 
 def test_hiragana_vowels_lesson_has_a_question_for_each_item():
     question_items = [question.item for question in HIRAGANA_VOWELS_LESSON.questions]
@@ -19,5 +19,5 @@ def test_hiragana_vowels_lesson_has_a_question_for_each_item():
         for question in HIRAGANA_VOWELS_LESSON.questions
     ]
 
-    assert question_items == list(HIRAGANA.keys())
-    assert expected_answers == list(HIRAGANA.values())
+    assert question_items == list(HIRAGANA_VOWELS_LESSON.items.keys())
+    assert expected_answers == list(HIRAGANA_VOWELS_LESSON.items.values())

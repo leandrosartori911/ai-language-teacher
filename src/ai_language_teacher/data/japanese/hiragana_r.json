@@ -1,0 +1,65 @@
+{
+  "title": "Hiragana R row",
+  "items": [
+    {
+      "item": "ら",
+      "answer": "ra",
+      "explanation": "ら is 'ra', but the Japanese r is a single light tap of the tongue behind the upper teeth, like the 'tt' in American 'butter'. It sits between English r, l and d, and it is never rolled or growled.",
+      "mnemonic": "A rabbit sitting down, with one ear up (the small dash) and a round back.",
+      "example": {
+        "word": "そら",
+        "reading": "sora",
+        "meaning": "sky"
+      },
+      "culture_note": "ら comes from a cursive form of the kanji 良."
+    },
+    {
+      "item": "り",
+      "answer": "ri",
+      "explanation": "り is 'ri', with the same light tap: close to 'lee' said very quickly.",
+      "mnemonic": "Two reeds standing by a river.",
+      "example": {
+        "word": "りす",
+        "reading": "risu",
+        "meaning": "squirrel"
+      },
+      "culture_note": "り comes from a cursive form of the kanji 利."
+    },
+    {
+      "item": "る",
+      "answer": "ru",
+      "explanation": "る is 'ru', a light tap followed by a short u. It looks like ろ; る ends in a loop, ろ does not.",
+      "mnemonic": "A road that ends in a roundabout: the loop at the bottom.",
+      "example": {
+        "word": "はる",
+        "reading": "haru",
+        "meaning": "spring (season)"
+      },
+      "culture_note": "る comes from a cursive form of the kanji 留."
+    },
+    {
+      "item": "れ",
+      "answer": "re",
+      "explanation": "れ is 're', a light tap followed by the 'e' of 'red'. It looks like ね and わ; れ is the one whose right side kicks outward.",
+      "mnemonic": "Someone doing a leg raise: the right side kicks straight out.",
+      "example": {
+        "word": "これ",
+        "reading": "kore",
+        "meaning": "this"
+      },
+      "culture_note": "れ comes from a cursive form of the kanji 礼."
+    },
+    {
+      "item": "ろ",
+      "answer": "ro",
+      "explanation": "ろ is 'ro', a light tap followed by a pure o. It looks like る but has no loop.",
+      "mnemonic": "A road winding down the hill with no roundabout at the end.",
+      "example": {
+        "word": "いろ",
+        "reading": "iro",
+        "meaning": "colour"
+      },
+      "culture_note": "ろ comes from a cursive form of the kanji 呂."
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "title": "Hiragana M row",
+  "items": [
+    {
+      "item": "ま",
+      "answer": "ma",
+      "explanation": "ま is 'ma', like the 'ma' in 'mama'.",
+      "mnemonic": "Two crossbars and a loop: a mama holding a baby in her arms.",
+      "example": {
+        "word": "いま",
+        "reading": "ima",
+        "meaning": "now"
+      },
+      "culture_note": "ま comes from a cursive form of the kanji 末."
+    },
+    {
+      "item": "み",
+      "answer": "mi",
+      "explanation": "み is 'mi', like the 'mee' in 'meet'.",
+      "mnemonic": "A musical note flowing to the right: 'mi', as in do-re-mi.",
+      "example": {
+        "word": "みみ",
+        "reading": "mimi",
+        "meaning": "ear"
+      },
+      "culture_note": "み comes from a cursive form of the kanji 美."
+    },
+    {
+      "item": "む",
+      "answer": "mu",
+      "explanation": "む is 'mu', like 'moo' but short.",
+      "mnemonic": "A cow with a curly tail and a fly buzzing next to it: 'moo'.",
+      "example": {
+        "word": "むし",
+        "reading": "mushi",
+        "meaning": "insect"
+      },
+      "culture_note": "む comes from a cursive form of the kanji 武."
+    },
+    {
+      "item": "め",
+      "answer": "me",
+      "explanation": "め is 'me', like the 'me' in 'met'. It looks like ぬ, but め has no loop at the end.",
+      "mnemonic": "An eye with a line across it, and め on its own means 'eye' (目).",
+      "example": {
+        "word": "め",
+        "reading": "me",
+        "meaning": "eye"
+      },
+      "culture_note": "め comes from a cursive form of the kanji 女."
+    },
+    {
+      "item": "も",
+      "answer": "mo",
+      "explanation": "も is 'mo', like 'mow' but pure. As a particle it means 'also' or 'too'.",
+      "mnemonic": "A fishing hook with two bars across it, catching more and more fish.",
+      "example": {
+        "word": "もも",
+        "reading": "momo",
+        "meaning": "peach"
+      },
+      "culture_note": "も comes from a cursive form of the kanji 毛. Momotarō, 'Peach Boy', is one of Japan's best-known folk tales: a boy born from a giant peach who sets out to defeat a band of ogres."
+    }
+  ]
+}

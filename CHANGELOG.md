@@ -22,3 +22,6 @@
   pronunciation guidance, an original mnemonic, an example word and an
   optional culture note. The lesson JSON format changes to a list of item
   objects, validated by the loader (spec 009).
+- All 46 basic hiragana, taught as ten lessons (one per row) with full
+  teaching content. Lesson items can list `also_accepted` spellings
+  (e.g. し accepts "shi" and "si") (spec 010).

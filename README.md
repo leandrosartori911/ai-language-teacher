@@ -6,7 +6,7 @@ The goal is a tutor that checks real mastery before unlocking the next stage,
 adapts lessons to student performance, and later supports speaking practice,
 all without paid cloud services.
 
-> Status: early development (v0.1.0). Hiragana and katakana vowels.
+> Status: early development (v0.1.0). Full basic hiragana; katakana vowels.
 
 ## Features (current)
 
@@ -14,7 +14,7 @@ all without paid cloud services.
   and culture notes, written in English for this project
 - Item-level knowledge tracking, kept separately per skill
 - Questions, assessments and lessons as small, tested building blocks
-- Lessons: Hiragana vowels (あ い う え お), Katakana vowels (ア イ ウ エ オ)
+- Lessons: all 46 basic hiragana in ten row lessons, Katakana vowels (ア イ ウ エ オ)
 
 ## Quickstart
 
