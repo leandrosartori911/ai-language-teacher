@@ -21,7 +21,7 @@ MVP goal: a local, zero-cost AI teacher that really teaches Japanese
 ## Phase B: Teaching engine
 - [x] Teaching content per item: explanation, mnemonic, example, culture note (spec 009)
 - [x] Full basic hiragana, one lesson per row, alternative spellings (spec 010)
-- [ ] Full basic katakana (spec 011)
+- [x] Full basic katakana and the long vowel mark ー (spec 011)
 - [ ] Dakuten and handakuten, both scripts (spec 012)
 - [ ] Combinations (yoon), both scripts (spec 013)
 - [ ] Lesson unlock threshold (spec 014)

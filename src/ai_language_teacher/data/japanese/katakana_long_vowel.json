@@ -1,0 +1,22 @@
+{
+  "title": "Katakana long vowel mark",
+  "items": [
+    {
+      "item": "ー",
+      "answer": "long vowel",
+      "prompt": "What does ー mean in katakana words?",
+      "explanation": "ー is not a kana and has no sound of its own: it makes the vowel before it long, held for about twice as long. コーヒー is kō-hī, not ko-hi. In vertical writing it turns into a vertical line. Vowel length changes meaning in Japanese, so the mark matters.",
+      "mnemonic": "A long line for a long sound.",
+      "example": {
+        "word": "スーパー",
+        "reading": "sūpā",
+        "meaning": "supermarket"
+      },
+      "also_accepted": [
+        "long vowel mark",
+        "long"
+      ],
+      "culture_note": "Hiragana words show long vowels by adding a vowel kana instead, as in おかあさん (okāsan, mother); ー is used mainly in katakana."
+    }
+  ]
+}

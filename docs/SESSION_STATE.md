@@ -64,7 +64,15 @@ Portuguese for conversation with the user in Claude Code.
   (e.g. `Claude Opus 5.5`; the user approved naming the real model on
   2026-09-27 instead of the earlier fixed `Claude Sonnet 5`).
 - **`git push` after every commit** (remote `origin` is set, `gh` is
-  authenticated as `leandrosartori911`).
+  authenticated as `leandrosartori911`), then watch the CI run
+  (`gh run watch <id> --exit-status`) and report the result.
+- **Before pushing a change to lesson data or `hiragana.py`/`katakana.py`,
+  run the CI `wheel` smoke check locally** (build wheel into the
+  scratchpad, install into a fresh venv, run the same import/assert from
+  outside the repo). Spec 010 broke CI because that assertion was stale.
+- Lesson content is generated from throwaway scripts in the session
+  scratchpad (not committed); the JSON files in the repo are the source of
+  truth. Edit the JSON directly for small fixes.
 - Update `docs/ROADMAP.md` and `CHANGELOG.md` as part of each spec, not
   just the spec file itself.
 - Ponytail mode active (lazy/YAGNI): prefer stdlib over new dependencies,
@@ -108,7 +116,7 @@ ai-language-teacher/
   docs/
     ROADMAP.md
     SESSION_STATE.md        # this file
-    specs/001..010-*.md     # one file per implemented feature
+    specs/001..011-*.md     # one file per implemented feature
     adr/                    # 0001 web stack, 0002 local LLM
   src/ai_language_teacher/
     main.py                 # stub: prints a banner, not a real CLI yet
@@ -125,7 +133,7 @@ ai-language-teacher/
       loader.py                 # load_lesson(path) — JSON -> Lesson
       japanese/
         hiragana.py               # HIRAGANA_LESSONS (10 row lessons), HIRAGANA (all 46)
-        katakana.py                # loads katakana_vowels.json via loader
+        katakana.py                # KATAKANA_LESSONS (10 rows + ー), KATAKANA (47)
   tests/
     test_student.py  test_assessment.py  test_question.py  test_lesson.py
     test_hiragana.py  test_katakana.py  test_loader.py  test_progress.py
@@ -199,14 +207,16 @@ If there's no `item` (skill-only assessment), it still overwrites directly
   n, h, m, y, r, w + ん), files `data/japanese/hiragana_<row>.json` (spec 010).
   Main answers are Hepburn; `also_accepted` adds shi/si, chi/ti, tsu/tu,
   fu/hu, o/wo, n/nn.
-- Katakana vowels: ア→a, イ→i, ウ→u, エ→e, オ→o (`src/ai_language_teacher/data/japanese/katakana_vowels.json`).
+- Katakana: all 46 basic kana as ten row lessons plus `katakana_long_vowel.json`
+  (ー, answer "long vowel", custom `prompt`) (spec 011). Same Hepburn main
+  answers and `also_accepted` spellings as hiragana. Examples are loanwords.
 - Every item has English teaching content written originally for the
   project (no text copied from other courses). Culture notes cover kana
   origins (e.g. あ from 安, ア from the left part of 阿) and a few true,
   useful facts. **Content is what the Phase D LLM will be grounded on, so
   check facts carefully before adding any.**
-- Nothing else yet (no katakana consonants, dakuten, combinations, kanji,
-  vocab or grammar).
+- Nothing else yet (no dakuten, combinations, small っ/ッ, kanji, vocab or
+  grammar).
 
 ## Known issues / deliberate shortcuts (marked `# ponytail:` in code)
 
@@ -215,7 +225,7 @@ If there's no `item` (skill-only assessment), it still overwrites directly
 
 ## Test status
 
-96 tests passing, `ruff check` and `mypy` (strict) clean, as of spec 010.
+170 tests passing, `ruff check` and `mypy` (strict) clean, as of spec 011.
 
 ```
 tests/test_student.py     — Student creation, skills, mastery aggregation
@@ -230,6 +240,7 @@ tests/test_models.py      — dataclass models, value equality, no shared defaul
 tests/test_knowledge_per_skill.py — per-skill knowledge and means
 tests/test_teaching.py    — teaching content present + loader validation
 tests/test_hiragana_full.py — 10 row lessons, 46 kana, alternative spellings
+tests/test_katakana_full.py — 11 lessons (rows + ー), romaji parity with hiragana, prompts
 ```
 
 ## Progress
@@ -243,8 +254,8 @@ engine, C: web app, D: local LLM teacher, E: release).
   inside the package, loaded with `importlib.resources` (CI job `wheel`
   checks a non-editable install); 008 `Knowledge` per skill.
 - **Phase B (in progress):** 009 teaching content and 010 full basic
-  hiragana done. Next (the user wants *complete* kana, split into small
-  specs): 011 full basic katakana, 012 dakuten/handakuten (both scripts),
+  hiragana and 011 full basic katakana done. Next (the user wants
+  *complete* kana, split into small specs): 012 dakuten/handakuten (both scripts),
   013 combinations/yoon (both scripts), 014 unlock threshold (proposed:
   `0.8`, single optional predecessor lesson, no dependency graph), 015
   spaced repetition (Leitner or SM-2, no external library), 016 N5 kanji and

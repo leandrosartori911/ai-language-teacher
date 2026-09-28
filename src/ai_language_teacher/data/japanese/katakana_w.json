@@ -1,0 +1,47 @@
+{
+  "title": "Katakana W row and ン",
+  "items": [
+    {
+      "item": "ワ",
+      "answer": "wa",
+      "explanation": "ワ is the katakana for 'wa', the same sound as hiragana わ. It looks like ウ without the dot on top.",
+      "mnemonic": "ウ that lost its hat: 'wa!', where did it go?",
+      "example": {
+        "word": "ワイン",
+        "reading": "wain",
+        "meaning": "wine"
+      },
+      "culture_note": "ワ developed from the kanji 和."
+    },
+    {
+      "item": "ヲ",
+      "answer": "o",
+      "explanation": "ヲ is the katakana for 'o', the same sound as hiragana を. It is very rare today: modern katakana words almost never need it. Both 'o' and 'wo' are accepted.",
+      "mnemonic": "フ with a bar through it: a rare sight.",
+      "example": {
+        "word": "ホンヲヨム",
+        "reading": "hon o yomu",
+        "meaning": "read a book (written all in katakana)"
+      },
+      "also_accepted": [
+        "wo"
+      ],
+      "culture_note": "ヲ developed from the kanji 乎. You mostly see ヲ where katakana was used for grammar too, as in old telegrams, written all in katakana, and pre-war laws, written in kanji and katakana."
+    },
+    {
+      "item": "ン",
+      "answer": "n",
+      "explanation": "ン is the katakana for 'n', the same sound as hiragana ん. It is easy to confuse with ソ: in ン the dash is nearly horizontal and the long stroke rises UP from the bottom left. Both 'n' and 'nn' are accepted.",
+      "mnemonic": "A nose (the dash) above a stroke sweeping upward: a sniff, 'nn'.",
+      "example": {
+        "word": "パン",
+        "reading": "pan",
+        "meaning": "bread"
+      },
+      "also_accepted": [
+        "nn"
+      ],
+      "culture_note": "パン comes from the Portuguese pão, one of the first European words to enter Japanese after Portuguese traders arrived in the 16th century."
+    }
+  ]
+}

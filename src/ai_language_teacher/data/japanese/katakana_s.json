@@ -1,0 +1,68 @@
+{
+  "title": "Katakana S row",
+  "items": [
+    {
+      "item": "サ",
+      "answer": "sa",
+      "explanation": "サ is the katakana for 'sa', the same sound as hiragana さ.",
+      "mnemonic": "さ drawn with straight lines: a saw blade with two handles.",
+      "example": {
+        "word": "サラダ",
+        "reading": "sarada",
+        "meaning": "salad"
+      },
+      "culture_note": "サ developed from the kanji 散."
+    },
+    {
+      "item": "シ",
+      "answer": "shi",
+      "explanation": "シ is the katakana for 'shi', the same sound as hiragana し. It is easy to confuse with ツ: in シ the two short strokes sit to the left and the long stroke sweeps UP from the bottom left. Both 'shi' and 'si' are accepted.",
+      "mnemonic": "A smiling face lying on its side: two eyes, and a mouth sweeping up in a grin. She smiles.",
+      "example": {
+        "word": "タクシー",
+        "reading": "takushī",
+        "meaning": "taxi"
+      },
+      "also_accepted": [
+        "si"
+      ],
+      "culture_note": "シ developed from the kanji 之."
+    },
+    {
+      "item": "ス",
+      "answer": "su",
+      "explanation": "ス is the katakana for 'su', the same sound as hiragana す. It looks like ヌ, which has one extra small stroke crossing it.",
+      "mnemonic": "A swan seen from the side: the top is its bent neck, the strokes below its body and tail.",
+      "example": {
+        "word": "スキー",
+        "reading": "sukī",
+        "meaning": "skiing"
+      },
+      "culture_note": "ス developed from the kanji 須."
+    },
+    {
+      "item": "セ",
+      "answer": "se",
+      "explanation": "セ is the katakana for 'se', the same sound as hiragana せ.",
+      "mnemonic": "せ with a sharp corner: a seat with a straight back.",
+      "example": {
+        "word": "セーター",
+        "reading": "sētā",
+        "meaning": "sweater"
+      },
+      "culture_note": "セ developed from the kanji 世."
+    },
+    {
+      "item": "ソ",
+      "answer": "so",
+      "explanation": "ソ is the katakana for 'so', the same sound as hiragana そ. It is easy to confuse with ン: in ソ the dash is nearly vertical and the long stroke comes DOWN from the top.",
+      "mnemonic": "A needle sewing down through cloth: both strokes point downward.",
+      "example": {
+        "word": "ソース",
+        "reading": "sōsu",
+        "meaning": "sauce"
+      },
+      "culture_note": "ソ developed from the kanji 曽."
+    }
+  ]
+}

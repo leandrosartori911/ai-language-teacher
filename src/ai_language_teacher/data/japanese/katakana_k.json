@@ -1,0 +1,65 @@
+{
+  "title": "Katakana K row",
+  "items": [
+    {
+      "item": "カ",
+      "answer": "ka",
+      "explanation": "カ is the katakana for 'ka', the same sound as hiragana か. It is か without the small dash on the right.",
+      "mnemonic": "か without its mosquito: only the arm swinging down in a karate chop.",
+      "example": {
+        "word": "カメラ",
+        "reading": "kamera",
+        "meaning": "camera"
+      },
+      "culture_note": "カ developed from the kanji 加."
+    },
+    {
+      "item": "キ",
+      "answer": "ki",
+      "explanation": "キ is the katakana for 'ki', the same sound as hiragana き. It is き without the hook at the bottom.",
+      "mnemonic": "Two crossbars on a slanted post: the frame of a kite.",
+      "example": {
+        "word": "ケーキ",
+        "reading": "kēki",
+        "meaning": "cake"
+      },
+      "culture_note": "キ developed from the kanji 幾."
+    },
+    {
+      "item": "ク",
+      "answer": "ku",
+      "explanation": "ク is the katakana for 'ku', the same sound as hiragana く. Do not confuse it with ケ (a line crosses to the right) or タ (an extra stroke inside).",
+      "mnemonic": "く wearing a small cap: the cuckoo put on a hat.",
+      "example": {
+        "word": "クラス",
+        "reading": "kurasu",
+        "meaning": "class"
+      },
+      "culture_note": "ク developed from the kanji 久."
+    },
+    {
+      "item": "ケ",
+      "answer": "ke",
+      "explanation": "ケ is the katakana for 'ke', the same sound as hiragana け. Its crossbar pokes out to the right, which is how you tell it from ク.",
+      "mnemonic": "A capital K leaning back and missing one leg.",
+      "example": {
+        "word": "スケート",
+        "reading": "sukēto",
+        "meaning": "skating"
+      },
+      "culture_note": "ケ developed from the kanji 介."
+    },
+    {
+      "item": "コ",
+      "answer": "ko",
+      "explanation": "コ is the katakana for 'ko', the same sound as hiragana こ.",
+      "mnemonic": "A box open on the left: a cozy corner.",
+      "example": {
+        "word": "コーヒー",
+        "reading": "kōhī",
+        "meaning": "coffee"
+      },
+      "culture_note": "コ developed from the kanji 己. コーヒー came from the Dutch koffie: for over two centuries the Dutch were the only Europeans allowed to trade with Japan, from the small island of Dejima in Nagasaki."
+    }
+  ]
+}
