@@ -1,0 +1,63 @@
+{
+  "title": "Hiragana P row (handakuten)",
+  "items": [
+    {
+      "item": "ぱ",
+      "answer": "pa",
+      "explanation": "ぱ is 'pa': は ('ha') with handakuten. The small circle ゜ is called handakuten. It is only used on the H row and turns h into p.",
+      "mnemonic": "は blowing a little bubble ゜: the soft 'h' pops into a 'p', 'pa'.",
+      "example": {
+        "word": "かんぱい",
+        "reading": "kanpai",
+        "meaning": "cheers!"
+      },
+      "culture_note": "かんぱい (乾杯) literally means 'dry cup'. At Japanese gatherings nobody drinks until someone raises a glass and says it."
+    },
+    {
+      "item": "ぴ",
+      "answer": "pi",
+      "explanation": "ぴ is 'pi': ひ ('hi') with handakuten.",
+      "mnemonic": "ひ blowing a little bubble ゜: the soft 'h' pops into a 'p', 'pi'.",
+      "example": {
+        "word": "ぴかぴか",
+        "reading": "pikapika",
+        "meaning": "sparkling, shiny"
+      },
+      "culture_note": "Japanese has thousands of sound-symbolic words like ぴかぴか. Pikachu's name is often explained as ピカ (sparkle) plus チュウ (a mouse's squeak)."
+    },
+    {
+      "item": "ぷ",
+      "answer": "pu",
+      "explanation": "ぷ is 'pu': ふ ('fu') with handakuten.",
+      "mnemonic": "ふ blowing a little bubble ゜: the soft 'h' pops into a 'p', 'pu'.",
+      "example": {
+        "word": "てんぷら",
+        "reading": "tenpura",
+        "meaning": "tempura"
+      }
+    },
+    {
+      "item": "ぺ",
+      "answer": "pe",
+      "explanation": "ぺ is 'pe': へ ('he') with handakuten.",
+      "mnemonic": "へ blowing a little bubble ゜: the soft 'h' pops into a 'p', 'pe'.",
+      "example": {
+        "word": "ぺこぺこ",
+        "reading": "pekopeko",
+        "meaning": "starving"
+      },
+      "culture_note": "ぺこぺこ describes an empty stomach: おなかがぺこぺこ (onaka ga pekopeko) means 'I'm starving'."
+    },
+    {
+      "item": "ぽ",
+      "answer": "po",
+      "explanation": "ぽ is 'po': ほ ('ho') with handakuten.",
+      "mnemonic": "ほ blowing a little bubble ゜: the soft 'h' pops into a 'p', 'po'.",
+      "example": {
+        "word": "さんぽ",
+        "reading": "sanpo",
+        "meaning": "a walk"
+      }
+    }
+  ]
+}

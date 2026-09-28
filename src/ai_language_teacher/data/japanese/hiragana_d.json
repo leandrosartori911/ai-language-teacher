@@ -1,0 +1,68 @@
+{
+  "title": "Hiragana D row (dakuten)",
+  "items": [
+    {
+      "item": "だ",
+      "answer": "da",
+      "explanation": "だ is 'da': た ('ta') with dakuten. The two small ticks ゛ are called dakuten. They make the consonant voiced, meaning your vocal cords buzz: k becomes g, s becomes z, t becomes d, and h becomes b. Touch your throat while saying 'k' and then 'g' to feel the difference.",
+      "mnemonic": "た plus two ticks for buzzing vocal cords: 'ta' starts to buzz and becomes 'da'.",
+      "example": {
+        "word": "だいがく",
+        "reading": "daigaku",
+        "meaning": "university"
+      }
+    },
+    {
+      "item": "ぢ",
+      "answer": "ji",
+      "explanation": "ぢ is 'ji': ち ('chi') with dakuten. It sounds exactly like じ and is rare: it is written only when a word's pieces require it, as in はなぢ, or when ち is repeated, as in ちぢむ (chijimu, to shrink). Both 'ji' and 'di' are accepted.",
+      "mnemonic": "ち plus two ticks for buzzing vocal cords: 'chi' starts to buzz and becomes 'ji'.",
+      "example": {
+        "word": "はなぢ",
+        "reading": "hanaji",
+        "meaning": "nosebleed"
+      },
+      "also_accepted": [
+        "di"
+      ],
+      "culture_note": "はなぢ is はな (nose) + ち (blood). When words join, the first consonant of the second part often becomes voiced; this is called rendaku, and it is why the spelling is ぢ and not じ."
+    },
+    {
+      "item": "づ",
+      "answer": "zu",
+      "explanation": "づ is 'zu': つ ('tsu') with dakuten. It sounds exactly like ず and is rare: it is written only when a word's pieces require it, or when つ is repeated, as in つづく. Both 'zu' and 'du' are accepted.",
+      "mnemonic": "つ plus two ticks for buzzing vocal cords: 'tsu' starts to buzz and becomes 'zu'.",
+      "example": {
+        "word": "つづく",
+        "reading": "tsuzuku",
+        "meaning": "to continue"
+      },
+      "also_accepted": [
+        "du"
+      ],
+      "culture_note": "つづく also appears at the end of manga chapters and TV episodes, meaning 'to be continued'."
+    },
+    {
+      "item": "で",
+      "answer": "de",
+      "explanation": "で is 'de': て ('te') with dakuten.",
+      "mnemonic": "て plus two ticks for buzzing vocal cords: 'te' starts to buzz and becomes 'de'.",
+      "example": {
+        "word": "でんわ",
+        "reading": "denwa",
+        "meaning": "telephone"
+      }
+    },
+    {
+      "item": "ど",
+      "answer": "do",
+      "explanation": "ど is 'do': と ('to') with dakuten.",
+      "mnemonic": "と plus two ticks for buzzing vocal cords: 'to' starts to buzz and becomes 'do'.",
+      "example": {
+        "word": "まど",
+        "reading": "mado",
+        "meaning": "window"
+      }
+    }
+  ]
+}

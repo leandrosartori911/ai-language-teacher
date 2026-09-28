@@ -2,7 +2,7 @@ from importlib.resources import files
 
 from ai_language_teacher.language.loader import load_lesson
 
-ROWS = ["vowels", "k", "s", "t", "n", "h", "m", "y", "r", "w"]
+ROWS = ["vowels", "k", "s", "t", "n", "h", "m", "y", "r", "w", "g", "z", "d", "b", "p"]
 
 DATA_DIR = files("ai_language_teacher") / "data" / "japanese"
 DATA_FILE = DATA_DIR / "hiragana_vowels.json"

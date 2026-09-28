@@ -40,13 +40,14 @@ def question_for(item):
     raise AssertionError(f"no question for {item}")
 
 
-def test_hiragana_is_taught_in_ten_row_lessons():
-    assert len(HIRAGANA_LESSONS) == 10
-    assert [next(iter(lesson.items)) for lesson in HIRAGANA_LESSONS] == ROW_STARTS
+def test_hiragana_course_starts_with_ten_basic_row_lessons():
+    basic = HIRAGANA_LESSONS[:10]
+
+    assert [next(iter(lesson.items)) for lesson in basic] == ROW_STARTS
 
 
 def test_lessons_cover_the_46_basic_hiragana_once():
-    all_items = [item for lesson in HIRAGANA_LESSONS for item in lesson.items]
+    all_items = [item for lesson in HIRAGANA_LESSONS[:10] for item in lesson.items]
 
     assert len(all_items) == 46
     assert sorted(all_items) == sorted(BASIC_HIRAGANA)
@@ -58,7 +59,6 @@ def test_hiragana_dict_is_the_union_of_all_lessons():
         union.update(lesson.items)
 
     assert HIRAGANA == union
-    assert len(HIRAGANA) == 46
 
 
 @pytest.mark.parametrize("lesson", HIRAGANA_LESSONS, ids=lambda lesson: lesson.title)

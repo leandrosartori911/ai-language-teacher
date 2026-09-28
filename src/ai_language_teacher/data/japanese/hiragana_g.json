@@ -1,0 +1,62 @@
+{
+  "title": "Hiragana G row (dakuten)",
+  "items": [
+    {
+      "item": "が",
+      "answer": "ga",
+      "explanation": "が is 'ga': か ('ka') with dakuten. The two small ticks ゛ are called dakuten. They make the consonant voiced, meaning your vocal cords buzz: k becomes g, s becomes z, t becomes d, and h becomes b. Touch your throat while saying 'k' and then 'g' to feel the difference. In the middle of words some speakers, especially older ones, soften it to a nasal 'nga'; both are correct.",
+      "mnemonic": "か plus two ticks for buzzing vocal cords: 'ka' starts to buzz and becomes 'ga'.",
+      "example": {
+        "word": "がっこう",
+        "reading": "gakkō",
+        "meaning": "school"
+      }
+    },
+    {
+      "item": "ぎ",
+      "answer": "gi",
+      "explanation": "ぎ is 'gi': き ('ki') with dakuten. Always a hard g, as in 'give', never as in 'giant'.",
+      "mnemonic": "き plus two ticks for buzzing vocal cords: 'ki' starts to buzz and becomes 'gi'.",
+      "example": {
+        "word": "かぎ",
+        "reading": "kagi",
+        "meaning": "key"
+      }
+    },
+    {
+      "item": "ぐ",
+      "answer": "gu",
+      "explanation": "ぐ is 'gu': く ('ku') with dakuten.",
+      "mnemonic": "く plus two ticks for buzzing vocal cords: 'ku' starts to buzz and becomes 'gu'.",
+      "example": {
+        "word": "かぐ",
+        "reading": "kagu",
+        "meaning": "furniture"
+      }
+    },
+    {
+      "item": "げ",
+      "answer": "ge",
+      "explanation": "げ is 'ge': け ('ke') with dakuten. Always a hard g, as in 'get'.",
+      "mnemonic": "け plus two ticks for buzzing vocal cords: 'ke' starts to buzz and becomes 'ge'.",
+      "example": {
+        "word": "げんき",
+        "reading": "genki",
+        "meaning": "healthy, energetic"
+      },
+      "culture_note": "げんき appears in one of the first phrases learners hear: おげんきですか (ogenki desu ka, 'how are you?')."
+    },
+    {
+      "item": "ご",
+      "answer": "go",
+      "explanation": "ご is 'go': こ ('ko') with dakuten.",
+      "mnemonic": "こ plus two ticks for buzzing vocal cords: 'ko' starts to buzz and becomes 'go'.",
+      "example": {
+        "word": "ごはん",
+        "reading": "gohan",
+        "meaning": "cooked rice, a meal"
+      },
+      "culture_note": "ごはん means both cooked rice and a meal in general, which shows how central rice has been to Japanese eating."
+    }
+  ]
+}
