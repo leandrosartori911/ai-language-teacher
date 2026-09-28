@@ -34,3 +34,6 @@
 - Combinations (きゃ, しゅ, ちょ... and voiced ぎゃ, じゃ, びょ, ぴゃ...) and
   small っ/ッ for both scripts, completing the kana course: 105 hiragana and
   106 katakana items (spec 013).
+- Lesson unlocking: a lesson opens once the previous lesson in the course
+  reaches 0.8 mastery (`core.progression`: `lesson_mastery`,
+  `unlocked_lessons`) (spec 014).

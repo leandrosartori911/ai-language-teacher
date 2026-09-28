@@ -24,7 +24,7 @@ MVP goal: a local, zero-cost AI teacher that really teaches Japanese
 - [x] Full basic katakana and the long vowel mark ー (spec 011)
 - [x] Dakuten and handakuten, both scripts (spec 012)
 - [x] Combinations (yoon) and small tsu, both scripts (spec 013); kana complete
-- [ ] Lesson unlock threshold (spec 014)
+- [x] Lesson unlock threshold (spec 014)
 - [ ] Spaced repetition (spec 015)
 - [ ] Essential JLPT N5 kanji and starter vocabulary (spec 016)
 
