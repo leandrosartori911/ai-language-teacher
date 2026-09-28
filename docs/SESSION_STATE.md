@@ -116,7 +116,7 @@ ai-language-teacher/
   docs/
     ROADMAP.md
     SESSION_STATE.md        # this file
-    specs/001..012-*.md     # one file per implemented feature
+    specs/001..013-*.md     # one file per implemented feature
     adr/                    # 0001 web stack, 0002 local LLM
   src/ai_language_teacher/
     main.py                 # stub: prints a banner, not a real CLI yet
@@ -132,8 +132,8 @@ ai-language-teacher/
     language/
       loader.py                 # load_lesson(path) — JSON -> Lesson
       japanese/
-        hiragana.py               # HIRAGANA_LESSONS (15), HIRAGANA (71)
-        katakana.py                # KATAKANA_LESSONS (16), KATAKANA (72)
+        hiragana.py               # HIRAGANA_LESSONS (18), HIRAGANA (105)
+        katakana.py                # KATAKANA_LESSONS (19), KATAKANA (106)
   tests/
     test_student.py  test_assessment.py  test_question.py  test_lesson.py
     test_hiragana.py  test_katakana.py  test_loader.py  test_progress.py
@@ -218,7 +218,12 @@ If there's no `item` (skill-only assessment), it still overwrites directly
 - Dakuten/handakuten (spec 012): rows g, z, d, b, p per script, after the
   basic rows (katakana: after ー). `HIRAGANA_LESSONS`/`KATAKANA_LESSONS` are
   the full course per script in teaching order. じ/ぢ/づ accept zi/di/du.
-- Nothing else yet (no combinations, small っ/ッ, kanji, vocab or grammar).
+- Combinations and small tsu (spec 013): per script, lessons
+  `combinations` (21), `voiced_combinations` (12), `small_tsu` (っ/ッ, custom
+  prompt, answer "double consonant"). Items are two characters (きゃ).
+  **Kana is complete.** Rare combos in katakana use native words written
+  in katakana (the meaning says so).
+- Nothing else yet (no kanji, vocab or grammar).
 
 ## Known issues / deliberate shortcuts (marked `# ponytail:` in code)
 
@@ -227,7 +232,7 @@ If there's no `item` (skill-only assessment), it still overwrites directly
 
 ## Test status
 
-230 tests passing, `ruff check` and `mypy` (strict) clean, as of spec 012.
+322 tests passing, `ruff check` and `mypy` (strict) clean, as of spec 013.
 
 ```
 tests/test_student.py     — Student creation, skills, mastery aggregation
@@ -243,7 +248,8 @@ tests/test_knowledge_per_skill.py — per-skill knowledge and means
 tests/test_teaching.py    — teaching content present + loader validation
 tests/test_hiragana_full.py — 10 row lessons, 46 kana, alternative spellings
 tests/test_katakana_full.py — 11 lessons (rows + ー), romaji parity with hiragana, prompts
-tests/test_dakuten.py     — dakuten/handakuten rows, totals 71/72, parity, spellings
+tests/test_dakuten.py     — dakuten/handakuten rows, parity, spellings
+tests/test_combinations.py — combinations, small tsu, totals 105/106
 ```
 
 ## Progress
@@ -257,8 +263,8 @@ engine, C: web app, D: local LLM teacher, E: release).
   inside the package, loaded with `importlib.resources` (CI job `wheel`
   checks a non-editable install); 008 `Knowledge` per skill.
 - **Phase B (in progress):** 009 teaching content and 010 full basic
-  hiragana, 011 full basic katakana and 012 dakuten/handakuten done. Next
-  (the user wants *complete* kana, split into small specs): 013 combinations/yoon (both scripts), 014 unlock threshold (proposed:
+  hiragana, 011 full basic katakana, 012 dakuten/handakuten and 013
+  combinations + small tsu done (kana complete). Next: 014 unlock threshold (proposed:
   `0.8`, single optional predecessor lesson, no dependency graph), 015
   spaced repetition (Leitner or SM-2, no external library), 016 N5 kanji and
   starter vocabulary.

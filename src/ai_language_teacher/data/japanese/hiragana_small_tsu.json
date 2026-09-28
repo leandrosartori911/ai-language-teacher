@@ -1,0 +1,22 @@
+{
+  "title": "Hiragana small tsu",
+  "items": [
+    {
+      "item": "っ",
+      "answer": "double consonant",
+      "prompt": "What does a small っ do?",
+      "explanation": "A small っ has no sound of its own. It doubles the consonant that follows: you pause for one beat with your mouth ready for the next sound, then say it. In romaji the consonant is written twice. Compare きって (kitte, stamp) versus きて (kite, come). Before ch, romaji writes 'tch', as in マッチ (matchi, match).",
+      "mnemonic": "The small っ is a tiny speed bump: the sound stops for a beat before the next consonant.",
+      "example": {
+        "word": "きって",
+        "reading": "kitte",
+        "meaning": "postage stamp"
+      },
+      "also_accepted": [
+        "doubles the next consonant",
+        "pause"
+      ],
+      "culture_note": "At the end of a word or an exclamation, as in あっ! ('ah!'), っ marks a sudden stop, like a gasp."
+    }
+  ]
+}

@@ -21,23 +21,21 @@ def items_of(lessons):
     return [item for lesson in lessons for item in lesson.items]
 
 
-def test_hiragana_course_ends_with_five_dakuten_rows():
-    assert len(HIRAGANA_LESSONS) == 15
-    assert ["".join(lesson.items) for lesson in HIRAGANA_LESSONS[10:]] == DAKUTEN_HIRAGANA
+def test_hiragana_dakuten_rows_follow_the_basic_rows():
+    assert ["".join(lesson.items) for lesson in HIRAGANA_LESSONS[10:15]] == DAKUTEN_HIRAGANA
 
 
-def test_katakana_course_ends_with_five_dakuten_rows():
-    assert len(KATAKANA_LESSONS) == 16
-    assert ["".join(lesson.items) for lesson in KATAKANA_LESSONS[11:]] == DAKUTEN_KATAKANA
+def test_katakana_dakuten_rows_follow_the_basic_rows():
+    assert ["".join(lesson.items) for lesson in KATAKANA_LESSONS[11:16]] == DAKUTEN_KATAKANA
 
 
 def test_full_courses_have_no_repeated_items():
-    assert len(items_of(HIRAGANA_LESSONS)) == len(HIRAGANA) == 71
-    assert len(items_of(KATAKANA_LESSONS)) == len(KATAKANA) == 72
+    assert len(items_of(HIRAGANA_LESSONS)) == len(HIRAGANA)
+    assert len(items_of(KATAKANA_LESSONS)) == len(KATAKANA)
 
 
 @pytest.mark.parametrize(
-    "lesson", HIRAGANA_LESSONS[10:] + KATAKANA_LESSONS[11:], ids=lambda lesson: lesson.title
+    "lesson", HIRAGANA_LESSONS[10:15] + KATAKANA_LESSONS[11:16], ids=lambda lesson: lesson.title
 )
 def test_every_dakuten_item_has_teaching_content(lesson):
     assert set(lesson.teaching) == set(lesson.items)
