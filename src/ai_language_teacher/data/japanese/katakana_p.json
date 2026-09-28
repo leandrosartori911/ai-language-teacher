@@ -1,0 +1,62 @@
+{
+  "title": "Katakana P row (handakuten)",
+  "items": [
+    {
+      "item": "パ",
+      "answer": "pa",
+      "explanation": "パ is 'pa': ハ ('ha') with handakuten. It is the same sound as hiragana ぱ. The small circle ゜ is called handakuten. It is only used on the H row and turns h into p.",
+      "mnemonic": "ハ blowing a little bubble ゜: the soft 'h' pops into a 'p', 'pa'.",
+      "example": {
+        "word": "パスタ",
+        "reading": "pasuta",
+        "meaning": "pasta"
+      }
+    },
+    {
+      "item": "ピ",
+      "answer": "pi",
+      "explanation": "ピ is 'pi': ヒ ('hi') with handakuten. It is the same sound as hiragana ぴ.",
+      "mnemonic": "ヒ blowing a little bubble ゜: the soft 'h' pops into a 'p', 'pi'.",
+      "example": {
+        "word": "ピアノ",
+        "reading": "piano",
+        "meaning": "piano"
+      }
+    },
+    {
+      "item": "プ",
+      "answer": "pu",
+      "explanation": "プ is 'pu': フ ('fu') with handakuten. It is the same sound as hiragana ぷ.",
+      "mnemonic": "フ blowing a little bubble ゜: the soft 'h' pops into a 'p', 'pu'.",
+      "example": {
+        "word": "プール",
+        "reading": "pūru",
+        "meaning": "swimming pool"
+      },
+      "culture_note": "プール means a swimming pool, not the game of pool."
+    },
+    {
+      "item": "ペ",
+      "answer": "pe",
+      "explanation": "ペ is 'pe': ヘ ('he') with handakuten. It is the same sound as hiragana ぺ.",
+      "mnemonic": "ヘ blowing a little bubble ゜: the soft 'h' pops into a 'p', 'pe'.",
+      "example": {
+        "word": "ペン",
+        "reading": "pen",
+        "meaning": "pen"
+      }
+    },
+    {
+      "item": "ポ",
+      "answer": "po",
+      "explanation": "ポ is 'po': ホ ('ho') with handakuten. It is the same sound as hiragana ぽ.",
+      "mnemonic": "ホ blowing a little bubble ゜: the soft 'h' pops into a 'p', 'po'.",
+      "example": {
+        "word": "ポスト",
+        "reading": "posuto",
+        "meaning": "postbox, mailbox"
+      },
+      "culture_note": "ポスト means a postbox; the red postboxes are a familiar sight on Japanese streets."
+    }
+  ]
+}

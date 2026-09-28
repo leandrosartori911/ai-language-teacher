@@ -1,0 +1,60 @@
+{
+  "title": "Hiragana B row (dakuten)",
+  "items": [
+    {
+      "item": "ば",
+      "answer": "ba",
+      "explanation": "ば is 'ba': は ('ha') with dakuten. The two small ticks ゛ are called dakuten. They make the consonant voiced, meaning your vocal cords buzz: k becomes g, s becomes z, t becomes d, and h becomes b. Touch your throat while saying 'k' and then 'g' to feel the difference.",
+      "mnemonic": "は plus two ticks for buzzing vocal cords: 'ha' starts to buzz and becomes 'ba'.",
+      "example": {
+        "word": "ばら",
+        "reading": "bara",
+        "meaning": "rose"
+      }
+    },
+    {
+      "item": "び",
+      "answer": "bi",
+      "explanation": "び is 'bi': ひ ('hi') with dakuten.",
+      "mnemonic": "ひ plus two ticks for buzzing vocal cords: 'hi' starts to buzz and becomes 'bi'.",
+      "example": {
+        "word": "えび",
+        "reading": "ebi",
+        "meaning": "shrimp"
+      }
+    },
+    {
+      "item": "ぶ",
+      "answer": "bu",
+      "explanation": "ぶ is 'bu': ふ ('fu') with dakuten.",
+      "mnemonic": "ふ plus two ticks for buzzing vocal cords: 'fu' starts to buzz and becomes 'bu'.",
+      "example": {
+        "word": "ぶた",
+        "reading": "buta",
+        "meaning": "pig"
+      }
+    },
+    {
+      "item": "べ",
+      "answer": "be",
+      "explanation": "べ is 'be': へ ('he') with dakuten.",
+      "mnemonic": "へ plus two ticks for buzzing vocal cords: 'he' starts to buzz and becomes 'be'.",
+      "example": {
+        "word": "たべる",
+        "reading": "taberu",
+        "meaning": "to eat"
+      }
+    },
+    {
+      "item": "ぼ",
+      "answer": "bo",
+      "explanation": "ぼ is 'bo': ほ ('ho') with dakuten.",
+      "mnemonic": "ほ plus two ticks for buzzing vocal cords: 'ho' starts to buzz and becomes 'bo'.",
+      "example": {
+        "word": "ぼうし",
+        "reading": "bōshi",
+        "meaning": "hat"
+      }
+    }
+  ]
+}

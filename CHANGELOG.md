@@ -29,3 +29,5 @@
   mark ー, with loanword examples and notes on easily confused pairs
   (シ/ツ, ソ/ン...). Lesson items can set a custom question `prompt`
   (spec 011).
+- Dakuten and handakuten (が, ざ, だ, ば, ぱ rows and their katakana), five
+  lessons per script with teaching content; じ/ぢ/づ accept zi/di/du (spec 012).

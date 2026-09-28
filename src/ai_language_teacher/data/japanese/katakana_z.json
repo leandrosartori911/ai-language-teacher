@@ -1,0 +1,63 @@
+{
+  "title": "Katakana Z row (dakuten)",
+  "items": [
+    {
+      "item": "ザ",
+      "answer": "za",
+      "explanation": "ザ is 'za': サ ('sa') with dakuten. It is the same sound as hiragana ざ. The two small ticks ゛ are called dakuten. They make the consonant voiced, meaning your vocal cords buzz: k becomes g, s becomes z, t becomes d, and h becomes b. Touch your throat while saying 'k' and then 'g' to feel the difference.",
+      "mnemonic": "サ plus two ticks for buzzing vocal cords: 'sa' starts to buzz and becomes 'za'.",
+      "example": {
+        "word": "ピザ",
+        "reading": "piza",
+        "meaning": "pizza"
+      }
+    },
+    {
+      "item": "ジ",
+      "answer": "ji",
+      "explanation": "ジ is 'ji': シ ('shi') with dakuten. It is the same sound as hiragana じ. It sounds like the 'j' in 'jeep', not 'zee'. Both 'ji' and 'zi' are accepted.",
+      "mnemonic": "シ plus two ticks for buzzing vocal cords: 'shi' starts to buzz and becomes 'ji'.",
+      "example": {
+        "word": "ジム",
+        "reading": "jimu",
+        "meaning": "gym"
+      },
+      "also_accepted": [
+        "zi"
+      ]
+    },
+    {
+      "item": "ズ",
+      "answer": "zu",
+      "explanation": "ズ is 'zu': ス ('su') with dakuten. It is the same sound as hiragana ず. Many speakers say it with a light 'dz' at the start of a word.",
+      "mnemonic": "ス plus two ticks for buzzing vocal cords: 'su' starts to buzz and becomes 'zu'.",
+      "example": {
+        "word": "チーズ",
+        "reading": "chīzu",
+        "meaning": "cheese"
+      }
+    },
+    {
+      "item": "ゼ",
+      "answer": "ze",
+      "explanation": "ゼ is 'ze': セ ('se') with dakuten. It is the same sound as hiragana ぜ.",
+      "mnemonic": "セ plus two ticks for buzzing vocal cords: 'se' starts to buzz and becomes 'ze'.",
+      "example": {
+        "word": "ゼロ",
+        "reading": "zero",
+        "meaning": "zero"
+      }
+    },
+    {
+      "item": "ゾ",
+      "answer": "zo",
+      "explanation": "ゾ is 'zo': ソ ('so') with dakuten. It is the same sound as hiragana ぞ.",
+      "mnemonic": "ソ plus two ticks for buzzing vocal cords: 'so' starts to buzz and becomes 'zo'.",
+      "example": {
+        "word": "ゾーン",
+        "reading": "zōn",
+        "meaning": "zone"
+      }
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "title": "Hiragana Z row (dakuten)",
+  "items": [
+    {
+      "item": "ざ",
+      "answer": "za",
+      "explanation": "ざ is 'za': さ ('sa') with dakuten. The two small ticks ゛ are called dakuten. They make the consonant voiced, meaning your vocal cords buzz: k becomes g, s becomes z, t becomes d, and h becomes b. Touch your throat while saying 'k' and then 'g' to feel the difference.",
+      "mnemonic": "さ plus two ticks for buzzing vocal cords: 'sa' starts to buzz and becomes 'za'.",
+      "example": {
+        "word": "ざっし",
+        "reading": "zasshi",
+        "meaning": "magazine"
+      }
+    },
+    {
+      "item": "じ",
+      "answer": "ji",
+      "explanation": "じ is 'ji': し ('shi') with dakuten. It sounds like the 'j' in 'jeep', not 'zee'. Both 'ji' and 'zi' are accepted.",
+      "mnemonic": "し plus two ticks for buzzing vocal cords: 'shi' starts to buzz and becomes 'ji'.",
+      "example": {
+        "word": "じかん",
+        "reading": "jikan",
+        "meaning": "time"
+      },
+      "also_accepted": [
+        "zi"
+      ]
+    },
+    {
+      "item": "ず",
+      "answer": "zu",
+      "explanation": "ず is 'zu': す ('su') with dakuten. Many speakers say it with a light 'dz' at the start of a word.",
+      "mnemonic": "す plus two ticks for buzzing vocal cords: 'su' starts to buzz and becomes 'zu'.",
+      "example": {
+        "word": "みず",
+        "reading": "mizu",
+        "meaning": "water"
+      }
+    },
+    {
+      "item": "ぜ",
+      "answer": "ze",
+      "explanation": "ぜ is 'ze': せ ('se') with dakuten.",
+      "mnemonic": "せ plus two ticks for buzzing vocal cords: 'se' starts to buzz and becomes 'ze'.",
+      "example": {
+        "word": "かぜ",
+        "reading": "kaze",
+        "meaning": "wind; a cold"
+      },
+      "culture_note": "かぜ means both 'wind' (風) and 'a cold' (風邪); the kanji show which one is meant, and in speech the context does."
+    },
+    {
+      "item": "ぞ",
+      "answer": "zo",
+      "explanation": "ぞ is 'zo': そ ('so') with dakuten.",
+      "mnemonic": "そ plus two ticks for buzzing vocal cords: 'so' starts to buzz and becomes 'zo'.",
+      "example": {
+        "word": "かぞく",
+        "reading": "kazoku",
+        "meaning": "family"
+      }
+    }
+  ]
+}

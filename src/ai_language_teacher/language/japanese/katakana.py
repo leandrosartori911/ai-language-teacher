@@ -2,7 +2,9 @@ from importlib.resources import files
 
 from ai_language_teacher.language.loader import load_lesson
 
-LESSONS = ["vowels", "k", "s", "t", "n", "h", "m", "y", "r", "w", "long_vowel"]
+LESSONS = [
+    "vowels", "k", "s", "t", "n", "h", "m", "y", "r", "w", "long_vowel", "g", "z", "d", "b", "p"
+]
 
 DATA_DIR = files("ai_language_teacher") / "data" / "japanese"
 DATA_FILE = DATA_DIR / "katakana_vowels.json"

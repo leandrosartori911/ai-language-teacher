@@ -1,0 +1,69 @@
+{
+  "title": "Katakana D row (dakuten)",
+  "items": [
+    {
+      "item": "ダ",
+      "answer": "da",
+      "explanation": "ダ is 'da': タ ('ta') with dakuten. It is the same sound as hiragana だ. The two small ticks ゛ are called dakuten. They make the consonant voiced, meaning your vocal cords buzz: k becomes g, s becomes z, t becomes d, and h becomes b. Touch your throat while saying 'k' and then 'g' to feel the difference.",
+      "mnemonic": "タ plus two ticks for buzzing vocal cords: 'ta' starts to buzz and becomes 'da'.",
+      "example": {
+        "word": "サラダ",
+        "reading": "sarada",
+        "meaning": "salad"
+      }
+    },
+    {
+      "item": "ヂ",
+      "answer": "ji",
+      "explanation": "ヂ is 'ji': チ ('chi') with dakuten. It is the same sound as hiragana ぢ. It sounds exactly like じ and is rare: it is written only when a word's pieces require it, as in はなぢ, or when ち is repeated, as in ちぢむ (chijimu, to shrink). Both 'ji' and 'di' are accepted.",
+      "mnemonic": "チ plus two ticks for buzzing vocal cords: 'chi' starts to buzz and becomes 'ji'.",
+      "example": {
+        "word": "チヂミ",
+        "reading": "chijimi",
+        "meaning": "Korean savoury pancake"
+      },
+      "also_accepted": [
+        "di"
+      ],
+      "culture_note": "チヂミ is a Korean dish popular in Japan. Words from nearby Asian languages are also written in katakana."
+    },
+    {
+      "item": "ヅ",
+      "answer": "zu",
+      "explanation": "ヅ is 'zu': ツ ('tsu') with dakuten. It is the same sound as hiragana づ. It sounds exactly like ず and is rare: it is written only when a word's pieces require it, or when つ is repeated, as in つづく. Both 'zu' and 'du' are accepted.",
+      "mnemonic": "ツ plus two ticks for buzzing vocal cords: 'tsu' starts to buzz and becomes 'zu'.",
+      "example": {
+        "word": "ツヅク",
+        "reading": "tsuzuku",
+        "meaning": "to be continued (つづく written in katakana for emphasis)"
+      },
+      "also_accepted": [
+        "du"
+      ],
+      "culture_note": "Katakana is sometimes used for native words to make them stand out, the way English uses italics or capitals."
+    },
+    {
+      "item": "デ",
+      "answer": "de",
+      "explanation": "デ is 'de': テ ('te') with dakuten. It is the same sound as hiragana で.",
+      "mnemonic": "テ plus two ticks for buzzing vocal cords: 'te' starts to buzz and becomes 'de'.",
+      "example": {
+        "word": "デパート",
+        "reading": "depāto",
+        "meaning": "department store"
+      },
+      "culture_note": "デパート is clipped from 'department store'."
+    },
+    {
+      "item": "ド",
+      "answer": "do",
+      "explanation": "ド is 'do': ト ('to') with dakuten. It is the same sound as hiragana ど.",
+      "mnemonic": "ト plus two ticks for buzzing vocal cords: 'to' starts to buzz and becomes 'do'.",
+      "example": {
+        "word": "ドア",
+        "reading": "doa",
+        "meaning": "door"
+      }
+    }
+  ]
+}

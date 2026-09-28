@@ -1,0 +1,60 @@
+{
+  "title": "Katakana B row (dakuten)",
+  "items": [
+    {
+      "item": "バ",
+      "answer": "ba",
+      "explanation": "バ is 'ba': ハ ('ha') with dakuten. It is the same sound as hiragana ば. The two small ticks ゛ are called dakuten. They make the consonant voiced, meaning your vocal cords buzz: k becomes g, s becomes z, t becomes d, and h becomes b. Touch your throat while saying 'k' and then 'g' to feel the difference.",
+      "mnemonic": "ハ plus two ticks for buzzing vocal cords: 'ha' starts to buzz and becomes 'ba'.",
+      "example": {
+        "word": "バス",
+        "reading": "basu",
+        "meaning": "bus"
+      }
+    },
+    {
+      "item": "ビ",
+      "answer": "bi",
+      "explanation": "ビ is 'bi': ヒ ('hi') with dakuten. It is the same sound as hiragana び.",
+      "mnemonic": "ヒ plus two ticks for buzzing vocal cords: 'hi' starts to buzz and becomes 'bi'.",
+      "example": {
+        "word": "ビール",
+        "reading": "bīru",
+        "meaning": "beer"
+      }
+    },
+    {
+      "item": "ブ",
+      "answer": "bu",
+      "explanation": "ブ is 'bu': フ ('fu') with dakuten. It is the same sound as hiragana ぶ.",
+      "mnemonic": "フ plus two ticks for buzzing vocal cords: 'fu' starts to buzz and becomes 'bu'.",
+      "example": {
+        "word": "ブラシ",
+        "reading": "burashi",
+        "meaning": "brush"
+      }
+    },
+    {
+      "item": "ベ",
+      "answer": "be",
+      "explanation": "ベ is 'be': ヘ ('he') with dakuten. It is the same sound as hiragana べ.",
+      "mnemonic": "ヘ plus two ticks for buzzing vocal cords: 'he' starts to buzz and becomes 'be'.",
+      "example": {
+        "word": "ベッド",
+        "reading": "beddo",
+        "meaning": "bed"
+      }
+    },
+    {
+      "item": "ボ",
+      "answer": "bo",
+      "explanation": "ボ is 'bo': ホ ('ho') with dakuten. It is the same sound as hiragana ぼ.",
+      "mnemonic": "ホ plus two ticks for buzzing vocal cords: 'ho' starts to buzz and becomes 'bo'.",
+      "example": {
+        "word": "ボール",
+        "reading": "bōru",
+        "meaning": "ball"
+      }
+    }
+  ]
+}

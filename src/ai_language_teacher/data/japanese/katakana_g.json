@@ -1,0 +1,60 @@
+{
+  "title": "Katakana G row (dakuten)",
+  "items": [
+    {
+      "item": "ガ",
+      "answer": "ga",
+      "explanation": "ガ is 'ga': カ ('ka') with dakuten. It is the same sound as hiragana が. The two small ticks ゛ are called dakuten. They make the consonant voiced, meaning your vocal cords buzz: k becomes g, s becomes z, t becomes d, and h becomes b. Touch your throat while saying 'k' and then 'g' to feel the difference. In the middle of words some speakers, especially older ones, soften it to a nasal 'nga'; both are correct.",
+      "mnemonic": "カ plus two ticks for buzzing vocal cords: 'ka' starts to buzz and becomes 'ga'.",
+      "example": {
+        "word": "ガム",
+        "reading": "gamu",
+        "meaning": "chewing gum"
+      }
+    },
+    {
+      "item": "ギ",
+      "answer": "gi",
+      "explanation": "ギ is 'gi': キ ('ki') with dakuten. It is the same sound as hiragana ぎ. Always a hard g, as in 'give', never as in 'giant'.",
+      "mnemonic": "キ plus two ticks for buzzing vocal cords: 'ki' starts to buzz and becomes 'gi'.",
+      "example": {
+        "word": "ギター",
+        "reading": "gitā",
+        "meaning": "guitar"
+      }
+    },
+    {
+      "item": "グ",
+      "answer": "gu",
+      "explanation": "グ is 'gu': ク ('ku') with dakuten. It is the same sound as hiragana ぐ.",
+      "mnemonic": "ク plus two ticks for buzzing vocal cords: 'ku' starts to buzz and becomes 'gu'.",
+      "example": {
+        "word": "グラス",
+        "reading": "gurasu",
+        "meaning": "drinking glass"
+      }
+    },
+    {
+      "item": "ゲ",
+      "answer": "ge",
+      "explanation": "ゲ is 'ge': ケ ('ke') with dakuten. It is the same sound as hiragana げ. Always a hard g, as in 'get'.",
+      "mnemonic": "ケ plus two ticks for buzzing vocal cords: 'ke' starts to buzz and becomes 'ge'.",
+      "example": {
+        "word": "ゲーム",
+        "reading": "gēmu",
+        "meaning": "game, video game"
+      }
+    },
+    {
+      "item": "ゴ",
+      "answer": "go",
+      "explanation": "ゴ is 'go': コ ('ko') with dakuten. It is the same sound as hiragana ご.",
+      "mnemonic": "コ plus two ticks for buzzing vocal cords: 'ko' starts to buzz and becomes 'go'.",
+      "example": {
+        "word": "ゴルフ",
+        "reading": "gorufu",
+        "meaning": "golf"
+      }
+    }
+  ]
+}

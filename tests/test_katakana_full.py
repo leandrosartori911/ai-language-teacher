@@ -35,13 +35,14 @@ def question_for(item):
     return next(question for question in all_questions() if question.item == item)
 
 
-def test_katakana_is_taught_in_ten_rows_plus_long_vowel_mark():
-    assert len(KATAKANA_LESSONS) == 11
-    assert [next(iter(lesson.items)) for lesson in KATAKANA_LESSONS] == ROW_STARTS
+def test_katakana_course_starts_with_ten_rows_plus_long_vowel_mark():
+    basic = KATAKANA_LESSONS[:11]
+
+    assert [next(iter(lesson.items)) for lesson in basic] == ROW_STARTS
 
 
 def test_lessons_cover_46_basic_katakana_and_long_vowel_mark_once():
-    all_items = [item for lesson in KATAKANA_LESSONS for item in lesson.items]
+    all_items = [item for lesson in KATAKANA_LESSONS[:11] for item in lesson.items]
 
     assert len(all_items) == 47
     assert sorted(all_items) == sorted(BASIC_KATAKANA + "ー")
