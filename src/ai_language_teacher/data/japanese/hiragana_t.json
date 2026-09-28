@@ -1,0 +1,71 @@
+{
+  "title": "Hiragana T row",
+  "items": [
+    {
+      "item": "た",
+      "answer": "ta",
+      "explanation": "た is 'ta', like the 'ta' in 'taco'.",
+      "mnemonic": "The left part looks like a lowercase 't' and the right part like a small 'a' stacked in two lines: 'ta'.",
+      "example": {
+        "word": "たこ",
+        "reading": "tako",
+        "meaning": "octopus"
+      },
+      "culture_note": "た comes from a cursive form of the kanji 太."
+    },
+    {
+      "item": "ち",
+      "answer": "chi",
+      "explanation": "ち is 'chi', like the 'chee' in 'cheese', not 'tee'. Some romanization systems write it 'ti', so both spellings are accepted.",
+      "mnemonic": "A backwards number 5 with a cheeky grin: 'chi'.",
+      "example": {
+        "word": "くち",
+        "reading": "kuchi",
+        "meaning": "mouth"
+      },
+      "also_accepted": [
+        "ti"
+      ],
+      "culture_note": "ち comes from a cursive form of the kanji 知."
+    },
+    {
+      "item": "つ",
+      "answer": "tsu",
+      "explanation": "つ is 'tsu', the 'ts' at the end of 'cats' followed by a short u. It is the hardest sound in this row for English speakers at the start of a word: practise saying 'cats-u' and then drop the 'ca'. Some systems write it 'tu', so both spellings are accepted.",
+      "mnemonic": "A single wave rolling from left to right, like a tsunami.",
+      "example": {
+        "word": "つくえ",
+        "reading": "tsukue",
+        "meaning": "desk"
+      },
+      "also_accepted": [
+        "tu"
+      ],
+      "culture_note": "つ comes from a cursive form of the kanji 川. English borrowed つなみ (tsunami, 'harbour wave') from Japanese."
+    },
+    {
+      "item": "て",
+      "answer": "te",
+      "explanation": "て is 'te', like the 'te' in 'ten'.",
+      "mnemonic": "An arm reaching across and down to a hand, and て on its own means 'hand' (手).",
+      "example": {
+        "word": "て",
+        "reading": "te",
+        "meaning": "hand"
+      },
+      "culture_note": "て comes from a cursive form of the kanji 天."
+    },
+    {
+      "item": "と",
+      "answer": "to",
+      "explanation": "と is 'to', like 'toe' but pure, without the glide.",
+      "mnemonic": "A toe with a splinter stuck in it: the short slanted line is the splinter.",
+      "example": {
+        "word": "とけい",
+        "reading": "tokei",
+        "meaning": "clock, watch"
+      },
+      "culture_note": "と comes from a cursive form of the kanji 止."
+    }
+  ]
+}

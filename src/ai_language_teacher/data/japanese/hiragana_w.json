@@ -1,0 +1,47 @@
+{
+  "title": "Hiragana W row and ん",
+  "items": [
+    {
+      "item": "わ",
+      "answer": "wa",
+      "explanation": "わ is 'wa', like the 'wa' in 'wander'. It looks like ね and れ; わ is the one whose right side curls round without a loop.",
+      "mnemonic": "A wide-open mouth on the right side, shouting 'wa!'",
+      "example": {
+        "word": "わたし",
+        "reading": "watashi",
+        "meaning": "I, me"
+      },
+      "culture_note": "わ comes from a cursive form of the kanji 和. The kanji 和 also means 'Japanese' or 'harmony', as in 和食 (washoku, Japanese cuisine)."
+    },
+    {
+      "item": "を",
+      "answer": "o",
+      "explanation": "を is read 'o', the same as お, and today it is used only as a particle that marks the object of a verb, as in ほんをよむ (hon o yomu, 'read a book'). It is often romanized 'wo', so both spellings are accepted.",
+      "mnemonic": "Someone bending forward to lift something heavy: 'oh!'",
+      "example": {
+        "word": "ほんをよむ",
+        "reading": "hon o yomu",
+        "meaning": "to read a book"
+      },
+      "also_accepted": [
+        "wo"
+      ],
+      "culture_note": "を comes from a cursive form of the kanji 遠."
+    },
+    {
+      "item": "ん",
+      "answer": "n",
+      "explanation": "ん is a single 'n' sound that counts as its own beat. Its exact sound shifts with the next sound: before b, p or m it sounds like 'm', as in さんぽ (sanpo, 'a walk'), which sounds like 'sampo'. It is sometimes typed 'nn', so both spellings are accepted.",
+      "mnemonic": "It looks like a lowercase 'n' written in one quick stroke.",
+      "example": {
+        "word": "ほん",
+        "reading": "hon",
+        "meaning": "book"
+      },
+      "also_accepted": [
+        "nn"
+      ],
+      "culture_note": "ん comes from a cursive form of the kanji 无. No ordinary Japanese word starts with ん, which is why the word game shiritori, where each word must start with the last kana of the previous one, is lost by saying a word ending in ん."
+    }
+  ]
+}

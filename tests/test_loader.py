@@ -6,7 +6,7 @@ import pytest
 
 import ai_language_teacher
 from ai_language_teacher.language.japanese import hiragana, katakana
-from ai_language_teacher.language.japanese.hiragana import HIRAGANA, HIRAGANA_VOWELS_LESSON
+from ai_language_teacher.language.japanese.hiragana import HIRAGANA_VOWELS_LESSON
 from ai_language_teacher.language.loader import load_lesson
 
 HIRAGANA_RESOURCE = files("ai_language_teacher") / "data" / "japanese" / "hiragana_vowels.json"
@@ -16,7 +16,7 @@ def test_load_lesson_matches_hardcoded_hiragana_lesson():
     lesson = load_lesson(HIRAGANA_RESOURCE)
 
     assert lesson.title == HIRAGANA_VOWELS_LESSON.title
-    assert lesson.items == HIRAGANA
+    assert lesson.items == HIRAGANA_VOWELS_LESSON.items
 
     question_items = [q.item for q in lesson.questions]
     question_answers = [q.expected_answer for q in lesson.questions]
@@ -65,4 +65,4 @@ def test_load_lesson_accepts_str_path_and_resource():
     path = Path(str(HIRAGANA_RESOURCE))
 
     for source in (str(path), path, HIRAGANA_RESOURCE):
-        assert load_lesson(source).items == HIRAGANA
+        assert load_lesson(source).items == HIRAGANA_VOWELS_LESSON.items

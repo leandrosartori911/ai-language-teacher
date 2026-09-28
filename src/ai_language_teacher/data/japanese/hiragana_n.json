@@ -1,0 +1,65 @@
+{
+  "title": "Hiragana N row",
+  "items": [
+    {
+      "item": "な",
+      "answer": "na",
+      "explanation": "な is 'na', like the 'na' in 'nacho'.",
+      "mnemonic": "A cross on the left and a knotted rope on the right: tie the knot.",
+      "example": {
+        "word": "なつ",
+        "reading": "natsu",
+        "meaning": "summer"
+      },
+      "culture_note": "な comes from a cursive form of the kanji 奈. The same kanji starts the name of Nara (奈良), Japan's capital in the 8th century."
+    },
+    {
+      "item": "に",
+      "answer": "ni",
+      "explanation": "に is 'ni', like the 'nee' in 'need'.",
+      "mnemonic": "A needle standing up, with two short threads beside it.",
+      "example": {
+        "word": "にく",
+        "reading": "niku",
+        "meaning": "meat"
+      },
+      "culture_note": "に comes from a cursive form of the kanji 仁."
+    },
+    {
+      "item": "ぬ",
+      "answer": "nu",
+      "explanation": "ぬ is 'nu', like 'noo' but short. Do not confuse it with め: ぬ ends in a small loop, め does not.",
+      "mnemonic": "A tangle of noodles with a chopstick through it; the loop at the end is a noodle curling up.",
+      "example": {
+        "word": "いぬ",
+        "reading": "inu",
+        "meaning": "dog"
+      },
+      "culture_note": "ぬ comes from a cursive form of the kanji 奴."
+    },
+    {
+      "item": "ね",
+      "answer": "ne",
+      "explanation": "ね is 'ne', like the 'ne' in 'net'. It looks like れ and わ; ね is the one whose tail curls into a loop.",
+      "mnemonic": "A cat sitting down with its tail curled into a loop, and ねこ (neko) means cat.",
+      "example": {
+        "word": "ねこ",
+        "reading": "neko",
+        "meaning": "cat"
+      },
+      "culture_note": "ね comes from a cursive form of the kanji 祢. The maneki-neko, a cat figure with a raised paw, is displayed in many Japanese shops and restaurants to beckon in customers and good luck."
+    },
+    {
+      "item": "の",
+      "answer": "no",
+      "explanation": "の is 'no', like 'no' but pure. It is also one of the most common words in Japanese: a particle that links nouns, like 's' or 'of', as in わたしの (watashi no, 'my').",
+      "mnemonic": "A single swirl, like the circle-and-slash of a 'no entry' sign drawn in one stroke.",
+      "example": {
+        "word": "きのこ",
+        "reading": "kinoko",
+        "meaning": "mushroom"
+      },
+      "culture_note": "の comes from a cursive form of the kanji 乃."
+    }
+  ]
+}

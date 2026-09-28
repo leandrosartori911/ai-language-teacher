@@ -108,7 +108,7 @@ ai-language-teacher/
   docs/
     ROADMAP.md
     SESSION_STATE.md        # this file
-    specs/001..009-*.md     # one file per implemented feature
+    specs/001..010-*.md     # one file per implemented feature
     adr/                    # 0001 web stack, 0002 local LLM
   src/ai_language_teacher/
     main.py                 # stub: prints a banner, not a real CLI yet
@@ -124,7 +124,7 @@ ai-language-teacher/
     language/
       loader.py                 # load_lesson(path) — JSON -> Lesson
       japanese/
-        hiragana.py               # loads hiragana_vowels.json via loader
+        hiragana.py               # HIRAGANA_LESSONS (10 row lessons), HIRAGANA (all 46)
         katakana.py                # loads katakana_vowels.json via loader
   tests/
     test_student.py  test_assessment.py  test_question.py  test_lesson.py
@@ -195,14 +195,18 @@ If there's no `item` (skill-only assessment), it still overwrites directly
 
 ## Content
 
-- Hiragana vowels: あ→a, い→i, う→u, え→e, お→o (`src/ai_language_teacher/data/japanese/hiragana_vowels.json`).
+- Hiragana: all 46 basic kana as ten lessons, one per row (vowels, k, s, t,
+  n, h, m, y, r, w + ん), files `data/japanese/hiragana_<row>.json` (spec 010).
+  Main answers are Hepburn; `also_accepted` adds shi/si, chi/ti, tsu/tu,
+  fu/hu, o/wo, n/nn.
 - Katakana vowels: ア→a, イ→i, ウ→u, エ→e, オ→o (`src/ai_language_teacher/data/japanese/katakana_vowels.json`).
 - Every item has English teaching content written originally for the
   project (no text copied from other courses). Culture notes cover kana
   origins (e.g. あ from 安, ア from the left part of 阿) and a few true,
   useful facts. **Content is what the Phase D LLM will be grounded on, so
   check facts carefully before adding any.**
-- Nothing else yet (no consonant rows, no kanji, no vocab, no grammar).
+- Nothing else yet (no katakana consonants, dakuten, combinations, kanji,
+  vocab or grammar).
 
 ## Known issues / deliberate shortcuts (marked `# ponytail:` in code)
 
@@ -211,7 +215,7 @@ If there's no `item` (skill-only assessment), it still overwrites directly
 
 ## Test status
 
-66 tests passing, `ruff check` and `mypy` (strict) clean, as of spec 009.
+96 tests passing, `ruff check` and `mypy` (strict) clean, as of spec 010.
 
 ```
 tests/test_student.py     — Student creation, skills, mastery aggregation
@@ -225,6 +229,7 @@ tests/test_progress.py    — end-to-end: question -> assessment -> student
 tests/test_models.py      — dataclass models, value equality, no shared defaults
 tests/test_knowledge_per_skill.py — per-skill knowledge and means
 tests/test_teaching.py    — teaching content present + loader validation
+tests/test_hiragana_full.py — 10 row lessons, 46 kana, alternative spellings
 ```
 
 ## Progress
@@ -237,12 +242,14 @@ engine, C: web app, D: local LLM teacher, E: release).
 - **Phase A: done.** 006 typed dataclass models + mypy; 007 lesson data
   inside the package, loaded with `importlib.resources` (CI job `wheel`
   checks a non-editable install); 008 `Knowledge` per skill.
-- **Phase B (in progress):** 009 teaching content per item done. Next:
-  010 full kana, 011 unlock threshold (proposed:
-  `0.8`, single optional predecessor lesson, no dependency graph), 012
-  spaced repetition (Leitner or SM-2, no external library), 013 N5 kanji and
+- **Phase B (in progress):** 009 teaching content and 010 full basic
+  hiragana done. Next (the user wants *complete* kana, split into small
+  specs): 011 full basic katakana, 012 dakuten/handakuten (both scripts),
+  013 combinations/yoon (both scripts), 014 unlock threshold (proposed:
+  `0.8`, single optional predecessor lesson, no dependency graph), 015
+  spaced repetition (Leitner or SM-2, no external library), 016 N5 kanji and
   starter vocabulary.
-- **Phase C:** 014 SQLite persistence (stdlib `sqlite3`), 015+ web UI.
+- **Phase C:** 017 SQLite persistence (stdlib `sqlite3`), 018+ web UI.
 - **Phase D:** Ollama teacher. **Phase E:** v0.1.0 release.
 
 ## Immediate next step for the new session

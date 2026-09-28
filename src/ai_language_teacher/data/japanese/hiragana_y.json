@@ -1,0 +1,41 @@
+{
+  "title": "Hiragana Y row",
+  "items": [
+    {
+      "item": "や",
+      "answer": "ya",
+      "explanation": "や is 'ya', like the 'ya' in 'yacht'. In modern Japanese this row has only three kana.",
+      "mnemonic": "The curved stroke and the short line are the horns of a yak.",
+      "example": {
+        "word": "やま",
+        "reading": "yama",
+        "meaning": "mountain"
+      },
+      "culture_note": "や comes from a cursive form of the kanji 也."
+    },
+    {
+      "item": "ゆ",
+      "answer": "yu",
+      "explanation": "ゆ is 'yu', like the English word 'you' but short.",
+      "mnemonic": "The big loop with a line through it is a U-turn arrow: 'yu-turn'.",
+      "example": {
+        "word": "ゆき",
+        "reading": "yuki",
+        "meaning": "snow"
+      },
+      "culture_note": "ゆ comes from a cursive form of the kanji 由. ゆ is also written on the curtains at the entrance of public baths and hot springs, because ゆ (湯) means hot water."
+    },
+    {
+      "item": "よ",
+      "answer": "yo",
+      "explanation": "よ is 'yo', like 'yo' in 'yo-yo' but pure.",
+      "mnemonic": "A yo-yo hanging from a finger: the short crossbar is the finger, the loop is the yo-yo.",
+      "example": {
+        "word": "よる",
+        "reading": "yoru",
+        "meaning": "night"
+      },
+      "culture_note": "よ comes from a cursive form of the kanji 与."
+    }
+  ]
+}

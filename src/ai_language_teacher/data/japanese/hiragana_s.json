@@ -1,0 +1,68 @@
+{
+  "title": "Hiragana S row",
+  "items": [
+    {
+      "item": "さ",
+      "answer": "sa",
+      "explanation": "さ is 'sa', like the 'sa' in 'saga'.",
+      "mnemonic": "The crossbar is a saw blade cutting down into the curve below.",
+      "example": {
+        "word": "あさ",
+        "reading": "asa",
+        "meaning": "morning"
+      },
+      "culture_note": "さ comes from a cursive form of the kanji 左."
+    },
+    {
+      "item": "し",
+      "answer": "shi",
+      "explanation": "し is 'shi', like the English word 'she', not 'see'. Some romanization systems write it 'si', so both spellings are accepted.",
+      "mnemonic": "A fishing hook: she hooks a fish.",
+      "example": {
+        "word": "しお",
+        "reading": "shio",
+        "meaning": "salt"
+      },
+      "also_accepted": [
+        "si"
+      ],
+      "culture_note": "し comes from a cursive form of the kanji 之. Because し (shi) is also a reading of 四 (four) and sounds like 死 (death), the number four is often avoided in Japan, much like thirteen in some Western countries."
+    },
+    {
+      "item": "す",
+      "answer": "su",
+      "explanation": "す is 'su', like 'soo' but short and relaxed. At the end of words it is often nearly silent: です (desu) sounds like 'des'.",
+      "mnemonic": "A swing hanging from a bar, with a loop where the seat is.",
+      "example": {
+        "word": "すし",
+        "reading": "sushi",
+        "meaning": "sushi"
+      },
+      "culture_note": "す comes from a cursive form of the kanji 寸."
+    },
+    {
+      "item": "せ",
+      "answer": "se",
+      "explanation": "せ is 'se', like the 'se' in 'set'.",
+      "mnemonic": "A seat seen from the side: the long bar is the seat, the hook underneath is its leg.",
+      "example": {
+        "word": "せき",
+        "reading": "seki",
+        "meaning": "seat"
+      },
+      "culture_note": "せ comes from a cursive form of the kanji 世."
+    },
+    {
+      "item": "そ",
+      "answer": "so",
+      "explanation": "そ is 'so', like 'so' in English but pure, without the 'w' glide.",
+      "mnemonic": "A zigzag like a thread you sew up and down through cloth.",
+      "example": {
+        "word": "そこ",
+        "reading": "soko",
+        "meaning": "there"
+      },
+      "culture_note": "そ comes from a cursive form of the kanji 曽."
+    }
+  ]
+}

@@ -20,14 +20,17 @@ MVP goal: a local, zero-cost AI teacher that really teaches Japanese
 
 ## Phase B: Teaching engine
 - [x] Teaching content per item: explanation, mnemonic, example, culture note (spec 009)
-- [ ] Full Hiragana and Katakana (spec 010)
-- [ ] Lesson unlock threshold (spec 011)
-- [ ] Spaced repetition (spec 012)
-- [ ] Essential JLPT N5 kanji and starter vocabulary (spec 013)
+- [x] Full basic hiragana, one lesson per row, alternative spellings (spec 010)
+- [ ] Full basic katakana (spec 011)
+- [ ] Dakuten and handakuten, both scripts (spec 012)
+- [ ] Combinations (yoon), both scripts (spec 013)
+- [ ] Lesson unlock threshold (spec 014)
+- [ ] Spaced repetition (spec 015)
+- [ ] Essential JLPT N5 kanji and starter vocabulary (spec 016)
 
 ## Phase C: Web app
-- [ ] SQLite persistence (spec 014)
-- [ ] Web UI: FastAPI + Jinja2 templates (spec 015+)
+- [ ] SQLite persistence (spec 017)
+- [ ] Web UI: FastAPI + Jinja2 templates (spec 018+)
 
 ## Phase D: Local LLM teacher
 - [ ] Conversational teacher via Ollama, grounded on curated content, with a

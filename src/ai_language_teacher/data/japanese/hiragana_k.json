@@ -1,0 +1,65 @@
+{
+  "title": "Hiragana K row",
+  "items": [
+    {
+      "item": "か",
+      "answer": "ka",
+      "explanation": "か is 'ka', like the 'ca' in 'car' without the r.",
+      "mnemonic": "The big stroke is an arm swinging down, the small dash beside it a mosquito. Slap: 'ka!'",
+      "example": {
+        "word": "かお",
+        "reading": "kao",
+        "meaning": "face"
+      },
+      "culture_note": "か comes from a cursive form of the kanji 加. Fittingly, か on its own is also the Japanese word for mosquito (蚊)."
+    },
+    {
+      "item": "き",
+      "answer": "ki",
+      "explanation": "き is 'ki', like the English word 'key'.",
+      "mnemonic": "Two crossbars on a post with a hook underneath, like a rooftop antenna that squeals 'kiii' when the signal drops.",
+      "example": {
+        "word": "あき",
+        "reading": "aki",
+        "meaning": "autumn"
+      },
+      "culture_note": "き comes from a cursive form of the kanji 幾."
+    },
+    {
+      "item": "く",
+      "answer": "ku",
+      "explanation": "く is 'ku', like 'coo' but short, with relaxed lips as in う.",
+      "mnemonic": "An open beak pointing left, like a cuckoo calling 'ku-ku'.",
+      "example": {
+        "word": "いく",
+        "reading": "iku",
+        "meaning": "to go"
+      },
+      "culture_note": "く comes from a cursive form of the kanji 久."
+    },
+    {
+      "item": "け",
+      "answer": "ke",
+      "explanation": "け is 'ke', like the 'ke' in 'kept'.",
+      "mnemonic": "The left line is the side of a keg, the right part is its tap.",
+      "example": {
+        "word": "いけ",
+        "reading": "ike",
+        "meaning": "pond"
+      },
+      "culture_note": "け comes from a cursive form of the kanji 計."
+    },
+    {
+      "item": "こ",
+      "answer": "ko",
+      "explanation": "こ is 'ko', like the 'co' in 'coat' but pure, without a glide at the end.",
+      "mnemonic": "Two short lines like two coins lying one above the other: 'ko-ins'.",
+      "example": {
+        "word": "ここ",
+        "reading": "koko",
+        "meaning": "here"
+      },
+      "culture_note": "こ comes from a cursive form of the kanji 己."
+    }
+  ]
+}

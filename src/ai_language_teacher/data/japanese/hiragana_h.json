@@ -1,0 +1,68 @@
+{
+  "title": "Hiragana H row",
+  "items": [
+    {
+      "item": "は",
+      "answer": "ha",
+      "explanation": "は is 'ha', like the 'ha' in 'hard'. When it is used as the topic particle, it is read 'wa', as in わたしは (watashi wa, 'as for me').",
+      "mnemonic": "Like け with a small loop at the bottom, as if someone laughed 'ha-ha' so hard they tied themselves in a knot.",
+      "example": {
+        "word": "はな",
+        "reading": "hana",
+        "meaning": "flower"
+      },
+      "culture_note": "は comes from a cursive form of the kanji 波. The particle は is read 'wa' because Japanese pronunciation changed over the centuries while the spelling of the particle stayed the same."
+    },
+    {
+      "item": "ひ",
+      "answer": "hi",
+      "explanation": "ひ is 'hi', like the 'hee' in 'heel'.",
+      "mnemonic": "A wide grin: 'hee-hee'.",
+      "example": {
+        "word": "ひと",
+        "reading": "hito",
+        "meaning": "person"
+      },
+      "culture_note": "ひ comes from a cursive form of the kanji 比."
+    },
+    {
+      "item": "ふ",
+      "answer": "fu",
+      "explanation": "ふ is 'fu', softer than an English f: blow air between both lips, without touching your teeth, as if cooling hot soup. Some systems write it 'hu', so both spellings are accepted.",
+      "mnemonic": "Someone blowing out a candle: the small top stroke is a puff of air, the strokes around it are cheeks and hands.",
+      "example": {
+        "word": "ふね",
+        "reading": "fune",
+        "meaning": "boat, ship"
+      },
+      "also_accepted": [
+        "hu"
+      ],
+      "culture_note": "ふ comes from a cursive form of the kanji 不. Mount Fuji, Japan's highest mountain, is ふじさん (Fuji-san) in Japanese."
+    },
+    {
+      "item": "へ",
+      "answer": "he",
+      "explanation": "へ is 'he', like the 'he' in 'hen'. When it is used as the direction particle ('to', 'towards'), it is read 'e'.",
+      "mnemonic": "A small hill: 'hey, a hill!'",
+      "example": {
+        "word": "へそ",
+        "reading": "heso",
+        "meaning": "belly button"
+      },
+      "culture_note": "へ comes from a cursive form of the kanji 部."
+    },
+    {
+      "item": "ほ",
+      "answer": "ho",
+      "explanation": "ほ is 'ho', like 'hoe' but pure. It looks like は with an extra bar on top.",
+      "mnemonic": "は with a hat on: Santa's 'ho-ho-ho'.",
+      "example": {
+        "word": "ほし",
+        "reading": "hoshi",
+        "meaning": "star"
+      },
+      "culture_note": "ほ comes from a cursive form of the kanji 保."
+    }
+  ]
+}

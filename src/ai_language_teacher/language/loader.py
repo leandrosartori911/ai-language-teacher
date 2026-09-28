@@ -47,6 +47,7 @@ def load_lesson(path: str | Path | Traversable) -> Lesson:
 
     items: dict[str, str] = {}
     teaching: dict[str, Teaching] = {}
+    questions: list[Question] = []
 
     for entry in data["items"]:
         item = _text(entry, "item", f"{path}")
@@ -55,15 +56,21 @@ def load_lesson(path: str | Path | Traversable) -> Lesson:
         if item in items:
             raise ValueError(f"{where} appears more than once")
 
-        items[item] = _text(entry, "answer", where)
+        answer = _text(entry, "answer", where)
+        items[item] = answer
         teaching[item] = _teaching(entry, where)
 
         if item not in teaching[item].example.word:
             raise ValueError(f"{where}: example word does not contain the item")
 
-    questions = [
-        Question(f"What is the romaji for {item}?", answer, item)
-        for item, answer in items.items()
-    ]
+        also_accepted = entry.get("also_accepted", [])
+        if not isinstance(also_accepted, list):
+            raise ValueError(f"{where}: 'also_accepted' must be a list")
+        for spelling in also_accepted:
+            if not isinstance(spelling, str) or not spelling.strip() or spelling == answer:
+                raise ValueError(f"{where}: bad 'also_accepted' spelling {spelling!r}")
+
+        expected: str | list[str] = [answer, *also_accepted] if also_accepted else answer
+        questions.append(Question(f"What is the romaji for {item}?", expected, item))
 
     return Lesson(data["title"], items, questions, teaching)
