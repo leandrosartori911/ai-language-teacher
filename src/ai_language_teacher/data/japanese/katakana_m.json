@@ -1,0 +1,65 @@
+{
+  "title": "Katakana M row",
+  "items": [
+    {
+      "item": "マ",
+      "answer": "ma",
+      "explanation": "マ is the katakana for 'ma', the same sound as hiragana ま.",
+      "mnemonic": "A mama's apron folded down at the corner.",
+      "example": {
+        "word": "マスク",
+        "reading": "masuku",
+        "meaning": "face mask"
+      },
+      "culture_note": "マ developed from the kanji 末."
+    },
+    {
+      "item": "ミ",
+      "answer": "mi",
+      "explanation": "ミ is the katakana for 'mi', the same sound as hiragana み.",
+      "mnemonic": "Three lines, like the kanji 三 (three), which it came from.",
+      "example": {
+        "word": "ミルク",
+        "reading": "miruku",
+        "meaning": "milk"
+      },
+      "culture_note": "ミ developed from the kanji 三."
+    },
+    {
+      "item": "ム",
+      "answer": "mu",
+      "explanation": "ム is the katakana for 'mu', the same sound as hiragana む.",
+      "mnemonic": "A cow's head seen from the front, with its nose at the bottom: 'moo'.",
+      "example": {
+        "word": "ハム",
+        "reading": "hamu",
+        "meaning": "ham"
+      },
+      "culture_note": "ム developed from the kanji 牟."
+    },
+    {
+      "item": "メ",
+      "answer": "me",
+      "explanation": "メ is the katakana for 'me', the same sound as hiragana め.",
+      "mnemonic": "An X crossed over an eye, and め means eye.",
+      "example": {
+        "word": "メロン",
+        "reading": "meron",
+        "meaning": "melon"
+      },
+      "culture_note": "メ developed from the kanji 女."
+    },
+    {
+      "item": "モ",
+      "answer": "mo",
+      "explanation": "モ is the katakana for 'mo', the same sound as hiragana も.",
+      "mnemonic": "も drawn with straight lines: a hook catching more fish.",
+      "example": {
+        "word": "メモ",
+        "reading": "memo",
+        "meaning": "memo, note"
+      },
+      "culture_note": "モ developed from the kanji 毛."
+    }
+  ]
+}

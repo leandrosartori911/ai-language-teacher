@@ -1,0 +1,65 @@
+{
+  "title": "Katakana N row",
+  "items": [
+    {
+      "item": "ナ",
+      "answer": "na",
+      "explanation": "ナ is the katakana for 'na', the same sound as hiragana な.",
+      "mnemonic": "な without its knotted rope: only the leaning cross is left.",
+      "example": {
+        "word": "バナナ",
+        "reading": "banana",
+        "meaning": "banana"
+      },
+      "culture_note": "ナ developed from the kanji 奈."
+    },
+    {
+      "item": "ニ",
+      "answer": "ni",
+      "explanation": "ニ is the katakana for 'ni', the same sound as hiragana に.",
+      "mnemonic": "Two lines, like the kanji 二 (two), and 'two' in Japanese is に (ni).",
+      "example": {
+        "word": "テニス",
+        "reading": "tenisu",
+        "meaning": "tennis"
+      },
+      "culture_note": "ニ developed from the kanji 二."
+    },
+    {
+      "item": "ヌ",
+      "answer": "nu",
+      "explanation": "ヌ is the katakana for 'nu', the same sound as hiragana ぬ. It is ス with an extra short stroke crossing it.",
+      "mnemonic": "ス with a chopstick stuck through it, lifting noodles.",
+      "example": {
+        "word": "カヌー",
+        "reading": "kanū",
+        "meaning": "canoe"
+      },
+      "culture_note": "ヌ developed from the kanji 奴."
+    },
+    {
+      "item": "ネ",
+      "answer": "ne",
+      "explanation": "ネ is the katakana for 'ne', the same sound as hiragana ね.",
+      "mnemonic": "A necktie knotted around a cross, and ネクタイ (nekutai) means necktie.",
+      "example": {
+        "word": "ネクタイ",
+        "reading": "nekutai",
+        "meaning": "necktie"
+      },
+      "culture_note": "ネ developed from the kanji 祢."
+    },
+    {
+      "item": "ノ",
+      "answer": "no",
+      "explanation": "ノ is the katakana for 'no', the same sound as hiragana の.",
+      "mnemonic": "A single slash: one stroke that simply says 'no'.",
+      "example": {
+        "word": "ノート",
+        "reading": "nōto",
+        "meaning": "notebook"
+      },
+      "culture_note": "ノ developed from the kanji 乃. Loanwords can shift meaning: ノート comes from 'note' but means a notebook."
+    }
+  ]
+}

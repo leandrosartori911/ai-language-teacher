@@ -71,6 +71,9 @@ def load_lesson(path: str | Path | Traversable) -> Lesson:
                 raise ValueError(f"{where}: bad 'also_accepted' spelling {spelling!r}")
 
         expected: str | list[str] = [answer, *also_accepted] if also_accepted else answer
-        questions.append(Question(f"What is the romaji for {item}?", expected, item))
+        prompt = f"What is the romaji for {item}?"
+        if "prompt" in entry:
+            prompt = _text(entry, "prompt", where)
+        questions.append(Question(prompt, expected, item))
 
     return Lesson(data["title"], items, questions, teaching)

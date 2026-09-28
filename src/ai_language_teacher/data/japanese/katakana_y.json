@@ -1,0 +1,41 @@
+{
+  "title": "Katakana Y row",
+  "items": [
+    {
+      "item": "ヤ",
+      "answer": "ya",
+      "explanation": "ヤ is the katakana for 'ya', the same sound as hiragana や.",
+      "mnemonic": "The yak's horns of や, straightened out.",
+      "example": {
+        "word": "タイヤ",
+        "reading": "taiya",
+        "meaning": "tyre"
+      },
+      "culture_note": "ヤ developed from the kanji 也."
+    },
+    {
+      "item": "ユ",
+      "answer": "yu",
+      "explanation": "ユ is the katakana for 'yu', the same sound as hiragana ゆ.",
+      "mnemonic": "A U-turn drawn with straight lines.",
+      "example": {
+        "word": "ユーモア",
+        "reading": "yūmoa",
+        "meaning": "humour"
+      },
+      "culture_note": "ユ developed from the kanji 由."
+    },
+    {
+      "item": "ヨ",
+      "answer": "yo",
+      "explanation": "ヨ is the katakana for 'yo', the same sound as hiragana よ.",
+      "mnemonic": "A backwards capital E: 'yo, E, you are facing the wrong way!'",
+      "example": {
+        "word": "ヨーグルト",
+        "reading": "yōguruto",
+        "meaning": "yogurt"
+      },
+      "culture_note": "ヨ developed from the kanji 与."
+    }
+  ]
+}

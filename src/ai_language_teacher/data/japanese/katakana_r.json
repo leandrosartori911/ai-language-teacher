@@ -1,0 +1,65 @@
+{
+  "title": "Katakana R row",
+  "items": [
+    {
+      "item": "ラ",
+      "answer": "ra",
+      "explanation": "ラ is the katakana for 'ra', the same sound as hiragana ら. It is the same light tap of the tongue as ら.",
+      "mnemonic": "A rabbit's ear (the short top line) over its hunched back.",
+      "example": {
+        "word": "ラジオ",
+        "reading": "rajio",
+        "meaning": "radio"
+      },
+      "culture_note": "ラ developed from the kanji 良."
+    },
+    {
+      "item": "リ",
+      "answer": "ri",
+      "explanation": "リ is the katakana for 'ri', the same sound as hiragana り.",
+      "mnemonic": "The two reeds of り, standing straighter.",
+      "example": {
+        "word": "リモコン",
+        "reading": "rimokon",
+        "meaning": "remote control"
+      },
+      "culture_note": "リ developed from the kanji 利. リモコン is another clipped loanword: remo(te) con(trol)."
+    },
+    {
+      "item": "ル",
+      "answer": "ru",
+      "explanation": "ル is the katakana for 'ru', the same sound as hiragana る.",
+      "mnemonic": "Two roots growing down, one with a kink at the end.",
+      "example": {
+        "word": "ビール",
+        "reading": "bīru",
+        "meaning": "beer"
+      },
+      "culture_note": "ル developed from the kanji 流. ビール comes from the Dutch bier, another word from the centuries of trade with the Netherlands."
+    },
+    {
+      "item": "レ",
+      "answer": "re",
+      "explanation": "レ is the katakana for 're', the same sound as hiragana れ.",
+      "mnemonic": "The leg raise from れ: one straight leg kicking up.",
+      "example": {
+        "word": "レモン",
+        "reading": "remon",
+        "meaning": "lemon"
+      },
+      "culture_note": "レ developed from the kanji 礼."
+    },
+    {
+      "item": "ロ",
+      "answer": "ro",
+      "explanation": "ロ is the katakana for 'ro', the same sound as hiragana ろ. It looks like the kanji 口 (mouth), but in katakana words it is ロ; context tells them apart.",
+      "mnemonic": "A square robot head, and ロボット (robotto) means robot.",
+      "example": {
+        "word": "ロボット",
+        "reading": "robotto",
+        "meaning": "robot"
+      },
+      "culture_note": "ロ developed from the kanji 呂."
+    }
+  ]
+}

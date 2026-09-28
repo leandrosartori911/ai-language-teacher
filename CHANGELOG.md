@@ -25,3 +25,7 @@
 - All 46 basic hiragana, taught as ten lessons (one per row) with full
   teaching content. Lesson items can list `also_accepted` spellings
   (e.g. し accepts "shi" and "si") (spec 010).
+- All 46 basic katakana in ten row lessons plus a lesson on the long vowel
+  mark ー, with loanword examples and notes on easily confused pairs
+  (シ/ツ, ソ/ン...). Lesson items can set a custom question `prompt`
+  (spec 011).

@@ -1,0 +1,71 @@
+{
+  "title": "Katakana T row",
+  "items": [
+    {
+      "item": "タ",
+      "answer": "ta",
+      "explanation": "タ is the katakana for 'ta', the same sound as hiragana た. It is ク with one extra stroke inside.",
+      "mnemonic": "ク folded around something: a taco with its filling.",
+      "example": {
+        "word": "タオル",
+        "reading": "taoru",
+        "meaning": "towel"
+      },
+      "culture_note": "タ developed from the kanji 多."
+    },
+    {
+      "item": "チ",
+      "answer": "chi",
+      "explanation": "チ is the katakana for 'chi', the same sound as hiragana ち. Both 'chi' and 'ti' are accepted.",
+      "mnemonic": "A cheerleader: a short stroke for the head, arms stretched out as the crossbar, one long leg.",
+      "example": {
+        "word": "チーズ",
+        "reading": "chīzu",
+        "meaning": "cheese"
+      },
+      "also_accepted": [
+        "ti"
+      ],
+      "culture_note": "チ developed from the kanji 千."
+    },
+    {
+      "item": "ツ",
+      "answer": "tsu",
+      "explanation": "ツ is the katakana for 'tsu', the same sound as hiragana つ. It is easy to confuse with シ: in ツ the two short strokes sit on top and the long stroke falls DOWN from the top right. Both 'tsu' and 'tu' are accepted.",
+      "mnemonic": "Two drops of water on top of a wave that falls from the top right: a tsunami coming down.",
+      "example": {
+        "word": "ツアー",
+        "reading": "tsuā",
+        "meaning": "tour"
+      },
+      "also_accepted": [
+        "tu"
+      ],
+      "culture_note": "ツ developed from the kanji 川."
+    },
+    {
+      "item": "テ",
+      "answer": "te",
+      "explanation": "テ is the katakana for 'te', the same sound as hiragana て.",
+      "mnemonic": "A telephone pole: two crossbars and a post leaning to the left.",
+      "example": {
+        "word": "テレビ",
+        "reading": "terebi",
+        "meaning": "television"
+      },
+      "culture_note": "テ developed from the kanji 天. Many long loanwords are clipped: テレビ is short for テレビジョン (terebijon, television)."
+    },
+    {
+      "item": "ト",
+      "answer": "to",
+      "explanation": "ト is the katakana for 'to', the same sound as hiragana と.",
+      "mnemonic": "A totem pole with one branch sticking out.",
+      "example": {
+        "word": "トマト",
+        "reading": "tomato",
+        "meaning": "tomato"
+      },
+      "culture_note": "ト developed from the kanji 止."
+    }
+  ]
+}

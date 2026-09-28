@@ -1,0 +1,68 @@
+{
+  "title": "Katakana H row",
+  "items": [
+    {
+      "item": "ハ",
+      "answer": "ha",
+      "explanation": "ハ is the katakana for 'ha', the same sound as hiragana は.",
+      "mnemonic": "Two strokes bursting apart like a laugh: 'ha!'",
+      "example": {
+        "word": "ハンバーガー",
+        "reading": "hanbāgā",
+        "meaning": "hamburger"
+      },
+      "culture_note": "ハ developed from the kanji 八. It still looks like 八, the kanji for eight."
+    },
+    {
+      "item": "ヒ",
+      "answer": "hi",
+      "explanation": "ヒ is the katakana for 'hi', the same sound as hiragana ひ.",
+      "mnemonic": "A heel seen from the side, with the foot stretching to the right.",
+      "example": {
+        "word": "ヒーター",
+        "reading": "hītā",
+        "meaning": "heater"
+      },
+      "culture_note": "ヒ developed from the kanji 比."
+    },
+    {
+      "item": "フ",
+      "answer": "fu",
+      "explanation": "フ is the katakana for 'fu', the same sound as hiragana ふ. Blow air between both lips, as for ふ. It looks like ワ without the short stroke on the left. Both 'fu' and 'hu' are accepted.",
+      "mnemonic": "A single hooked stroke, like a puff of breath: 'fu'.",
+      "example": {
+        "word": "ナイフ",
+        "reading": "naifu",
+        "meaning": "knife"
+      },
+      "also_accepted": [
+        "hu"
+      ],
+      "culture_note": "フ developed from the kanji 不."
+    },
+    {
+      "item": "ヘ",
+      "answer": "he",
+      "explanation": "ヘ is the katakana for 'he', the same sound as hiragana へ. It is written almost exactly like the hiragana.",
+      "mnemonic": "The same small hill as へ: 'hey, a hill!'",
+      "example": {
+        "word": "ヘリコプター",
+        "reading": "herikoputā",
+        "meaning": "helicopter"
+      },
+      "culture_note": "ヘ developed from the kanji 部."
+    },
+    {
+      "item": "ホ",
+      "answer": "ho",
+      "explanation": "ホ is the katakana for 'ho', the same sound as hiragana ほ.",
+      "mnemonic": "A cross standing on two little feet: 'ho, ho'.",
+      "example": {
+        "word": "ホテル",
+        "reading": "hoteru",
+        "meaning": "hotel"
+      },
+      "culture_note": "ホ developed from the kanji 保."
+    }
+  ]
+}
