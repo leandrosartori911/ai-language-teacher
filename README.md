@@ -13,6 +13,8 @@ all without paid cloud services.
 - Teaching content for every item: explanation, mnemonic, example word
   and culture notes, written in English for this project
 - Item-level knowledge tracking, kept separately per skill
+- Mastery-based progression: the next lesson unlocks at 80% mastery of the
+  previous one
 - Questions, assessments and lessons as small, tested building blocks
 - Lessons: complete hiragana and katakana: basic rows, dakuten/handakuten
   (が, ぱ...), combinations (きゃ, しょ...), small っ and the long vowel mark ー

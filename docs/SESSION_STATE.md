@@ -116,7 +116,7 @@ ai-language-teacher/
   docs/
     ROADMAP.md
     SESSION_STATE.md        # this file
-    specs/001..013-*.md     # one file per implemented feature
+    specs/001..014-*.md     # one file per implemented feature
     adr/                    # 0001 web stack, 0002 local LLM
   src/ai_language_teacher/
     main.py                 # stub: prints a banner, not a real CLI yet
@@ -129,6 +129,8 @@ ai-language-teacher/
       question.py             # Question
       assessment.py            # Assessment, AssessmentResult
       lesson.py                 # Lesson
+      teaching.py               # Teaching, Example (spec 009)
+      progression.py            # UNLOCK_THRESHOLD, lesson_mastery, unlocked_lessons (spec 014)
     language/
       loader.py                 # load_lesson(path) — JSON -> Lesson
       japanese/
@@ -167,6 +169,13 @@ Since spec 006 all core models are `@dataclass`es with full type hints
   optional), `teaching` (dict item -> `Teaching`, spec 009).
 - **`Teaching`** (`core/teaching.py`, spec 009): `explanation`, `mnemonic`,
   `example: Example(word, reading, meaning)`, `culture_note: str | None`.
+- **Progression** (`core/progression.py`, spec 014): `UNLOCK_THRESHOLD = 0.8`;
+  `lesson_mastery(student, skill, lesson)` = mean of that skill's scores for
+  the lesson's items (unanswered = 0); `unlocked_lessons(student, skill,
+  lessons)` returns the prefix of the course whose previous lesson is at
+  or above the threshold. Course order is the prerequisite chain. Unlocks
+  are computed live, not stored: a drop below 0.8 relocks the next lesson
+  (user approved; revisit with persistence in spec 017 if too strict).
 - **`load_lesson(path)`** (specs 004, 009): reads a JSON file shaped
   `{"title": ..., "items": [{"item", "answer", "explanation", "mnemonic",
   "example": {"word", "reading", "meaning"}, "culture_note"?}, ...]}`
@@ -232,7 +241,7 @@ If there's no `item` (skill-only assessment), it still overwrites directly
 
 ## Test status
 
-322 tests passing, `ruff check` and `mypy` (strict) clean, as of spec 013.
+333 tests passing, `ruff check` and `mypy` (strict) clean, as of spec 014.
 
 ```
 tests/test_student.py     — Student creation, skills, mastery aggregation
@@ -250,6 +259,7 @@ tests/test_hiragana_full.py — 10 row lessons, 46 kana, alternative spellings
 tests/test_katakana_full.py — 11 lessons (rows + ー), romaji parity with hiragana, prompts
 tests/test_dakuten.py     — dakuten/handakuten rows, parity, spellings
 tests/test_combinations.py — combinations, small tsu, totals 105/106
+tests/test_progression.py — lesson mastery and unlocking
 ```
 
 ## Progress
@@ -264,8 +274,8 @@ engine, C: web app, D: local LLM teacher, E: release).
   checks a non-editable install); 008 `Knowledge` per skill.
 - **Phase B (in progress):** 009 teaching content and 010 full basic
   hiragana, 011 full basic katakana, 012 dakuten/handakuten and 013
-  combinations + small tsu done (kana complete). Next: 014 unlock threshold (proposed:
-  `0.8`, single optional predecessor lesson, no dependency graph), 015
+  combinations + small tsu done (kana complete); 014 unlock threshold done.
+  Next: 015
   spaced repetition (Leitner or SM-2, no external library), 016 N5 kanji and
   starter vocabulary.
 - **Phase C:** 017 SQLite persistence (stdlib `sqlite3`), 018+ web UI.
