@@ -37,3 +37,8 @@
 - Lesson unlocking: a lesson opens once the previous lesson in the course
   reaches 0.8 mastery (`core.progression`: `lesson_mastery`,
   `unlocked_lessons`) (spec 014).
+- Spaced repetition with Leitner boxes (intervals 1/2/4/8/16 days):
+  `core.review` adds `Card`, `record_answer`, `due_items` and
+  `study_queue` (due reviews first, then new items from unlocked lessons);
+  `Student` gains `cards`. `lesson_mastery` now raises `ValueError` for an
+  unknown skill instead of `KeyError` (spec 015).

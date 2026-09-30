@@ -8,6 +8,9 @@ def lesson_mastery(student: Student, skill: str, lesson: Lesson) -> float:
     if not lesson.items:
         raise ValueError(f"Lesson {lesson.title!r} has no items")
 
+    if skill not in student.knowledge:
+        raise ValueError(f"Unknown skill: {skill}")
+
     knowledge = student.knowledge[skill]
     scores = [knowledge.get_score(item) for item in lesson.items]
     return sum(scores) / len(scores)

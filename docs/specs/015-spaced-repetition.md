@@ -34,23 +34,26 @@ of the teacher.
   course order. Items that are not due and already scheduled are left out.
 - The caller always passes `today`; nothing in this module reads the
   clock, so behaviour is deterministic and easy to test.
+- Small fix carried over from spec 014: `lesson_mastery` with an unknown
+  skill raises `ValueError` (it raised `KeyError`), matching `Student`.
 
 ## Acceptance Criteria
-- [ ] A first correct answer puts the item in box 1, due tomorrow.
-- [ ] Each further correct answer moves it up one box with the matching
+- [x] A first correct answer puts the item in box 1, due tomorrow.
+- [x] Each further correct answer moves it up one box with the matching
       interval (box 2: 2 days, box 3: 4, box 4: 8, box 5: 16); box 5 stays
       at 5.
-- [ ] A wrong answer, from any box, puts it in box 1 due today.
-- [ ] `record_answer` updates knowledge and skill mastery the same way as
+- [x] A wrong answer, from any box, puts it in box 1 due today.
+- [x] `record_answer` updates knowledge and skill mastery the same way as
       `apply_assessment`, and rejects a result without an item.
-- [ ] Cards are kept per skill (the same item key in two skills has two
+- [x] Cards are kept per skill (the same item key in two skills has two
       cards), and two students never share cards.
-- [ ] `due_items` returns only due items, most overdue first, ties broken
+- [x] `due_items` returns only due items, most overdue first, ties broken
       by lower box.
-- [ ] `study_queue` for a new student on `HIRAGANA_LESSONS` is the five
+- [x] `study_queue` for a new student on `HIRAGANA_LESSONS` is the five
       vowels, in order.
-- [ ] `study_queue` puts due items before new ones, skips scheduled items
+- [x] `study_queue` puts due items before new ones, skips scheduled items
       that are not due yet, and never includes items from locked lessons.
+- [x] `lesson_mastery` with an unknown skill raises `ValueError`.
 
 ## Out of Scope
 - SM-2 or other algorithms with per-item ease factors; Leitner is enough

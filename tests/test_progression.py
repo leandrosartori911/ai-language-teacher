@@ -60,6 +60,11 @@ def test_mastery_of_empty_lesson_raises():
         lesson_mastery(Student("Test"), "hiragana", Lesson("Empty", {}))
 
 
+def test_mastery_of_unknown_skill_raises_value_error():
+    with pytest.raises(ValueError):
+        lesson_mastery(Student("Test"), "klingon", LESSON_1)
+
+
 def test_new_student_has_only_first_lesson_unlocked():
     assert unlocked_lessons(Student("Test"), "hiragana", COURSE) == [LESSON_1]
 
