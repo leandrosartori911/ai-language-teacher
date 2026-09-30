@@ -1,7 +1,12 @@
 from dataclasses import dataclass, field
+from typing import TYPE_CHECKING
 
 from ai_language_teacher.core.assessment import AssessmentResult
 from ai_language_teacher.core.knowledge import Knowledge
+
+if TYPE_CHECKING:
+    # review.py imports Student at runtime; import Card for type hints only.
+    from ai_language_teacher.core.review import Card
 
 SKILLS = (
     "hiragana",
@@ -21,6 +26,9 @@ class Student:
     skills: dict[str, float] = field(default_factory=lambda: dict.fromkeys(SKILLS, 0.0))
     knowledge: dict[str, Knowledge] = field(
         default_factory=lambda: {skill: Knowledge() for skill in SKILLS}
+    )
+    cards: "dict[str, dict[str, Card]]" = field(
+        default_factory=lambda: {skill: {} for skill in SKILLS}
     )
 
     def update_skill(self, skill: str, score: float) -> None:

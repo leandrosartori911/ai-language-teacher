@@ -25,7 +25,7 @@ MVP goal: a local, zero-cost AI teacher that really teaches Japanese
 - [x] Dakuten and handakuten, both scripts (spec 012)
 - [x] Combinations (yoon) and small tsu, both scripts (spec 013); kana complete
 - [x] Lesson unlock threshold (spec 014)
-- [ ] Spaced repetition (spec 015)
+- [x] Spaced repetition, Leitner boxes (spec 015)
 - [ ] Essential JLPT N5 kanji and starter vocabulary (spec 016)
 
 ## Phase C: Web app

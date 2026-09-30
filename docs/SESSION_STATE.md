@@ -1,7 +1,7 @@
 # Session State — read this first in a new session
 
-Last updated: 2026-09-30. Repo is clean, all work committed and pushed;
-CI green on the last commit of spec 014.
+Last updated: 2026-09-30. Repo is clean, all work committed and pushed
+after spec 015.
 
 ## What this project is
 
@@ -132,6 +132,7 @@ ai-language-teacher/
       lesson.py                 # Lesson
       teaching.py               # Teaching, Example (spec 009)
       progression.py            # UNLOCK_THRESHOLD, lesson_mastery, unlocked_lessons (spec 014)
+      review.py                 # Leitner spaced repetition: Card, record_answer, due_items, study_queue (spec 015)
     language/
       loader.py                 # load_lesson(path) — JSON -> Lesson
       japanese/
@@ -177,6 +178,19 @@ Since spec 006 all core models are `@dataclass`es with full type hints
   or above the threshold. Course order is the prerequisite chain. Unlocks
   are computed live, not stored: a drop below 0.8 relocks the next lesson
   (user approved; revisit with persistence in spec 017 if too strict).
+  Unknown skill raises `ValueError` (fixed in spec 015).
+- **Spaced repetition** (`core/review.py`, spec 015): Leitner,
+  `BOX_INTERVALS = (1, 2, 4, 8, 16)` days. `Card(box, due)`;
+  `Student.cards: skill -> item -> Card` (Card imported under
+  `TYPE_CHECKING` in student.py to avoid an import cycle).
+  `record_answer(student, result, today)` applies the assessment, then:
+  correct = up one box (new item starts at 0, top is 5), due
+  `today + BOX_INTERVALS[box-1]`; wrong = box 1 due today. Results
+  without an item raise `ValueError`. `due_items` sorts by (due, box).
+  `study_queue` = due items, then items with no card from unlocked
+  lessons, in course order. Callers always pass `today` (no clock reads).
+  Note: only `record_answer` creates cards; `apply_assessment` alone
+  doesn't, so the UI must use `record_answer`.
 - **`load_lesson(path)`** (specs 004, 009): reads a JSON file shaped
   `{"title": ..., "items": [{"item", "answer", "explanation", "mnemonic",
   "example": {"word", "reading", "meaning"}, "culture_note"?}, ...]}`
@@ -242,7 +256,7 @@ If there's no `item` (skill-only assessment), it still overwrites directly
 
 ## Test status
 
-333 tests passing, `ruff check` and `mypy` (strict) clean, as of spec 014.
+353 tests passing, `ruff check` and `mypy` (strict) clean, as of spec 015.
 
 ```
 tests/test_student.py     — Student creation, skills, mastery aggregation
@@ -261,6 +275,7 @@ tests/test_katakana_full.py — 11 lessons (rows + ー), romaji parity with hira
 tests/test_dakuten.py     — dakuten/handakuten rows, parity, spellings
 tests/test_combinations.py — combinations, small tsu, totals 105/106
 tests/test_progression.py — lesson mastery and unlocking
+tests/test_review.py      — Leitner boxes, due items, study queue
 ```
 
 ## Progress
@@ -275,27 +290,21 @@ engine, C: web app, D: local LLM teacher, E: release).
   checks a non-editable install); 008 `Knowledge` per skill.
 - **Phase B (in progress):** 009 teaching content and 010 full basic
   hiragana, 011 full basic katakana, 012 dakuten/handakuten and 013
-  combinations + small tsu done (kana complete); 014 unlock threshold done.
-  Next: 015
-  spaced repetition (Leitner or SM-2, no external library), 016 N5 kanji and
-  starter vocabulary.
+  combinations + small tsu done (kana complete); 014 unlock threshold done;
+  015 spaced repetition (Leitner) done. Next: 016 N5 kanji and starter
+  vocabulary.
 - **Phase C:** 017 SQLite persistence (stdlib `sqlite3`), 018+ web UI.
 - **Phase D:** Ollama teacher. **Phase E:** v0.1.0 release.
 
 ## Immediate next step for the new session
 
 1. Read this file plus `docs/ROADMAP.md` and the latest specs.
-2. **Spec 015 (spaced repetition) is written but NOT yet approved**:
-   `docs/specs/015-spaced-repetition.md` (committed as a draft). Summarize it
-   for the user in Portuguese and ask for approval before writing tests.
-   Decisions it flags for approval: Leitner (5 boxes, intervals 1/2/4/8/16
-   days) instead of SM-2; callers always pass `today` (no clock reads);
-   a wrong answer goes back to box 1 due *today*. It adds `Student.cards`,
-   `record_answer`, `due_items` and `study_queue` (due items first, then
-   unseen items from unlocked lessons).
-3. Open minor point from spec 014, not decided: `lesson_mastery` with an
-   unknown skill raises `KeyError` (Student uses `ValueError`); a 2-line
-   fix if the user wants consistency.
-4. After 015: spec 016 (essential N5 kanji ~30-50 + ~100 starter
-   vocabulary), then Phase C (017 SQLite persistence, which must also save
-   `cards`; 018+ web UI with FastAPI + Jinja2).
+2. Write spec 016 (essential JLPT N5 kanji ~30-50 + ~100 starter
+   vocabulary) with the `spec-writer` skill and get the user's approval
+   before tests. Open questions to raise: how kanji items are quizzed
+   (meaning, reading, or both; on'yomi vs kun'yomi), how vocabulary is
+   quizzed (reading and/or meaning), and where kanji/vocab sit in the
+   unlock chain (e.g. after kana). Check every fact carefully: this content
+   grounds the Phase D LLM.
+3. Then Phase C: 017 SQLite persistence (must also save `cards`), 018+ web
+   UI with FastAPI + Jinja2.
