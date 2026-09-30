@@ -1,6 +1,7 @@
 # Session State — read this first in a new session
 
-Last updated: 2026-09-27. Repo is clean, all work committed and pushed.
+Last updated: 2026-09-30. Repo is clean, all work committed and pushed;
+CI green on the last commit of spec 014.
 
 ## What this project is
 
@@ -284,5 +285,17 @@ engine, C: web app, D: local LLM teacher, E: release).
 ## Immediate next step for the new session
 
 1. Read this file plus `docs/ROADMAP.md` and the latest specs.
-2. Write the next spec in the roadmap, get approval, then follow the
-   test-first workflow.
+2. **Spec 015 (spaced repetition) is written but NOT yet approved**:
+   `docs/specs/015-spaced-repetition.md` (committed as a draft). Summarize it
+   for the user in Portuguese and ask for approval before writing tests.
+   Decisions it flags for approval: Leitner (5 boxes, intervals 1/2/4/8/16
+   days) instead of SM-2; callers always pass `today` (no clock reads);
+   a wrong answer goes back to box 1 due *today*. It adds `Student.cards`,
+   `record_answer`, `due_items` and `study_queue` (due items first, then
+   unseen items from unlocked lessons).
+3. Open minor point from spec 014, not decided: `lesson_mastery` with an
+   unknown skill raises `KeyError` (Student uses `ValueError`); a 2-line
+   fix if the user wants consistency.
+4. After 015: spec 016 (essential N5 kanji ~30-50 + ~100 starter
+   vocabulary), then Phase C (017 SQLite persistence, which must also save
+   `cards`; 018+ web UI with FastAPI + Jinja2).
