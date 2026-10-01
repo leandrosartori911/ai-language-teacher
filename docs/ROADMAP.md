@@ -27,7 +27,7 @@ MVP goal: a local, zero-cost AI teacher that really teaches Japanese
 - [x] Lesson unlock threshold (spec 014)
 - [x] Spaced repetition, Leitner boxes (spec 015)
 - [x] 40 essential JLPT N5 kanji, meaning quiz, readings taught (spec 016)
-- [ ] Starter vocabulary, ~100 words (spec 017)
+- [x] Starter vocabulary, 100 words with example sentences (spec 017)
 - [ ] Kanji and vocabulary open only after katakana is mastered (spec 018)
 
 ## Phase C: Web app

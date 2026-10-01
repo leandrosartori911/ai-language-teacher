@@ -1,7 +1,7 @@
 # Session State — read this first in a new session
 
 Last updated: 2026-09-30. Repo is clean, all work committed and pushed
-after spec 016.
+after spec 017.
 
 ## What this project is
 
@@ -139,6 +139,7 @@ ai-language-teacher/
         hiragana.py               # HIRAGANA_LESSONS (18), HIRAGANA (105)
         katakana.py                # KATAKANA_LESSONS (19), KATAKANA (106)
         kanji.py                   # KANJI_LESSONS (6), KANJI (40) (spec 016)
+        vocabulary.py              # VOCABULARY_LESSONS (10), VOCABULARY (100) (spec 017)
   tests/
     test_student.py  test_assessment.py  test_question.py  test_lesson.py
     test_hiragana.py  test_katakana.py  test_loader.py  test_progress.py
@@ -173,7 +174,8 @@ Since spec 006 all core models are `@dataclass`es with full type hints
   optional), `teaching` (dict item -> `Teaching`, spec 009).
 - **`Teaching`** (`core/teaching.py`, spec 009): `explanation`, `mnemonic`,
   `example: Example(word, reading, meaning)`, `culture_note: str | None`,
-  `kun_readings`/`on_readings: list[str]` (empty for kana, spec 016).
+  `kun_readings`/`on_readings: list[str]` (empty for kana, spec 016),
+  `reading: str | None` (word reading in kana, vocabulary only, spec 017).
 - **Progression** (`core/progression.py`, spec 014): `UNLOCK_THRESHOLD = 0.8`;
   `lesson_mastery(student, skill, lesson)` = mean of that skill's scores for
   the lesson's items (unanswered = 0); `unlocked_lessons(student, skill,
@@ -200,7 +202,8 @@ Since spec 006 all core models are `@dataclass`es with full type hints
   (list order = teaching order), auto-generates one `Question` per item
   (`"What is the romaji for {item}?"`, or the file's top-level `"question"`
   template such as `"What does {item} mean?"`; per-item `"prompt"` wins;
-  optional `"kun"`/`"on"` reading lists, spec 016), returns a `Lesson`. Raises
+  optional `"kun"`/`"on"` reading lists, spec 016; optional `"reading"`,
+  spec 017), returns a `Lesson`. Raises
   `ValueError` (naming file and item) for: no items, missing/blank required
   field, blank `culture_note`, example word not containing the item,
   duplicate item.
@@ -258,7 +261,13 @@ If there's no `item` (skill-only assessment), it still overwrites directly
   not quizzed: kun in hiragana with `.` before okurigana, on in katakana.
   Kanji example readings are in hiragana (kana uses romaji). Verbs such as
   食/行 deliberately left for the vocabulary spec.
-- Nothing else yet (no vocab or grammar).
+- Vocabulary (spec 017): 100 N5 words, files `vocabulary_<theme>.json`
+  (greetings, people, questions, food, places, things, time, verbs_1,
+  verbs_2, adjectives). Quiz = English meaning. Each word has `reading`
+  (kana) and an example *sentence* (in `example.word`) in plain form so it
+  contains the word as taught; explanation gives the polite form and the
+  particles used. Readings/meanings checked against the jisho.org API.
+- Nothing else yet (no grammar lessons).
 
 ## Known issues / deliberate shortcuts (marked `# ponytail:` in code)
 
@@ -267,7 +276,7 @@ If there's no `item` (skill-only assessment), it still overwrites directly
 
 ## Test status
 
-492 tests passing, `ruff check` and `mypy` (strict) clean, as of spec 016.
+802 tests passing, `ruff check` and `mypy` (strict) clean, as of spec 017.
 
 ```
 tests/test_student.py     — Student creation, skills, mastery aggregation
@@ -288,6 +297,7 @@ tests/test_combinations.py — combinations, small tsu, totals 105/106
 tests/test_progression.py — lesson mastery and unlocking
 tests/test_review.py      — Leitner boxes, due items, study queue
 tests/test_kanji.py       — kanji content, readings, question template
+tests/test_vocabulary.py  — vocabulary content, readings, sentences
 ```
 
 ## Progress
@@ -303,23 +313,21 @@ engine, C: web app, D: local LLM teacher, E: release).
 - **Phase B (in progress):** 009 teaching content and 010 full basic
   hiragana, 011 full basic katakana, 012 dakuten/handakuten and 013
   combinations + small tsu done (kana complete); 014 unlock threshold done;
-  015 spaced repetition (Leitner) done; 016 N5 kanji (40) done. Next: 017
-  starter vocabulary, 018 course gating (kanji/vocab only after katakana).
+  015 spaced repetition (Leitner) done; 016 N5 kanji (40) and 017
+  vocabulary (100) done. Next: 018 course gating (kanji/vocab only after
+  katakana).
 - **Phase C:** 019 SQLite persistence (stdlib `sqlite3`), 020+ web UI.
 - **Phase D:** Ollama teacher. **Phase E:** v0.1.0 release.
 
 ## Immediate next step for the new session
 
 1. Read this file plus `docs/ROADMAP.md` and the latest specs.
-2. Write spec 017 (starter vocabulary, ~100 words) and get approval before
-   tests. Agreed with the user on 2026-10-01: the quiz asks the English
-   meaning (same format as kanji: `"question"` template, `also_accepted`
-   synonyms); the word is shown as normally written (kanji/kana) with its
-   kana reading taught. Include common N5 verbs (食べる, 行く...) here.
-   Consider whether vocab examples are sentences rather than words.
-3. Spec 018: hiragana -> katakana -> (kanji and vocabulary together).
-   Agreed rule: kanji and vocab open when every katakana lesson has
-   mastery >= 0.8 (reuse `lesson_mastery`). User accepted ~210 kana before
-   any vocab.
-4. Then Phase C: 019 SQLite persistence (must also save `cards`), 020+ web
+2. Write spec 018 (course gating) and get approval before tests. Agreed
+   with the user: hiragana -> katakana -> (kanji and vocabulary together).
+   Rule: kanji and vocab open when every katakana lesson has mastery
+   >= 0.8 (reuse `lesson_mastery`); presumably katakana opens when every
+   hiragana lesson is >= 0.8 (confirm with the user). User accepted ~210
+   kana before any vocab. Decide where the course order lives (e.g. a
+   Japanese-specific list of (skill, lessons) in `language/japanese/`).
+3. Then Phase C: 019 SQLite persistence (must also save `cards`), 020+ web
    UI with FastAPI + Jinja2.

@@ -1,0 +1,142 @@
+{
+  "title": "Vocabulary: things",
+  "question": "What does {item} mean?",
+  "items": [
+    {
+      "item": "本",
+      "answer": "book",
+      "reading": "ほん",
+      "explanation": "Book. The same kanji means origin, as in 日本 (Japan, 'origin of the sun').",
+      "mnemonic": "Hon: 'Honk if you love books.'",
+      "example": {
+        "word": "本を読む。",
+        "reading": "ほんを よむ。",
+        "meaning": "I read a book."
+      }
+    },
+    {
+      "item": "車",
+      "answer": "car",
+      "reading": "くるま",
+      "explanation": "Car. で here means 'by means of'.",
+      "mnemonic": "Kuruma: a car going round and round (kuru kuru).",
+      "example": {
+        "word": "車で会社に行く。",
+        "reading": "くるまで かいしゃに いく。",
+        "meaning": "I go to the office by car."
+      }
+    },
+    {
+      "item": "電車",
+      "answer": "train",
+      "reading": "でんしゃ",
+      "explanation": "Train: 電 (electric) + 車 (vehicle).",
+      "mnemonic": "Den-sha: an electric car, a train.",
+      "example": {
+        "word": "電車で学校に行く。",
+        "reading": "でんしゃで がっこうに いく。",
+        "meaning": "I go to school by train."
+      },
+      "culture_note": "Japanese trains are known for punctuality; when a train is late, rail companies can hand out a delay certificate for school or work."
+    },
+    {
+      "item": "電話",
+      "answer": "telephone",
+      "reading": "でんわ",
+      "explanation": "Telephone: 電 (electric) + 話 (talk). 電話する means to make a call; に marks who you call.",
+      "mnemonic": "Den-wa: electric talk.",
+      "example": {
+        "word": "母に電話する。",
+        "reading": "ははに でんわする。",
+        "meaning": "I call my mother."
+      },
+      "also_accepted": [
+        "phone",
+        "phone call"
+      ]
+    },
+    {
+      "item": "お金",
+      "answer": "money",
+      "reading": "おかね",
+      "explanation": "Money; 金 alone means gold. ない is the plain negative of ある: 'there isn't'.",
+      "mnemonic": "O-kane: money for a cane.",
+      "example": {
+        "word": "お金がない。",
+        "reading": "おかねが ない。",
+        "meaning": "I have no money."
+      }
+    },
+    {
+      "item": "傘",
+      "answer": "umbrella",
+      "reading": "かさ",
+      "explanation": "Umbrella. The kanji looks like an open umbrella with people under it.",
+      "mnemonic": "Kasa: 'Casa' means house, and an umbrella is a tiny house for rain.",
+      "example": {
+        "word": "傘を買う。",
+        "reading": "かさを かう。",
+        "meaning": "I buy an umbrella."
+      },
+      "culture_note": "Clear plastic umbrellas are sold cheaply at convenience stores when it starts to rain."
+    },
+    {
+      "item": "かばん",
+      "answer": "bag",
+      "reading": "かばん",
+      "explanation": "Bag. It has a kanji, 鞄, but is usually written in hiragana. ある is used for things that exist.",
+      "mnemonic": "Ka-ban: a bag with a ban sticker.",
+      "example": {
+        "word": "かばんに本がある。",
+        "reading": "かばんに ほんが ある。",
+        "meaning": "There is a book in the bag."
+      }
+    },
+    {
+      "item": "時計",
+      "answer": "clock",
+      "reading": "とけい",
+      "explanation": "Clock or watch. A special reading: 時 is usually ジ.",
+      "mnemonic": "Tokei: 'Tick-tock, okay?'",
+      "example": {
+        "word": "この時計は高い。",
+        "reading": "この とけいは たかい。",
+        "meaning": "This watch is expensive."
+      },
+      "also_accepted": [
+        "watch"
+      ]
+    },
+    {
+      "item": "テレビ",
+      "answer": "television",
+      "reading": "テレビ",
+      "explanation": "TV, shortened from テレビジョン (television).",
+      "mnemonic": "Tere-bi: television, cut short.",
+      "example": {
+        "word": "夜テレビを見る。",
+        "reading": "よる テレビを みる。",
+        "meaning": "I watch TV at night."
+      },
+      "also_accepted": [
+        "tv"
+      ]
+    },
+    {
+      "item": "写真",
+      "answer": "photo",
+      "reading": "しゃしん",
+      "explanation": "Photo: 写 (copy) + 真 (truth), a copy of reality.",
+      "mnemonic": "Sha-shin: the camera flash shines.",
+      "example": {
+        "word": "家族の写真を見る。",
+        "reading": "かぞくの しゃしんを みる。",
+        "meaning": "I look at a family photo."
+      },
+      "also_accepted": [
+        "photograph",
+        "picture"
+      ]
+    }
+  ]
+}

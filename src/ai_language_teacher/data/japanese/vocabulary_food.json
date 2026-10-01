@@ -1,0 +1,146 @@
+{
+  "title": "Vocabulary: food and drink",
+  "question": "What does {item} mean?",
+  "items": [
+    {
+      "item": "水",
+      "answer": "water",
+      "reading": "みず",
+      "explanation": "Water, usually cold; hot water is お湯 (おゆ). を marks the object of a verb. The polite form of 飲む is 飲みます.",
+      "mnemonic": "Mizu: 'Me, sue? No, I just want water.'",
+      "example": {
+        "word": "水を飲む。",
+        "reading": "みずを のむ。",
+        "meaning": "I drink water."
+      },
+      "culture_note": "In restaurants, a glass of water or tea is usually served free when you sit down."
+    },
+    {
+      "item": "お茶",
+      "answer": "tea",
+      "reading": "おちゃ",
+      "explanation": "Tea; in Japan it usually means green tea. Black tea is 紅茶 (こうちゃ). お is a polite prefix.",
+      "mnemonic": "O-cha: a cup of tea with a chameleon.",
+      "example": {
+        "word": "毎朝お茶を飲む。",
+        "reading": "まいあさ おちゃを のむ。",
+        "meaning": "I drink tea every morning."
+      },
+      "also_accepted": [
+        "green tea"
+      ]
+    },
+    {
+      "item": "ご飯",
+      "answer": "rice",
+      "reading": "ごはん",
+      "explanation": "Cooked rice, and also a meal in general: 朝ご飯 (breakfast), 昼ご飯 (lunch), 晩ご飯 (dinner). Uncooked rice is 米 (こめ).",
+      "mnemonic": "Go-han: go get your hand some rice.",
+      "example": {
+        "word": "朝ご飯を食べる。",
+        "reading": "あさごはんを たべる。",
+        "meaning": "I eat breakfast."
+      },
+      "also_accepted": [
+        "meal",
+        "cooked rice"
+      ]
+    },
+    {
+      "item": "パン",
+      "answer": "bread",
+      "reading": "パン",
+      "explanation": "Bread, written in katakana because it is a loanword.",
+      "mnemonic": "A pan full of bread.",
+      "example": {
+        "word": "朝はパンを食べる。",
+        "reading": "あさは パンを たべる。",
+        "meaning": "I eat bread in the morning."
+      },
+      "culture_note": "The word came from Portuguese pão, brought by Portuguese traders in the 16th century."
+    },
+    {
+      "item": "肉",
+      "answer": "meat",
+      "reading": "にく",
+      "explanation": "Meat. と between nouns means 'and'.",
+      "mnemonic": "Niku: 'Nickel for a piece of meat.'",
+      "example": {
+        "word": "肉と野菜を食べる。",
+        "reading": "にくと やさいを たべる。",
+        "meaning": "I eat meat and vegetables."
+      }
+    },
+    {
+      "item": "魚",
+      "answer": "fish",
+      "reading": "さかな",
+      "explanation": "Fish, both the animal and the food.",
+      "mnemonic": "Sakana: 'Sack of nah... a sack of fish!'",
+      "example": {
+        "word": "魚を食べる。",
+        "reading": "さかなを たべる。",
+        "meaning": "I eat fish."
+      }
+    },
+    {
+      "item": "野菜",
+      "answer": "vegetables",
+      "reading": "やさい",
+      "explanation": "Vegetables. 毎日 (every day) needs no particle.",
+      "mnemonic": "Ya-sai: 'Yeah, sigh, more vegetables.'",
+      "example": {
+        "word": "毎日野菜を食べる。",
+        "reading": "まいにち やさいを たべる。",
+        "meaning": "I eat vegetables every day."
+      },
+      "also_accepted": [
+        "vegetable"
+      ]
+    },
+    {
+      "item": "卵",
+      "answer": "egg",
+      "reading": "たまご",
+      "explanation": "Egg. 二つ (ふたつ) counts two things.",
+      "mnemonic": "Tamago: 'Tom, go get the eggs!'",
+      "example": {
+        "word": "卵を二つ買う。",
+        "reading": "たまごを ふたつ かう。",
+        "meaning": "I buy two eggs."
+      },
+      "also_accepted": [
+        "eggs"
+      ],
+      "culture_note": "Eggs in Japan are often eaten raw, for example cracked over hot rice as 卵かけご飯 (たまごかけごはん)."
+    },
+    {
+      "item": "コーヒー",
+      "answer": "coffee",
+      "reading": "コーヒー",
+      "explanation": "Coffee, a loanword from Dutch koffie. Both ー marks make the vowels long: kō-hī.",
+      "mnemonic": "Coffee said slowly: kōōō-hīīī.",
+      "example": {
+        "word": "コーヒーを飲む。",
+        "reading": "コーヒーを のむ。",
+        "meaning": "I drink coffee."
+      }
+    },
+    {
+      "item": "おいしい",
+      "answer": "delicious",
+      "reading": "おいしい",
+      "explanation": "Delicious. It is an い-adjective: it ends in い and can end a sentence by itself. Also written 美味しい.",
+      "mnemonic": "Oishii: 'Oh, she eats it all: delicious!'",
+      "example": {
+        "word": "このパンはおいしい。",
+        "reading": "この パンは おいしい。",
+        "meaning": "This bread is delicious."
+      },
+      "also_accepted": [
+        "tasty",
+        "good"
+      ]
+    }
+  ]
+}

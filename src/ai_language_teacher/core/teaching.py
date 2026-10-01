@@ -16,3 +16,4 @@ class Teaching:
     culture_note: str | None = None
     kun_readings: list[str] = field(default_factory=list)
     on_readings: list[str] = field(default_factory=list)
+    reading: str | None = None
