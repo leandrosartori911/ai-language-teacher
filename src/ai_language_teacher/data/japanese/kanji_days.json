@@ -1,0 +1,153 @@
+{
+  "title": "Kanji: days of the week",
+  "question": "What does {item} mean?",
+  "items": [
+    {
+      "item": "日",
+      "answer": "day",
+      "explanation": "日 is a picture of the sun and means sun or day. 日曜日 uses both readings: にち at the start and び (ひ with dakuten) at the end. It is also the 日 in 日本 (にほん, Japan).",
+      "mnemonic": "A window with the sun shining through it.",
+      "example": {
+        "word": "日曜日",
+        "reading": "にちようび",
+        "meaning": "Sunday"
+      },
+      "kun": [
+        "ひ",
+        "か"
+      ],
+      "on": [
+        "ニチ",
+        "ジツ"
+      ],
+      "also_accepted": [
+        "sun"
+      ],
+      "culture_note": "日本 means origin of the sun, which is why Japan is called the land of the rising sun."
+    },
+    {
+      "item": "月",
+      "answer": "moon",
+      "explanation": "月 means moon and month. It is read ゲツ in 月曜日 (Monday) and ガツ in month names such as 一月 (いちがつ, January). The moon itself is つき.",
+      "mnemonic": "A crescent moon drawn as a tall box with two lines inside.",
+      "example": {
+        "word": "月曜日",
+        "reading": "げつようび",
+        "meaning": "Monday"
+      },
+      "kun": [
+        "つき"
+      ],
+      "on": [
+        "ゲツ",
+        "ガツ"
+      ],
+      "also_accepted": [
+        "month"
+      ]
+    },
+    {
+      "item": "火",
+      "answer": "fire",
+      "explanation": "A picture of flames rising from a fire. It is read カ in 火曜日 (かようび, Tuesday); fire itself is ひ.",
+      "mnemonic": "A person waving both arms next to a campfire.",
+      "example": {
+        "word": "火曜日",
+        "reading": "かようび",
+        "meaning": "Tuesday"
+      },
+      "kun": [
+        "ひ",
+        "ほ"
+      ],
+      "on": [
+        "カ"
+      ]
+    },
+    {
+      "item": "水",
+      "answer": "water",
+      "explanation": "A picture of water flowing in a stream with splashes on each side. It is read スイ in 水曜日 (すいようび, Wednesday); water itself is みず.",
+      "mnemonic": "A river in the middle, with drops splashing out on both sides.",
+      "example": {
+        "word": "水曜日",
+        "reading": "すいようび",
+        "meaning": "Wednesday"
+      },
+      "kun": [
+        "みず"
+      ],
+      "on": [
+        "スイ"
+      ]
+    },
+    {
+      "item": "木",
+      "answer": "tree",
+      "explanation": "A picture of a tree: trunk, branches, and roots. It is read モク in 木曜日 (もくようび, Thursday); a tree itself is き.",
+      "mnemonic": "A tree with arms spread out and roots going down.",
+      "example": {
+        "word": "木曜日",
+        "reading": "もくようび",
+        "meaning": "Thursday"
+      },
+      "kun": [
+        "き",
+        "こ"
+      ],
+      "on": [
+        "ボク",
+        "モク"
+      ],
+      "also_accepted": [
+        "wood"
+      ]
+    },
+    {
+      "item": "金",
+      "answer": "gold",
+      "explanation": "金 means gold, metal and money. It is read キン in 金曜日 (きんようび, Friday); money is おかね, written お金.",
+      "mnemonic": "A roof over a pile of gold nuggets.",
+      "example": {
+        "word": "金曜日",
+        "reading": "きんようび",
+        "meaning": "Friday"
+      },
+      "kun": [
+        "かね",
+        "かな"
+      ],
+      "on": [
+        "キン",
+        "コン"
+      ],
+      "also_accepted": [
+        "money",
+        "metal"
+      ]
+    },
+    {
+      "item": "土",
+      "answer": "earth",
+      "explanation": "A sprout coming out of the ground. It is read ド in 土曜日 (どようび, Saturday); soil itself is つち.",
+      "mnemonic": "A plus sign planted on the ground: something growing from the earth.",
+      "example": {
+        "word": "土曜日",
+        "reading": "どようび",
+        "meaning": "Saturday"
+      },
+      "kun": [
+        "つち"
+      ],
+      "on": [
+        "ド",
+        "ト"
+      ],
+      "also_accepted": [
+        "soil",
+        "ground"
+      ],
+      "culture_note": "The days of the week are named after the sun, the moon and five planets: 火星 Mars, 水星 Mercury, 木星 Jupiter, 金星 Venus and 土星 Saturn. It is the same scheme as in English, where Saturday is Saturn's day."
+    }
+  ]
+}

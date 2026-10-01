@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 
 @dataclass
@@ -14,3 +14,5 @@ class Teaching:
     mnemonic: str
     example: Example
     culture_note: str | None = None
+    kun_readings: list[str] = field(default_factory=list)
+    on_readings: list[str] = field(default_factory=list)

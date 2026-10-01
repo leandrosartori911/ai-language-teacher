@@ -35,4 +35,5 @@ jobs:
         run: >
           /tmp/venv/bin/python -c "from ai_language_teacher.language.japanese.hiragana import HIRAGANA;
           from ai_language_teacher.language.japanese.katakana import KATAKANA;
-          assert len(HIRAGANA) == 105 and len(KATAKANA) == 106"
+          from ai_language_teacher.language.japanese.kanji import KANJI;
+          assert len(HIRAGANA) == 105 and len(KATAKANA) == 106 and len(KANJI) == 40"
