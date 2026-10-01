@@ -15,6 +15,16 @@ def _text(entry: dict[str, Any], key: str, where: str) -> str:
     return value
 
 
+def _readings(entry: dict[str, Any], key: str, where: str) -> list[str]:
+    readings = entry.get(key, [])
+    if not isinstance(readings, list):
+        raise ValueError(f"{where}: {key!r} must be a list")
+    for reading in readings:
+        if not isinstance(reading, str) or not reading.strip():
+            raise ValueError(f"{where}: bad {key!r} reading {reading!r}")
+    return readings
+
+
 def _teaching(entry: dict[str, Any], where: str) -> Teaching:
     example = entry.get("example")
     if not isinstance(example, dict):
@@ -33,6 +43,8 @@ def _teaching(entry: dict[str, Any], where: str) -> Teaching:
             meaning=_text(example, "meaning", f"{where} example"),
         ),
         culture_note=culture_note,
+        kun_readings=_readings(entry, "kun", where),
+        on_readings=_readings(entry, "on", where),
     )
 
 
@@ -48,6 +60,7 @@ def load_lesson(path: str | Path | Traversable) -> Lesson:
     items: dict[str, str] = {}
     teaching: dict[str, Teaching] = {}
     questions: list[Question] = []
+    template = data.get("question", "What is the romaji for {item}?")
 
     for entry in data["items"]:
         item = _text(entry, "item", f"{path}")
@@ -71,7 +84,7 @@ def load_lesson(path: str | Path | Traversable) -> Lesson:
                 raise ValueError(f"{where}: bad 'also_accepted' spelling {spelling!r}")
 
         expected: str | list[str] = [answer, *also_accepted] if also_accepted else answer
-        prompt = f"What is the romaji for {item}?"
+        prompt = template.format(item=item)
         if "prompt" in entry:
             prompt = _text(entry, "prompt", where)
         questions.append(Question(prompt, expected, item))

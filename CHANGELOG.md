@@ -42,3 +42,9 @@
   `study_queue` (due reviews first, then new items from unlocked lessons);
   `Student` gains `cards`. `lesson_mastery` now raises `ValueError` for an
   unknown skill instead of `KeyError` (spec 015).
+- 40 essential JLPT N5 kanji in six themed lessons (numbers, big numbers
+  and money, days of the week, people, position and size, time). The quiz
+  asks for the meaning; kun'yomi and on'yomi readings are taught with an
+  example word. Lesson files can set a `question` template and per-item
+  `kun`/`on` readings. Answer matching now also ignores a leading
+  "to"/"a"/"an"/"the" and repeated spaces (spec 016).

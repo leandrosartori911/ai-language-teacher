@@ -1,0 +1,152 @@
+{
+  "title": "Kanji: people",
+  "question": "What does {item} mean?",
+  "items": [
+    {
+      "item": "人",
+      "answer": "person",
+      "explanation": "A person walking, seen from the side. It is read ジン for nationality (日本人) and ニン when counting people (三人, さんにん), but one person is ひとり and two people are ふたり.",
+      "mnemonic": "Two legs walking.",
+      "example": {
+        "word": "日本人",
+        "reading": "にほんじん",
+        "meaning": "Japanese person"
+      },
+      "kun": [
+        "ひと"
+      ],
+      "on": [
+        "ジン",
+        "ニン"
+      ],
+      "also_accepted": [
+        "people",
+        "human"
+      ]
+    },
+    {
+      "item": "子",
+      "answer": "child",
+      "explanation": "A child wrapped up with its arms out. It is usually read こ, as in 子ども (こども, child).",
+      "mnemonic": "A baby in a blanket, waving its arms.",
+      "example": {
+        "word": "子ども",
+        "reading": "こども",
+        "meaning": "child"
+      },
+      "kun": [
+        "こ"
+      ],
+      "on": [
+        "シ",
+        "ス"
+      ],
+      "also_accepted": [
+        "kid"
+      ],
+      "culture_note": "Many girls' names used to end in 子, such as 花子 (はなこ); it was very common in the 20th century and is less common today."
+    },
+    {
+      "item": "女",
+      "answer": "woman",
+      "explanation": "女 means woman. Alone it is read おんな; 女の子 (おんなのこ) is a girl. The on reading ジョ appears in words like 女性 (じょせい, woman).",
+      "mnemonic": "A woman sitting with her legs crossed.",
+      "example": {
+        "word": "女の子",
+        "reading": "おんなのこ",
+        "meaning": "girl"
+      },
+      "kun": [
+        "おんな",
+        "め"
+      ],
+      "on": [
+        "ジョ",
+        "ニョ",
+        "ニョウ"
+      ],
+      "also_accepted": [
+        "female"
+      ]
+    },
+    {
+      "item": "男",
+      "answer": "man",
+      "explanation": "男 is 田 (rice field) on top of 力 (strength): the one who works the field. Alone it is read おとこ; 男の子 (おとこのこ) is a boy.",
+      "mnemonic": "Strength in the rice field.",
+      "example": {
+        "word": "男の子",
+        "reading": "おとこのこ",
+        "meaning": "boy"
+      },
+      "kun": [
+        "おとこ"
+      ],
+      "on": [
+        "ダン",
+        "ナン"
+      ],
+      "also_accepted": [
+        "male"
+      ]
+    },
+    {
+      "item": "父",
+      "answer": "father",
+      "explanation": "父 means father. ちち is used for your own father when talking to others; お父さん (おとうさん) is used to address your father or to talk about someone else's. とう is a special reading only used in this word.",
+      "mnemonic": "Two crossed sticks under a dad's two eyebrows.",
+      "example": {
+        "word": "お父さん",
+        "reading": "おとうさん",
+        "meaning": "father"
+      },
+      "kun": [
+        "ちち"
+      ],
+      "on": [
+        "フ"
+      ],
+      "also_accepted": [
+        "dad"
+      ]
+    },
+    {
+      "item": "母",
+      "answer": "mother",
+      "explanation": "母 means mother. はは is used for your own mother when talking to others; お母さん (おかあさん) is used to address your mother or to talk about someone else's. かあ is a special reading only used in this word.",
+      "mnemonic": "A mother's body with two dots inside: the two who matter most to her.",
+      "example": {
+        "word": "お母さん",
+        "reading": "おかあさん",
+        "meaning": "mother"
+      },
+      "kun": [
+        "はは"
+      ],
+      "on": [
+        "ボ"
+      ],
+      "also_accepted": [
+        "mom",
+        "mum"
+      ]
+    },
+    {
+      "item": "友",
+      "answer": "friend",
+      "explanation": "友 means friend and is read とも, as in 友だち (ともだち, friend).",
+      "mnemonic": "Two hands crossing in a handshake.",
+      "example": {
+        "word": "友だち",
+        "reading": "ともだち",
+        "meaning": "friend"
+      },
+      "kun": [
+        "とも"
+      ],
+      "on": [
+        "ユウ"
+      ]
+    }
+  ]
+}

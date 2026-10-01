@@ -1,0 +1,167 @@
+{
+  "title": "Kanji: position and size",
+  "question": "What does {item} mean?",
+  "items": [
+    {
+      "item": "上",
+      "answer": "up",
+      "explanation": "A line pointing up from the ground. Above is うえ; the on reading ジョウ appears in 上手 (じょうず, good at something).",
+      "mnemonic": "A flag pole standing on the ground, pointing up.",
+      "example": {
+        "word": "上手",
+        "reading": "じょうず",
+        "meaning": "skilled, good at"
+      },
+      "kun": [
+        "うえ",
+        "うわ",
+        "かみ",
+        "あ.げる",
+        "あ.がる",
+        "のぼ.る"
+      ],
+      "on": [
+        "ジョウ",
+        "ショウ"
+      ],
+      "also_accepted": [
+        "above",
+        "top"
+      ]
+    },
+    {
+      "item": "下",
+      "answer": "down",
+      "explanation": "The mirror image of 上: a line hanging down under the ground. Below is した; the on reading カ appears in 地下鉄 (ちかてつ, subway, literally underground iron).",
+      "mnemonic": "A root hanging below the ground line.",
+      "example": {
+        "word": "地下鉄",
+        "reading": "ちかてつ",
+        "meaning": "subway"
+      },
+      "kun": [
+        "した",
+        "しも",
+        "もと",
+        "さ.げる",
+        "さ.がる",
+        "くだ.る",
+        "お.りる"
+      ],
+      "on": [
+        "カ",
+        "ゲ"
+      ],
+      "also_accepted": [
+        "below",
+        "under"
+      ]
+    },
+    {
+      "item": "中",
+      "answer": "middle",
+      "explanation": "A line straight through the middle of a box. Inside is なか; the on reading チュウ appears in 中国 (ちゅうごく, China).",
+      "mnemonic": "An arrow through the middle of a target.",
+      "example": {
+        "word": "中国",
+        "reading": "ちゅうごく",
+        "meaning": "China"
+      },
+      "kun": [
+        "なか"
+      ],
+      "on": [
+        "チュウ",
+        "ジュウ"
+      ],
+      "also_accepted": [
+        "inside",
+        "center",
+        "centre",
+        "in"
+      ],
+      "culture_note": "中国, the middle kingdom, is China, but 中国地方 is also a region of western Honshu in Japan."
+    },
+    {
+      "item": "大",
+      "answer": "big",
+      "explanation": "A person stretching their arms out wide to show something big. It is read おお in おおきい (big) and ダイ in 大学 (だいがく, university).",
+      "mnemonic": "A person with arms spread: it was this big!",
+      "example": {
+        "word": "大学",
+        "reading": "だいがく",
+        "meaning": "university"
+      },
+      "kun": [
+        "おお",
+        "おお.きい",
+        "おお.いに"
+      ],
+      "on": [
+        "ダイ",
+        "タイ"
+      ],
+      "also_accepted": [
+        "large",
+        "great"
+      ]
+    },
+    {
+      "item": "小",
+      "answer": "small",
+      "explanation": "A small hook with two little dots beside it. It is read ちい in ちいさい (small) and ショウ in 小学校 (しょうがっこう, elementary school).",
+      "mnemonic": "Three small crumbs.",
+      "example": {
+        "word": "小学校",
+        "reading": "しょうがっこう",
+        "meaning": "elementary school"
+      },
+      "kun": [
+        "ちい.さい",
+        "こ",
+        "お"
+      ],
+      "on": [
+        "ショウ"
+      ],
+      "also_accepted": [
+        "little"
+      ]
+    },
+    {
+      "item": "左",
+      "answer": "left",
+      "explanation": "Left is ひだり, as in 左手 (ひだりて, left hand). Compare with 右: both start with the same cross shape, but 左 has 工 (a tool) underneath.",
+      "mnemonic": "The left hand holds the tool (工).",
+      "example": {
+        "word": "左手",
+        "reading": "ひだりて",
+        "meaning": "left hand"
+      },
+      "kun": [
+        "ひだり"
+      ],
+      "on": [
+        "サ"
+      ]
+    },
+    {
+      "item": "右",
+      "answer": "right",
+      "explanation": "Right is みぎ, as in 右手 (みぎて, right hand). It looks like 左, but has 口 (mouth) underneath instead of 工.",
+      "mnemonic": "The right hand brings food to the mouth (口).",
+      "example": {
+        "word": "右手",
+        "reading": "みぎて",
+        "meaning": "right hand"
+      },
+      "kun": [
+        "みぎ"
+      ],
+      "on": [
+        "ウ",
+        "ユウ"
+      ]
+    }
+  ]
+}

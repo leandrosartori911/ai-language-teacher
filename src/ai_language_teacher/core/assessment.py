@@ -2,6 +2,16 @@ from dataclasses import dataclass
 
 from ai_language_teacher.core.question import Question
 
+LEADING_WORDS = ("to ", "a ", "an ", "the ")
+
+
+def normalize(answer: str) -> str:
+    answer = " ".join(answer.lower().split())
+    for word in LEADING_WORDS:
+        if answer.startswith(word):
+            return answer.removeprefix(word)
+    return answer
+
 
 @dataclass
 class AssessmentResult:
@@ -26,8 +36,8 @@ class Assessment:
         if isinstance(accepted, str):
             accepted = [accepted]
 
-        normalized_answer = student_answer.strip().lower()
-        correct = any(normalized_answer == a.strip().lower() for a in accepted)
+        normalized_answer = normalize(student_answer)
+        correct = any(normalized_answer == normalize(a) for a in accepted)
 
         if correct:
             score = 1.0

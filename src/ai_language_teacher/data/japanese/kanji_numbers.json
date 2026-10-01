@@ -1,0 +1,230 @@
+{
+  "title": "Kanji: numbers 1 to 10",
+  "question": "What does {item} mean?",
+  "items": [
+    {
+      "item": "一",
+      "answer": "one",
+      "explanation": "A single horizontal stroke for one. It is read イチ when counting and in words like 一月 (いちがつ, January); the native reading appears in ひとつ (one thing).",
+      "mnemonic": "One finger held sideways.",
+      "example": {
+        "word": "一月",
+        "reading": "いちがつ",
+        "meaning": "January"
+      },
+      "kun": [
+        "ひと",
+        "ひと.つ"
+      ],
+      "on": [
+        "イチ",
+        "イツ"
+      ],
+      "also_accepted": [
+        "1"
+      ],
+      "culture_note": "In legal documents and contracts, the formal character 壱 is used instead, because a single stroke could easily be changed into 二 or 三."
+    },
+    {
+      "item": "二",
+      "answer": "two",
+      "explanation": "Two horizontal strokes, the lower one longer. It is read ニ when counting and in 二月 (にがつ, February); the native reading appears in ふたつ (two things).",
+      "mnemonic": "Two fingers held sideways, one on top of the other.",
+      "example": {
+        "word": "二月",
+        "reading": "にがつ",
+        "meaning": "February"
+      },
+      "kun": [
+        "ふた",
+        "ふた.つ"
+      ],
+      "on": [
+        "ニ"
+      ],
+      "also_accepted": [
+        "2"
+      ]
+    },
+    {
+      "item": "三",
+      "answer": "three",
+      "explanation": "Three horizontal strokes, the bottom one longest. It is read サン when counting and in 三月 (さんがつ, March); the native reading appears in みっつ (three things).",
+      "mnemonic": "Three fingers held sideways: one more line than 二.",
+      "example": {
+        "word": "三月",
+        "reading": "さんがつ",
+        "meaning": "March"
+      },
+      "kun": [
+        "み",
+        "み.つ",
+        "みっ.つ"
+      ],
+      "on": [
+        "サン"
+      ],
+      "also_accepted": [
+        "3"
+      ]
+    },
+    {
+      "item": "四",
+      "answer": "four",
+      "explanation": "四 has two readings for four: シ, as in 四月 (しがつ, April), and よん. Because シ sounds like 死 (death), people usually say よん when counting.",
+      "mnemonic": "A box with four corners and two legs inside it.",
+      "example": {
+        "word": "四月",
+        "reading": "しがつ",
+        "meaning": "April"
+      },
+      "kun": [
+        "よ",
+        "よ.つ",
+        "よっ.つ",
+        "よん"
+      ],
+      "on": [
+        "シ"
+      ],
+      "also_accepted": [
+        "4"
+      ],
+      "culture_note": "Four is considered unlucky because of that sound, so some hospitals and hotels in Japan skip room number 4."
+    },
+    {
+      "item": "五",
+      "answer": "five",
+      "explanation": "It is read ゴ when counting and in 五月 (ごがつ, May); the native reading appears in いつつ (five things).",
+      "mnemonic": "A capital I with an extra hook tucked inside its belly.",
+      "example": {
+        "word": "五月",
+        "reading": "ごがつ",
+        "meaning": "May"
+      },
+      "kun": [
+        "いつ",
+        "いつ.つ"
+      ],
+      "on": [
+        "ゴ"
+      ],
+      "also_accepted": [
+        "5"
+      ]
+    },
+    {
+      "item": "六",
+      "answer": "six",
+      "explanation": "It is read ロク when counting and in 六月 (ろくがつ, June); the native reading appears in むっつ (six things).",
+      "mnemonic": "A little stick figure with a hat and two legs, standing on six toes.",
+      "example": {
+        "word": "六月",
+        "reading": "ろくがつ",
+        "meaning": "June"
+      },
+      "kun": [
+        "む",
+        "む.つ",
+        "むっ.つ",
+        "むい"
+      ],
+      "on": [
+        "ロク"
+      ],
+      "also_accepted": [
+        "6"
+      ]
+    },
+    {
+      "item": "七",
+      "answer": "seven",
+      "explanation": "七 is read シチ, as in 七月 (しちがつ, July), or なな. When counting, people often say なな because しち and いち are easy to mix up.",
+      "mnemonic": "A 7 turned upside down and crossed out.",
+      "example": {
+        "word": "七月",
+        "reading": "しちがつ",
+        "meaning": "July"
+      },
+      "kun": [
+        "なな",
+        "なな.つ",
+        "なの"
+      ],
+      "on": [
+        "シチ"
+      ],
+      "also_accepted": [
+        "7"
+      ]
+    },
+    {
+      "item": "八",
+      "answer": "eight",
+      "explanation": "Two strokes that spread apart. It is read ハチ when counting and in 八月 (はちがつ, August); the native reading appears in やっつ (eight things).",
+      "mnemonic": "Two lines opening out like a fan.",
+      "example": {
+        "word": "八月",
+        "reading": "はちがつ",
+        "meaning": "August"
+      },
+      "kun": [
+        "や",
+        "や.つ",
+        "やっ.つ",
+        "よう"
+      ],
+      "on": [
+        "ハチ"
+      ],
+      "also_accepted": [
+        "8"
+      ],
+      "culture_note": "Eight is considered a lucky number because the shape widens toward the bottom, suggesting prosperity that keeps growing."
+    },
+    {
+      "item": "九",
+      "answer": "nine",
+      "explanation": "九 is read キュウ or ク. The month is 九月 (くがつ, September), but when counting people usually say きゅう, because く sounds like 苦 (suffering).",
+      "mnemonic": "An arm bent at the elbow, reaching for the last number before ten.",
+      "example": {
+        "word": "九月",
+        "reading": "くがつ",
+        "meaning": "September"
+      },
+      "kun": [
+        "ここの",
+        "ここの.つ"
+      ],
+      "on": [
+        "キュウ",
+        "ク"
+      ],
+      "also_accepted": [
+        "9"
+      ]
+    },
+    {
+      "item": "十",
+      "answer": "ten",
+      "explanation": "A cross for ten. Bigger numbers are built from it: 十一 (じゅういち) is ten plus one, 二十 (にじゅう) is two tens. The native reading appears in とお (ten things).",
+      "mnemonic": "A plus sign: add up all ten fingers.",
+      "example": {
+        "word": "十月",
+        "reading": "じゅうがつ",
+        "meaning": "October"
+      },
+      "kun": [
+        "とお",
+        "と"
+      ],
+      "on": [
+        "ジュウ",
+        "ジッ"
+      ],
+      "also_accepted": [
+        "10"
+      ]
+    }
+  ]
+}

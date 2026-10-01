@@ -1,0 +1,105 @@
+{
+  "title": "Kanji: time",
+  "question": "What does {item} mean?",
+  "items": [
+    {
+      "item": "年",
+      "answer": "year",
+      "explanation": "年 means year and is read ネン in most words, as in 来年 (らいねん, next year) and in dates like 2026年. This year, 今年, has the special reading ことし.",
+      "mnemonic": "A farmer carrying a sheaf of rice: one harvest every year.",
+      "example": {
+        "word": "来年",
+        "reading": "らいねん",
+        "meaning": "next year"
+      },
+      "kun": [
+        "とし"
+      ],
+      "on": [
+        "ネン"
+      ]
+    },
+    {
+      "item": "時",
+      "answer": "time",
+      "explanation": "時 means time and o'clock. It is read ジ: 三時 (さんじ) is three o'clock. Watch out for 四時 (よじ) and 九時 (くじ). Time in general is じかん.",
+      "mnemonic": "The sun (日) next to a temple (寺) bell that rings the hours.",
+      "example": {
+        "word": "時間",
+        "reading": "じかん",
+        "meaning": "time, hours"
+      },
+      "kun": [
+        "とき"
+      ],
+      "on": [
+        "ジ"
+      ],
+      "also_accepted": [
+        "hour",
+        "o'clock"
+      ]
+    },
+    {
+      "item": "分",
+      "answer": "minute",
+      "explanation": "分 means minute and to divide. Minutes are フン, which becomes ぷん after some numbers: 一分 (いっぷん), 三分 (さんぷん), 十分 (じゅっぷん). The verb わかる (to understand) is written 分かる.",
+      "mnemonic": "A knife (刀) under 八, whose two strokes fall apart: something divided.",
+      "example": {
+        "word": "五分",
+        "reading": "ごふん",
+        "meaning": "five minutes"
+      },
+      "kun": [
+        "わ.ける",
+        "わ.かる",
+        "わ.かれる",
+        "わ.かつ"
+      ],
+      "on": [
+        "ブン",
+        "フン",
+        "ブ"
+      ],
+      "also_accepted": [
+        "part",
+        "divide"
+      ]
+    },
+    {
+      "item": "半",
+      "answer": "half",
+      "explanation": "半 means half and is read ハン. Put it after a time to say half past: 三時半 (さんじはん) is 3:30.",
+      "mnemonic": "A vertical line cutting a shape exactly in half.",
+      "example": {
+        "word": "三時半",
+        "reading": "さんじはん",
+        "meaning": "half past three"
+      },
+      "kun": [
+        "なか.ば"
+      ],
+      "on": [
+        "ハン"
+      ]
+    },
+    {
+      "item": "今",
+      "answer": "now",
+      "explanation": "今 means now and is read いま alone. The on reading コン appears in 今月 (こんげつ, this month). Today, 今日, has the special reading きょう.",
+      "mnemonic": "A roof over a single moment: right now.",
+      "example": {
+        "word": "今月",
+        "reading": "こんげつ",
+        "meaning": "this month"
+      },
+      "kun": [
+        "いま"
+      ],
+      "on": [
+        "コン",
+        "キン"
+      ]
+    }
+  ]
+}
