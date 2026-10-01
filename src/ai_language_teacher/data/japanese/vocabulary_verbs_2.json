@@ -1,0 +1,156 @@
+{
+  "title": "Vocabulary: verbs 2",
+  "question": "What does {item} mean?",
+  "items": [
+    {
+      "item": "する",
+      "answer": "to do",
+      "reading": "する",
+      "explanation": "To do. An irregular verb (polite: します) that turns many nouns into verbs: 勉強する (to study), 電話する (to phone).",
+      "mnemonic": "Suru: sure, I'll do it.",
+      "example": {
+        "word": "宿題をする。",
+        "reading": "しゅくだいを する。",
+        "meaning": "I do my homework."
+      }
+    },
+    {
+      "item": "ある",
+      "answer": "to exist",
+      "reading": "ある",
+      "explanation": "There is, to exist, for things and plants. For people and animals, use いる. Polite form: あります.",
+      "mnemonic": "Aru: 'Are you there?' asks about a thing.",
+      "example": {
+        "word": "駅の前に店がある。",
+        "reading": "えきの まえに みせが ある。",
+        "meaning": "There is a shop in front of the station."
+      },
+      "also_accepted": [
+        "to be",
+        "to have",
+        "there is",
+        "there are"
+      ]
+    },
+    {
+      "item": "いる",
+      "answer": "to exist",
+      "reading": "いる",
+      "explanation": "There is, to be (somewhere), for people and animals. For things, use ある. Polite form: います.",
+      "mnemonic": "Iru: 'Here you are!' — living things are here.",
+      "example": {
+        "word": "公園に犬がいる。",
+        "reading": "こうえんに いぬが いる。",
+        "meaning": "There is a dog in the park."
+      },
+      "also_accepted": [
+        "to be",
+        "there is",
+        "there are"
+      ]
+    },
+    {
+      "item": "起きる",
+      "answer": "to wake up",
+      "reading": "おきる",
+      "explanation": "To wake up, to get up. に marks a time. Polite form: 起きます.",
+      "mnemonic": "Okiru: 'Okay, I'm up!'",
+      "example": {
+        "word": "毎朝六時に起きる。",
+        "reading": "まいあさ ろくじに おきる。",
+        "meaning": "I get up at six every morning."
+      },
+      "also_accepted": [
+        "to get up"
+      ]
+    },
+    {
+      "item": "寝る",
+      "answer": "to sleep",
+      "reading": "ねる",
+      "explanation": "To sleep, to go to bed. Polite form: 寝ます.",
+      "mnemonic": "Neru: a nerd goes to bed early.",
+      "example": {
+        "word": "夜十一時に寝る。",
+        "reading": "よる じゅういちじに ねる。",
+        "meaning": "I go to bed at eleven at night."
+      },
+      "also_accepted": [
+        "to go to bed"
+      ]
+    },
+    {
+      "item": "帰る",
+      "answer": "to return",
+      "reading": "かえる",
+      "explanation": "To return home or to where you belong. It ends in -eru but conjugates like 行く: the polite form is 帰ります, not 帰ます.",
+      "mnemonic": "Kaeru also sounds like frog: the frog returns home.",
+      "example": {
+        "word": "六時に家に帰る。",
+        "reading": "ろくじに いえに かえる。",
+        "meaning": "I go home at six."
+      },
+      "also_accepted": [
+        "to go home",
+        "to go back",
+        "to come back"
+      ]
+    },
+    {
+      "item": "分かる",
+      "answer": "to understand",
+      "reading": "わかる",
+      "explanation": "To understand. What is understood takes が, not を. 少し means a little. Polite form: 分かります.",
+      "mnemonic": "Wakaru: 'Wake up and you'll understand.'",
+      "example": {
+        "word": "日本語が少し分かる。",
+        "reading": "にほんごが すこし わかる。",
+        "meaning": "I understand a little Japanese."
+      }
+    },
+    {
+      "item": "待つ",
+      "answer": "to wait",
+      "reading": "まつ",
+      "explanation": "To wait. The person you wait for takes を. Polite form: 待ちます.",
+      "mnemonic": "Matsu: waiting on a mat.",
+      "example": {
+        "word": "駅で友だちを待つ。",
+        "reading": "えきで ともだちを まつ。",
+        "meaning": "I wait for a friend at the station."
+      }
+    },
+    {
+      "item": "会う",
+      "answer": "to meet",
+      "reading": "あう",
+      "explanation": "To meet. The person you meet takes に. Polite form: 会います.",
+      "mnemonic": "Au: 'Ow!' — bumping into someone you meet.",
+      "example": {
+        "word": "明日先生に会う。",
+        "reading": "あした せんせいに あう。",
+        "meaning": "I'll meet my teacher tomorrow."
+      },
+      "also_accepted": [
+        "to see"
+      ]
+    },
+    {
+      "item": "休む",
+      "answer": "to rest",
+      "reading": "やすむ",
+      "explanation": "To rest, and also to take a day off or be absent. Polite form: 休みます.",
+      "mnemonic": "Yasumu: 'Yes, sum up the week and rest.'",
+      "example": {
+        "word": "日曜日は家で休む。",
+        "reading": "にちようびは いえで やすむ。",
+        "meaning": "On Sunday I rest at home."
+      },
+      "also_accepted": [
+        "to take a break",
+        "to be absent",
+        "to take a day off"
+      ]
+    }
+  ]
+}

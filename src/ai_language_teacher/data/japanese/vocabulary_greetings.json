@@ -1,0 +1,155 @@
+{
+  "title": "Vocabulary: greetings",
+  "question": "What does {item} mean?",
+  "items": [
+    {
+      "item": "おはようございます",
+      "answer": "good morning",
+      "reading": "おはようございます",
+      "explanation": "The polite morning greeting, used until about mid-morning. With friends and family, the short おはよう is enough.",
+      "mnemonic": "Say it like a sleepy 'Ohio' while stretching in the morning.",
+      "example": {
+        "word": "先生、おはようございます。",
+        "reading": "せんせい、おはようございます。",
+        "meaning": "Good morning, teacher."
+      },
+      "also_accepted": [
+        "morning"
+      ],
+      "culture_note": "In many workplaces with shifts, people say おはようございます when they arrive, even late in the day."
+    },
+    {
+      "item": "こんにちは",
+      "answer": "hello",
+      "reading": "こんにちは",
+      "explanation": "The everyday daytime greeting. It is written with は but the last sound is said わ: it began as a longer sentence, 今日は... ('as for today...'), where は is the topic particle.",
+      "mnemonic": "Cone-nichi-wa: waving an ice-cream cone to say hello in the afternoon sun.",
+      "example": {
+        "word": "田中さん、こんにちは。",
+        "reading": "たなかさん、こんにちは。",
+        "meaning": "Hello, Mr. Tanaka."
+      },
+      "also_accepted": [
+        "good afternoon",
+        "hi"
+      ]
+    },
+    {
+      "item": "こんばんは",
+      "answer": "good evening",
+      "reading": "こんばんは",
+      "explanation": "The evening greeting. Like こんにちは it ends in は said as わ, from 今晩は ('as for this evening...').",
+      "mnemonic": "Con-BAN-wa: the evening news anchor bangs the desk to say good evening.",
+      "example": {
+        "word": "みなさん、こんばんは。",
+        "reading": "みなさん、こんばんは。",
+        "meaning": "Good evening, everyone."
+      },
+      "also_accepted": [
+        "evening"
+      ]
+    },
+    {
+      "item": "さようなら",
+      "answer": "goodbye",
+      "reading": "さようなら",
+      "explanation": "Goodbye, but it sounds final, like you won't meet again soon. Children say it to their teacher at the end of the school day; friends usually say じゃあね or またね instead.",
+      "mnemonic": "Sigh-oh-NAH-ra: a sad sigh because someone is leaving.",
+      "example": {
+        "word": "先生、さようなら。",
+        "reading": "せんせい、さようなら。",
+        "meaning": "Goodbye, teacher."
+      },
+      "also_accepted": [
+        "bye"
+      ]
+    },
+    {
+      "item": "おやすみなさい",
+      "answer": "good night",
+      "reading": "おやすみなさい",
+      "explanation": "Said before going to sleep or when parting late at night, not as a greeting when you meet someone in the evening (that is こんばんは). With family and friends, just おやすみ. It comes from 休む (to rest).",
+      "mnemonic": "Oh, yasumi: 'Oh, rest time!'",
+      "example": {
+        "word": "お母さん、おやすみなさい。",
+        "reading": "おかあさん、おやすみなさい。",
+        "meaning": "Good night, Mom."
+      },
+      "also_accepted": [
+        "goodnight"
+      ]
+    },
+    {
+      "item": "ありがとう",
+      "answer": "thank you",
+      "reading": "ありがとう",
+      "explanation": "Thanks, in casual form. To be polite, say ありがとうございます.",
+      "mnemonic": "Thank the alligator (ari-ga-tō) for not biting you.",
+      "example": {
+        "word": "プレゼント、ありがとう。",
+        "reading": "プレゼント、ありがとう。",
+        "meaning": "Thanks for the present."
+      },
+      "also_accepted": [
+        "thanks"
+      ]
+    },
+    {
+      "item": "すみません",
+      "answer": "excuse me",
+      "reading": "すみません",
+      "explanation": "A very useful word: it apologises, gets someone's attention (a waiter, a stranger), and even thanks someone who went to trouble for you. ください means 'please give me'.",
+      "mnemonic": "Sue me, sen: say it before anyone thinks of suing you.",
+      "example": {
+        "word": "すみません、水をください。",
+        "reading": "すみません、みずを ください。",
+        "meaning": "Excuse me, water please."
+      },
+      "also_accepted": [
+        "sorry",
+        "i'm sorry"
+      ]
+    },
+    {
+      "item": "いただきます",
+      "answer": "let's eat",
+      "reading": "いただきます",
+      "explanation": "Said before eating, often with the palms together. Literally it means 'I humbly receive'. After the meal, people say ごちそうさまでした.",
+      "mnemonic": "Eat a dakimasu: hands together, ready to eat.",
+      "example": {
+        "word": "では、いただきます。",
+        "reading": "では、いただきます。",
+        "meaning": "Well then, let's eat."
+      },
+      "also_accepted": [
+        "thank you for the food",
+        "thanks for the food"
+      ],
+      "culture_note": "It is often explained as thanks to everyone who made the meal possible, and to the food itself."
+    },
+    {
+      "item": "はい",
+      "answer": "yes",
+      "reading": "はい",
+      "explanation": "Yes. It also answers roll call ('here!') and is often said just to show you are listening, so はい does not always mean agreement. です is the polite 'is'.",
+      "mnemonic": "Raise your hand and say 'Hi!' to answer yes.",
+      "example": {
+        "word": "はい、学生です。",
+        "reading": "はい、がくせいです。",
+        "meaning": "Yes, I am a student."
+      }
+    },
+    {
+      "item": "いいえ",
+      "answer": "no",
+      "reading": "いいえ",
+      "explanation": "No. A direct いいえ can sound blunt, so people often soften a refusal instead. It is also a humble reply to thanks: 'not at all'. じゃない means 'is not'.",
+      "mnemonic": "Eee-eh: a doubtful noise that means no.",
+      "example": {
+        "word": "いいえ、学生じゃない。",
+        "reading": "いいえ、がくせいじゃ ない。",
+        "meaning": "No, I am not a student."
+      }
+    }
+  ]
+}

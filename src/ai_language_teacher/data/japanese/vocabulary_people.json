@@ -1,0 +1,150 @@
+{
+  "title": "Vocabulary: people",
+  "question": "What does {item} mean?",
+  "items": [
+    {
+      "item": "私",
+      "answer": "I",
+      "reading": "わたし",
+      "explanation": "I, me. は marks the topic ('as for me') and だ is the plain form of です ('is'). Japanese often leaves 私 out when it is clear who is speaking.",
+      "mnemonic": "Wa-ta-shi: 'What a sheep? No, it's me!'",
+      "example": {
+        "word": "私は学生だ。",
+        "reading": "わたしは がくせいだ。",
+        "meaning": "I am a student."
+      },
+      "also_accepted": [
+        "me",
+        "myself"
+      ]
+    },
+    {
+      "item": "あなた",
+      "answer": "you",
+      "reading": "あなた",
+      "explanation": "You. の shows possession: あなたの本 is 'your book'. With people you know, Japanese prefers their name plus さん, because あなた can sound distant.",
+      "mnemonic": "Ah, NA-ta: pointing at the person you are talking to.",
+      "example": {
+        "word": "これはあなたの本だ。",
+        "reading": "これは あなたの ほんだ。",
+        "meaning": "This is your book."
+      }
+    },
+    {
+      "item": "先生",
+      "answer": "teacher",
+      "reading": "せんせい",
+      "explanation": "Teacher. 先 (ahead) + 生 (life): someone who was born, or learned, before you. It is also a title for doctors and lawyers, added after the name. You never call yourself 先生.",
+      "mnemonic": "The teacher sensei senses what you didn't study.",
+      "example": {
+        "word": "田中先生は日本人だ。",
+        "reading": "たなかせんせいは にほんじんだ。",
+        "meaning": "Professor Tanaka is Japanese."
+      },
+      "also_accepted": [
+        "doctor"
+      ]
+    },
+    {
+      "item": "学生",
+      "answer": "student",
+      "reading": "がくせい",
+      "explanation": "Student, especially a university student; school pupils are usually 生徒 (せいと). 学 means study.",
+      "mnemonic": "Gaku-sei: a student says 'gak!' when the exam starts.",
+      "example": {
+        "word": "兄は大学の学生だ。",
+        "reading": "あには だいがくの がくせいだ。",
+        "meaning": "My older brother is a university student."
+      }
+    },
+    {
+      "item": "友だち",
+      "answer": "friend",
+      "reading": "ともだち",
+      "explanation": "Friend; also written 友達. と means 'with' here.",
+      "mnemonic": "Tomo-dachi: tomorrow I'll see my friend.",
+      "example": {
+        "word": "友だちと話す。",
+        "reading": "ともだちと はなす。",
+        "meaning": "I talk with a friend."
+      },
+      "also_accepted": [
+        "friends"
+      ]
+    },
+    {
+      "item": "家族",
+      "answer": "family",
+      "reading": "かぞく",
+      "explanation": "Family. Counting people: 一人 (ひとり), 二人 (ふたり), then 三人 (さんにん), 四人 (よにん).",
+      "mnemonic": "Ka-zoku: a car full of family on a trip to the zoo.",
+      "example": {
+        "word": "私の家族は四人だ。",
+        "reading": "わたしの かぞくは よにんだ。",
+        "meaning": "There are four people in my family."
+      }
+    },
+    {
+      "item": "子ども",
+      "answer": "child",
+      "reading": "こども",
+      "explanation": "Child or children; Japanese nouns have no plural form. いる is used for people and animals that exist or are present.",
+      "mnemonic": "Ko-domo: a child in a dome-shaped playground.",
+      "example": {
+        "word": "子どもが三人いる。",
+        "reading": "こどもが さんにん いる。",
+        "meaning": "I have three children."
+      },
+      "also_accepted": [
+        "children",
+        "kid",
+        "kids"
+      ]
+    },
+    {
+      "item": "兄",
+      "answer": "older brother",
+      "reading": "あに",
+      "explanation": "Your own older brother, when talking to others. Someone else's older brother is お兄さん (おにいさん). Japanese has separate words for older and younger siblings: a younger brother is 弟 (おとうと).",
+      "mnemonic": "Ani: 'Any problem? My big brother will help.'",
+      "example": {
+        "word": "兄は先生だ。",
+        "reading": "あには せんせいだ。",
+        "meaning": "My older brother is a teacher."
+      },
+      "also_accepted": [
+        "big brother",
+        "elder brother"
+      ]
+    },
+    {
+      "item": "姉",
+      "answer": "older sister",
+      "reading": "あね",
+      "explanation": "Your own older sister, when talking to others; someone else's is お姉さん (おねえさん). A younger sister is 妹 (いもうと). に marks where someone is.",
+      "mnemonic": "Ane: 'Ah, neh, my big sister knows everything.'",
+      "example": {
+        "word": "姉は東京にいる。",
+        "reading": "あねは とうきょうに いる。",
+        "meaning": "My older sister is in Tokyo."
+      },
+      "also_accepted": [
+        "big sister",
+        "elder sister"
+      ]
+    },
+    {
+      "item": "名前",
+      "answer": "name",
+      "reading": "なまえ",
+      "explanation": "Name. Asking politely: お名前は? ('your name?').",
+      "mnemonic": "Na-ma-e: 'Nah, my name is not that!'",
+      "example": {
+        "word": "私の名前はアナだ。",
+        "reading": "わたしの なまえは アナだ。",
+        "meaning": "My name is Ana."
+      },
+      "culture_note": "Japanese names are said family name first: in 山田太郎, 山田 is the family name."
+    }
+  ]
+}

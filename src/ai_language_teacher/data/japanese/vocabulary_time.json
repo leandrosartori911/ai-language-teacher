@@ -1,0 +1,142 @@
+{
+  "title": "Vocabulary: time",
+  "question": "What does {item} mean?",
+  "items": [
+    {
+      "item": "今日",
+      "answer": "today",
+      "reading": "きょう",
+      "explanation": "Today. A special reading that belongs to the whole word, not to each kanji.",
+      "mnemonic": "Kyō: 'Key, oh! Today I lost my key.'",
+      "example": {
+        "word": "今日は暑い。",
+        "reading": "きょうは あつい。",
+        "meaning": "It's hot today."
+      }
+    },
+    {
+      "item": "明日",
+      "answer": "tomorrow",
+      "reading": "あした",
+      "explanation": "Tomorrow. Formal speech uses あす. The plain present form 行く also talks about the future.",
+      "mnemonic": "Ashita: 'Ash, eat a big breakfast tomorrow.'",
+      "example": {
+        "word": "明日学校に行く。",
+        "reading": "あした がっこうに いく。",
+        "meaning": "I'm going to school tomorrow."
+      }
+    },
+    {
+      "item": "昨日",
+      "answer": "yesterday",
+      "reading": "きのう",
+      "explanation": "Yesterday. 寒かった is the past form of 寒い: い-adjectives make their past with かった.",
+      "mnemonic": "Kinō: 'Kino? No, I went to the cinema yesterday.'",
+      "example": {
+        "word": "昨日は寒かった。",
+        "reading": "きのうは さむかった。",
+        "meaning": "It was cold yesterday."
+      }
+    },
+    {
+      "item": "毎日",
+      "answer": "every day",
+      "reading": "まいにち",
+      "explanation": "Every day: 毎 (every) + 日 (day). Also 毎朝 (every morning), 毎晩 (every night).",
+      "mnemonic": "My knee-chi hurts every day.",
+      "example": {
+        "word": "毎日日本語を勉強する。",
+        "reading": "まいにち にほんごを べんきょうする。",
+        "meaning": "I study Japanese every day."
+      },
+      "also_accepted": [
+        "everyday",
+        "daily"
+      ]
+    },
+    {
+      "item": "朝",
+      "answer": "morning",
+      "reading": "あさ",
+      "explanation": "Morning. 朝ご飯 is breakfast.",
+      "mnemonic": "Asa: 'Ah, sun!' — the morning.",
+      "example": {
+        "word": "朝コーヒーを飲む。",
+        "reading": "あさ コーヒーを のむ。",
+        "meaning": "I drink coffee in the morning."
+      }
+    },
+    {
+      "item": "昼",
+      "answer": "noon",
+      "reading": "ひる",
+      "explanation": "Noon, daytime; also short for lunch (昼ご飯).",
+      "mnemonic": "Hiru: the sun is high at noon.",
+      "example": {
+        "word": "昼に友だちと会う。",
+        "reading": "ひるに ともだちと あう。",
+        "meaning": "I meet a friend at noon."
+      },
+      "also_accepted": [
+        "daytime",
+        "midday",
+        "lunch"
+      ]
+    },
+    {
+      "item": "夜",
+      "answer": "night",
+      "reading": "よる",
+      "explanation": "Night.",
+      "mnemonic": "Yoru: 'Your room is dark at night.'",
+      "example": {
+        "word": "夜は本を読む。",
+        "reading": "よるは ほんを よむ。",
+        "meaning": "At night I read books."
+      },
+      "also_accepted": [
+        "evening"
+      ]
+    },
+    {
+      "item": "今",
+      "answer": "now",
+      "reading": "いま",
+      "explanation": "Now. いる says where a person is.",
+      "mnemonic": "Ima: 'I'm a busy person right now.'",
+      "example": {
+        "word": "今、家にいる。",
+        "reading": "いま、いえに いる。",
+        "meaning": "I'm at home now."
+      }
+    },
+    {
+      "item": "時間",
+      "answer": "time",
+      "reading": "じかん",
+      "explanation": "Time, and hours as a length: 二時間 (にじかん) is two hours, but 二時 (にじ) is two o'clock.",
+      "mnemonic": "Ji-kan: 'Gee, can I have more time?'",
+      "example": {
+        "word": "時間がない。",
+        "reading": "じかんが ない。",
+        "meaning": "I have no time."
+      },
+      "also_accepted": [
+        "hour",
+        "hours"
+      ]
+    },
+    {
+      "item": "今年",
+      "answer": "this year",
+      "reading": "ことし",
+      "explanation": "This year. A special reading, like 今日 (きょう).",
+      "mnemonic": "Ko-toshi: this year I'll finally go.",
+      "example": {
+        "word": "今年日本に行く。",
+        "reading": "ことし にほんに いく。",
+        "meaning": "I'm going to Japan this year."
+      }
+    }
+  ]
+}

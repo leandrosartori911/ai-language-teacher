@@ -1,0 +1,137 @@
+{
+  "title": "Vocabulary: verbs 1",
+  "question": "What does {item} mean?",
+  "items": [
+    {
+      "item": "食べる",
+      "answer": "to eat",
+      "reading": "たべる",
+      "explanation": "To eat. This is the plain (dictionary) form; the polite form is 食べます.",
+      "mnemonic": "Tabe-ru: food on the table.",
+      "example": {
+        "word": "毎朝パンを食べる。",
+        "reading": "まいあさ パンを たべる。",
+        "meaning": "I eat bread every morning."
+      }
+    },
+    {
+      "item": "飲む",
+      "answer": "to drink",
+      "reading": "のむ",
+      "explanation": "To drink; also used for taking medicine (薬を飲む). Polite form: 飲みます.",
+      "mnemonic": "Nomu: 'Nom nom', drinking it all.",
+      "example": {
+        "word": "お茶を飲む。",
+        "reading": "おちゃを のむ。",
+        "meaning": "I drink tea."
+      }
+    },
+    {
+      "item": "行く",
+      "answer": "to go",
+      "reading": "いく",
+      "explanation": "To go. に marks the destination. Polite form: 行きます.",
+      "mnemonic": "Iku: 'Eek, I have to go!'",
+      "example": {
+        "word": "駅に行く。",
+        "reading": "えきに いく。",
+        "meaning": "I go to the station."
+      }
+    },
+    {
+      "item": "来る",
+      "answer": "to come",
+      "reading": "くる",
+      "explanation": "To come. An irregular verb: the polite form is 来ます (きます). が marks who comes.",
+      "mnemonic": "Kuru: 'Cool, you came!'",
+      "example": {
+        "word": "友だちが家に来る。",
+        "reading": "ともだちが いえに くる。",
+        "meaning": "A friend comes to my house."
+      }
+    },
+    {
+      "item": "見る",
+      "answer": "to see",
+      "reading": "みる",
+      "explanation": "To see, to watch, to look. Polite form: 見ます.",
+      "mnemonic": "Miru: a mirror lets you see yourself.",
+      "example": {
+        "word": "テレビを見る。",
+        "reading": "テレビを みる。",
+        "meaning": "I watch TV."
+      },
+      "also_accepted": [
+        "to watch",
+        "to look"
+      ]
+    },
+    {
+      "item": "聞く",
+      "answer": "to listen",
+      "reading": "きく",
+      "explanation": "To listen, to hear, and also to ask (先生に聞く, ask the teacher). Polite form: 聞きます.",
+      "mnemonic": "Kiku: put an ear (耳) at the gate (門) to listen.",
+      "example": {
+        "word": "音楽を聞く。",
+        "reading": "おんがくを きく。",
+        "meaning": "I listen to music."
+      },
+      "also_accepted": [
+        "to hear",
+        "to ask"
+      ]
+    },
+    {
+      "item": "話す",
+      "answer": "to speak",
+      "reading": "はなす",
+      "explanation": "To speak, to talk. Polite form: 話します.",
+      "mnemonic": "Hanasu: 'Ha, nasty gossip!' — people talking.",
+      "example": {
+        "word": "日本語を話す。",
+        "reading": "にほんごを はなす。",
+        "meaning": "I speak Japanese."
+      },
+      "also_accepted": [
+        "to talk"
+      ]
+    },
+    {
+      "item": "読む",
+      "answer": "to read",
+      "reading": "よむ",
+      "explanation": "To read. Polite form: 読みます.",
+      "mnemonic": "Yomu: 'Yo, mu-st read this!'",
+      "example": {
+        "word": "毎晩本を読む。",
+        "reading": "まいばん ほんを よむ。",
+        "meaning": "I read a book every night."
+      }
+    },
+    {
+      "item": "書く",
+      "answer": "to write",
+      "reading": "かく",
+      "explanation": "To write. Polite form: 書きます.",
+      "mnemonic": "Kaku: scratch (kaku) letters onto paper.",
+      "example": {
+        "word": "名前を書く。",
+        "reading": "なまえを かく。",
+        "meaning": "I write my name."
+      }
+    },
+    {
+      "item": "買う",
+      "answer": "to buy",
+      "reading": "かう",
+      "explanation": "To buy. で marks where it happens. Polite form: 買います.",
+      "mnemonic": "Kau: buy a cow.",
+      "example": {
+        "word": "店で卵を買う。",
+        "reading": "みせで たまごを かう。",
+        "meaning": "I buy eggs at the shop."
+      }
+    }
+  ]
+}

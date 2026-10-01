@@ -1,0 +1,135 @@
+{
+  "title": "Vocabulary: question words",
+  "question": "What does {item} mean?",
+  "items": [
+    {
+      "item": "何",
+      "answer": "what",
+      "reading": "なに",
+      "explanation": "What. Before sounds like です, の and some counters it is read なん, as in this example. か at the end turns a sentence into a question.",
+      "mnemonic": "Nani?! The surprised 'what?!' from every anime.",
+      "example": {
+        "word": "これは何ですか。",
+        "reading": "これは なんですか。",
+        "meaning": "What is this?"
+      }
+    },
+    {
+      "item": "だれ",
+      "answer": "who",
+      "reading": "だれ",
+      "explanation": "Who. The more polite form is どなた. あの means 'that' (over there).",
+      "mnemonic": "Dare: 'Who would dare?'",
+      "example": {
+        "word": "あの人はだれですか。",
+        "reading": "あの ひとは だれですか。",
+        "meaning": "Who is that person?"
+      }
+    },
+    {
+      "item": "どこ",
+      "answer": "where",
+      "reading": "どこ",
+      "explanation": "Where. It belongs to a set: ここ (here), そこ (there, near you), あそこ (over there), どこ (where?).",
+      "mnemonic": "Doko: 'Where did the doctor go?'",
+      "example": {
+        "word": "トイレはどこですか。",
+        "reading": "トイレは どこですか。",
+        "meaning": "Where is the toilet?"
+      }
+    },
+    {
+      "item": "いつ",
+      "answer": "when",
+      "reading": "いつ",
+      "explanation": "When. 誕生日 (たんじょうび) means birthday.",
+      "mnemonic": "Itsu: 'It's... when?'",
+      "example": {
+        "word": "誕生日はいつですか。",
+        "reading": "たんじょうびは いつですか。",
+        "meaning": "When is your birthday?"
+      }
+    },
+    {
+      "item": "どれ",
+      "answer": "which",
+      "reading": "どれ",
+      "explanation": "Which one, among three or more, standing alone. Between two things, use どっち.",
+      "mnemonic": "Dore: which door is yours?",
+      "example": {
+        "word": "あなたのかばんはどれですか。",
+        "reading": "あなたの かばんは どれですか。",
+        "meaning": "Which one is your bag?"
+      },
+      "also_accepted": [
+        "which one"
+      ]
+    },
+    {
+      "item": "どの",
+      "answer": "which",
+      "reading": "どの",
+      "explanation": "Which, but it must be followed by a noun: どの本 (which book). Alone, use どれ. 乗ります means 'to ride, to take (a vehicle)'.",
+      "mnemonic": "Dono: which donut, this one or that one?",
+      "example": {
+        "word": "どの電車に乗りますか。",
+        "reading": "どの でんしゃに のりますか。",
+        "meaning": "Which train do you take?"
+      }
+    },
+    {
+      "item": "いくら",
+      "answer": "how much",
+      "reading": "いくら",
+      "explanation": "How much, for prices. For how many, use いくつ.",
+      "mnemonic": "Ikura is also salmon roe: 'How much is the ikura?'",
+      "example": {
+        "word": "このかばんはいくらですか。",
+        "reading": "この かばんは いくらですか。",
+        "meaning": "How much is this bag?"
+      }
+    },
+    {
+      "item": "いくつ",
+      "answer": "how many",
+      "reading": "いくつ",
+      "explanation": "How many, when counting things; also how old: おいくつですか is a polite way to ask someone's age.",
+      "mnemonic": "Ikutsu: 'I cut so many apples, how many?'",
+      "example": {
+        "word": "りんごはいくつありますか。",
+        "reading": "りんごは いくつ ありますか。",
+        "meaning": "How many apples are there?"
+      },
+      "also_accepted": [
+        "how old"
+      ]
+    },
+    {
+      "item": "どう",
+      "answer": "how",
+      "reading": "どう",
+      "explanation": "How, or how about. どうですか asks for an opinion: 'how is it?'",
+      "mnemonic": "Dō: 'Dough? How do you make it?'",
+      "example": {
+        "word": "日本の食べ物はどうですか。",
+        "reading": "にほんの たべものは どうですか。",
+        "meaning": "How do you like Japanese food?"
+      },
+      "also_accepted": [
+        "how about"
+      ]
+    },
+    {
+      "item": "どうして",
+      "answer": "why",
+      "reading": "どうして",
+      "explanation": "Why. なぜ also means why and sounds more formal.",
+      "mnemonic": "Dō-shite: 'Why did you do that?'",
+      "example": {
+        "word": "どうして日本語を勉強しますか。",
+        "reading": "どうして にほんごを べんきょう しますか。",
+        "meaning": "Why do you study Japanese?"
+      }
+    }
+  ]
+}

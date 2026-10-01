@@ -48,3 +48,8 @@
   example word. Lesson files can set a `question` template and per-item
   `kun`/`on` readings. Answer matching now also ignores a leading
   "to"/"a"/"an"/"the" and repeated spaces (spec 016).
+- 100 starter words in ten themed lessons (greetings, people, question
+  words, food, places, things, time, two verb lessons, adjectives). The
+  quiz asks for the meaning; each word has its kana reading and a short
+  example sentence in plain form, with notes on the polite form and the
+  grammar it uses. Lesson items can set a `reading` (spec 017).

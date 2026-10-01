@@ -1,0 +1,149 @@
+{
+  "title": "Vocabulary: adjectives",
+  "question": "What does {item} mean?",
+  "items": [
+    {
+      "item": "大きい",
+      "answer": "big",
+      "reading": "おおきい",
+      "explanation": "Big. An い-adjective: it can end the sentence by itself or come before a noun (大きい家).",
+      "mnemonic": "Ōkii: 'Oh, key that big?'",
+      "example": {
+        "word": "この家は大きい。",
+        "reading": "この いえは おおきい。",
+        "meaning": "This house is big."
+      },
+      "also_accepted": [
+        "large"
+      ]
+    },
+    {
+      "item": "小さい",
+      "answer": "small",
+      "reading": "ちいさい",
+      "explanation": "Small, little. An い-adjective.",
+      "mnemonic": "Chiisai: 'Cheese size' — small.",
+      "example": {
+        "word": "私の車は小さい。",
+        "reading": "わたしの くるまは ちいさい。",
+        "meaning": "My car is small."
+      },
+      "also_accepted": [
+        "little"
+      ]
+    },
+    {
+      "item": "高い",
+      "answer": "expensive",
+      "reading": "たかい",
+      "explanation": "Expensive, and also high or tall. The opposite of expensive is 安い; of high, 低い (ひくい).",
+      "mnemonic": "Takai: 'Take a high price? No thanks.'",
+      "example": {
+        "word": "東京の家は高い。",
+        "reading": "とうきょうの いえは たかい。",
+        "meaning": "Houses in Tokyo are expensive."
+      },
+      "also_accepted": [
+        "high",
+        "tall"
+      ]
+    },
+    {
+      "item": "安い",
+      "answer": "cheap",
+      "reading": "やすい",
+      "explanation": "Cheap, inexpensive.",
+      "mnemonic": "Yasui: 'Yes, sweet price!'",
+      "example": {
+        "word": "この店の野菜は安い。",
+        "reading": "この みせの やさいは やすい。",
+        "meaning": "The vegetables at this shop are cheap."
+      },
+      "also_accepted": [
+        "inexpensive"
+      ]
+    },
+    {
+      "item": "新しい",
+      "answer": "new",
+      "reading": "あたらしい",
+      "explanation": "New. Before a noun, い-adjectives need nothing in between: 新しい車.",
+      "mnemonic": "Atarashii: 'At a rush, see my new car!'",
+      "example": {
+        "word": "新しい車を買う。",
+        "reading": "あたらしい くるまを かう。",
+        "meaning": "I buy a new car."
+      }
+    },
+    {
+      "item": "古い",
+      "answer": "old",
+      "reading": "ふるい",
+      "explanation": "Old, for things, not people's age.",
+      "mnemonic": "Furui: fur gets old.",
+      "example": {
+        "word": "この本は古い。",
+        "reading": "この ほんは ふるい。",
+        "meaning": "This book is old."
+      }
+    },
+    {
+      "item": "暑い",
+      "answer": "hot",
+      "reading": "あつい",
+      "explanation": "Hot, for weather. Hot to the touch is a different kanji, 熱い, with the same reading.",
+      "mnemonic": "Atsui: 'Ah, sweat!' — hot weather.",
+      "example": {
+        "word": "日本の夏は暑い。",
+        "reading": "にほんの なつは あつい。",
+        "meaning": "Summer in Japan is hot."
+      }
+    },
+    {
+      "item": "寒い",
+      "answer": "cold",
+      "reading": "さむい",
+      "explanation": "Cold, for weather. Cold to the touch, like a drink, is 冷たい (つめたい).",
+      "mnemonic": "Samui: 'Sam, we're freezing!'",
+      "example": {
+        "word": "今日は寒い。",
+        "reading": "きょうは さむい。",
+        "meaning": "It's cold today."
+      }
+    },
+    {
+      "item": "好き",
+      "answer": "like",
+      "reading": "すき",
+      "explanation": "Liked. 好き is a な-adjective, not a verb: the thing you like takes が, and the sentence ends with だ or です. 大好き means to love something.",
+      "mnemonic": "Suki: 'Sushi? Ski? I like both!'",
+      "example": {
+        "word": "私は魚が好きだ。",
+        "reading": "わたしは さかなが すきだ。",
+        "meaning": "I like fish."
+      },
+      "also_accepted": [
+        "liked",
+        "favorite",
+        "favourite",
+        "fond"
+      ]
+    },
+    {
+      "item": "楽しい",
+      "answer": "fun",
+      "reading": "たのしい",
+      "explanation": "Fun, enjoyable.",
+      "mnemonic": "Tanoshii: 'Tan, no shirt, at the beach — fun!'",
+      "example": {
+        "word": "日本語の勉強は楽しい。",
+        "reading": "にほんごの べんきょうは たのしい。",
+        "meaning": "Studying Japanese is fun."
+      },
+      "also_accepted": [
+        "enjoyable",
+        "pleasant"
+      ]
+    }
+  ]
+}

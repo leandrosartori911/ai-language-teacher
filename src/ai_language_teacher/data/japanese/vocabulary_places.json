@@ -1,0 +1,145 @@
+{
+  "title": "Vocabulary: places",
+  "question": "What does {item} mean?",
+  "items": [
+    {
+      "item": "学校",
+      "answer": "school",
+      "reading": "がっこう",
+      "explanation": "School. に marks where you go.",
+      "mnemonic": "Gakkō: 'Gak! Go to school!'",
+      "example": {
+        "word": "子どもは学校に行く。",
+        "reading": "こどもは がっこうに いく。",
+        "meaning": "The children go to school."
+      }
+    },
+    {
+      "item": "家",
+      "answer": "house",
+      "reading": "いえ",
+      "explanation": "House, home. 家 is also read うち, which means home and even 'my family'; 家に帰る is often read うちに かえる.",
+      "mnemonic": "Ie: 'Eeh, eh, I'm home!'",
+      "example": {
+        "word": "家に帰る。",
+        "reading": "いえに かえる。",
+        "meaning": "I go home."
+      },
+      "also_accepted": [
+        "home"
+      ],
+      "culture_note": "People take their shoes off at the entrance (玄関, げんかん) before stepping into a home."
+    },
+    {
+      "item": "駅",
+      "answer": "station",
+      "reading": "えき",
+      "explanation": "Train station.",
+      "mnemonic": "Eki: 'Eek, I missed the train at the station!'",
+      "example": {
+        "word": "駅はどこですか。",
+        "reading": "えきは どこですか。",
+        "meaning": "Where is the station?"
+      },
+      "also_accepted": [
+        "train station"
+      ]
+    },
+    {
+      "item": "店",
+      "answer": "shop",
+      "reading": "みせ",
+      "explanation": "Shop, store. Staff greet customers with いらっしゃいませ (welcome).",
+      "mnemonic": "Mise: 'Me, say, what does this shop sell?'",
+      "example": {
+        "word": "この店は安い。",
+        "reading": "この みせは やすい。",
+        "meaning": "This shop is cheap."
+      },
+      "also_accepted": [
+        "store"
+      ]
+    },
+    {
+      "item": "病院",
+      "answer": "hospital",
+      "reading": "びょういん",
+      "explanation": "Hospital. Careful: 美容院 (びよういん, hair salon) differs only in the length of よ.",
+      "mnemonic": "Byō-in: being ill (病) puts you in a hospital.",
+      "example": {
+        "word": "父は病院にいる。",
+        "reading": "ちちは びょういんに いる。",
+        "meaning": "My father is at the hospital."
+      }
+    },
+    {
+      "item": "銀行",
+      "answer": "bank",
+      "reading": "ぎんこう",
+      "explanation": "Bank. 銀 means silver. で marks where an action happens; 働く (はたらく) means to work.",
+      "mnemonic": "Gin-kō: silver coins go into the bank.",
+      "example": {
+        "word": "姉は銀行で働く。",
+        "reading": "あねは ぎんこうで はたらく。",
+        "meaning": "My older sister works at a bank."
+      }
+    },
+    {
+      "item": "会社",
+      "answer": "company",
+      "reading": "かいしゃ",
+      "explanation": "Company, and by extension the office where you work.",
+      "mnemonic": "Kai-sha: 'Kai shares the company profits.'",
+      "example": {
+        "word": "父は会社に行く。",
+        "reading": "ちちは かいしゃに いく。",
+        "meaning": "My father goes to the office."
+      },
+      "also_accepted": [
+        "office",
+        "firm"
+      ]
+    },
+    {
+      "item": "トイレ",
+      "answer": "toilet",
+      "reading": "トイレ",
+      "explanation": "Toilet, from English. お手洗い (おてあらい) is more polite. あそこ means over there.",
+      "mnemonic": "Just 'toilet' said quickly: toi-re.",
+      "example": {
+        "word": "トイレはあそこだ。",
+        "reading": "トイレは あそこだ。",
+        "meaning": "The toilet is over there."
+      },
+      "also_accepted": [
+        "bathroom",
+        "restroom"
+      ],
+      "culture_note": "Toilets with heated seats and built-in bidet functions are common in Japanese homes."
+    },
+    {
+      "item": "部屋",
+      "answer": "room",
+      "reading": "へや",
+      "explanation": "Room. Its reading is special: it belongs to the whole word, not to each kanji.",
+      "mnemonic": "Heya: 'Hey ya, come into my room!'",
+      "example": {
+        "word": "私の部屋は小さい。",
+        "reading": "わたしの へやは ちいさい。",
+        "meaning": "My room is small."
+      }
+    },
+    {
+      "item": "国",
+      "answer": "country",
+      "reading": "くに",
+      "explanation": "Country. The question literally asks 'where is your country?'",
+      "mnemonic": "Kuni: 'Cool, need a passport for this country.'",
+      "example": {
+        "word": "あなたの国はどこですか。",
+        "reading": "あなたの くには どこですか。",
+        "meaning": "Which country are you from?"
+      }
+    }
+  ]
+}

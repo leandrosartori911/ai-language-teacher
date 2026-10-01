@@ -34,6 +34,8 @@ def _teaching(entry: dict[str, Any], where: str) -> Teaching:
     if culture_note is not None:
         culture_note = _text(entry, "culture_note", where)
 
+    reading = _text(entry, "reading", where) if "reading" in entry else None
+
     return Teaching(
         explanation=_text(entry, "explanation", where),
         mnemonic=_text(entry, "mnemonic", where),
@@ -45,6 +47,7 @@ def _teaching(entry: dict[str, Any], where: str) -> Teaching:
         culture_note=culture_note,
         kun_readings=_readings(entry, "kun", where),
         on_readings=_readings(entry, "on", where),
+        reading=reading,
     )
 
 
