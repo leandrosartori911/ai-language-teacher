@@ -1,7 +1,7 @@
 # Session State — read this first in a new session
 
 Last updated: 2026-09-30. Repo is clean, all work committed and pushed
-after spec 017.
+after spec 018.
 
 ## What this project is
 
@@ -131,7 +131,7 @@ ai-language-teacher/
       assessment.py            # Assessment, AssessmentResult
       lesson.py                 # Lesson
       teaching.py               # Teaching, Example (spec 009)
-      progression.py            # UNLOCK_THRESHOLD, lesson_mastery, unlocked_lessons (spec 014)
+      progression.py            # UNLOCK_THRESHOLD, lesson_mastery, unlocked_lessons (014), course_mastered, open_skills (018)
       review.py                 # Leitner spaced repetition: Card, record_answer, due_items, study_queue (spec 015)
     language/
       loader.py                 # load_lesson(path) — JSON -> Lesson
@@ -140,6 +140,7 @@ ai-language-teacher/
         katakana.py                # KATAKANA_LESSONS (19), KATAKANA (106)
         kanji.py                   # KANJI_LESSONS (6), KANJI (40) (spec 016)
         vocabulary.py              # VOCABULARY_LESSONS (10), VOCABULARY (100) (spec 017)
+        course.py                  # COURSES, PREREQUISITES: Japanese course order (spec 018)
   tests/
     test_student.py  test_assessment.py  test_question.py  test_lesson.py
     test_hiragana.py  test_katakana.py  test_loader.py  test_progress.py
@@ -153,7 +154,9 @@ Since spec 006 all core models are `@dataclass`es with full type hints
 
 - **`Student`**: `name`, `level` ("beginner"), `skills` dict (hiragana,
   katakana, kanji, vocabulary, grammar, listening, speaking — all start at
-  `0.0`), `knowledge: dict[str, Knowledge]` (one per skill, spec 008).
+  `0.0`), `knowledge: dict[str, Knowledge]` (one per skill, spec 008),
+  `cards` (spec 015), `unlocked_count: dict[str, int]` and
+  `opened_skills: set[str]` (permanent unlocks, spec 018).
   - `update_skill(skill, score)`: direct set, raises `ValueError` on
     unknown skill.
   - `apply_assessment(result)`: **see mastery aggregation below.**
@@ -180,10 +183,19 @@ Since spec 006 all core models are `@dataclass`es with full type hints
   `lesson_mastery(student, skill, lesson)` = mean of that skill's scores for
   the lesson's items (unanswered = 0); `unlocked_lessons(student, skill,
   lessons)` returns the prefix of the course whose previous lesson is at
-  or above the threshold. Course order is the prerequisite chain. Unlocks
-  are computed live, not stored: a drop below 0.8 relocks the next lesson
-  (user approved; revisit with persistence in spec 019 if too strict).
-  Unknown skill raises `ValueError` (fixed in spec 015).
+  or above the threshold. Course order is the prerequisite chain.
+  **Unlocks are permanent (spec 018, user's call):** `unlocked_lessons`
+  returns max(computed prefix, `student.unlocked_count[skill]`) and stores
+  it, so the result never shrinks. Unknown skill raises `ValueError`.
+- **Course gating** (spec 018): `course_mastered(student, skill, lessons)`
+  = every lesson >= 0.8 (empty course raises). `open_skills(student,
+  courses, prerequisites)`: a skill is open if already in
+  `student.opened_skills`, has no prerequisite, or its prerequisite is open
+  and mastered; newly opened skills are added (permanent). Prerequisites
+  must come before dependants in `courses`. Japanese data in
+  `language/japanese/course.py`: hiragana -> katakana -> kanji +
+  vocabulary. For a closed skill, callers pass `[]` lessons to
+  `study_queue` (no new items, reviews still due).
 - **Spaced repetition** (`core/review.py`, spec 015): Leitner,
   `BOX_INTERVALS = (1, 2, 4, 8, 16)` days. `Card(box, due)`;
   `Student.cards: skill -> item -> Card` (Card imported under
@@ -276,7 +288,7 @@ If there's no `item` (skill-only assessment), it still overwrites directly
 
 ## Test status
 
-802 tests passing, `ruff check` and `mypy` (strict) clean, as of spec 017.
+816 tests passing, `ruff check` and `mypy` (strict) clean, as of spec 018.
 
 ```
 tests/test_student.py     — Student creation, skills, mastery aggregation
@@ -294,7 +306,8 @@ tests/test_hiragana_full.py — 10 row lessons, 46 kana, alternative spellings
 tests/test_katakana_full.py — 11 lessons (rows + ー), romaji parity with hiragana, prompts
 tests/test_dakuten.py     — dakuten/handakuten rows, parity, spellings
 tests/test_combinations.py — combinations, small tsu, totals 105/106
-tests/test_progression.py — lesson mastery and unlocking
+tests/test_progression.py — lesson mastery and unlocking (permanent)
+tests/test_course_gating.py — course order between skills, permanent opens
 tests/test_review.py      — Leitner boxes, due items, study queue
 tests/test_kanji.py       — kanji content, readings, question template
 tests/test_vocabulary.py  — vocabulary content, readings, sentences
@@ -314,20 +327,22 @@ engine, C: web app, D: local LLM teacher, E: release).
   hiragana, 011 full basic katakana, 012 dakuten/handakuten and 013
   combinations + small tsu done (kana complete); 014 unlock threshold done;
   015 spaced repetition (Leitner) done; 016 N5 kanji (40) and 017
-  vocabulary (100) done. Next: 018 course gating (kanji/vocab only after
-  katakana).
+  vocabulary (100) done; 018 course gating + permanent unlocks done.
+  **Phase B is complete.**
 - **Phase C:** 019 SQLite persistence (stdlib `sqlite3`), 020+ web UI.
 - **Phase D:** Ollama teacher. **Phase E:** v0.1.0 release.
 
 ## Immediate next step for the new session
 
 1. Read this file plus `docs/ROADMAP.md` and the latest specs.
-2. Write spec 018 (course gating) and get approval before tests. Agreed
-   with the user: hiragana -> katakana -> (kanji and vocabulary together).
-   Rule: kanji and vocab open when every katakana lesson has mastery
-   >= 0.8 (reuse `lesson_mastery`); presumably katakana opens when every
-   hiragana lesson is >= 0.8 (confirm with the user). User accepted ~210
-   kana before any vocab. Decide where the course order lives (e.g. a
-   Japanese-specific list of (skill, lessons) in `language/japanese/`).
-3. Then Phase C: 019 SQLite persistence (must also save `cards`), 020+ web
-   UI with FastAPI + Jinja2.
+2. Phase C starts. Write spec 019 (SQLite persistence with stdlib
+   `sqlite3`) and get approval before tests. It must save and load the
+   whole `Student`: `skills`, `knowledge`, `cards` (box + due date),
+   `unlocked_count` and `opened_skills`. Open questions: one student or
+   several; file location (e.g. under the user's home, not the repo);
+   schema vs a single JSON blob per student (flag the choice before
+   coding); whether to record an ADR.
+3. Then 020+: web UI (FastAPI + Jinja2, bind to 127.0.0.1). Includes the
+   user's "review previous lessons" idea: practise any unlocked lesson
+   freely. Decide there how free practice affects Leitner cards (leaning:
+   update mastery, demote on a wrong answer, never promote early).

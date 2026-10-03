@@ -99,13 +99,26 @@ def test_cannot_skip_ahead_past_a_locked_lesson():
     assert unlocked_lessons(student, "hiragana", COURSE) == [LESSON_1, LESSON_2, LESSON_3]
 
 
-def test_dropping_below_threshold_locks_the_next_lesson_again():
+def test_unlocked_lesson_stays_unlocked_after_mastery_drops():
     student = Student("Test")
     answer_all(student, "hiragana", LESSON_1)
+    assert unlocked_lessons(student, "hiragana", COURSE) == [LESSON_1, LESSON_2]
+
     answer(student, "hiragana", "a1", False)
     answer(student, "hiragana", "a2", False)
 
-    assert unlocked_lessons(student, "hiragana", COURSE) == [LESSON_1]
+    assert unlocked_lessons(student, "hiragana", COURSE) == [LESSON_1, LESSON_2]
+
+
+def test_unlocks_are_kept_per_skill_and_per_student():
+    student, other = Student("Test"), Student("Other")
+    answer_all(student, "hiragana", LESSON_1)
+    unlocked_lessons(student, "hiragana", COURSE)
+    answer_all(student, "hiragana", LESSON_1, correct=False)
+
+    assert unlocked_lessons(student, "katakana", COURSE) == [LESSON_1]
+    assert unlocked_lessons(other, "hiragana", COURSE) == [LESSON_1]
+    assert student.unlocked_count["hiragana"] == 2
 
 
 def test_mastering_hiragana_vowels_unlocks_the_k_row():
@@ -117,3 +130,8 @@ def test_mastering_hiragana_vowels_unlocks_the_k_row():
     answer_all(student, "hiragana", vowels)
 
     assert unlocked_lessons(student, "hiragana", HIRAGANA_LESSONS) == [vowels, k_row]
+
+
+def test_unlocked_lessons_of_unknown_skill_raises_value_error():
+    with pytest.raises(ValueError):
+        unlocked_lessons(Student("Test"), "klingon", COURSE)

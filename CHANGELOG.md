@@ -53,3 +53,8 @@
   quiz asks for the meaning; each word has its kana reading and a short
   example sentence in plain form, with notes on the polite form and the
   grammar it uses. Lesson items can set a `reading` (spec 017).
+- Courses open in order: katakana after all hiragana is mastered, kanji
+  and vocabulary after all katakana (`open_skills`, `course_mastered`,
+  `language.japanese.course`). Unlocks are now permanent for skills and
+  lessons: a drop in mastery no longer locks content again; forgotten
+  items come back through spaced repetition (spec 018).
