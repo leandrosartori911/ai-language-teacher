@@ -1,7 +1,7 @@
 # Session State — read this first in a new session
 
 Last updated: 2026-09-30. Repo is clean, all work committed and pushed
-after spec 018.
+after spec 019.
 
 ## What this project is
 
@@ -118,8 +118,9 @@ ai-language-teacher/
     ROADMAP.md
     SESSION_STATE.md        # this file
     specs/001..014-*.md     # one file per implemented feature
-    adr/                    # 0001 web stack, 0002 local LLM
+    adr/                    # 0001 web stack, 0002 local LLM, 0003 SQLite
   src/ai_language_teacher/
+    storage.py              # SQLite persistence: connect, save/load/list students (spec 019)
     main.py                 # stub: prints a banner, not a real CLI yet
     data/japanese/          # lesson JSON, shipped as package data (spec 007)
       hiragana_vowels.json
@@ -281,6 +282,19 @@ If there's no `item` (skill-only assessment), it still overwrites directly
   particles used. Readings/meanings checked against the jisho.org API.
 - Nothing else yet (no grammar lessons).
 
+## Persistence (spec 019)
+
+`storage.py`, stdlib `sqlite3`. `DEFAULT_DB_PATH =
+~/.ai-language-teacher/data.db` (outside the repo). Tables: `students(id,
+name UNIQUE, level)`, `skills(student_id, skill, score, unlocked_count,
+opened)`, `knowledge(student_id, skill, item, score)`, `cards(student_id,
+skill, item, box 1-5, due ISO date)`; FKs with ON DELETE CASCADE, CHECK
+constraints. `PRAGMA user_version = 1`; newer DB raises `ValueError`.
+`save_student` deletes the student row (cascade) and reinserts all rows in
+one transaction (`with conn:`); a rejected row rolls back everything.
+`load_student` returns `None` for unknown names. **Any new `Student` field
+needs a schema change** (and a migration once real data exists).
+
 ## Known issues / deliberate shortcuts (marked `# ponytail:` in code)
 
 1. **Answer matching is exact after normalization** — no fuzzy/typo
@@ -288,7 +302,7 @@ If there's no `item` (skill-only assessment), it still overwrites directly
 
 ## Test status
 
-816 tests passing, `ruff check` and `mypy` (strict) clean, as of spec 018.
+828 tests passing, `ruff check` and `mypy` (strict) clean, as of spec 019.
 
 ```
 tests/test_student.py     — Student creation, skills, mastery aggregation
@@ -308,6 +322,7 @@ tests/test_dakuten.py     — dakuten/handakuten rows, parity, spellings
 tests/test_combinations.py — combinations, small tsu, totals 105/106
 tests/test_progression.py — lesson mastery and unlocking (permanent)
 tests/test_course_gating.py — course order between skills, permanent opens
+tests/test_storage.py     — SQLite round trip, integrity, schema version
 tests/test_review.py      — Leitner boxes, due items, study queue
 tests/test_kanji.py       — kanji content, readings, question template
 tests/test_vocabulary.py  — vocabulary content, readings, sentences
@@ -329,20 +344,19 @@ engine, C: web app, D: local LLM teacher, E: release).
   015 spaced repetition (Leitner) done; 016 N5 kanji (40) and 017
   vocabulary (100) done; 018 course gating + permanent unlocks done.
   **Phase B is complete.**
-- **Phase C:** 019 SQLite persistence (stdlib `sqlite3`), 020+ web UI.
+- **Phase C (in progress):** 019 SQLite persistence done; next 020+ web UI.
 - **Phase D:** Ollama teacher. **Phase E:** v0.1.0 release.
 
 ## Immediate next step for the new session
 
 1. Read this file plus `docs/ROADMAP.md` and the latest specs.
-2. Phase C starts. Write spec 019 (SQLite persistence with stdlib
-   `sqlite3`) and get approval before tests. It must save and load the
-   whole `Student`: `skills`, `knowledge`, `cards` (box + due date),
-   `unlocked_count` and `opened_skills`. Open questions: one student or
-   several; file location (e.g. under the user's home, not the repo);
-   schema vs a single JSON blob per student (flag the choice before
-   coding); whether to record an ADR.
-3. Then 020+: web UI (FastAPI + Jinja2, bind to 127.0.0.1). Includes the
-   user's "review previous lessons" idea: practise any unlocked lesson
-   freely. Decide there how free practice affects Leitner cards (leaning:
-   update mastery, demote on a wrong answer, never promote early).
+2. Write spec 020 (first web UI slice, FastAPI + Jinja2, bound to
+   127.0.0.1, ADR 0001) and get approval before tests. Adding FastAPI,
+   Jinja2 and uvicorn as dependencies (and httpx/TestClient for tests) is
+   the first new runtime dependency: flag it. Suggested first slice: pick
+   or create a profile, see open skills, study one skill via
+   `study_queue` (teaching card for new items, quiz, `record_answer`,
+   save). Keep it small; split into several specs.
+3. Later UI specs: "review previous lessons" (user's idea; free practice
+   updates mastery, demotes on wrong, never promotes early — confirm),
+   per-language theming via CSS variables.

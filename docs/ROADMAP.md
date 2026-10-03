@@ -31,7 +31,7 @@ MVP goal: a local, zero-cost AI teacher that really teaches Japanese
 - [x] Course order hiragana -> katakana -> kanji + vocabulary; unlocks are permanent (spec 018)
 
 ## Phase C: Web app
-- [ ] SQLite persistence (spec 019)
+- [x] SQLite persistence, several profiles (spec 019)
 - [ ] Web UI: FastAPI + Jinja2 templates (spec 020+)
 - [ ] Review previous lessons: practise any unlocked lesson freely
 

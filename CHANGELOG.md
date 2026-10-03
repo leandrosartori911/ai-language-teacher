@@ -58,3 +58,8 @@
   `language.japanese.course`). Unlocks are now permanent for skills and
   lessons: a drop in mastery no longer locks content again; forgotten
   items come back through spaced repetition (spec 018).
+- Student progress is saved in a local SQLite database
+  (`~/.ai-language-teacher/data.db`, standard library only): several
+  profiles by name, integrity enforced by the schema, one transaction per
+  save (`storage.connect`, `save_student`, `load_student`,
+  `list_students`). ADR 0003 records the choice (spec 019).
