@@ -30,6 +30,8 @@ class Student:
     cards: "dict[str, dict[str, Card]]" = field(
         default_factory=lambda: {skill: {} for skill in SKILLS}
     )
+    unlocked_count: dict[str, int] = field(default_factory=lambda: dict.fromkeys(SKILLS, 0))
+    opened_skills: set[str] = field(default_factory=set)
 
     def update_skill(self, skill: str, score: float) -> None:
         if skill not in self.skills:
