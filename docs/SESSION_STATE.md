@@ -331,7 +331,9 @@ tests compare against `markupsafe.escape(...)`.
 Security: `TrustedHostMiddleware` allows only `127.0.0.1`/`localhost`
 (DNS rebinding); a middleware rejects any POST whose `Origin` header is
 not the app's own (403). No CSRF tokens (localhost only, no logins).
-Tests use `base_url="http://127.0.0.1:8000"`.
+Tests use `base_url="http://127.0.0.1:8000"`, and so must the CI `wheel`
+smoke step (spec 021 broke CI by forgetting it). Before pushing a web
+change, run the CI `wheel` smoke command itself, not a similar check.
 
 To check the real server, run a script that starts `uvicorn.Server` in a
 thread and sets `should_exit` (scratchpad `live_check.py` pattern); never
