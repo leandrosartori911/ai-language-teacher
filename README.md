@@ -21,7 +21,8 @@ all without paid cloud services.
 
 Open the app, create a profile, and study: new items come with a teaching
 card, reviews come back when they are due, and the next lesson unlocks at
-80% mastery.
+80% mastery. Any unlocked lesson can also be practised freely; practice
+never pushes a review further away.
 
 ## Quickstart
 

@@ -8,7 +8,10 @@
   {% if skill.open %}
   <li class="open">
     {{ skill.name }} · {{ skill.mastery }}% · {{ skill.unlocked }} / {{ skill.total }} lessons
-    <a class="button" href="/study/{{ skill.name }}/{{ name|urlencode }}">Study</a>
+    <span>
+      <a class="button" href="/study/{{ skill.name }}/{{ name|urlencode }}">Study</a>
+      <a class="button" href="/practice/{{ skill.name }}/{{ name|urlencode }}">Practice</a>
+    </span>
   </li>
   {% else %}
   <li class="locked">{{ skill.name }} · locked: master {{ skill.prerequisite }} first</li>

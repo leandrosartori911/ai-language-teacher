@@ -1,7 +1,7 @@
 # Session State — read this first in a new session
 
-Last updated: 2026-10-05. Specs 020 (web skeleton) and 021 (study in the
-browser) implemented.
+Last updated: 2026-10-05. Specs 020 (web skeleton), 021 (study in the
+browser) and 022 (practise previous lessons) implemented.
 
 ## What this project is
 
@@ -123,8 +123,8 @@ ai-language-teacher/
     storage.py              # SQLite persistence: connect, save/load/list students (spec 019)
     main.py                 # main(): uvicorn on 127.0.0.1:8000; console script `ai-language-teacher`
     web/                    # spec 020
-      app.py                  # create_app(db_path, today): home, profiles, dashboard, study
-      templates/              # base, home, dashboard, study, _teaching (Jinja2)
+      app.py                  # create_app(db_path, today): home, profiles, dashboard, study, practice
+      templates/              # base, home, dashboard, study, practice, _teaching, _feedback (Jinja2)
       static/style.css        # colors as CSS variables in :root
     data/japanese/          # lesson JSON, shipped as package data (spec 007)
       hiragana_vowels.json
@@ -137,7 +137,7 @@ ai-language-teacher/
       lesson.py                 # Lesson
       teaching.py               # Teaching, Example (spec 009)
       progression.py            # UNLOCK_THRESHOLD, lesson_mastery, unlocked_lessons (014), course_mastered, open_skills (018)
-      review.py                 # Leitner spaced repetition: Card, record_answer, due_items, study_queue (spec 015)
+      review.py                 # Leitner spaced repetition: Card, record_answer, due_items, study_queue (spec 015); learned_items, record_practice (022)
     language/
       loader.py                 # load_lesson(path) — JSON -> Lesson
       japanese/
@@ -213,6 +213,12 @@ Since spec 006 all core models are `@dataclass`es with full type hints
   lessons, in course order. Callers always pass `today` (no clock reads).
   Note: only `record_answer` creates cards; `apply_assessment` alone
   doesn't, so the UI must use `record_answer`.
+- **Practice** (`core/review.py`, spec 022, rule confirmed by the user):
+  `learned_items(student, skill, lesson)` = lesson items that have a card,
+  in lesson order. `record_practice(student, result, today)` applies the
+  assessment (mastery both ways); wrong = card box 1 due today; correct =
+  card untouched (never promotes early). Raises `ValueError` for no item
+  or an item without a card.
 - **`load_lesson(path)`** (specs 004, 009): reads a JSON file shaped
   `{"title": ..., "items": [{"item", "answer", "explanation", "mnemonic",
   "example": {"word", "reading", "meaning"}, "culture_note"?}, ...]}`
@@ -328,6 +334,17 @@ again). Unknown skill/student 404, locked skill 403. `today` is a
 `create_app` parameter (tests fix the date). Templates escape text, so
 tests compare against `markupsafe.escape(...)`.
 
+Practice (spec 022): `GET /practice/{skill}/{name:path}` lists unlocked
+lessons with "N of M learned" (linked only if N > 0);
+`?lesson=<1-based number>&n=<position>` quizzes learned items in lesson
+order, no teaching card first; past the end "Practice complete"; no
+learned items "Nothing learned in this lesson yet". `POST` same URL
+(`lesson`, `n`, `item`, `answer`): item must be a learned item of that
+lesson (else 303 to the lesson page); blank = 400; else `evaluate`,
+`record_practice`, save, feedback with Next to `n + 1`. Locked lesson
+403; bad lesson number or negative `n` 404. Pages share `skill_page`
+(adds `study_url`/`practice_url`) and `_feedback.html`.
+
 Security: `TrustedHostMiddleware` allows only `127.0.0.1`/`localhost`
 (DNS rebinding); a middleware rejects any POST whose `Origin` header is
 not the app's own (403). No CSRF tokens (localhost only, no logins).
@@ -346,7 +363,7 @@ kill processes by image name.
 
 ## Test status
 
-872 tests passing, `ruff check` and `mypy` (strict) clean, as of spec 021.
+899 tests passing, `ruff check` and `mypy` (strict) clean, as of spec 022.
 
 ```
 tests/test_student.py     — Student creation, skills, mastery aggregation
@@ -372,6 +389,8 @@ tests/test_kanji.py       — kanji content, readings, question template
 tests/test_vocabulary.py  — vocabulary content, readings, sentences
 tests/test_web.py         — web pages: profiles, dashboard, static CSS, main()
 tests/test_study_web.py   — study pages, answers, unlocking, host/origin checks
+tests/test_practice.py    — learned_items, record_practice rule
+tests/test_practice_web.py — practice pages, lesson numbers, never promotes
 ```
 
 ## Progress
@@ -391,17 +410,15 @@ engine, C: web app, D: local LLM teacher, E: release).
   vocabulary (100) done; 018 course gating + permanent unlocks done.
   **Phase B is complete.**
 - **Phase C (in progress):** 019 SQLite persistence done; 020 web skeleton,
-  profiles and dashboard done; 021 study in the browser done; next: review
-  previous lessons.
+  profiles and dashboard done; 021 study in the browser done; 022 practise
+  previous lessons done; next: due-review counts on the dashboard.
 - **Phase D:** Ollama teacher. **Phase E:** v0.1.0 release.
 
 ## Immediate next step for the new session
 
 1. Read this file plus `docs/ROADMAP.md` and the latest specs.
-2. Next spec (022): "review previous lessons" (user's idea): practise any
-   unlocked lesson freely. Confirm with the user before writing: free
-   practice updates mastery and demotes cards on wrong answers, but never
-   promotes a card early. Alternatives for 022 if the user prefers:
-   due-review counts on the dashboard, or start Phase D (Ollama teacher).
-3. Later UI: "lesson unlocked" messages, per-language theming via CSS
-   variables.
+2. Agreed order (user, 2026-10-05): spec 023 = due-review counts per skill
+   on the dashboard (small); then Phase D (Ollama teacher) in its own
+   specs. Write the spec and get approval before tests, as always.
+3. Later UI: "lesson unlocked" messages, shuffled practice, per-language
+   theming via CSS variables.

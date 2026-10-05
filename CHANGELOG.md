@@ -74,3 +74,8 @@
   items in the current queue can be answered, so resent forms record
   nothing. The app now accepts only the hosts 127.0.0.1 and localhost
   (DNS rebinding) and rejects posts from other websites' origins (spec 021).
+- Practise previous lessons: each open skill has a Practice page listing
+  its unlocked lessons; practice quizzes the lesson's learned items in
+  order. A wrong answer demotes the item's review card, a correct one
+  counts toward mastery but never moves the card, so practice cannot push
+  reviews further away (`learned_items`, `record_practice`) (spec 022).
