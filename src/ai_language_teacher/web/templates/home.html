@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Who is studying?</h1>
+
+{% if names %}
+<ul class="profiles">
+  {% for name in names %}
+  <li><a href="/students/{{ name|urlencode }}">{{ name }}</a></li>
+  {% endfor %}
+</ul>
+{% endif %}
+
+<form method="post" action="/students">
+  <label for="name">New profile</label>
+  <input id="name" name="name" required autocomplete="off">
+  <button type="submit">Start</button>
+  {% if error %}<p class="error" role="alert">{{ error }}</p>{% endif %}
+</form>
+{% endblock %}

@@ -9,16 +9,19 @@ description = "Open-source, local AI language teacher, starting with Japanese."
 readme = "README.md"
 requires-python = ">=3.11"
 license = { text = "MIT" }
-dependencies = []
+dependencies = ["fastapi>=0.110", "jinja2>=3.1", "uvicorn>=0.29", "python-multipart>=0.0.9"]
 
 [project.optional-dependencies]
-dev = ["pytest>=8", "ruff>=0.6", "mypy>=1.11"]
+dev = ["pytest>=8", "ruff>=0.6", "mypy>=1.11", "httpx>=0.27"]
+
+[project.scripts]
+ai-language-teacher = "ai_language_teacher.main:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
 
 [tool.setuptools.package-data]
-ai_language_teacher = ["data/**/*.json"]
+ai_language_teacher = ["data/**/*.json", "web/templates/*.html", "web/static/*.css"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

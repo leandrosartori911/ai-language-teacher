@@ -63,3 +63,8 @@
   profiles by name, integrity enforced by the schema, one transaction per
   save (`storage.connect`, `save_student`, `load_student`,
   `list_students`). ADR 0003 records the choice (spec 019).
+- First web slice (FastAPI + Jinja2, ADR 0001): `ai-language-teacher` starts
+  the app on `127.0.0.1:8000`. Pick or create a profile and see a dashboard
+  with each skill's course mastery and unlocked lessons, or which skill must
+  be mastered first. First runtime dependencies: fastapi, jinja2, uvicorn,
+  python-multipart (spec 020).
