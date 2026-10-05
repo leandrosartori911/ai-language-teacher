@@ -17,7 +17,8 @@ def db_path(tmp_path):
 
 @pytest.fixture
 def client(db_path):
-    return TestClient(create_app(db_path))
+    # The app only accepts 127.0.0.1 and localhost as hosts (spec 021).
+    return TestClient(create_app(db_path), base_url="http://127.0.0.1:8000")
 
 
 def save(db_path, student):

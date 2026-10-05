@@ -19,6 +19,10 @@ all without paid cloud services.
 - Lessons: complete hiragana and katakana: basic rows, dakuten/handakuten
   (が, ぱ...), combinations (きゃ, しょ...), small っ and the long vowel mark ー
 
+Open the app, create a profile, and study: new items come with a teaching
+card, reviews come back when they are due, and the next lesson unlocks at
+80% mastery.
+
 ## Quickstart
 
 ```powershell

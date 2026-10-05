@@ -6,7 +6,10 @@
 <ul class="skills">
   {% for skill in skills %}
   {% if skill.open %}
-  <li class="open">{{ skill.name }} · {{ skill.mastery }}% · {{ skill.unlocked }} / {{ skill.total }} lessons</li>
+  <li class="open">
+    {{ skill.name }} · {{ skill.mastery }}% · {{ skill.unlocked }} / {{ skill.total }} lessons
+    <a class="button" href="/study/{{ skill.name }}/{{ name|urlencode }}">Study</a>
+  </li>
   {% else %}
   <li class="locked">{{ skill.name }} · locked: master {{ skill.prerequisite }} first</li>
   {% endif %}
