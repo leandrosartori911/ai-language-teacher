@@ -28,7 +28,11 @@ python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 pip install -e ".[dev]"
 pytest
+ai-language-teacher   # web app on http://127.0.0.1:8000
 ```
+
+Progress is saved locally in `~/.ai-language-teacher/data.db`. The app only
+listens on `127.0.0.1` and has no login.
 
 ## Roadmap
 

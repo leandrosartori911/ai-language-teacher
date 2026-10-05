@@ -1,7 +1,6 @@
 # Session State — read this first in a new session
 
-Last updated: 2026-09-30. Repo is clean, all work committed and pushed
-after spec 019.
+Last updated: 2026-10-05. Spec 020 (first web slice) implemented.
 
 ## What this project is
 
@@ -121,7 +120,11 @@ ai-language-teacher/
     adr/                    # 0001 web stack, 0002 local LLM, 0003 SQLite
   src/ai_language_teacher/
     storage.py              # SQLite persistence: connect, save/load/list students (spec 019)
-    main.py                 # stub: prints a banner, not a real CLI yet
+    main.py                 # main(): uvicorn on 127.0.0.1:8000; console script `ai-language-teacher`
+    web/                    # spec 020
+      app.py                  # create_app(db_path): home, POST /students, dashboard
+      templates/              # base.html, home.html, dashboard.html (Jinja2)
+      static/style.css        # colors as CSS variables in :root
     data/japanese/          # lesson JSON, shipped as package data (spec 007)
       hiragana_vowels.json
       katakana_vowels.json
@@ -295,6 +298,24 @@ one transaction (`with conn:`); a rejected row rolls back everything.
 `load_student` returns `None` for unknown names. **Any new `Student` field
 needs a schema change** (and a migration once real data exists).
 
+## Web app (spec 020)
+
+FastAPI + Jinja2, no JavaScript yet. `create_app(db_path=DEFAULT_DB_PATH)`
+takes the DB path so tests use `tmp_path`. Each request opens its own
+connection with `closing(connect(db_path))` (not a FastAPI dependency:
+sync dependencies and endpoints can run on different threadpool threads,
+and sqlite3 connections are bound to their thread). Routes: `GET /`
+(profiles + create form), `POST /students` (trimmed name; blank = 400;
+existing name is never overwritten; 303 to the profile),
+`GET /students/{name:path}` (dashboard; `:path` so names with "/" work;
+404 for unknown). Dashboard mastery = mean over every item of the course
+(unanswered = 0), not `Student.skills`. The dashboard never saves.
+Templates/CSS are package data; CI `wheel` job serves `/` from the wheel.
+Tests use `fastapi.testclient.TestClient` (needs `httpx`; Starlette now
+warns that `httpx2` is preferred, but installing it was blocked by the
+permission classifier, so the warning stays until the user decides).
+No CSRF protection yet: revisit in spec 021, when posts change progress.
+
 ## Known issues / deliberate shortcuts (marked `# ponytail:` in code)
 
 1. **Answer matching is exact after normalization** — no fuzzy/typo
@@ -302,7 +323,7 @@ needs a schema change** (and a migration once real data exists).
 
 ## Test status
 
-828 tests passing, `ruff check` and `mypy` (strict) clean, as of spec 019.
+844 tests passing, `ruff check` and `mypy` (strict) clean, as of spec 020.
 
 ```
 tests/test_student.py     — Student creation, skills, mastery aggregation
@@ -326,6 +347,7 @@ tests/test_storage.py     — SQLite round trip, integrity, schema version
 tests/test_review.py      — Leitner boxes, due items, study queue
 tests/test_kanji.py       — kanji content, readings, question template
 tests/test_vocabulary.py  — vocabulary content, readings, sentences
+tests/test_web.py         — web pages: profiles, dashboard, static CSS, main()
 ```
 
 ## Progress
@@ -344,19 +366,19 @@ engine, C: web app, D: local LLM teacher, E: release).
   015 spaced repetition (Leitner) done; 016 N5 kanji (40) and 017
   vocabulary (100) done; 018 course gating + permanent unlocks done.
   **Phase B is complete.**
-- **Phase C (in progress):** 019 SQLite persistence done; next 020+ web UI.
+- **Phase C (in progress):** 019 SQLite persistence done; 020 web skeleton,
+  profiles and dashboard done; next 021 study a skill in the browser.
 - **Phase D:** Ollama teacher. **Phase E:** v0.1.0 release.
 
 ## Immediate next step for the new session
 
 1. Read this file plus `docs/ROADMAP.md` and the latest specs.
-2. Write spec 020 (first web UI slice, FastAPI + Jinja2, bound to
-   127.0.0.1, ADR 0001) and get approval before tests. Adding FastAPI,
-   Jinja2 and uvicorn as dependencies (and httpx/TestClient for tests) is
-   the first new runtime dependency: flag it. Suggested first slice: pick
-   or create a profile, see open skills, study one skill via
-   `study_queue` (teaching card for new items, quiz, `record_answer`,
-   save). Keep it small; split into several specs.
+2. Write spec 021: study one skill in the browser via `study_queue`
+   (teaching card for new items, quiz, `record_answer` with
+   `date.today()`, save after each answer, link from the dashboard). Posts
+   now change progress, so decide on CSRF (e.g. check the `Origin` header)
+   and flag it before writing code. Keep it small; split if needed.
 3. Later UI specs: "review previous lessons" (user's idea; free practice
    updates mastery, demotes on wrong, never promotes early — confirm),
-   per-language theming via CSS variables.
+   due-review counts on the dashboard, per-language theming via CSS
+   variables.

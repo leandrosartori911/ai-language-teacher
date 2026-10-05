@@ -32,7 +32,8 @@ MVP goal: a local, zero-cost AI teacher that really teaches Japanese
 
 ## Phase C: Web app
 - [x] SQLite persistence, several profiles (spec 019)
-- [ ] Web UI: FastAPI + Jinja2 templates (spec 020+)
+- [x] Web app skeleton, profiles and skill dashboard (spec 020)
+- [ ] Study a skill in the browser: teaching card, quiz, spaced repetition (spec 021)
 - [ ] Review previous lessons: practise any unlocked lesson freely
 
 ## Phase D: Local LLM teacher

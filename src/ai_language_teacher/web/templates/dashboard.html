@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}{{ name }} · AI Language Teacher{% endblock %}
+{% block content %}
+<h1>{{ name }}</h1>
+
+<ul class="skills">
+  {% for skill in skills %}
+  {% if skill.open %}
+  <li class="open">{{ skill.name }} · {{ skill.mastery }}% · {{ skill.unlocked }} / {{ skill.total }} lessons</li>
+  {% else %}
+  <li class="locked">{{ skill.name }} · locked: master {{ skill.prerequisite }} first</li>
+  {% endif %}
+  {% endfor %}
+</ul>
+{% endblock %}
