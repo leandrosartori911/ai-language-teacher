@@ -1,0 +1,13 @@
+<section class="card">
+  <p class="item" lang="ja">{{ item }}</p>
+  {% if teaching.reading %}<p lang="ja">Reading: {{ teaching.reading }}</p>{% endif %}
+  {% if teaching.kun_readings %}<p lang="ja">Kun: {{ teaching.kun_readings|join(", ") }}</p>{% endif %}
+  {% if teaching.on_readings %}<p lang="ja">On: {{ teaching.on_readings|join(", ") }}</p>{% endif %}
+  <p>{{ teaching.explanation }}</p>
+  <p class="mnemonic">{{ teaching.mnemonic }}</p>
+  <p class="example">
+    <span lang="ja">{{ teaching.example.word }}</span>
+    ({{ teaching.example.reading }}): {{ teaching.example.meaning }}
+  </p>
+  {% if teaching.culture_note %}<p class="culture">{{ teaching.culture_note }}</p>{% endif %}
+</section>

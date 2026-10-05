@@ -1,6 +1,7 @@
 # Session State — read this first in a new session
 
-Last updated: 2026-10-05. Spec 020 (first web slice) implemented.
+Last updated: 2026-10-05. Specs 020 (web skeleton) and 021 (study in the
+browser) implemented.
 
 ## What this project is
 
@@ -122,8 +123,8 @@ ai-language-teacher/
     storage.py              # SQLite persistence: connect, save/load/list students (spec 019)
     main.py                 # main(): uvicorn on 127.0.0.1:8000; console script `ai-language-teacher`
     web/                    # spec 020
-      app.py                  # create_app(db_path): home, POST /students, dashboard
-      templates/              # base.html, home.html, dashboard.html (Jinja2)
+      app.py                  # create_app(db_path, today): home, profiles, dashboard, study
+      templates/              # base, home, dashboard, study, _teaching (Jinja2)
       static/style.css        # colors as CSS variables in :root
     data/japanese/          # lesson JSON, shipped as package data (spec 007)
       hiragana_vowels.json
@@ -314,7 +315,27 @@ Templates/CSS are package data; CI `wheel` job serves `/` from the wheel.
 Tests use `fastapi.testclient.TestClient` (needs `httpx`; Starlette now
 warns that `httpx2` is preferred, but installing it was blocked by the
 permission classifier, so the warning stays until the user decides).
-No CSRF protection yet: revisit in spec 021, when posts change progress.
+
+Study (spec 021): `GET /study/{skill}/{name:path}` shows the first item of
+`study_queue`: teaching card for a new item (no card yet) with a "Quiz me"
+link to `?step=quiz`; quiz directly for due reviews; "Nothing to study
+right now" + next review date when empty. `POST` same URL (`item`,
+`answer`): item must be in the current queue (else 303 back, nothing
+recorded; blocks early promotion and resent forms); blank answer = 400;
+else `Assessment.from_question(...).evaluate`, `record_answer`,
+`save_student`, feedback page (wrong answers show the teaching card
+again). Unknown skill/student 404, locked skill 403. `today` is a
+`create_app` parameter (tests fix the date). Templates escape text, so
+tests compare against `markupsafe.escape(...)`.
+
+Security: `TrustedHostMiddleware` allows only `127.0.0.1`/`localhost`
+(DNS rebinding); a middleware rejects any POST whose `Origin` header is
+not the app's own (403). No CSRF tokens (localhost only, no logins).
+Tests use `base_url="http://127.0.0.1:8000"`.
+
+To check the real server, run a script that starts `uvicorn.Server` in a
+thread and sets `should_exit` (scratchpad `live_check.py` pattern); never
+kill processes by image name.
 
 ## Known issues / deliberate shortcuts (marked `# ponytail:` in code)
 
@@ -323,7 +344,7 @@ No CSRF protection yet: revisit in spec 021, when posts change progress.
 
 ## Test status
 
-844 tests passing, `ruff check` and `mypy` (strict) clean, as of spec 020.
+872 tests passing, `ruff check` and `mypy` (strict) clean, as of spec 021.
 
 ```
 tests/test_student.py     — Student creation, skills, mastery aggregation
@@ -348,6 +369,7 @@ tests/test_review.py      — Leitner boxes, due items, study queue
 tests/test_kanji.py       — kanji content, readings, question template
 tests/test_vocabulary.py  — vocabulary content, readings, sentences
 tests/test_web.py         — web pages: profiles, dashboard, static CSS, main()
+tests/test_study_web.py   — study pages, answers, unlocking, host/origin checks
 ```
 
 ## Progress
@@ -367,18 +389,17 @@ engine, C: web app, D: local LLM teacher, E: release).
   vocabulary (100) done; 018 course gating + permanent unlocks done.
   **Phase B is complete.**
 - **Phase C (in progress):** 019 SQLite persistence done; 020 web skeleton,
-  profiles and dashboard done; next 021 study a skill in the browser.
+  profiles and dashboard done; 021 study in the browser done; next: review
+  previous lessons.
 - **Phase D:** Ollama teacher. **Phase E:** v0.1.0 release.
 
 ## Immediate next step for the new session
 
 1. Read this file plus `docs/ROADMAP.md` and the latest specs.
-2. Write spec 021: study one skill in the browser via `study_queue`
-   (teaching card for new items, quiz, `record_answer` with
-   `date.today()`, save after each answer, link from the dashboard). Posts
-   now change progress, so decide on CSRF (e.g. check the `Origin` header)
-   and flag it before writing code. Keep it small; split if needed.
-3. Later UI specs: "review previous lessons" (user's idea; free practice
-   updates mastery, demotes on wrong, never promotes early — confirm),
-   due-review counts on the dashboard, per-language theming via CSS
+2. Next spec (022): "review previous lessons" (user's idea): practise any
+   unlocked lesson freely. Confirm with the user before writing: free
+   practice updates mastery and demotes cards on wrong answers, but never
+   promotes a card early. Alternatives for 022 if the user prefers:
+   due-review counts on the dashboard, or start Phase D (Ollama teacher).
+3. Later UI: "lesson unlocked" messages, per-language theming via CSS
    variables.

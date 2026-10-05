@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}{{ skill }} · {{ name }} · AI Language Teacher{% endblock %}
+{% block content %}
+<p><a href="/students/{{ name|urlencode }}">{{ name }}</a> · {{ skill }}</p>
+
+{% if mode == "teach" %}
+<h1>New: <span lang="ja">{{ item }}</span></h1>
+{% include "_teaching.html" %}
+<p><a class="button" href="{{ study_url }}?step=quiz">Quiz me</a></p>
+
+{% elif mode == "quiz" %}
+<h1>{{ prompt }}</h1>
+<form method="post" action="{{ study_url }}">
+  <input type="hidden" name="item" value="{{ item }}">
+  <label for="answer">Your answer</label>
+  <input id="answer" name="answer" required autofocus autocomplete="off">
+  <button type="submit">Check</button>
+  {% if error %}<p class="error" role="alert">{{ error }}</p>{% endif %}
+</form>
+
+{% elif mode == "feedback" %}
+{% if correct %}
+<h1 class="correct">Correct!</h1>
+{% else %}
+<h1 class="wrong">Not quite.</h1>
+{% endif %}
+<p>{{ prompt }}</p>
+<p>Your answer: {{ answer }}</p>
+<p>Expected: {{ expected }}</p>
+{% if not correct %}{% include "_teaching.html" %}{% endif %}
+<p><a class="button" href="{{ study_url }}">Next</a></p>
+
+{% else %}
+<h1>Nothing to study right now</h1>
+{% if next_review %}<p>Next review: {{ next_review.isoformat() }}</p>{% endif %}
+<p><a href="/students/{{ name|urlencode }}">Back to {{ name }}</a></p>
+{% endif %}
+{% endblock %}

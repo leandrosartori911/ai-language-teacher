@@ -68,3 +68,9 @@
   with each skill's course mastery and unlocked lessons, or which skill must
   be mastered first. First runtime dependencies: fastapi, jinja2, uvicorn,
   python-multipart (spec 020).
+- Study in the browser: each open skill has a Study page that teaches new
+  items with their teaching card, quizzes due reviews first, checks answers,
+  schedules them with spaced repetition and saves after every answer. Only
+  items in the current queue can be answered, so resent forms record
+  nothing. The app now accepts only the hosts 127.0.0.1 and localhost
+  (DNS rebinding) and rejects posts from other websites' origins (spec 021).
