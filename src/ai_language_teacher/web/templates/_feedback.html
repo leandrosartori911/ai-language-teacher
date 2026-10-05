@@ -1,0 +1,9 @@
+{% if correct %}
+<h1 class="correct">Correct!</h1>
+{% else %}
+<h1 class="wrong">Not quite.</h1>
+{% endif %}
+<p>{{ prompt }}</p>
+<p>Your answer: {{ answer }}</p>
+<p>Expected: {{ expected }}</p>
+{% if not correct %}{% include "_teaching.html" %}{% endif %}

@@ -12,11 +12,16 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from starlette.middleware.trustedhost import TrustedHostMiddleware
 
-from ai_language_teacher.core.assessment import Assessment
+from ai_language_teacher.core.assessment import Assessment, AssessmentResult
 from ai_language_teacher.core.lesson import Lesson
 from ai_language_teacher.core.progression import open_skills, unlocked_lessons
 from ai_language_teacher.core.question import Question
-from ai_language_teacher.core.review import record_answer, study_queue
+from ai_language_teacher.core.review import (
+    learned_items,
+    record_answer,
+    record_practice,
+    study_queue,
+)
 from ai_language_teacher.core.student import Student
 from ai_language_teacher.language.japanese.course import COURSES, PREREQUISITES
 from ai_language_teacher.storage import (
@@ -44,6 +49,11 @@ def lesson_of(lessons: list[Lesson], item: str) -> Lesson:
 
 def question_of(lesson: Lesson, item: str) -> Question:
     return next(question for question in lesson.questions if question.item == item)
+
+
+def evaluate(skill: str, item: str, answer: str) -> AssessmentResult:
+    question = question_of(lesson_of(COURSES[skill], item), item)
+    return Assessment.from_question(skill, question).evaluate(answer)
 
 
 def create_app(
@@ -128,15 +138,21 @@ def create_app(
             raise HTTPException(status_code=403, detail=f"{skill} is locked")
         return student
 
-    def study_page(
-        request: Request, student: Student, skill: str, status_code: int = 200, **context: Any
+    def skill_page(
+        request: Request,
+        template: str,
+        student: Student,
+        skill: str,
+        status_code: int = 200,
+        **context: Any,
     ) -> Response:
         context |= {
             "name": student.name,
             "skill": skill,
             "study_url": f"/study/{skill}/{quote(student.name)}",
+            "practice_url": f"/practice/{skill}/{quote(student.name)}",
         }
-        return templates.TemplateResponse(request, "study.html", context, status_code=status_code)
+        return templates.TemplateResponse(request, template, context, status_code=status_code)
 
     def item_context(lessons: list[Lesson], item: str) -> dict[str, Any]:
         lesson = lesson_of(lessons, item)
@@ -156,14 +172,21 @@ def create_app(
         queue = study_queue(student, skill, lessons, today())
         if not queue:
             dues = [card.due for card in student.cards[skill].values()]
-            return study_page(
-                request, student, skill, mode="done", next_review=min(dues, default=None)
+            return skill_page(
+                request,
+                "study.html",
+                student,
+                skill,
+                mode="done",
+                next_review=min(dues, default=None),
             )
 
         item = queue[0]
         is_new = item not in student.cards[skill]
         mode = "teach" if is_new and step != "quiz" else "quiz"
-        return study_page(request, student, skill, mode=mode, **item_context(lessons, item))
+        return skill_page(
+            request, "study.html", student, skill, mode=mode, **item_context(lessons, item)
+        )
 
     @app.post("/study/{skill}/{name:path}", response_class=HTMLResponse)
     def submit_answer(
@@ -185,8 +208,9 @@ def create_app(
 
             context = item_context(lessons, item)
             if not answer.strip():
-                return study_page(
+                return skill_page(
                     request,
+                    "study.html",
                     student,
                     skill,
                     400,
@@ -195,13 +219,115 @@ def create_app(
                     **context,
                 )
 
-            question = question_of(lesson_of(lessons, item), item)
-            result = Assessment.from_question(skill, question).evaluate(answer)
+            result = evaluate(skill, item, answer)
             record_answer(student, result, day)
             save_student(conn, student)
 
-        return study_page(
+        return skill_page(
             request,
+            "study.html",
+            student,
+            skill,
+            mode="feedback",
+            correct=result.correct,
+            answer=answer,
+            **context,
+        )
+
+    def practice_lesson(student: Student, skill: str, number: str) -> tuple[int, Lesson]:
+        lessons = COURSES[skill]
+        if not (number.isdigit() and 1 <= int(number) <= len(lessons)):
+            raise HTTPException(status_code=404, detail="No such lesson")
+        if int(number) > len(unlocked_lessons(student, skill, lessons)):
+            raise HTTPException(status_code=403, detail="That lesson is locked")
+        return int(number), lessons[int(number) - 1]
+
+    @app.get("/practice/{skill}/{name:path}", response_class=HTMLResponse)
+    def practice(
+        request: Request, skill: str, name: str, lesson: str | None = None, n: int = 0
+    ) -> Response:
+        with closing(connect(db_path)) as conn:
+            student = study_target(conn, skill, name)
+
+        if lesson is None:
+            unlocked = unlocked_lessons(student, skill, COURSES[skill])
+            lessons = [
+                {
+                    "number": number,
+                    "title": each.title,
+                    "learned": len(learned_items(student, skill, each)),
+                    "total": len(each.items),
+                }
+                for number, each in enumerate(unlocked, start=1)
+            ]
+            return skill_page(
+                request, "practice.html", student, skill, mode="list", lessons=lessons
+            )
+
+        number, chosen = practice_lesson(student, skill, lesson)
+        if n < 0:
+            raise HTTPException(status_code=404, detail="No such position")
+        learned = learned_items(student, skill, chosen)
+        context: dict[str, Any] = {
+            "number": number,
+            "title": chosen.title,
+            "count": len(learned),
+            "n": n,
+        }
+        if not learned:
+            mode = "empty"
+        elif n >= len(learned):
+            mode = "complete"
+        else:
+            mode = "quiz"
+            context |= item_context(COURSES[skill], learned[n])
+        return skill_page(request, "practice.html", student, skill, mode=mode, **context)
+
+    @app.post("/practice/{skill}/{name:path}", response_class=HTMLResponse)
+    def submit_practice(
+        request: Request,
+        skill: str,
+        name: str,
+        lesson: Annotated[str, Form()] = "",
+        n: Annotated[int, Form()] = 0,
+        item: Annotated[str, Form()] = "",
+        answer: Annotated[str, Form()] = "",
+    ) -> Response:
+        with closing(connect(db_path)) as conn:
+            student = study_target(conn, skill, name)
+            number, chosen = practice_lesson(student, skill, lesson)
+            learned = learned_items(student, skill, chosen)
+            # Only learned items of this lesson can be practised.
+            if item not in learned:
+                url = f"/practice/{skill}/{quote(student.name)}?lesson={number}"
+                return RedirectResponse(url, status_code=303)
+
+            context: dict[str, Any] = {
+                "number": number,
+                "title": chosen.title,
+                "count": len(learned),
+                "n": n,
+            }
+            context |= item_context(COURSES[skill], item)
+            if not answer.strip():
+                return skill_page(
+                    request,
+                    "practice.html",
+                    student,
+                    skill,
+                    400,
+                    mode="quiz",
+                    error="Please type an answer.",
+                    **context,
+                )
+
+            result = evaluate(skill, item, answer)
+            record_practice(student, result, today())
+            save_student(conn, student)
+
+        return skill_page(
+            request,
+            "practice.html",
             student,
             skill,
             mode="feedback",
