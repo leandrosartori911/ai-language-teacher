@@ -42,6 +42,7 @@ from ai_language_teacher.teacher import (
 HERE = Path(__file__).parent
 ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
 MAX_QUESTION_LENGTH = 500
+MAX_EXPLAINED_ANSWER = 100
 
 
 def course_mastery(student: Student, skill: str, lessons: list[Lesson]) -> float:
@@ -62,6 +63,15 @@ def question_of(lesson: Lesson, item: str) -> Question:
 def evaluate(skill: str, item: str, answer: str) -> AssessmentResult:
     question = question_of(lesson_of(COURSES[skill], item), item)
     return Assessment.from_question(skill, question).evaluate(answer)
+
+
+def explain_question(answer: str, expected: str) -> str:
+    # The answer is cut so the question always fits MAX_QUESTION_LENGTH.
+    answer = answer.strip()[:MAX_EXPLAINED_ANSWER]
+    return (
+        f'I answered "{answer}", but the right answer is "{expected}". '
+        "Why is my answer wrong, and how can I remember the right one?"
+    )
 
 
 def create_app(
@@ -243,6 +253,7 @@ def create_app(
             mode="feedback",
             correct=result.correct,
             answer=answer,
+            explain=explain_question(answer, context["expected"]),
             **context,
         )
 
@@ -345,6 +356,7 @@ def create_app(
             mode="feedback",
             correct=result.correct,
             answer=answer,
+            explain=explain_question(answer, context["expected"]),
             **context,
         )
 

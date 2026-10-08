@@ -86,3 +86,8 @@
   `AI_TEACHER_MODEL`), grounded on that item's lesson content and told not
   to write new Japanese. Without Ollama the page says how to start it and
   still shows the card. No new dependencies (spec 024, ADR 0004).
+- Explain my mistake: after a wrong answer in Study or Practice, a button
+  asks the AI teacher why the student's answer was wrong, with both
+  answers and the lesson content. On feedback pages the teacher answers
+  in a new tab, so the Next link and the place in practice are kept
+  (spec 025).

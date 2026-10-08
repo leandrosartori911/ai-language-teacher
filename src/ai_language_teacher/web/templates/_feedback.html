@@ -6,4 +6,11 @@
 <p>{{ prompt }}</p>
 <p>Your answer: {{ answer }}</p>
 <p>Expected: {{ expected }}</p>
-{% if not correct %}{% include "_teaching.html" %}{% endif %}
+{% if not correct %}
+<form method="post" action="/ask/{{ skill }}/{{ name|urlencode }}" target="_blank" class="explain">
+  <input type="hidden" name="item" value="{{ item }}">
+  <input type="hidden" name="question" value="{{ explain }}">
+  <button type="submit">Explain my mistake (opens in a new tab)</button>
+</form>
+{% include "_teaching.html" %}
+{% endif %}

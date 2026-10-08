@@ -3,7 +3,7 @@
 Last updated: 2026-10-08. Specs 020 (web skeleton), 021 (study in the
 browser), 022 (practise previous lessons) and 023 (due-review counts)
 implemented. **Phase C is complete.** Phase D started: ADR 0004 (model
-choice) and spec 024 (ask the AI teacher) done.
+choice), spec 024 (ask the AI teacher) and 025 (explain my mistake) done.
 
 ## What this project is
 
@@ -386,6 +386,13 @@ and teaching card; unavailable = 200 with "ollama pull <model>". Saves
 nothing. The ask form lives in `_teaching.html`, so it shows on every
 teaching card (new item, wrong answer in Study/Practice, ask page).
 
+Explain my mistake (spec 025): wrong-answer feedback (`_feedback.html`)
+has a form posting to `/ask` with a hidden ready-made question from
+`explain_question(answer, expected)` in `web/app.py` (answer cut to 100
+chars so it fits the 500 limit). No new route. On feedback pages
+(`mode == "feedback"`) the explain and ask forms use `target="_blank"`
+("opens in a new tab") so the Next link and the practice position stay.
+
 ## Known issues / deliberate shortcuts (marked `# ponytail:` in code)
 
 1. **Answer matching is exact after normalization** — no fuzzy/typo
@@ -396,7 +403,7 @@ teaching card (new item, wrong answer in Study/Practice, ask page).
 
 ## Test status
 
-923 tests passing, `ruff check` and `mypy` (strict) clean, as of spec 024.
+929 tests passing, `ruff check` and `mypy` (strict) clean, as of spec 025.
 
 ```
 tests/test_student.py     — Student creation, skills, mastery aggregation
@@ -427,6 +434,7 @@ tests/test_practice_web.py — practice pages, lesson numbers, never promotes
 tests/test_dashboard_due.py — due-review counts on the dashboard
 tests/test_teacher.py     — teacher prompt, system prompt, Ollama call (faked)
 tests/test_ask_web.py     — ask page, fallback, limits, checks
+tests/test_explain_web.py — explain-my-mistake form, cut answer, new tab
 ```
 
 ## Progress
@@ -450,15 +458,16 @@ engine, C: web app, D: local LLM teacher, E: release).
   previous lessons done; 023 due-review counts on the dashboard done.
   **Phase C is complete.**
 - **Phase D (in progress):** ADR 0004 model choice; 024 ask the AI
-  teacher about an item done.
+  teacher about an item; 025 explain my mistake done.
 - **Phase E:** v0.1.0 release.
 
 ## Immediate next step for the new session
 
 1. Read this file plus `docs/ROADMAP.md` and the latest specs.
-2. Next: decide with the user what else Phase D needs before the
-   release (candidates: teacher explains a wrong answer on request,
-   streaming, conversation history), or move to Phase E (v0.1.0, demo
-   GIF). Write the spec and get approval before tests, as always.
+2. Next (agreed with the user on 2026-10-08): Phase E, the v0.1.0
+   release (README review, demo GIF, tag). Streaming and chat history
+   wait until someone needs them. Kana input exercises are in ROADMAP
+   "Later" (IME hint + on-screen kana table, user's idea). Write the
+   spec and get approval before tests, as always.
 3. Later UI: "lesson unlocked" messages, shuffled practice, per-language
    theming via CSS variables.
