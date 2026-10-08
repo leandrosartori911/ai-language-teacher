@@ -464,10 +464,24 @@ engine, C: web app, D: local LLM teacher, E: release).
 ## Immediate next step for the new session
 
 1. Read this file plus `docs/ROADMAP.md` and the latest specs.
-2. Next (agreed with the user on 2026-10-08): Phase E, the v0.1.0
-   release (README review, demo GIF, tag). Streaming and chat history
-   wait until someone needs them. Kana input exercises are in ROADMAP
-   "Later" (IME hint + on-screen kana table, user's idea). Write the
-   spec and get approval before tests, as always.
+2. **Phase E in progress: v0.1.0 release, treated as a checklist (no
+   spec), agreed with the user on 2026-10-08.**
+   - [x] README rewritten for the release (status, content table, how it
+         works, end-user quickstart with `pip install .`, AI teacher,
+         "How it is built"). Committed on 2026-10-08; the user may still
+         review the text before the release.
+   - [ ] Demo GIF: **the user records it** with ScreenToGif and saves it
+         as `docs/demo.gif` (< ~8 MB). Script given to the user: warm up
+         Ollama first; browser zoom 125%, ~1280x720, 12-15 fps; create
+         profile "Demo" -> dashboard -> Study -> あ card, Quiz me, "a",
+         Correct, Next -> い card, Quiz me, "e" (wrong) -> "Explain my
+         mistake" (new tab, pause to read) -> close tab -> dashboard.
+   - [ ] Add the GIF to the README; rename CHANGELOG "Unreleased" to
+         `0.1.0 - <date>`; commit, push, watch CI.
+   - [ ] **Ask the user before** creating tag `v0.1.0` and the GitHub
+         Release (public actions); release notes from the CHANGELOG.
+   Streaming and chat history wait until someone needs them. Kana input
+   exercises are in ROADMAP "Later" (IME hint + on-screen kana table,
+   user's idea). New features: spec + approval before tests, as always.
 3. Later UI: "lesson unlocked" messages, shuffled practice, per-language
    theming via CSS variables.

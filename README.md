@@ -1,50 +1,65 @@
 # AI Language Teacher
 
-An open-source, local AI language teacher, starting with Japanese.
+An open-source, local AI language teacher, starting with Japanese. It
+teaches, not only quizzes: every item comes with an explanation, a
+mnemonic, an example and, often, a note on history or culture. Spaced
+repetition brings items back when you are about to forget them, and an
+optional local LLM answers your questions about each lesson.
 
-The goal is a tutor that checks real mastery before unlocking the next stage,
-adapts lessons to student performance, and later supports speaking practice,
-all without paid cloud services.
+Everything runs on your machine, free: no account, no cloud service, no
+data leaves your computer.
 
-> Status: early development (v0.1.0). Complete hiragana and katakana.
+> Status: v0.1.0, first release. Japanese only.
 
-## Features (current)
+## What you can learn
 
-- Teaching content for every item: explanation, mnemonic, example word
-  and culture notes, written in English for this project
-- Item-level knowledge tracking, kept separately per skill
-- Mastery-based progression: the next lesson unlocks at 80% mastery of the
-  previous one
-- Questions, assessments and lessons as small, tested building blocks
-- Lessons: complete hiragana and katakana: basic rows, dakuten/handakuten
-  (が, ぱ...), combinations (きゃ, しょ...), small っ and the long vowel mark ー
+| Course | Content |
+|---|---|
+| Hiragana | All 105 items: basic rows, dakuten/handakuten (が, ぱ...), combinations (きゃ, しょ...) and small っ |
+| Katakana | All 106 items: the same, plus the long vowel mark ー; examples are loanwords |
+| Kanji | 40 essential JLPT N5 kanji: meaning quiz, kun and on readings taught |
+| Vocabulary | 100 N5 words with readings and example sentences |
 
-Open the app, create a profile, and study: new items come with a teaching
-card, reviews come back when they are due, and the next lesson unlocks at
-80% mastery. Any unlocked lesson can also be practised freely; practice
-never pushes a review further away.
+All teaching content was written in English for this project.
+
+## How it works
+
+- **Study:** a new item first shows its teaching card, then a quiz. Reviews
+  come back on a Leitner schedule (1, 2, 4, 8, 16 days); a wrong answer
+  brings the item back today.
+- **Mastery-based progression:** the next lesson unlocks at 80% mastery
+  of the previous one, and katakana opens once hiragana is mastered
+  (then kanji and vocabulary). Unlocks are permanent.
+- **Practice:** go back over any unlocked lesson. Practice never pushes a
+  review further away.
+- **Dashboard:** mastery, unlocked lessons and reviews due today, per
+  course. Several profiles can share one computer.
+- **AI teacher (optional):** ask a question on any teaching card, or press
+  "Explain my mistake" after a wrong answer. A local model answers from
+  that item's lesson content only.
 
 ## Quickstart
 
+Needs Python 3.11 or newer.
+
 ```powershell
-git clone <repo-url>
+git clone https://github.com/leandrosartori911/ai-language-teacher.git
 cd ai-language-teacher
 python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-pip install -e ".[dev]"
-pytest
-ai-language-teacher   # web app on http://127.0.0.1:8000
+.\.venv\Scripts\Activate.ps1      # macOS/Linux: source .venv/bin/activate
+pip install .
+ai-language-teacher               # then open http://127.0.0.1:8000
 ```
 
-Progress is saved locally in `~/.ai-language-teacher/data.db`. The app only
+Progress is saved in `~/.ai-language-teacher/data.db`. The app only
 listens on `127.0.0.1` and has no login.
 
 ## AI teacher (optional)
 
-Every teaching card has an "Ask the teacher" box. Questions go to a local
-LLM through [Ollama](https://ollama.com), grounded on the lesson content;
-nothing leaves your machine. Without Ollama the app works the same, just
-without that box answering.
+Questions go to a local LLM through [Ollama](https://ollama.com), together
+with the item's lesson content; the model is told to use only that
+content and never to write new Japanese sentences. Without Ollama the app
+works the same, and the teacher page says how to start it.
 
 ```powershell
 ollama pull qwen2.5:7b                 # default model, 4.7 GB
@@ -65,10 +80,27 @@ Models tested on Japanese teaching tasks (see
 On weaker machines, skip the LLM: the lesson cards and spaced repetition
 work without it.
 
+## How it is built
+
+- Python, FastAPI and Jinja2 templates, SQLite (standard library), no
+  JavaScript. Lesson content is JSON shipped inside the package.
+- Spec-driven: every feature starts as a short spec in
+  [docs/specs](docs/specs), tests come from its acceptance criteria and
+  are written before the code. Design decisions are recorded in
+  [docs/adr](docs/adr).
+- CI runs `ruff`, `mypy --strict` and `pytest` on Ubuntu and Windows
+  (Python 3.11 and 3.13), and checks that an installed wheel serves the app.
+
+For development:
+
+```powershell
+pip install -e ".[dev]"
+ruff check . ; mypy ; pytest
+```
+
 ## Roadmap
 
-See [docs/ROADMAP.md](docs/ROADMAP.md). Features are described in
-[docs/specs](docs/specs) before they are built.
+See [docs/ROADMAP.md](docs/ROADMAP.md) and [CHANGELOG.md](CHANGELOG.md).
 
 ## License
 
