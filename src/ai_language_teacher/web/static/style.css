@@ -101,3 +101,13 @@ li.open {
 .wrong {
   color: var(--error);
 }
+
+.ask {
+  margin: 1rem 0;
+}
+
+.teacher {
+  padding: 1rem;
+  border-left: 3px solid var(--accent);
+  white-space: pre-line;
+}

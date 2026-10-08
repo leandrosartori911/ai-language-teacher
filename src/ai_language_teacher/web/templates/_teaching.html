@@ -11,3 +11,9 @@
   </p>
   {% if teaching.culture_note %}<p class="culture">{{ teaching.culture_note }}</p>{% endif %}
 </section>
+<form method="post" action="/ask/{{ skill }}/{{ name|urlencode }}" class="ask">
+  <input type="hidden" name="item" value="{{ item }}">
+  <label for="question">Ask the teacher about <span lang="ja">{{ item }}</span></label>
+  <input id="question" name="question" maxlength="500" required autocomplete="off">
+  <button type="submit">Ask</button>
+</form>

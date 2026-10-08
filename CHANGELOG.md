@@ -81,3 +81,8 @@
   reviews further away (`learned_items`, `record_practice`) (spec 022).
 - The dashboard shows how many review cards are due today for each open
   skill ("3 due"), using the same rule as Study (spec 023).
+- Ask the AI teacher: every teaching card has a question box answered by
+  a local LLM through Ollama (default `qwen2.5:7b`, set another with
+  `AI_TEACHER_MODEL`), grounded on that item's lesson content and told not
+  to write new Japanese. Without Ollama the page says how to start it and
+  still shows the card. No new dependencies (spec 024, ADR 0004).

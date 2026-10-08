@@ -39,6 +39,32 @@ ai-language-teacher   # web app on http://127.0.0.1:8000
 Progress is saved locally in `~/.ai-language-teacher/data.db`. The app only
 listens on `127.0.0.1` and has no login.
 
+## AI teacher (optional)
+
+Every teaching card has an "Ask the teacher" box. Questions go to a local
+LLM through [Ollama](https://ollama.com), grounded on the lesson content;
+nothing leaves your machine. Without Ollama the app works the same, just
+without that box answering.
+
+```powershell
+ollama pull qwen2.5:7b                 # default model, 4.7 GB
+$env:AI_TEACHER_MODEL = "llama3.1:8b"  # optional: use another model
+ai-language-teacher
+```
+
+Models tested on Japanese teaching tasks (see
+[ADR 0004](docs/adr/0004-default-llm-model.md)):
+
+| Model | Download | Verdict |
+|---|---|---|
+| `qwen2.5:7b` | 4.7 GB | Recommended. Needs a GPU with ~6 GB VRAM, or ~16 GB RAM on the CPU (slower). |
+| `llama3.1:8b` | 4.9 GB | Usable; made mistakes writing new Japanese. |
+| `gemma3:4b` | 3.3 GB | Not recommended: stated wrong facts. |
+| `qwen2.5:3b`, `phi3:mini` | ~2 GB | Not recommended: invented facts even when grounded. |
+
+On weaker machines, skip the LLM: the lesson cards and spaced repetition
+work without it.
+
 ## Roadmap
 
 See [docs/ROADMAP.md](docs/ROADMAP.md). Features are described in
