@@ -7,7 +7,7 @@
   {% for skill in skills %}
   {% if skill.open %}
   <li class="open">
-    {{ skill.name }} · {{ skill.mastery }}% · {{ skill.unlocked }} / {{ skill.total }} lessons
+    {{ skill.name }} · {{ skill.mastery }}% · {{ skill.unlocked }} / {{ skill.total }} lessons · {{ skill.due }} due
     <span>
       <a class="button" href="/study/{{ skill.name }}/{{ name|urlencode }}">Study</a>
       <a class="button" href="/practice/{{ skill.name }}/{{ name|urlencode }}">Practice</a>

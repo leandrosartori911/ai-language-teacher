@@ -17,6 +17,7 @@ from ai_language_teacher.core.lesson import Lesson
 from ai_language_teacher.core.progression import open_skills, unlocked_lessons
 from ai_language_teacher.core.question import Question
 from ai_language_teacher.core.review import (
+    due_items,
     learned_items,
     record_answer,
     record_practice,
@@ -115,6 +116,7 @@ def create_app(
         # Read-only page: open_skills/unlocked_lessons update the student in
         # memory, but nothing is saved here.
         opened = open_skills(student, COURSES, PREREQUISITES)
+        day = today()
         skills = [
             {
                 "name": skill,
@@ -122,6 +124,7 @@ def create_app(
                 "mastery": round(course_mastery(student, skill, lessons) * 100),
                 "unlocked": len(unlocked_lessons(student, skill, lessons)),
                 "total": len(lessons),
+                "due": len(due_items(student, skill, day)),
                 "prerequisite": PREREQUISITES[skill],
             }
             for skill, lessons in COURSES.items()

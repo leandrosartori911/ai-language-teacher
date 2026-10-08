@@ -1,7 +1,8 @@
 # Session State — read this first in a new session
 
-Last updated: 2026-10-05. Specs 020 (web skeleton), 021 (study in the
-browser) and 022 (practise previous lessons) implemented.
+Last updated: 2026-10-08. Specs 020 (web skeleton), 021 (study in the
+browser), 022 (practise previous lessons) and 023 (due-review counts)
+implemented. **Phase C is complete.**
 
 ## What this project is
 
@@ -317,6 +318,8 @@ existing name is never overwritten; 303 to the profile),
 `GET /students/{name:path}` (dashboard; `:path` so names with "/" work;
 404 for unknown). Dashboard mastery = mean over every item of the course
 (unanswered = 0), not `Student.skills`. The dashboard never saves.
+Each open skill also shows "N due" = `len(due_items(student, skill,
+today()))` (spec 023); locked skills show no count.
 Templates/CSS are package data; CI `wheel` job serves `/` from the wheel.
 Tests use `fastapi.testclient.TestClient` (needs `httpx`; Starlette now
 warns that `httpx2` is preferred, but installing it was blocked by the
@@ -363,7 +366,7 @@ kill processes by image name.
 
 ## Test status
 
-899 tests passing, `ruff check` and `mypy` (strict) clean, as of spec 022.
+904 tests passing, `ruff check` and `mypy` (strict) clean, as of spec 023.
 
 ```
 tests/test_student.py     — Student creation, skills, mastery aggregation
@@ -391,6 +394,7 @@ tests/test_web.py         — web pages: profiles, dashboard, static CSS, main()
 tests/test_study_web.py   — study pages, answers, unlocking, host/origin checks
 tests/test_practice.py    — learned_items, record_practice rule
 tests/test_practice_web.py — practice pages, lesson numbers, never promotes
+tests/test_dashboard_due.py — due-review counts on the dashboard
 ```
 
 ## Progress
@@ -411,14 +415,15 @@ engine, C: web app, D: local LLM teacher, E: release).
   **Phase B is complete.**
 - **Phase C (in progress):** 019 SQLite persistence done; 020 web skeleton,
   profiles and dashboard done; 021 study in the browser done; 022 practise
-  previous lessons done; next: due-review counts on the dashboard.
+  previous lessons done; 023 due-review counts on the dashboard done.
+  **Phase C is complete.**
 - **Phase D:** Ollama teacher. **Phase E:** v0.1.0 release.
 
 ## Immediate next step for the new session
 
 1. Read this file plus `docs/ROADMAP.md` and the latest specs.
-2. Agreed order (user, 2026-10-05): spec 023 = due-review counts per skill
-   on the dashboard (small); then Phase D (Ollama teacher) in its own
-   specs. Write the spec and get approval before tests, as always.
+2. Next: Phase D (Ollama teacher), split into its own specs. First
+   compare 2-3 local models for Japanese quality (ask before pulling any
+   model). Write the spec and get approval before tests, as always.
 3. Later UI: "lesson unlocked" messages, shuffled practice, per-language
    theming via CSS variables.

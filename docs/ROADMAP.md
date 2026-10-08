@@ -35,7 +35,7 @@ MVP goal: a local, zero-cost AI teacher that really teaches Japanese
 - [x] Web app skeleton, profiles and skill dashboard (spec 020)
 - [x] Study a skill in the browser: teaching card, quiz, spaced repetition (spec 021)
 - [x] Practise previous lessons: any unlocked lesson, never promotes early (spec 022)
-- [ ] Due-review counts per skill on the dashboard
+- [x] Due-review counts per skill on the dashboard (spec 023)
 
 ## Phase D: Local LLM teacher
 - [ ] Conversational teacher via Ollama, grounded on curated content, with a
