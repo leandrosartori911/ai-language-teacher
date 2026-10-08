@@ -79,3 +79,5 @@
   order. A wrong answer demotes the item's review card, a correct one
   counts toward mastery but never moves the card, so practice cannot push
   reviews further away (`learned_items`, `record_practice`) (spec 022).
+- The dashboard shows how many review cards are due today for each open
+  skill ("3 due"), using the same rule as Study (spec 023).
