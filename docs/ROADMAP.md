@@ -41,6 +41,7 @@ MVP goal: a local, zero-cost AI teacher that really teaches Japanese
 - [x] Default model chosen by comparing five local models (ADR 0004)
 - [x] Ask the AI teacher about an item, grounded on the lesson content,
       with a fallback message when Ollama is not running (spec 024)
+- [x] Explain my mistake after a wrong answer (spec 025)
 
 ## Phase E: Release
 - [ ] v0.1.0 release, demo GIF
@@ -48,3 +49,5 @@ MVP goal: a local, zero-cost AI teacher that really teaches Japanese
 ## Later
 - Per-language themed interface (e.g. Japanese in flag colors)
 - More languages, deeper kanji, grammar, speech assessment
+- Exercises that ask for kana (produce, not only recognise), with a hint
+  to enable the Japanese IME and an on-screen kana table
