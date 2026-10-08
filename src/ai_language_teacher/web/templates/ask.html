@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}{{ item }} · {{ name }} · AI Language Teacher{% endblock %}
+{% block content %}
+<p><a href="/students/{{ name|urlencode }}">{{ name }}</a> · {{ skill }}</p>
+
+{% if error %}
+<p class="error" role="alert">{{ error }}</p>
+{% else %}
+<h1>You asked: {{ question }}</h1>
+{% if reply %}
+<section class="teacher">{{ reply }}</section>
+{% else %}
+<p class="error" role="alert">
+  The AI teacher is not available. Start Ollama and run
+  <code>ollama pull {{ model }}</code>, or keep studying with the lesson card below.
+</p>
+{% endif %}
+{% endif %}
+
+{% include "_teaching.html" %}
+<p><a class="button" href="{{ study_url }}">Back to Study</a></p>
+{% endblock %}

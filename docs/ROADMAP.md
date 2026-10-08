@@ -38,8 +38,9 @@ MVP goal: a local, zero-cost AI teacher that really teaches Japanese
 - [x] Due-review counts per skill on the dashboard (spec 023)
 
 ## Phase D: Local LLM teacher
-- [ ] Conversational teacher via Ollama, grounded on curated content, with a
-      rule-based fallback when no model is running
+- [x] Default model chosen by comparing five local models (ADR 0004)
+- [x] Ask the AI teacher about an item, grounded on the lesson content,
+      with a fallback message when Ollama is not running (spec 024)
 
 ## Phase E: Release
 - [ ] v0.1.0 release, demo GIF

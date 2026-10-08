@@ -32,9 +32,16 @@ from ai_language_teacher.storage import (
     load_student,
     save_student,
 )
+from ai_language_teacher.teacher import (
+    TeacherUnavailable,
+    ask_ollama,
+    current_model,
+    teacher_prompt,
+)
 
 HERE = Path(__file__).parent
 ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
+MAX_QUESTION_LENGTH = 500
 
 
 def course_mastery(student: Student, skill: str, lessons: list[Lesson]) -> float:
@@ -58,7 +65,9 @@ def evaluate(skill: str, item: str, answer: str) -> AssessmentResult:
 
 
 def create_app(
-    db_path: str | Path = DEFAULT_DB_PATH, today: Callable[[], date] = date.today
+    db_path: str | Path = DEFAULT_DB_PATH,
+    today: Callable[[], date] = date.today,
+    ask: Callable[[str], str] = ask_ollama,
 ) -> FastAPI:
     app = FastAPI(title="AI Language Teacher")
     app.mount("/static", StaticFiles(directory=HERE / "static"), name="static")
@@ -336,6 +345,46 @@ def create_app(
             mode="feedback",
             correct=result.correct,
             answer=answer,
+            **context,
+        )
+
+    @app.post("/ask/{skill}/{name:path}", response_class=HTMLResponse)
+    def ask_teacher(
+        request: Request,
+        skill: str,
+        name: str,
+        item: Annotated[str, Form()] = "",
+        question: Annotated[str, Form()] = "",
+    ) -> Response:
+        with closing(connect(db_path)) as conn:
+            student = study_target(conn, skill, name)
+
+        # Read-only page: only items the student can already see can be asked about.
+        unlocked = unlocked_lessons(student, skill, COURSES[skill])
+        if not any(item in lesson.items for lesson in unlocked):
+            raise HTTPException(status_code=404, detail="No such item in unlocked lessons")
+
+        context = item_context(COURSES[skill], item)
+        question = question.strip()
+        if not question or len(question) > MAX_QUESTION_LENGTH:
+            error = f"Please type a question of up to {MAX_QUESTION_LENGTH} characters."
+            return skill_page(
+                request, "ask.html", student, skill, 400, question=question, error=error, **context
+            )
+
+        prompt = teacher_prompt(item, context["expected"], context["teaching"], question)
+        try:
+            reply, model = ask(prompt), None
+        except TeacherUnavailable:
+            reply, model = None, current_model()
+        return skill_page(
+            request,
+            "ask.html",
+            student,
+            skill,
+            question=question,
+            reply=reply,
+            model=model,
             **context,
         )
 

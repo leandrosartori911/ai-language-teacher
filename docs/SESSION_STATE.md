@@ -2,7 +2,8 @@
 
 Last updated: 2026-10-08. Specs 020 (web skeleton), 021 (study in the
 browser), 022 (practise previous lessons) and 023 (due-review counts)
-implemented. **Phase C is complete.**
+implemented. **Phase C is complete.** Phase D started: ADR 0004 (model
+choice) and spec 024 (ask the AI teacher) done.
 
 ## What this project is
 
@@ -119,9 +120,10 @@ ai-language-teacher/
     ROADMAP.md
     SESSION_STATE.md        # this file
     specs/001..014-*.md     # one file per implemented feature
-    adr/                    # 0001 web stack, 0002 local LLM, 0003 SQLite
+    adr/                    # 0001 web stack, 0002 local LLM, 0003 SQLite, 0004 default model
   src/ai_language_teacher/
     storage.py              # SQLite persistence: connect, save/load/list students (spec 019)
+    teacher.py              # Ollama teacher: teacher_prompt, ask_ollama, TeacherUnavailable (spec 024)
     main.py                 # main(): uvicorn on 127.0.0.1:8000; console script `ai-language-teacher`
     web/                    # spec 020
       app.py                  # create_app(db_path, today): home, profiles, dashboard, study, practice
@@ -359,14 +361,42 @@ To check the real server, run a script that starts `uvicorn.Server` in a
 thread and sets `should_exit` (scratchpad `live_check.py` pattern); never
 kill processes by image name.
 
+## AI teacher (spec 024, ADR 0004)
+
+Model comparison on 2026-10-08 (6 grounded tasks, temperature 0, script
+was a scratchpad throwaway): `qwen2.5:7b` best (all right);
+`llama3.1:8b` ok but wrong readings in new sentences; `gemma3:4b` stated
+wrong facts; `qwen2.5:3b` and `phi3:mini` invented facts even when
+grounded (phi3 also looped). Decisions (user-approved): default
+`qwen2.5:7b`; student picks another with env var `AI_TEACHER_MODEL`; the
+LLM only explains curated content and never writes new Japanese; no
+small model is recommended, weak PCs run without the LLM. Installed in
+Ollama now: those five models.
+
+`teacher.py` (stdlib urllib): `teacher_prompt(item, answer, teaching,
+question)` lists the item's lesson content then "Student asks: ...";
+`SYSTEM_PROMPT` has the rules; `ask_ollama(prompt)` POSTs to
+`127.0.0.1:11434/api/generate` (no streaming, temperature 0, 120 s
+timeout) and raises `TeacherUnavailable` on any `OSError`.
+`create_app(..., ask=ask_ollama)`: tests inject a fake, CI needs no
+Ollama. `POST /ask/{skill}/{name:path}` (`item`, `question`): Study's
+skill checks; item must be in an unlocked lesson (else 404); blank or
+> 500 chars = 400 without calling the model; page shows question, answer
+and teaching card; unavailable = 200 with "ollama pull <model>". Saves
+nothing. The ask form lives in `_teaching.html`, so it shows on every
+teaching card (new item, wrong answer in Study/Practice, ask page).
+
 ## Known issues / deliberate shortcuts (marked `# ponytail:` in code)
 
 1. **Answer matching is exact after normalization** — no fuzzy/typo
    tolerance (explicitly out of scope in spec 003, may never be needed).
+2. **No streaming of teacher answers** (`teacher.py`): the page waits
+   for the whole answer; slow on CPU. Stream it if the wait bothers
+   students.
 
 ## Test status
 
-904 tests passing, `ruff check` and `mypy` (strict) clean, as of spec 023.
+923 tests passing, `ruff check` and `mypy` (strict) clean, as of spec 024.
 
 ```
 tests/test_student.py     — Student creation, skills, mastery aggregation
@@ -395,6 +425,8 @@ tests/test_study_web.py   — study pages, answers, unlocking, host/origin check
 tests/test_practice.py    — learned_items, record_practice rule
 tests/test_practice_web.py — practice pages, lesson numbers, never promotes
 tests/test_dashboard_due.py — due-review counts on the dashboard
+tests/test_teacher.py     — teacher prompt, system prompt, Ollama call (faked)
+tests/test_ask_web.py     — ask page, fallback, limits, checks
 ```
 
 ## Progress
@@ -417,13 +449,16 @@ engine, C: web app, D: local LLM teacher, E: release).
   profiles and dashboard done; 021 study in the browser done; 022 practise
   previous lessons done; 023 due-review counts on the dashboard done.
   **Phase C is complete.**
-- **Phase D:** Ollama teacher. **Phase E:** v0.1.0 release.
+- **Phase D (in progress):** ADR 0004 model choice; 024 ask the AI
+  teacher about an item done.
+- **Phase E:** v0.1.0 release.
 
 ## Immediate next step for the new session
 
 1. Read this file plus `docs/ROADMAP.md` and the latest specs.
-2. Next: Phase D (Ollama teacher), split into its own specs. First
-   compare 2-3 local models for Japanese quality (ask before pulling any
-   model). Write the spec and get approval before tests, as always.
+2. Next: decide with the user what else Phase D needs before the
+   release (candidates: teacher explains a wrong answer on request,
+   streaming, conversation history), or move to Phase E (v0.1.0, demo
+   GIF). Write the spec and get approval before tests, as always.
 3. Later UI: "lesson unlocked" messages, shuffled practice, per-language
    theming via CSS variables.
