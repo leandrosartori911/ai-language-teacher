@@ -541,14 +541,15 @@ engine, C: web app, D: local LLM teacher, E: release).
    presentable (good-looking and working well). Draft specs written
    from the user's review plus a screenshot review and a live probe of
    the teacher (all **not approved yet**; each needs review and approval
-   before tests, open questions inside each spec). **Next: review spec
-   029 with the user:**
+   before tests, open questions inside each spec). **Next: implement
+   spec 029 (approved on 2026-10-14, decisions recorded in the spec):
+   tests first, then code, then a browser check at 360 px like 028.**
    - 026 done (profiles as accounts, logout, delete with confirmation);
    - 027 done (guardrails, course word lookup, red-team set 25/26);
    - 028 done (chat panel, sentence-by-sentence streaming, browser-checked);
-   - 029 navigation and dashboard (header nav, Continue, course cards,
-     session progress, unlock messages, phone-width fixes, consistent
-     buttons and "Practice" spelling);
+   - 029 approved, not implemented: navigation and dashboard (header
+     nav, Continue, course cards, left counter, unlock messages, end
+     screen, phone-width fixes, one button class, "Practice" spelling);
    - 030 web UI design, top quality priority, done last: choose a visual
      direction from mockups first, design tokens, offline fonts,
      accessibility. Consider the superpowers brainstorming skill and
