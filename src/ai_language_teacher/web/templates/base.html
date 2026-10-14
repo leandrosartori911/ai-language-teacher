@@ -7,7 +7,15 @@
   <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-  <header><a href="/">AI Language Teacher</a></header>
+  <header>
+    <a href="/">AI Language Teacher</a>
+    {% if name %}
+    <span class="profile">
+      {{ name }}
+      <form method="post" action="/logout"><button type="submit">Logout</button></form>
+    </span>
+    {% endif %}
+  </header>
   <main>
     {% block content %}{% endblock %}
   </main>

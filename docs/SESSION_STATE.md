@@ -1,9 +1,8 @@
 # Session State — read this first in a new session
 
-Last updated: 2026-10-08. Specs 020 (web skeleton), 021 (study in the
-browser), 022 (practise previous lessons) and 023 (due-review counts)
-implemented. **Phase C is complete.** Phase D: ADR 0004 (model
-choice), spec 024 (ask the AI teacher) and 025 (explain my mistake) done.
+Last updated: 2026-10-14. Phases A-D complete. Phase F (polish before
+release): spec 026 (profiles as accounts, logout, delete) done; 027-030
+are drafts awaiting approval.
 
 ## What this project is
 
@@ -122,12 +121,12 @@ ai-language-teacher/
     specs/001..014-*.md     # one file per implemented feature
     adr/                    # 0001 web stack, 0002 local LLM, 0003 SQLite, 0004 default model
   src/ai_language_teacher/
-    storage.py              # SQLite persistence: connect, save/load/list students (spec 019)
+    storage.py              # SQLite persistence: connect, save/load/list/delete students (spec 019, 026)
     teacher.py              # Ollama teacher: teacher_prompt, ask_ollama, TeacherUnavailable (spec 024)
     main.py                 # main(): uvicorn on 127.0.0.1:8000; console script `ai-language-teacher`
     web/                    # spec 020
       app.py                  # create_app(db_path, today): home, profiles, dashboard, study, practice
-      templates/              # base, home, dashboard, study, practice, _teaching, _feedback (Jinja2)
+      templates/              # base, home, delete, dashboard, study, practice, ask, _teaching, _feedback (Jinja2)
       static/style.css        # colors as CSS variables in :root
     data/japanese/          # lesson JSON, shipped as package data (spec 007)
       hiragana_vowels.json
@@ -361,6 +360,24 @@ To check the real server, run a script that starts `uvicorn.Server` in a
 thread and sets `should_exit` (scratchpad `live_check.py` pattern); never
 kill processes by image name.
 
+Profiles as accounts (spec 026, replaces the name-in-URL routes above):
+the open profile lives in cookie `profile` (URL-encoded name, `HttpOnly`,
+`SameSite=Lax`, not signed: user approved, no new dependency).
+`current_student(conn, request)` reads it (missing profile = `None`);
+`open_student` raises `HTTPException(303, Location: /)` when there is
+none. Routes now: `POST /students` creates-or-opens and sets the cookie,
+303 to `/dashboard`; home lists each profile as a button posting its name
+there, plus a trash link `/delete?name=...`. `GET /delete` = confirmation
+page (Yes = `POST /delete`, No = link home; unknown 404); `POST /delete`
+uses `storage.delete_student` (cascade), clears the cookie only if it was
+the open profile. `POST /logout` clears it. `GET /dashboard`,
+`/study/{skill}`, `/practice/{skill}`, `POST /ask/{skill}`: no name in
+the URL; old URLs 404. `base.html` shows the name + Logout form when the
+context has `name` (home and delete pass the open profile's name).
+Web tests create `TestClient(..., cookies=ANA)` with
+`ANA = {"profile": "Ana"}`; `tests/test_profiles_web.py` covers the real
+flow.
+
 ## AI teacher (spec 024, ADR 0004)
 
 Model comparison on 2026-10-08 (6 grounded tasks, temperature 0, script
@@ -403,7 +420,7 @@ chars so it fits the 500 limit). No new route. On feedback pages
 
 ## Test status
 
-929 tests passing, `ruff check` and `mypy` (strict) clean, as of spec 025.
+958 tests passing, `ruff check` and `mypy` (strict) clean, as of spec 026.
 
 ```
 tests/test_student.py     — Student creation, skills, mastery aggregation
@@ -435,6 +452,7 @@ tests/test_dashboard_due.py — due-review counts on the dashboard
 tests/test_teacher.py     — teacher prompt, system prompt, Ollama call (faked)
 tests/test_ask_web.py     — ask page, fallback, limits, checks
 tests/test_explain_web.py — explain-my-mistake form, cut answer, new tab
+tests/test_profiles_web.py — profile cookie, logout, delete with confirmation
 ```
 
 ## Progress
@@ -459,6 +477,8 @@ engine, C: web app, D: local LLM teacher, E: release).
   **Phase C is complete.**
 - **Phase D (in progress):** ADR 0004 model choice; 024 ask the AI
   teacher about an item; 025 explain my mistake done.
+- **Phase F (in progress):** 026 profiles as accounts with logout and
+  delete done.
 - **Phase E:** v0.1.0 release.
 
 ## Immediate next step for the new session
@@ -469,9 +489,9 @@ engine, C: web app, D: local LLM teacher, E: release).
    presentable (good-looking and working well). Draft specs written
    from the user's review plus a screenshot review and a live probe of
    the teacher (all **not approved yet**; each needs review and approval
-   before tests, open questions inside each spec):
-   - 026 profiles as accounts with Logout at the right of the header
-     (cookie, URLs without the name, no passwords);
+   before tests, open questions inside each spec). **Next: review spec
+   027 with the user:**
+   - 026 done (profiles as accounts, logout, delete with confirmation);
    - 027 teacher guardrails + red-team test set (user found it easy to
      break; ask the user for the questions that broke it; probe on
      2026-10-14 showed single questions refused well but translation

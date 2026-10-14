@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block title %}Practice {{ skill }} · {{ name }} · AI Language Teacher{% endblock %}
 {% block content %}
-<p><a href="/students/{{ name|urlencode }}">{{ name }}</a> · <a href="{{ practice_url }}">practice {{ skill }}</a></p>
+<p><a href="/dashboard">{{ name }}</a> · <a href="{{ practice_url }}">practice {{ skill }}</a></p>
 
 {% if mode == "list" %}
 <h1>Practise {{ skill }}</h1>

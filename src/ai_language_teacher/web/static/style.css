@@ -18,8 +18,17 @@ body {
 }
 
 header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 1rem;
   border-bottom: 2px solid var(--accent);
+}
+
+.profile {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
 }
 
 header a {
@@ -64,7 +73,8 @@ form {
   color: var(--error);
 }
 
-li.open {
+li.open,
+.profiles li {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -74,6 +84,11 @@ li.open {
   padding: 0.3rem 0.8rem;
   border: 1px solid var(--accent);
   border-radius: 4px;
+  text-decoration: none;
+}
+
+.trash {
+  font-size: 1.3rem;
   text-decoration: none;
 }
 

@@ -12,7 +12,7 @@
   {% if teaching.culture_note %}<p class="culture">{{ teaching.culture_note }}</p>{% endif %}
 </section>
 {# On feedback pages a new tab keeps the Next link (and the place in practice). #}
-<form method="post" action="/ask/{{ skill }}/{{ name|urlencode }}"{% if mode == "feedback" %} target="_blank"{% endif %} class="ask">
+<form method="post" action="/ask/{{ skill }}"{% if mode == "feedback" %} target="_blank"{% endif %} class="ask">
   <input type="hidden" name="item" value="{{ item }}">
   <label for="question">Ask the teacher about <span lang="ja">{{ item }}</span></label>
   <input id="question" name="question" maxlength="500" required autocomplete="off">

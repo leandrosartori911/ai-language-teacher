@@ -10,6 +10,9 @@ from ai_language_teacher.storage import connect, load_student, save_student
 from ai_language_teacher.teacher import TeacherUnavailable
 from ai_language_teacher.web.app import create_app
 
+# The cookie that choosing "Ana" on the home page sets (spec 026).
+ANA = {"profile": "Ana"}
+
 APP_URL = "http://127.0.0.1:8000"
 A = COURSES["hiragana"][0].teaching["あ"]
 
@@ -31,7 +34,7 @@ def client(db_path, asked):
         return "Think of the stick figure falling in!"
 
     app = create_app(db_path, today=lambda: date(2026, 10, 8), ask=fake_teacher)
-    return TestClient(app, base_url=APP_URL)
+    return TestClient(app, base_url=APP_URL, cookies=ANA)
 
 
 @pytest.fixture
@@ -51,13 +54,13 @@ def load(db_path):
 
 
 def ask(client, item="あ", question="Why is it shaped like that?", skill="hiragana", **kwargs):
-    return client.post(f"/ask/{skill}/Ana", data={"item": item, "question": question}, **kwargs)
+    return client.post(f"/ask/{skill}", data={"item": item, "question": question}, **kwargs)
 
 
 def test_teaching_card_has_the_ask_form(client, ana):
-    text = client.get("/study/hiragana/Ana").text
+    text = client.get("/study/hiragana").text
 
-    assert '<form method="post" action="/ask/hiragana/Ana"' in text
+    assert '<form method="post" action="/ask/hiragana"' in text
     assert '<input type="hidden" name="item" value="あ">' in text
     assert 'name="question"' in text
 
@@ -69,7 +72,7 @@ def test_asking_shows_question_answer_and_card_and_saves_nothing(client, ana, db
     assert str(escape("Why is it shaped like that?")) in response.text
     assert str(escape("Think of the stick figure falling in!")) in response.text
     assert str(escape(A.explanation)) in response.text
-    assert 'href="/study/hiragana/Ana"' in response.text
+    assert 'href="/study/hiragana"' in response.text
     assert "Why is it shaped like that?" in asked[0]
     assert A.mnemonic in asked[0]
     assert load(db_path) == ana
@@ -81,7 +84,7 @@ def test_unavailable_teacher_still_shows_the_card(db_path, ana, monkeypatch):
 
     monkeypatch.setenv("AI_TEACHER_MODEL", "gemma3:4b")
     app = create_app(db_path, ask=offline)
-    response = ask(TestClient(app, base_url=APP_URL))
+    response = ask(TestClient(app, base_url=APP_URL, cookies=ANA))
 
     assert response.status_code == 200
     assert "ollama pull gemma3:4b" in response.text
