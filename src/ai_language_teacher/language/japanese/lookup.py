@@ -57,7 +57,10 @@ def _vocabulary() -> list[tuple[str, str, set[str], str]]:
             if reading.endswith("は"):  # こんにちは is said "konnichiwa"
                 keys.add(_key(romaji[:-2] + "wa"))
             keys = {key for key in keys if len(key) >= MIN_ROMAJI_KEY}
-            entries.append((item, reading, keys, f"{item} ({reading}, {romaji}): {meaning}"))
+            # The explanation adds the polite form and particles the teacher may use.
+            spelled = romaji if reading == item else f"{reading}, {romaji}"
+            line = f"{item} ({spelled}): {meaning}. {lesson.teaching[item].explanation}"
+            entries.append((item, reading, keys, line))
     return entries
 
 

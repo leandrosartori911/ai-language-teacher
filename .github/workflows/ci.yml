@@ -47,4 +47,5 @@ jobs:
           from ai_language_teacher.web.app import create_app;
           client = TestClient(create_app('/tmp/smoke.db'), base_url='http://127.0.0.1:8000');
           assert client.get('/').status_code == 200;
-          assert client.get('/static/style.css').status_code == 200"
+          assert client.get('/static/style.css').status_code == 200;
+          assert client.get('/static/chat.js').status_code == 200"

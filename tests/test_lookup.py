@@ -45,8 +45,18 @@ def test_finds_vocabulary_by_kana_kanji_or_romaji(message, word):
     assert word in items(message)
 
 
-def test_found_vocabulary_line_has_reading_romaji_and_meaning():
-    assert "食べる (たべる, taberu): to eat" in find_course_words("taberu")
+def test_found_vocabulary_line_has_reading_romaji_meaning_and_explanation():
+    [line] = find_course_words("taberu")
+
+    assert line.startswith("食べる (たべる, taberu): to eat. ")
+    assert "食べます" in line  # the polite form, from the explanation
+
+
+def test_kana_only_word_does_not_repeat_its_reading():
+    # "ありがとう (ありがとう, arigatou)" made the model garble the kana (spec 028).
+    [line] = find_course_words("arigatou")
+
+    assert line.startswith("ありがとう (arigatou): thank you. ")
 
 
 def test_finds_kanji_by_character_with_readings():

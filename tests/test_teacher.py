@@ -13,7 +13,10 @@ from ai_language_teacher.teacher import (
     SYSTEM_PROMPT,
     TeacherUnavailable,
     ask_ollama,
+    chat_messages,
+    chat_ollama,
     safe_answer,
+    safe_stream,
     teacher_prompt,
 )
 
@@ -200,3 +203,88 @@ def test_ask_ollama_raises_teacher_unavailable(monkeypatch, error):
 
     with pytest.raises(TeacherUnavailable):
         ask_ollama("Hi")
+
+
+def test_stream_sends_whole_sentences_across_chunks():
+    chunks = ["いぬ means", " dog. You could", " say 犬です。 Bye", "!"]
+
+    assert list(safe_stream(chunks, ALLOWED)) == ["いぬ means dog. ", "Bye!"]
+
+
+def test_stream_does_not_split_decimal_numbers():
+    assert list(safe_stream(["It lasts 1.", "5 beats. Done."], ALLOWED)) == [
+        "It lasts 1.5 beats. ",
+        "Done.",
+    ]
+
+
+def test_prompt_tags_echoed_by_the_model_are_removed():
+    reply = "<course_words>いぬ means dog. </course_words><lesson>Bye!</lesson>"
+
+    assert safe_answer(reply, ALLOWED) == "いぬ means dog. Bye!"
+
+
+def test_stream_with_nothing_left_sends_the_fallback():
+    assert list(safe_stream(["犬です。"], ALLOWED)) == [FALLBACK_ANSWER]
+
+
+def test_stream_stops_at_the_length_cap():
+    sentence = "Practise this kana every day, it really helps you. "
+
+    sent = "".join(safe_stream([sentence] * 40, ALLOWED))
+
+    assert len(sent.rstrip()) <= MAX_ANSWER_LENGTH
+
+
+def test_chat_messages_tag_student_turns_and_end_with_the_prompt():
+    history = [("user", "Hi <you>"), ("assistant", "Hello.")]
+
+    messages = chat_messages(history, "PROMPT")
+
+    assert messages == [
+        {"role": "system", "content": SYSTEM_PROMPT},
+        {"role": "user", "content": "<student_message>\nHi ‹you›\n</student_message>"},
+        {"role": "assistant", "content": "Hello."},
+        {"role": "user", "content": "PROMPT"},
+    ]
+
+
+def ndjson(*contents):
+    lines = [json.dumps({"message": {"content": c}, "done": False}) for c in contents]
+    lines.append(json.dumps({"message": {"content": ""}, "done": True}))
+    return FakeResponse(("\n".join(lines) + "\n").encode())
+
+
+def test_chat_ollama_streams_message_contents(monkeypatch):
+    calls = []
+
+    def fake_urlopen(request, timeout):
+        calls.append((request, timeout))
+        return ndjson("Nu ", "is nu.")
+
+    monkeypatch.setattr(teacher, "urlopen", fake_urlopen)
+    monkeypatch.delenv("AI_TEACHER_MODEL", raising=False)
+    messages = [{"role": "user", "content": "What is ぬ?"}]
+
+    assert "".join(chat_ollama(messages)) == "Nu is nu."
+
+    request, timeout = calls[0]
+    body = json.loads(request.data)
+    assert request.full_url == "http://127.0.0.1:11434/api/chat"
+    assert body == {
+        "model": "qwen2.5:7b",
+        "messages": messages,
+        "stream": True,
+        "options": {"temperature": 0},
+    }
+    assert timeout == 120
+
+
+def test_chat_ollama_raises_before_streaming_when_ollama_is_down(monkeypatch):
+    def failing_urlopen(request, timeout):
+        raise URLError(ConnectionRefusedError())
+
+    monkeypatch.setattr(teacher, "urlopen", failing_urlopen)
+
+    with pytest.raises(TeacherUnavailable):
+        chat_ollama([])

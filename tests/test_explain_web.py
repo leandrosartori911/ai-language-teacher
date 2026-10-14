@@ -16,7 +16,7 @@ ANA = {"profile": "Ana"}
 TODAY = date(2026, 10, 8)
 APP_URL = "http://127.0.0.1:8000"
 EXPLAIN_FORM = re.compile(
-    r'<form method="post" action="/ask/hiragana" target="_blank" class="explain">'
+    r'<form method="post" action="/ask/hiragana" class="explain">'
     r'.*?name="item" value="(?P<item>[^"]*)"'
     r'.*?name="question" value="(?P<question>[^"]*)"',
     re.DOTALL,
@@ -80,7 +80,7 @@ def test_wrong_study_answer_offers_explain_my_mistake(client, ana):
     text = study(client, "い", "ri").text
 
     item, question = explain_form(text)
-    assert "Explain my mistake (opens in a new tab)" in text
+    assert "Explain my mistake" in text
     assert item == "い"
     assert question == (
         'I answered "ri", but the right answer is "i". '
@@ -121,10 +121,12 @@ def test_explain_question_reaches_the_teacher_and_saves_nothing(client, ana, db_
     assert load(db_path) == before
 
 
-def test_feedback_forms_open_in_a_new_tab_but_teaching_card_does_not(client, ana):
+def test_no_form_opens_a_new_tab_any_more(client, ana):
+    # The chat panel (spec 028) replaced the new tabs of spec 025.
     teach = client.get("/study/hiragana").text
     feedback = study(client, "い", "ri").text
 
-    assert 'action="/ask/hiragana" target="_blank" class="ask"' in feedback
+    assert 'action="/ask/hiragana" class="ask"' in feedback
     assert 'action="/ask/hiragana" class="ask"' in teach
-    assert 'target="_blank"' not in teach
+    assert 'target="_blank"' not in teach + feedback
+    assert "new tab" not in teach + feedback

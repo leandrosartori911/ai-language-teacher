@@ -103,3 +103,11 @@
   rules are a numbered list. Answer sentences with Japanese not found in
   the prompt are removed and long answers are cut. A red-team set of 26
   cases (`evals/`) passes 25 with `qwen2.5:7b`.
+- Chat with the AI teacher (spec 028): a side panel (full screen on a
+  phone) on every page with a teaching card. Asking or pressing
+  "Explain my mistake" opens it instead of another page or a new tab;
+  follow-up questions work, and the conversation follows the student
+  from item to item in the same browser tab. Answers stream sentence by
+  sentence from Ollama's `/api/chat`, each sentence checked before it is
+  sent. First JavaScript in the project (`static/chat.js`, no
+  dependencies); without JavaScript the ask page still works.

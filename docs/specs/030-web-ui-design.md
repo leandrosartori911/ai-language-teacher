@@ -36,6 +36,8 @@ when the app is presentable: good-looking and working well.
   runtime (the app must work without internet); any font is either the
   system's or bundled with a free license. No CSS framework unless the
   design agreement shows a clear need.
+- **Chat panel (spec 028):** restyle it; on a wide screen it currently
+  covers the header, including the Logout button, while open.
 
 ## Acceptance Criteria
 - [ ] A design direction is chosen by the user from mockups, and saved

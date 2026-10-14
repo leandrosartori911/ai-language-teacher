@@ -3,15 +3,18 @@
 import json
 import os
 import re
-from collections.abc import Sequence
+from collections.abc import Iterable, Iterator, Sequence
+from typing import IO
 from urllib.request import Request, urlopen
 
 from ai_language_teacher.core.teaching import Teaching
 
 OLLAMA_URL = "http://127.0.0.1:11434/api/generate"
+OLLAMA_CHAT_URL = "http://127.0.0.1:11434/api/chat"
 DEFAULT_MODEL = "qwen2.5:7b"
 TIMEOUT_SECONDS = 120
 MAX_ANSWER_LENGTH = 1200
+MAX_HISTORY_MESSAGES = 12  # the last 6 exchanges of a chat (spec 028)
 
 SYSTEM_PROMPT = """\
 You are a friendly Japanese teacher for absolute beginners, inside a study app. Rules:
@@ -38,8 +41,10 @@ FALLBACK_ANSWER = (
 
 # Kana, kanji and the iteration mark 々; Japanese punctuation is not included.
 JAPANESE_RUN = re.compile(r"[぀-ヿ㐀-䶿一-鿿々]+")
-SENTENCE_END = ".!?。！？"
-SENTENCE = re.compile(rf"[^{SENTENCE_END}]*(?:[{SENTENCE_END}]+|$)\s*")
+# The prompt's own tags, which the model sometimes copies into its answer.
+PROMPT_TAG = re.compile(r"</?(?:lesson|course_words|student_message)>")
+# A full sentence: "." needs a space after it, so a streamed "1." + "5" stays whole.
+FULL_SENTENCE = re.compile(r".*?(?:[.!?]+\s+|[。！？]+\s*)", re.DOTALL)
 
 
 class TeacherUnavailable(Exception):
@@ -70,30 +75,96 @@ def teacher_prompt(
     if teaching.culture_note:
         lines.append(f"- culture note: {teaching.culture_note}")
     found = "\n".join(f"- {word}" for word in words) or "none"
-    # The student's text cannot close its tag or open another one.
-    message = question.replace("<", "‹").replace(">", "›")
     return (
         "<lesson>\n" + "\n".join(lines) + "\n</lesson>\n\n"
-        f"<course_words>\n{found}\n</course_words>\n\n"
-        f"<student_message>\n{message}\n</student_message>"
+        f"<course_words>\n{found}\n</course_words>\n\n" + student_message(question)
     )
 
 
+def student_message(text: str) -> str:
+    # The student's text cannot close its tag or open another one.
+    text = text.replace("<", "‹").replace(">", "›")
+    return f"<student_message>\n{text}\n</student_message>"
+
+
+def chat_messages(history: Sequence[tuple[str, str]], prompt: str) -> list[dict[str, str]]:
+    """Ollama chat messages: rules, the last turns (capped), then the current prompt."""
+    messages = [{"role": "system", "content": SYSTEM_PROMPT}]
+    for role, content in history[-MAX_HISTORY_MESSAGES:]:
+        content = content[:MAX_ANSWER_LENGTH]
+        messages.append(
+            {"role": role, "content": student_message(content) if role == "user" else content}
+        )
+    messages.append({"role": "user", "content": prompt})
+    return messages
+
+
+def _sentences(chunks: Iterable[str]) -> Iterator[str]:
+    buffer = ""
+    for chunk in chunks:
+        buffer += chunk
+        while match := FULL_SENTENCE.match(buffer):
+            yield match.group()
+            buffer = buffer[match.end() :]
+    if buffer:
+        yield buffer
+
+
+def safe_stream(chunks: Iterable[str], allowed: str) -> Iterator[str]:
+    """Yield the answer sentence by sentence, skipping any sentence with Japanese
+    that `allowed` does not contain, up to MAX_ANSWER_LENGTH characters."""
+    length = 0
+    for sentence in _sentences(chunks):
+        sentence = PROMPT_TAG.sub("", sentence)
+        if not length:
+            sentence = sentence.lstrip()
+        if not sentence.strip() or not all(
+            run in allowed for run in JAPANESE_RUN.findall(sentence)
+        ):
+            continue
+        if length + len(sentence.rstrip()) > MAX_ANSWER_LENGTH:
+            if not length:  # a single overlong sentence: cut it hard
+                length = MAX_ANSWER_LENGTH
+                yield sentence[: MAX_ANSWER_LENGTH - 1].rstrip() + "…"
+            break
+        length += len(sentence)
+        yield sentence
+    if not length:
+        yield FALLBACK_ANSWER
+
+
 def safe_answer(reply: str, prompt: str) -> str:
-    """Drop sentences with Japanese that the prompt does not contain; cap the length."""
-    kept = [
-        sentence
-        for sentence in SENTENCE.findall(reply)
-        if all(run in prompt for run in JAPANESE_RUN.findall(sentence))
-    ]
-    answer = "".join(kept).strip()
-    if not answer:
-        return FALLBACK_ANSWER
-    if len(answer) > MAX_ANSWER_LENGTH:
-        cut = answer[:MAX_ANSWER_LENGTH]
-        end = max(cut.rfind(char) for char in SENTENCE_END)
-        answer = cut[: end + 1] if end >= 0 else cut[: MAX_ANSWER_LENGTH - 1].rstrip() + "…"
-    return answer
+    return "".join(safe_stream([reply], prompt)).strip()
+
+
+def chat_ollama(messages: list[dict[str, str]]) -> Iterator[str]:
+    """Stream the answer's text from Ollama; raises TeacherUnavailable before streaming."""
+    body = {
+        "model": current_model(),
+        "messages": messages,
+        "stream": True,
+        "options": {"temperature": 0},
+    }
+    request = Request(
+        OLLAMA_CHAT_URL, json.dumps(body).encode(), {"Content-Type": "application/json"}
+    )
+    try:
+        response = urlopen(request, timeout=TIMEOUT_SECONDS)
+    except OSError as error:  # URLError, HTTPError and timeouts are OSErrors
+        raise TeacherUnavailable(str(error)) from error
+    return _contents(response)
+
+
+def _contents(response: IO[bytes]) -> Iterator[str]:
+    with response:
+        try:
+            for line in response:  # one JSON object per line
+                if line.strip():
+                    yield json.loads(line).get("message", {}).get("content", "")
+        except OSError:
+            # ponytail: a timeout in the middle just ends the answer; show a
+            # message if students run into it.
+            return
 
 
 def ask_ollama(prompt: str) -> str:
@@ -107,8 +178,8 @@ def ask_ollama(prompt: str) -> str:
     request = Request(
         OLLAMA_URL, json.dumps(body).encode(), {"Content-Type": "application/json"}
     )
-    # ponytail: no streaming, the page waits for the whole answer (slow on a
-    # CPU); stream it if students find the wait too long.
+    # Only the ask page (the no-JavaScript fallback) uses this; it waits for
+    # the whole answer, while the chat streams it (spec 028).
     try:
         with urlopen(request, timeout=TIMEOUT_SECONDS) as response:
             answer: str = json.load(response)["response"]

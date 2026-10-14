@@ -1,15 +1,22 @@
 import sqlite3
-from collections.abc import Awaitable, Callable
+from collections.abc import Awaitable, Callable, Iterator, Sequence
 from contextlib import closing
 from datetime import date
 from pathlib import Path
-from typing import Annotated, Any
+from typing import Annotated, Any, Literal
 from urllib.parse import quote, unquote
 
 from fastapi import FastAPI, Form, HTTPException, Request
-from fastapi.responses import HTMLResponse, PlainTextResponse, RedirectResponse, Response
+from fastapi.responses import (
+    HTMLResponse,
+    PlainTextResponse,
+    RedirectResponse,
+    Response,
+    StreamingResponse,
+)
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+from pydantic import BaseModel
 from starlette.middleware.trustedhost import TrustedHostMiddleware
 
 from ai_language_teacher.core.assessment import Assessment, AssessmentResult
@@ -35,16 +42,21 @@ from ai_language_teacher.storage import (
     save_student,
 )
 from ai_language_teacher.teacher import (
+    MAX_HISTORY_MESSAGES,
     TeacherUnavailable,
     ask_ollama,
+    chat_messages,
+    chat_ollama,
     current_model,
     safe_answer,
+    safe_stream,
     teacher_prompt,
 )
 
 HERE = Path(__file__).parent
 ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
 MAX_QUESTION_LENGTH = 500
+TOO_LONG = f"Please type a question of up to {MAX_QUESTION_LENGTH} characters."
 MAX_EXPLAINED_ANSWER = 100
 # Holds the open profile's URL-encoded name (spec 026). Not signed: the app is
 # local and has no passwords, so anyone at the keyboard can open any profile.
@@ -80,6 +92,18 @@ def explain_question(answer: str, expected: str) -> str:
     )
 
 
+class ChatTurn(BaseModel):
+    role: Literal["user", "assistant"]
+    content: str
+
+
+class ChatRequest(BaseModel):
+    # The history comes from the browser tab (spec 028); the server keeps nothing.
+    item: str
+    message: str
+    history: list[ChatTurn] = []
+
+
 def current_student(conn: sqlite3.Connection, request: Request) -> Student | None:
     # A cookie naming a deleted profile counts as no profile.
     cookie = request.cookies.get(PROFILE_COOKIE)
@@ -90,6 +114,7 @@ def create_app(
     db_path: str | Path = DEFAULT_DB_PATH,
     today: Callable[[], date] = date.today,
     ask: Callable[[str], str] = ask_ollama,
+    chat: Callable[[list[dict[str, str]]], Iterator[str]] = chat_ollama,
 ) -> FastAPI:
     app = FastAPI(title="AI Language Teacher")
     app.mount("/static", StaticFiles(directory=HERE / "static"), name="static")
@@ -400,6 +425,22 @@ def create_app(
             **context,
         )
 
+    def teacher_target(request: Request, skill: str, item: str) -> Student:
+        with closing(connect(db_path)) as conn:
+            student = study_target(conn, skill, request)
+        # Read-only: only items the student can already see can be asked about.
+        unlocked = unlocked_lessons(student, skill, COURSES[skill])
+        if not any(item in lesson.items for lesson in unlocked):
+            raise HTTPException(status_code=404, detail="No such item in unlocked lessons")
+        return student
+
+    def item_prompt(skill: str, item: str, question: str, earlier: Sequence[str] = ()) -> str:
+        # Words from the student's earlier questions ground follow-ups ("and its
+        # polite form?") that do not repeat the word.
+        context = item_context(COURSES[skill], item)
+        words = find_course_words("\n".join([*earlier, question]))
+        return teacher_prompt(item, context["expected"], context["teaching"], question, words)
+
     @app.post("/ask/{skill}", response_class=HTMLResponse)
     def ask_teacher(
         request: Request,
@@ -407,24 +448,15 @@ def create_app(
         item: Annotated[str, Form()] = "",
         question: Annotated[str, Form()] = "",
     ) -> Response:
-        with closing(connect(db_path)) as conn:
-            student = study_target(conn, skill, request)
-
-        # Read-only page: only items the student can already see can be asked about.
-        unlocked = unlocked_lessons(student, skill, COURSES[skill])
-        if not any(item in lesson.items for lesson in unlocked):
-            raise HTTPException(status_code=404, detail="No such item in unlocked lessons")
-
+        # The no-JavaScript fallback of the chat (spec 028).
+        student = teacher_target(request, skill, item)
         context = item_context(COURSES[skill], item)
         question = question.strip()
         if not question or len(question) > MAX_QUESTION_LENGTH:
-            error = f"Please type a question of up to {MAX_QUESTION_LENGTH} characters."
-            return skill_page(
-                request, "ask.html", student, skill, 400, question=question, error=error, **context
-            )
+            context |= {"question": question, "error": TOO_LONG}
+            return skill_page(request, "ask.html", student, skill, 400, **context)
 
-        words = find_course_words(question)
-        prompt = teacher_prompt(item, context["expected"], context["teaching"], question, words)
+        prompt = item_prompt(skill, item, question)
         try:
             reply, model = safe_answer(ask(prompt), prompt), None
         except TeacherUnavailable:
@@ -439,5 +471,24 @@ def create_app(
             model=model,
             **context,
         )
+
+    @app.post("/chat/{skill}")
+    def chat_with_teacher(request: Request, skill: str, body: ChatRequest) -> Response:
+        teacher_target(request, skill, body.item)
+        message = body.message.strip()
+        if not message or len(message) > MAX_QUESTION_LENGTH:
+            return PlainTextResponse(TOO_LONG, status_code=400)
+
+        history = [(turn.role, turn.content) for turn in body.history][-MAX_HISTORY_MESSAGES:]
+        earlier = [content for role, content in history if role == "user"]
+        messages = chat_messages(history, item_prompt(skill, body.item, message, earlier))
+        try:
+            chunks = chat(messages)
+        except TeacherUnavailable:
+            text = "The AI teacher is not available. Start Ollama and run: ollama pull "
+            return PlainTextResponse(text + current_model(), status_code=503)
+        # Japanese from earlier turns may be repeated, so it counts as allowed too.
+        allowed = "\n".join(each["content"] for each in messages)
+        return StreamingResponse(safe_stream(chunks, allowed), media_type="text/plain")
 
     return app
