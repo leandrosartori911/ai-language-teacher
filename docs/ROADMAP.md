@@ -43,7 +43,16 @@ MVP goal: a local, zero-cost AI teacher that really teaches Japanese
       with a fallback message when Ollama is not running (spec 024)
 - [x] Explain my mistake after a wrong answer (spec 025)
 
-## Phase E: Release
+## Phase F: Polish before release (draft specs, not approved yet)
+The user decided on 2026-10-14 to publish the GIF and the release only
+when the app is presentable. Order:
+- [ ] Profiles work like accounts, with logout (spec 026)
+- [ ] AI teacher guardrails and a red-team test set (spec 027)
+- [ ] Chat with the AI teacher (spec 028)
+- [ ] Navigation and a friendlier dashboard (spec 029)
+- [ ] Web UI design, the release's face, done last and with care (spec 030)
+
+## Phase E: Release (after Phase F)
 - [ ] v0.1.0 release, demo GIF
 
 ## Later

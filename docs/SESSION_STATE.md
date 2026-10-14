@@ -2,7 +2,7 @@
 
 Last updated: 2026-10-08. Specs 020 (web skeleton), 021 (study in the
 browser), 022 (practise previous lessons) and 023 (due-review counts)
-implemented. **Phase C is complete.** Phase D started: ADR 0004 (model
+implemented. **Phase C is complete.** Phase D: ADR 0004 (model
 choice), spec 024 (ask the AI teacher) and 025 (explain my mistake) done.
 
 ## What this project is
@@ -464,24 +464,33 @@ engine, C: web app, D: local LLM teacher, E: release).
 ## Immediate next step for the new session
 
 1. Read this file plus `docs/ROADMAP.md` and the latest specs.
-2. **Phase E in progress: v0.1.0 release, treated as a checklist (no
-   spec), agreed with the user on 2026-10-08.**
-   - [x] README rewritten for the release (status, content table, how it
-         works, end-user quickstart with `pip install .`, AI teacher,
-         "How it is built"). Committed on 2026-10-08; the user may still
-         review the text before the release.
-   - [ ] Demo GIF: **the user records it** with ScreenToGif and saves it
-         as `docs/demo.gif` (< ~8 MB). Script given to the user: warm up
-         Ollama first; browser zoom 125%, ~1280x720, 12-15 fps; create
-         profile "Demo" -> dashboard -> Study -> あ card, Quiz me, "a",
-         Correct, Next -> い card, Quiz me, "e" (wrong) -> "Explain my
-         mistake" (new tab, pause to read) -> close tab -> dashboard.
-   - [ ] Add the GIF to the README; rename CHANGELOG "Unreleased" to
-         `0.1.0 - <date>`; commit, push, watch CI.
-   - [ ] **Ask the user before** creating tag `v0.1.0` and the GitHub
-         Release (public actions); release notes from the CHANGELOG.
-   Streaming and chat history wait until someone needs them. Kana input
-   exercises are in ROADMAP "Later" (IME hint + on-screen kana table,
-   user's idea). New features: spec + approval before tests, as always.
+2. **Phase F (polish before release) comes first, decided by the user
+   on 2026-10-14:** nothing is recorded or published until the app is
+   presentable (good-looking and working well). Draft specs written
+   from the user's review plus a screenshot review and a live probe of
+   the teacher (all **not approved yet**; each needs review and approval
+   before tests, open questions inside each spec):
+   - 026 profiles as accounts with Logout at the right of the header
+     (cookie, URLs without the name, no passwords);
+   - 027 teacher guardrails + red-team test set (user found it easy to
+     break; ask the user for the questions that broke it; probe on
+     2026-10-14 showed single questions refused well but translation
+     refused too; user's failing case: romaji sentences asking for
+     their meaning got an answer about the current lesson instead);
+   - 028 real chat panel with the teacher (bubbles, follow-ups, streaming,
+     first JavaScript; replaces the ask page and new tabs);
+   - 029 navigation and dashboard (header nav, Continue, course cards,
+     session progress, unlock messages, phone-width fixes, consistent
+     buttons and "Practice" spelling);
+   - 030 web UI design, top quality priority, done last: choose a visual
+     direction from mockups first, design tokens, offline fonts,
+     accessibility. Consider the superpowers brainstorming skill and
+     agents for the mockups.
+   Then Phase E: README already rewritten and committed; demo GIF
+   recorded by the user (step-by-step guide was given on 2026-10-14:
+   ScreenToGif, private browser window, zoom 125%, 15 fps, save to
+   `docs/demo.gif` < 8 MB; the guide needs updating after 026-030
+   change the flow); CHANGELOG `0.1.0 - <date>`; ask before tag and
+   GitHub Release.
 3. Later UI: "lesson unlocked" messages, shuffled practice, per-language
    theming via CSS variables.
