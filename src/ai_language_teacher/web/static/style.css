@@ -126,3 +126,98 @@ li.open,
   border-left: 3px solid var(--accent);
   white-space: pre-line;
 }
+
+/* Chat with the teacher (spec 028): a side panel, full screen on a phone. */
+.chat-toggle {
+  margin: 0.5rem 0;
+}
+
+.chat {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(24rem, 100%);
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  border-left: 2px solid var(--accent);
+}
+
+.chat[hidden] {
+  display: none;
+}
+
+.chat-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.chat-head h2 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.messages {
+  flex: 1;
+  overflow-y: auto;
+  margin: 0;
+  padding: 1rem;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.messages li {
+  max-width: 85%;
+  padding: 0.5rem 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  white-space: pre-line;
+}
+
+.messages .user {
+  align-self: flex-end;
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--bg);
+}
+
+.messages .assistant {
+  align-self: flex-start;
+  background: var(--card);
+}
+
+.messages .error {
+  color: var(--error);
+}
+
+.chat-form {
+  flex-wrap: nowrap;
+  padding: 0.5rem 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.chat-form input {
+  flex: 1;
+  min-width: 0;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (max-width: 40rem) {
+  .chat {
+    border-left: none;
+  }
+}

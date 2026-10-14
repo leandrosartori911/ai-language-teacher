@@ -1,8 +1,9 @@
 # Session State — read this first in a new session
 
 Last updated: 2026-10-14. Phases A-D complete. Phase F (polish before
-release): specs 026 (profiles as accounts, logout, delete) and 027
-(teacher guardrails, word lookup, red-team set) done; 028-030
+release): specs 026 (profiles as accounts, logout, delete), 027
+(teacher guardrails, word lookup, red-team set) and 028 (chat panel)
+done; 029-030
 are drafts awaiting approval.
 
 ## What this project is
@@ -123,7 +124,7 @@ ai-language-teacher/
     adr/                    # 0001 web stack, 0002 local LLM, 0003 SQLite, 0004 default model
   src/ai_language_teacher/
     storage.py              # SQLite persistence: connect, save/load/list/delete students (spec 019, 026)
-    teacher.py              # Ollama teacher: teacher_prompt, safe_answer, ask_ollama, TeacherUnavailable (spec 024, 027)
+    teacher.py              # Ollama teacher: prompts, safe_stream/safe_answer, chat_ollama, ask_ollama (spec 024, 027, 028)
     main.py                 # main(): uvicorn on 127.0.0.1:8000; console script `ai-language-teacher`
     web/                    # spec 020
       app.py                  # create_app(db_path, today): home, profiles, dashboard, study, practice
@@ -408,9 +409,8 @@ teaching card (new item, wrong answer in Study/Practice, ask page).
 Explain my mistake (spec 025): wrong-answer feedback (`_feedback.html`)
 has a form posting to `/ask` with a hidden ready-made question from
 `explain_question(answer, expected)` in `web/app.py` (answer cut to 100
-chars so it fits the 500 limit). No new route. On feedback pages
-(`mode == "feedback"`) the explain and ask forms use `target="_blank"`
-("opens in a new tab") so the Next link and the practice position stay.
+chars so it fits the 500 limit). No new route. (The new tabs it used
+were removed by spec 028: the chat panel opens instead.)
 
 Guardrails (spec 027): `find_course_words(question)` (in
 `language/japanese/lookup.py`) returns one line per vocabulary word
@@ -431,19 +431,45 @@ is public). Re-run the evals after any prompt change. Beware: in Bash
 heredocs passed through the tool, `\n` arrived as a real newline, so
 edit Python files containing escapes with the Edit/Write tools.
 
+Chat (spec 028): `_chat.html` (included by `_teaching.html`, so only on
+pages with a teaching card, never on quiz screens) + `static/chat.js`
+(first JS; shipped via `web/static/*.js` in package-data). JS takes over
+`form.ask`/`form.explain` and the panel form; without JS they post to
+`/ask` (fallback, no new tabs). History lives in `sessionStorage`
+(`teacher-chat`, plus `teacher-chat-open`), last 12 messages sent per
+request. `POST /chat/{skill}` JSON (`ChatRequest`: item, message,
+history of `ChatTurn` role user|assistant) -> `teacher_target` (profile,
+skill, unlocked item) -> `item_prompt(skill, item, message, earlier)`
+(lookup over the new and earlier student messages) -> `chat_messages`
+(system, capped history with student turns tagged, prompt) ->
+`chat(messages)` (`create_app(chat=...)`, default `chat_ollama`:
+`/api/chat` stream, raises `TeacherUnavailable` before streaming -> 503)
+-> `StreamingResponse(safe_stream(chunks, allowed))` where allowed = all
+message contents. `safe_stream` emits whole sentences ("." needs a space
+after it), strips prompt tags, drops invented Japanese, caps at 1200,
+fallback if nothing sent; `safe_answer` is a wrapper. Lookup lines now
+carry the curated explanation; kana-only words do not repeat the
+reading (it made the model garble kana). Evals after 028: 25/26.
+Browser check done with the claude-in-chrome tools on 2026-10-14 (the
+user picked "Browser 1"); careful: `document.querySelector("form")`
+hits the header Logout form first.
+
 ## Known issues / deliberate shortcuts (marked `# ponytail:` in code)
 
 1. **Answer matching is exact after normalization** — no fuzzy/typo
    tolerance (explicitly out of scope in spec 003, may never be needed).
-2. **No streaming of teacher answers** (`teacher.py`): the page waits
-   for the whole answer; slow on CPU. Stream it if the wait bothers
-   students.
+2. **Ask page does not stream** (`teacher.py` `ask_ollama`): only the
+   no-JavaScript fallback; the chat streams.
 3. **Lookup matches exact words only** (`lookup.py`): conjugated forms
    ("tabemasu", "wasuretai") are not found; needs grammar content.
+4. **Mid-answer timeout ends the chat answer quietly** (`teacher.py`
+   `_contents`); show a message if students run into it.
+5. **Chat panel covers the header (and Logout) on wide screens** while
+   open; listed in spec 030.
 
 ## Test status
 
-997 tests passing, `ruff check` and `mypy` (strict) clean, as of spec 027.
+1026 tests passing, `ruff check` and `mypy` (strict) clean, as of spec 028.
 
 ```
 tests/test_student.py     — Student creation, skills, mastery aggregation
@@ -477,6 +503,7 @@ tests/test_ask_web.py     — ask page, fallback, limits, checks
 tests/test_explain_web.py — explain-my-mistake form, cut answer, new tab
 tests/test_profiles_web.py — profile cookie, logout, delete with confirmation
 tests/test_lookup.py      — romaji from kana tables, course word lookup
+tests/test_chat_web.py    — chat route: streaming, history, checks, panel markup
 ```
 
 ## Progress
@@ -502,7 +529,8 @@ engine, C: web app, D: local LLM teacher, E: release).
 - **Phase D (in progress):** ADR 0004 model choice; 024 ask the AI
   teacher about an item; 025 explain my mistake done.
 - **Phase F (in progress):** 026 profiles as accounts with logout and
-  delete done; 027 teacher guardrails, word lookup and red-team set done.
+  delete done; 027 teacher guardrails, word lookup and red-team set done;
+  028 chat panel done.
 - **Phase E:** v0.1.0 release.
 
 ## Immediate next step for the new session
@@ -514,11 +542,10 @@ engine, C: web app, D: local LLM teacher, E: release).
    from the user's review plus a screenshot review and a live probe of
    the teacher (all **not approved yet**; each needs review and approval
    before tests, open questions inside each spec). **Next: review spec
-   028 with the user:**
+   029 with the user:**
    - 026 done (profiles as accounts, logout, delete with confirmation);
    - 027 done (guardrails, course word lookup, red-team set 25/26);
-   - 028 real chat panel with the teacher (bubbles, follow-ups, streaming,
-     first JavaScript; replaces the ask page and new tabs);
+   - 028 done (chat panel, sentence-by-sentence streaming, browser-checked);
    - 029 navigation and dashboard (header nav, Continue, course cards,
      session progress, unlock messages, phone-width fixes, consistent
      buttons and "Practice" spelling);

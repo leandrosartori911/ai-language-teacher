@@ -7,10 +7,10 @@
 <p>Your answer: {{ answer }}</p>
 <p>Expected: {{ expected }}</p>
 {% if not correct %}
-<form method="post" action="/ask/{{ skill }}" target="_blank" class="explain">
+<form method="post" action="/ask/{{ skill }}" class="explain">
   <input type="hidden" name="item" value="{{ item }}">
   <input type="hidden" name="question" value="{{ explain }}">
-  <button type="submit">Explain my mistake (opens in a new tab)</button>
+  <button type="submit">Explain my mistake</button>
 </form>
 {% include "_teaching.html" %}
 {% endif %}

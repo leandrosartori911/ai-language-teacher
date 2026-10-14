@@ -1,0 +1,16 @@
+{# Chat with the teacher (spec 028). chat.js shows it and takes over the ask
+   forms; without JavaScript they post to the ask page instead. #}
+<button type="button" class="chat-toggle" aria-controls="chat" aria-expanded="false" hidden>Chat with the teacher</button>
+<section id="chat" class="chat" data-url="/chat/{{ skill }}" data-item="{{ item }}" aria-label="Chat with the AI teacher" hidden>
+  <div class="chat-head">
+    <h2>AI teacher</h2>
+    <button type="button" class="chat-close" aria-label="Close the chat">&times;</button>
+  </div>
+  <ol class="messages" aria-live="polite"></ol>
+  <form class="chat-form">
+    <label for="chat-input" class="visually-hidden">Message to the teacher</label>
+    <input id="chat-input" maxlength="500" autocomplete="off" placeholder="Ask about {{ item }}">
+    <button type="submit">Send</button>
+  </form>
+</section>
+<script src="/static/chat.js" defer></script>

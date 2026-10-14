@@ -35,8 +35,9 @@ All teaching content was written in English for this project.
 - **Dashboard:** mastery, unlocked lessons and reviews due today, per
   course. Several profiles can share one computer: open one, log out to
   switch, or delete it.
-- **AI teacher (optional):** ask a question on any teaching card, or press
-  "Explain my mistake" after a wrong answer. A local model answers from
+- **AI teacher (optional):** chat with it from any teaching card, ask
+  follow-up questions, or press "Explain my mistake" after a wrong
+  answer; answers appear sentence by sentence. A local model answers from
   the lesson content only: course words in your question (in kana, kanji
   or romaji) are looked up and given to it, it says so when a word is not
   in the lessons yet, and any Japanese it invents is removed before you
@@ -86,8 +87,8 @@ work without it.
 
 ## How it is built
 
-- Python, FastAPI and Jinja2 templates, SQLite (standard library), no
-  JavaScript. Lesson content is JSON shipped inside the package.
+- Python, FastAPI and Jinja2 templates, SQLite (standard library), and
+  one small dependency-free script for the chat. Lesson content is JSON shipped inside the package.
 - Spec-driven: every feature starts as a short spec in
   [docs/specs](docs/specs), tests come from its acceptance criteria and
   are written before the code. Design decisions are recorded in
