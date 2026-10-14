@@ -45,7 +45,7 @@ MVP goal: a local, zero-cost AI teacher that really teaches Japanese
 
 ## Phase F: Polish before release
 The user decided on 2026-10-14 to publish the GIF and the release only
-when the app is presentable. Specs 029-030 are drafts, each approved
+when the app is presentable. Spec 029 is approved, 030 is a draft, each approved
 before its tests. Order:
 - [x] Profiles work like accounts, with logout and delete (spec 026)
 - [x] AI teacher guardrails, course word lookup and a red-team test set (spec 027)
