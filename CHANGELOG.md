@@ -91,3 +91,7 @@
   answers and the lesson content. On feedback pages the teacher answers
   in a new tab, so the Next link and the place in practice are kept
   (spec 025).
+- Profiles work like accounts: choosing one opens it (remembered in a
+  cookie), every page shows its name and a Logout button, and URLs no
+  longer contain the name (`/dashboard`, `/study/<skill>`...). A trash
+  button deletes a profile after a confirmation page (spec 026).

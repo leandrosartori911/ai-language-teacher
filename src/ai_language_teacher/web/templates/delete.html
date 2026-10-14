@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Delete {{ target }} · AI Language Teacher{% endblock %}
+{% block content %}
+<h1>Delete profile</h1>
+<p>You are about to delete the profile {{ target }} and all its progress. This cannot be undone.</p>
+<p>Are you sure?</p>
+<form method="post" action="/delete">
+  <input type="hidden" name="name" value="{{ target }}">
+  <button type="submit">Yes, delete</button>
+  <a class="button" href="/">No</a>
+</form>
+{% endblock %}

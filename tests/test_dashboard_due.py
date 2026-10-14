@@ -8,6 +8,9 @@ from ai_language_teacher.core.student import Student
 from ai_language_teacher.storage import connect, save_student
 from ai_language_teacher.web.app import create_app
 
+# The cookie that choosing "Ana" on the home page sets (spec 026).
+ANA = {"profile": "Ana"}
+
 TODAY = date(2026, 10, 8)
 
 
@@ -18,7 +21,9 @@ def db_path(tmp_path):
 
 @pytest.fixture
 def client(db_path):
-    return TestClient(create_app(db_path, today=lambda: TODAY), base_url="http://127.0.0.1:8000")
+    return TestClient(
+        create_app(db_path, today=lambda: TODAY), base_url="http://127.0.0.1:8000", cookies=ANA
+    )
 
 
 def save(db_path, student):
@@ -28,7 +33,7 @@ def save(db_path, student):
 
 
 def dashboard(client):
-    return client.get("/students/Ana").text
+    return client.get("/dashboard").text
 
 
 def test_student_without_cards_sees_zero_due(client, db_path):
@@ -82,7 +87,7 @@ def test_count_uses_the_app_today(db_path):
 
     def count_on(day):
         app = create_app(db_path, today=lambda: day)
-        return TestClient(app, base_url="http://127.0.0.1:8000").get("/students/Ana").text
+        return TestClient(app, base_url="http://127.0.0.1:8000", cookies=ANA).get("/dashboard").text
 
     assert "lessons · 0 due" in count_on(TODAY)
     assert "lessons · 1 due" in count_on(TODAY + timedelta(days=2))

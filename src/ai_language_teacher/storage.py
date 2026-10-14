@@ -130,5 +130,12 @@ def load_student(conn: sqlite3.Connection, name: str) -> Student | None:
     return student
 
 
+def delete_student(conn: sqlite3.Connection, name: str) -> bool:
+    # ON DELETE CASCADE removes the student's skills, knowledge and cards.
+    with conn:
+        cursor = conn.execute("DELETE FROM students WHERE name = ?", (name,))
+    return cursor.rowcount > 0
+
+
 def list_students(conn: sqlite3.Connection) -> list[str]:
     return [name for (name,) in conn.execute("SELECT name FROM students ORDER BY name")]

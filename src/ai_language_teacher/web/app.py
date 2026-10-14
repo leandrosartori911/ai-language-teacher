@@ -4,7 +4,7 @@ from contextlib import closing
 from datetime import date
 from pathlib import Path
 from typing import Annotated, Any
-from urllib.parse import quote
+from urllib.parse import quote, unquote
 
 from fastapi import FastAPI, Form, HTTPException, Request
 from fastapi.responses import HTMLResponse, PlainTextResponse, RedirectResponse, Response
@@ -28,6 +28,7 @@ from ai_language_teacher.language.japanese.course import COURSES, PREREQUISITES
 from ai_language_teacher.storage import (
     DEFAULT_DB_PATH,
     connect,
+    delete_student,
     list_students,
     load_student,
     save_student,
@@ -43,6 +44,9 @@ HERE = Path(__file__).parent
 ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
 MAX_QUESTION_LENGTH = 500
 MAX_EXPLAINED_ANSWER = 100
+# Holds the open profile's URL-encoded name (spec 026). Not signed: the app is
+# local and has no passwords, so anyone at the keyboard can open any profile.
+PROFILE_COOKIE = "profile"
 
 
 def course_mastery(student: Student, skill: str, lessons: list[Lesson]) -> float:
@@ -74,6 +78,12 @@ def explain_question(answer: str, expected: str) -> str:
     )
 
 
+def current_student(conn: sqlite3.Connection, request: Request) -> Student | None:
+    # A cookie naming a deleted profile counts as no profile.
+    cookie = request.cookies.get(PROFILE_COOKIE)
+    return None if cookie is None else load_student(conn, unquote(cookie))
+
+
 def create_app(
     db_path: str | Path = DEFAULT_DB_PATH,
     today: Callable[[], date] = date.today,
@@ -101,22 +111,25 @@ def create_app(
     def home_page(request: Request, error: str | None = None, status_code: int = 200) -> Response:
         with closing(connect(db_path)) as conn:
             names = list_students(conn)
-        return templates.TemplateResponse(
-            request, "home.html", {"names": names, "error": error}, status_code=status_code
-        )
+            current = current_student(conn, request)
+        context = {"names": names, "error": error, "name": current and current.name}
+        return templates.TemplateResponse(request, "home.html", context, status_code=status_code)
 
-    def load_or_404(conn: sqlite3.Connection, name: str) -> Student:
-        student = load_student(conn, name)
+    def open_student(conn: sqlite3.Connection, request: Request) -> Student:
+        student = current_student(conn, request)
         if student is None:
-            raise HTTPException(status_code=404, detail="No profile with that name")
+            # No open profile: back to "Who is studying?".
+            raise HTTPException(status_code=303, headers={"Location": "/"})
         return student
 
     @app.get("/", response_class=HTMLResponse)
     def home(request: Request) -> Response:
         return home_page(request)
 
+    # Creates the profile if needed, then opens it. Choosing an existing
+    # profile on the home page posts its name here too.
     @app.post("/students")
-    def create_student(request: Request, name: Annotated[str, Form()] = "") -> Response:
+    def open_profile(request: Request, name: Annotated[str, Form()] = "") -> Response:
         name = name.strip()
         if not name:
             return home_page(request, "Please enter a name.", 400)
@@ -124,13 +137,40 @@ def create_app(
         with closing(connect(db_path)) as conn:
             if load_student(conn, name) is None:
                 save_student(conn, Student(name))
-        return RedirectResponse(f"/students/{quote(name)}", status_code=303)
+        response = RedirectResponse("/dashboard", status_code=303)
+        response.set_cookie(PROFILE_COOKIE, quote(name, safe=""), httponly=True, samesite="lax")
+        return response
 
-    # ":path" so a name containing "/" still matches this route.
-    @app.get("/students/{name:path}", response_class=HTMLResponse)
-    def dashboard(request: Request, name: str) -> Response:
+    @app.post("/logout")
+    def logout() -> Response:
+        response = RedirectResponse("/", status_code=303)
+        response.delete_cookie(PROFILE_COOKIE)
+        return response
+
+    @app.get("/delete", response_class=HTMLResponse)
+    def confirm_delete(request: Request, name: str = "") -> Response:
+        # Only asks; the Yes button posts to /delete below.
         with closing(connect(db_path)) as conn:
-            student = load_or_404(conn, name)
+            if load_student(conn, name) is None:
+                raise HTTPException(status_code=404, detail="No profile with that name")
+            current = current_student(conn, request)
+        context = {"target": name, "name": current and current.name}
+        return templates.TemplateResponse(request, "delete.html", context)
+
+    @app.post("/delete")
+    def delete_profile(request: Request, name: Annotated[str, Form()] = "") -> Response:
+        with closing(connect(db_path)) as conn:
+            if not delete_student(conn, name):
+                raise HTTPException(status_code=404, detail="No profile with that name")
+        response = RedirectResponse("/", status_code=303)
+        if unquote(request.cookies.get(PROFILE_COOKIE, "")) == name:
+            response.delete_cookie(PROFILE_COOKIE)
+        return response
+
+    @app.get("/dashboard", response_class=HTMLResponse)
+    def dashboard(request: Request) -> Response:
+        with closing(connect(db_path)) as conn:
+            student = open_student(conn, request)
 
         # Read-only page: open_skills/unlocked_lessons update the student in
         # memory, but nothing is saved here.
@@ -152,10 +192,10 @@ def create_app(
             request, "dashboard.html", {"name": student.name, "skills": skills}
         )
 
-    def study_target(conn: sqlite3.Connection, skill: str, name: str) -> Student:
+    def study_target(conn: sqlite3.Connection, skill: str, request: Request) -> Student:
+        student = open_student(conn, request)
         if skill not in COURSES:
             raise HTTPException(status_code=404, detail="No course for that skill")
-        student = load_or_404(conn, name)
         if skill not in open_skills(student, COURSES, PREREQUISITES):
             raise HTTPException(status_code=403, detail=f"{skill} is locked")
         return student
@@ -171,8 +211,8 @@ def create_app(
         context |= {
             "name": student.name,
             "skill": skill,
-            "study_url": f"/study/{skill}/{quote(student.name)}",
-            "practice_url": f"/practice/{skill}/{quote(student.name)}",
+            "study_url": f"/study/{skill}",
+            "practice_url": f"/practice/{skill}",
         }
         return templates.TemplateResponse(request, template, context, status_code=status_code)
 
@@ -185,10 +225,10 @@ def create_app(
             "expected": lesson.items[item],
         }
 
-    @app.get("/study/{skill}/{name:path}", response_class=HTMLResponse)
-    def study(request: Request, skill: str, name: str, step: str | None = None) -> Response:
+    @app.get("/study/{skill}", response_class=HTMLResponse)
+    def study(request: Request, skill: str, step: str | None = None) -> Response:
         with closing(connect(db_path)) as conn:
-            student = study_target(conn, skill, name)
+            student = study_target(conn, skill, request)
 
         lessons = COURSES[skill]
         queue = study_queue(student, skill, lessons, today())
@@ -210,23 +250,22 @@ def create_app(
             request, "study.html", student, skill, mode=mode, **item_context(lessons, item)
         )
 
-    @app.post("/study/{skill}/{name:path}", response_class=HTMLResponse)
+    @app.post("/study/{skill}", response_class=HTMLResponse)
     def submit_answer(
         request: Request,
         skill: str,
-        name: str,
         item: Annotated[str, Form()] = "",
         answer: Annotated[str, Form()] = "",
     ) -> Response:
         with closing(connect(db_path)) as conn:
-            student = study_target(conn, skill, name)
+            student = study_target(conn, skill, request)
             lessons = COURSES[skill]
             day = today()
 
             # Only the current queue can be answered: a resent form or an item
             # that is not due yet records nothing.
             if item not in study_queue(student, skill, lessons, day):
-                return RedirectResponse(f"/study/{skill}/{quote(student.name)}", status_code=303)
+                return RedirectResponse(f"/study/{skill}", status_code=303)
 
             context = item_context(lessons, item)
             if not answer.strip():
@@ -265,12 +304,12 @@ def create_app(
             raise HTTPException(status_code=403, detail="That lesson is locked")
         return int(number), lessons[int(number) - 1]
 
-    @app.get("/practice/{skill}/{name:path}", response_class=HTMLResponse)
+    @app.get("/practice/{skill}", response_class=HTMLResponse)
     def practice(
-        request: Request, skill: str, name: str, lesson: str | None = None, n: int = 0
+        request: Request, skill: str, lesson: str | None = None, n: int = 0
     ) -> Response:
         with closing(connect(db_path)) as conn:
-            student = study_target(conn, skill, name)
+            student = study_target(conn, skill, request)
 
         if lesson is None:
             unlocked = unlocked_lessons(student, skill, COURSES[skill])
@@ -306,23 +345,22 @@ def create_app(
             context |= item_context(COURSES[skill], learned[n])
         return skill_page(request, "practice.html", student, skill, mode=mode, **context)
 
-    @app.post("/practice/{skill}/{name:path}", response_class=HTMLResponse)
+    @app.post("/practice/{skill}", response_class=HTMLResponse)
     def submit_practice(
         request: Request,
         skill: str,
-        name: str,
         lesson: Annotated[str, Form()] = "",
         n: Annotated[int, Form()] = 0,
         item: Annotated[str, Form()] = "",
         answer: Annotated[str, Form()] = "",
     ) -> Response:
         with closing(connect(db_path)) as conn:
-            student = study_target(conn, skill, name)
+            student = study_target(conn, skill, request)
             number, chosen = practice_lesson(student, skill, lesson)
             learned = learned_items(student, skill, chosen)
             # Only learned items of this lesson can be practised.
             if item not in learned:
-                url = f"/practice/{skill}/{quote(student.name)}?lesson={number}"
+                url = f"/practice/{skill}?lesson={number}"
                 return RedirectResponse(url, status_code=303)
 
             context: dict[str, Any] = {
@@ -360,16 +398,15 @@ def create_app(
             **context,
         )
 
-    @app.post("/ask/{skill}/{name:path}", response_class=HTMLResponse)
+    @app.post("/ask/{skill}", response_class=HTMLResponse)
     def ask_teacher(
         request: Request,
         skill: str,
-        name: str,
         item: Annotated[str, Form()] = "",
         question: Annotated[str, Form()] = "",
     ) -> Response:
         with closing(connect(db_path)) as conn:
-            student = study_target(conn, skill, name)
+            student = study_target(conn, skill, request)
 
         # Read-only page: only items the student can already see can be asked about.
         unlocked = unlocked_lessons(student, skill, COURSES[skill])

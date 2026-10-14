@@ -10,11 +10,14 @@ from ai_language_teacher.language.japanese.course import COURSES
 from ai_language_teacher.storage import connect, load_student, save_student
 from ai_language_teacher.web.app import create_app
 
+# The cookie that choosing "Ana" on the home page sets (spec 026).
+ANA = {"profile": "Ana"}
+
 TODAY = date(2026, 10, 5)
 APP_URL = "http://127.0.0.1:8000"
 HIRAGANA = COURSES["hiragana"]
 LATER = Card(3, TODAY + timedelta(days=4))
-PRACTICE = "/practice/hiragana/Ana"
+PRACTICE = "/practice/hiragana"
 
 
 @pytest.fixture
@@ -24,7 +27,7 @@ def db_path(tmp_path):
 
 @pytest.fixture
 def client(db_path):
-    return TestClient(create_app(db_path, today=lambda: TODAY), base_url=APP_URL)
+    return TestClient(create_app(db_path, today=lambda: TODAY), base_url=APP_URL, cookies=ANA)
 
 
 def save(db_path, student):
@@ -56,7 +59,7 @@ def practise(client, item, answer, n=0, lesson="1", **kwargs):
 
 
 def test_dashboard_links_to_practice_only_for_open_skills(client, ana):
-    text = client.get("/students/Ana").text
+    text = client.get("/dashboard").text
 
     assert f'href="{PRACTICE}"' in text
     assert "/practice/katakana/" not in text
@@ -117,7 +120,7 @@ def test_past_the_last_item_practice_is_complete(client, ana):
 
     assert "Practice complete" in text
     assert f'href="{PRACTICE}"' in text
-    assert 'href="/study/hiragana/Ana"' in text
+    assert 'href="/study/hiragana"' in text
 
 
 def test_lesson_with_nothing_learned_says_so(client, db_path):
@@ -126,7 +129,7 @@ def test_lesson_with_nothing_learned_says_so(client, db_path):
     text = client.get(f"{PRACTICE}?lesson=1").text
 
     assert "Nothing learned in this lesson yet" in text
-    assert 'href="/study/hiragana/Ana"' in text
+    assert 'href="/study/hiragana"' in text
 
 
 @pytest.mark.parametrize("item", ["う", "か", ""])
@@ -163,9 +166,8 @@ def test_negative_position_returns_404(client, ana):
 
 
 def test_locked_skill_and_unknowns(client, ana):
-    assert client.get("/practice/katakana/Ana").status_code == 403
-    assert client.get("/practice/grammar/Ana").status_code == 404
-    assert client.get("/practice/hiragana/Nobody").status_code == 404
+    assert client.get("/practice/katakana").status_code == 403
+    assert client.get("/practice/grammar").status_code == 404
 
 
 def test_foreign_origin_cannot_practise(client, ana, db_path):

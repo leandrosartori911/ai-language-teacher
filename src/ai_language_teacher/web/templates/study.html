@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block title %}{{ skill }} · {{ name }} · AI Language Teacher{% endblock %}
 {% block content %}
-<p><a href="/students/{{ name|urlencode }}">{{ name }}</a> · {{ skill }}</p>
+<p><a href="/dashboard">{{ name }}</a> · {{ skill }}</p>
 
 {% if mode == "teach" %}
 <h1>New: <span lang="ja">{{ item }}</span></h1>
@@ -25,6 +25,6 @@
 {% else %}
 <h1>Nothing to study right now</h1>
 {% if next_review %}<p>Next review: {{ next_review.isoformat() }}</p>{% endif %}
-<p><a href="/students/{{ name|urlencode }}">Back to {{ name }}</a></p>
+<p><a href="/dashboard">Back to {{ name }}</a></p>
 {% endif %}
 {% endblock %}

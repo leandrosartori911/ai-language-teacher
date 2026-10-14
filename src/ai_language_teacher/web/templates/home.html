@@ -4,8 +4,15 @@
 
 {% if names %}
 <ul class="profiles">
-  {% for name in names %}
-  <li><a href="/students/{{ name|urlencode }}">{{ name }}</a></li>
+  {% for each in names %}
+  <li>
+    {# Choosing a profile posts its name, like creating one (spec 026). #}
+    <form method="post" action="/students">
+      <input type="hidden" name="name" value="{{ each }}">
+      <button type="submit">{{ each }}</button>
+    </form>
+    <a class="trash" href="/delete?{{ {"name": each}|urlencode }}" aria-label="Delete profile {{ each }}" title="Delete profile">&#128465;</a>
+  </li>
   {% endfor %}
 </ul>
 {% endif %}

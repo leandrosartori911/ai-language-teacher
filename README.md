@@ -33,7 +33,8 @@ All teaching content was written in English for this project.
 - **Practice:** go back over any unlocked lesson. Practice never pushes a
   review further away.
 - **Dashboard:** mastery, unlocked lessons and reviews due today, per
-  course. Several profiles can share one computer.
+  course. Several profiles can share one computer: open one, log out to
+  switch, or delete it.
 - **AI teacher (optional):** ask a question on any teaching card, or press
   "Explain my mistake" after a wrong answer. A local model answers from
   that item's lesson content only.
