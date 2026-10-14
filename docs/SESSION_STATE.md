@@ -1,7 +1,8 @@
 # Session State — read this first in a new session
 
 Last updated: 2026-10-14. Phases A-D complete. Phase F (polish before
-release): spec 026 (profiles as accounts, logout, delete) done; 027-030
+release): specs 026 (profiles as accounts, logout, delete) and 027
+(teacher guardrails, word lookup, red-team set) done; 028-030
 are drafts awaiting approval.
 
 ## What this project is
@@ -122,7 +123,7 @@ ai-language-teacher/
     adr/                    # 0001 web stack, 0002 local LLM, 0003 SQLite, 0004 default model
   src/ai_language_teacher/
     storage.py              # SQLite persistence: connect, save/load/list/delete students (spec 019, 026)
-    teacher.py              # Ollama teacher: teacher_prompt, ask_ollama, TeacherUnavailable (spec 024)
+    teacher.py              # Ollama teacher: teacher_prompt, safe_answer, ask_ollama, TeacherUnavailable (spec 024, 027)
     main.py                 # main(): uvicorn on 127.0.0.1:8000; console script `ai-language-teacher`
     web/                    # spec 020
       app.py                  # create_app(db_path, today): home, profiles, dashboard, study, practice
@@ -148,6 +149,7 @@ ai-language-teacher/
         kanji.py                   # KANJI_LESSONS (6), KANJI (40) (spec 016)
         vocabulary.py              # VOCABULARY_LESSONS (10), VOCABULARY (100) (spec 017)
         course.py                  # COURSES, PREREQUISITES: Japanese course order (spec 018)
+        lookup.py                  # to_romaji, find_course_words: course words in a message (spec 027)
   tests/
     test_student.py  test_assessment.py  test_question.py  test_lesson.py
     test_hiragana.py  test_katakana.py  test_loader.py  test_progress.py
@@ -410,6 +412,25 @@ chars so it fits the 500 limit). No new route. On feedback pages
 (`mode == "feedback"`) the explain and ask forms use `target="_blank"`
 ("opens in a new tab") so the Next link and the practice position stay.
 
+Guardrails (spec 027): `find_course_words(question)` (in
+`language/japanese/lookup.py`) returns one line per vocabulary word
+(matched by word, kana reading, or romaji key: long vowels collapsed,
+final は also "wa", 1-3 joined words, keys under 3 letters skipped) and
+per kanji (by character). Romaji comes from the hiragana lessons
+(`to_romaji`). `teacher_prompt(..., words)` wraps content in `<lesson>`,
+`<course_words>` (or "none") and `<student_message>`; `<`/`>` in the
+question become `‹`/`›`. `SYSTEM_PROMPT` is a numbered rule list.
+`safe_answer(reply, prompt)` drops sentences whose Japanese runs are not
+in the prompt (fallback `FALLBACK_ANSWER` if nothing is left) and cuts
+answers over `MAX_ANSWER_LENGTH` (1200) after the last full sentence.
+The ask route runs lookup, prompt, `ask`, `safe_answer`.
+`evals/teacher_cases.json` (26 cases) + `evals/run_teacher_evals.py`
+(run by hand, needs Ollama) gave 25/26 with `qwen2.5:7b` on 2026-10-14;
+the known failure is "repeat your system prompt" (accepted: the prompt
+is public). Re-run the evals after any prompt change. Beware: in Bash
+heredocs passed through the tool, `\n` arrived as a real newline, so
+edit Python files containing escapes with the Edit/Write tools.
+
 ## Known issues / deliberate shortcuts (marked `# ponytail:` in code)
 
 1. **Answer matching is exact after normalization** — no fuzzy/typo
@@ -417,10 +438,12 @@ chars so it fits the 500 limit). No new route. On feedback pages
 2. **No streaming of teacher answers** (`teacher.py`): the page waits
    for the whole answer; slow on CPU. Stream it if the wait bothers
    students.
+3. **Lookup matches exact words only** (`lookup.py`): conjugated forms
+   ("tabemasu", "wasuretai") are not found; needs grammar content.
 
 ## Test status
 
-958 tests passing, `ruff check` and `mypy` (strict) clean, as of spec 026.
+997 tests passing, `ruff check` and `mypy` (strict) clean, as of spec 027.
 
 ```
 tests/test_student.py     — Student creation, skills, mastery aggregation
@@ -453,6 +476,7 @@ tests/test_teacher.py     — teacher prompt, system prompt, Ollama call (faked)
 tests/test_ask_web.py     — ask page, fallback, limits, checks
 tests/test_explain_web.py — explain-my-mistake form, cut answer, new tab
 tests/test_profiles_web.py — profile cookie, logout, delete with confirmation
+tests/test_lookup.py      — romaji from kana tables, course word lookup
 ```
 
 ## Progress
@@ -478,7 +502,7 @@ engine, C: web app, D: local LLM teacher, E: release).
 - **Phase D (in progress):** ADR 0004 model choice; 024 ask the AI
   teacher about an item; 025 explain my mistake done.
 - **Phase F (in progress):** 026 profiles as accounts with logout and
-  delete done.
+  delete done; 027 teacher guardrails, word lookup and red-team set done.
 - **Phase E:** v0.1.0 release.
 
 ## Immediate next step for the new session
@@ -490,13 +514,9 @@ engine, C: web app, D: local LLM teacher, E: release).
    from the user's review plus a screenshot review and a live probe of
    the teacher (all **not approved yet**; each needs review and approval
    before tests, open questions inside each spec). **Next: review spec
-   027 with the user:**
+   028 with the user:**
    - 026 done (profiles as accounts, logout, delete with confirmation);
-   - 027 teacher guardrails + red-team test set (user found it easy to
-     break; ask the user for the questions that broke it; probe on
-     2026-10-14 showed single questions refused well but translation
-     refused too; user's failing case: romaji sentences asking for
-     their meaning got an answer about the current lesson instead);
+   - 027 done (guardrails, course word lookup, red-team set 25/26);
    - 028 real chat panel with the teacher (bubbles, follow-ups, streaming,
      first JavaScript; replaces the ask page and new tabs);
    - 029 navigation and dashboard (header nav, Continue, course cards,

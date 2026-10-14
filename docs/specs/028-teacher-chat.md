@@ -48,7 +48,9 @@ question, and the student leaves the lesson to read the answer.
   Proposal: no in this spec; it would need a schema change.
 - A general chat about Japanese, not tied to an item, needs a way to
   find the right lesson content (search over the lessons). Proposal:
-  later spec; this one always grounds on the current item.
+  later spec; this one always grounds on the current item. Spec 027
+  already adds `find_course_words`, which looks up course words named in
+  each message, so the chat can reuse it per message.
 
 ## Out of Scope
 - Voice input or output.
