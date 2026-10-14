@@ -95,3 +95,11 @@
   cookie), every page shows its name and a Logout button, and URLs no
   longer contain the name (`/dashboard`, `/study/<skill>`...). A trash
   button deletes a profile after a confirmation page (spec 026).
+- AI teacher guardrails (spec 027): course words in the question (kana,
+  kanji or romaji such as "taberu" or "ohayou gozaimasu") are looked up
+  and added to the prompt; words outside the course get "not in the
+  lessons yet" instead of a guess. Lesson content, course words and the
+  student's message sit inside tags the student cannot close, and the
+  rules are a numbered list. Answer sentences with Japanese not found in
+  the prompt are removed and long answers are cut. A red-team set of 26
+  cases (`evals/`) passes 25 with `qwen2.5:7b`.

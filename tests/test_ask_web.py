@@ -121,3 +121,20 @@ def test_foreign_origin_is_blocked(client, ana, asked):
 
     assert response.status_code == 403
     assert asked == []
+
+
+def test_course_words_in_the_question_reach_the_prompt(client, ana, asked):
+    ask(client, question="What is the meaning of taberu?")
+
+    assert "食べる (たべる, taberu): to eat" in asked[0]
+
+
+def test_invented_japanese_in_the_answer_is_not_shown(db_path, ana):
+    def inventing_teacher(prompt):
+        return "あ is 'a'. You could say 東京に行きたい。"
+
+    app = create_app(db_path, today=lambda: date(2026, 10, 8), ask=inventing_teacher)
+    text = ask(TestClient(app, base_url=APP_URL, cookies=ANA)).text
+
+    assert "あ is &#39;a&#39;." in text
+    assert "東京" not in text

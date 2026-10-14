@@ -37,7 +37,10 @@ All teaching content was written in English for this project.
   switch, or delete it.
 - **AI teacher (optional):** ask a question on any teaching card, or press
   "Explain my mistake" after a wrong answer. A local model answers from
-  that item's lesson content only.
+  the lesson content only: course words in your question (in kana, kanji
+  or romaji) are looked up and given to it, it says so when a word is not
+  in the lessons yet, and any Japanese it invents is removed before you
+  see the answer. A red-team test set measures this (see below).
 
 ## Quickstart
 
@@ -97,6 +100,13 @@ For development:
 ```powershell
 pip install -e ".[dev]"
 ruff check . ; mypy ; pytest
+```
+
+To check the AI teacher against its red-team and quality cases (needs
+Ollama and the model; not run in CI):
+
+```powershell
+python evals/run_teacher_evals.py
 ```
 
 ## Roadmap

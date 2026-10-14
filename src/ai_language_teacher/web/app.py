@@ -25,6 +25,7 @@ from ai_language_teacher.core.review import (
 )
 from ai_language_teacher.core.student import Student
 from ai_language_teacher.language.japanese.course import COURSES, PREREQUISITES
+from ai_language_teacher.language.japanese.lookup import find_course_words
 from ai_language_teacher.storage import (
     DEFAULT_DB_PATH,
     connect,
@@ -37,6 +38,7 @@ from ai_language_teacher.teacher import (
     TeacherUnavailable,
     ask_ollama,
     current_model,
+    safe_answer,
     teacher_prompt,
 )
 
@@ -421,9 +423,10 @@ def create_app(
                 request, "ask.html", student, skill, 400, question=question, error=error, **context
             )
 
-        prompt = teacher_prompt(item, context["expected"], context["teaching"], question)
+        words = find_course_words(question)
+        prompt = teacher_prompt(item, context["expected"], context["teaching"], question, words)
         try:
-            reply, model = ask(prompt), None
+            reply, model = safe_answer(ask(prompt), prompt), None
         except TeacherUnavailable:
             reply, model = None, current_model()
         return skill_page(
