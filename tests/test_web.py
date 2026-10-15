@@ -84,15 +84,21 @@ def test_blank_name_is_rejected_and_nothing_is_saved(client, db_path, name):
     conn.close()
 
 
+def card(text, skill):
+    # The dashboard card of one course (spec 029).
+    return text.split(f'id="course-{skill}"', 1)[1].split("</li>", 1)[0]
+
+
 def test_new_student_dashboard_opens_only_hiragana(client, db_path):
     save(db_path, Student("Ana"))
 
     text = client.get("/dashboard").text
 
-    assert f"hiragana · 0% · 1 / {len(COURSES['hiragana'])} lessons" in text
-    assert "katakana · locked: master hiragana first" in text
-    assert "kanji · locked: master katakana first" in text
-    assert "vocabulary · locked: master katakana first" in text
+    assert '<progress max="100" value="0">' in card(text, "hiragana")
+    assert f"1 / {len(COURSES['hiragana'])} lessons unlocked" in card(text, "hiragana")
+    assert "Master hiragana to open: 0%" in card(text, "katakana")
+    assert "Master katakana to open: 0%" in card(text, "kanji")
+    assert "Master katakana to open: 0%" in card(text, "vocabulary")
     assert "grammar" not in text
 
 
@@ -106,9 +112,10 @@ def test_mastering_hiragana_opens_katakana(client, db_path):
     text = client.get("/dashboard").text
 
     hiragana_total = len(COURSES["hiragana"])
-    assert f"hiragana · 100% · {hiragana_total} / {hiragana_total} lessons" in text
-    assert f"katakana · 0% · 1 / {len(COURSES['katakana'])} lessons" in text
-    assert "kanji · locked: master katakana first" in text
+    assert "100% mastered" in card(text, "hiragana")
+    assert f"{hiragana_total} / {hiragana_total} lessons" in card(text, "hiragana")
+    assert f"1 / {len(COURSES['katakana'])} lessons" in card(text, "katakana")
+    assert "Master katakana to open: 0%" in card(text, "kanji")
 
 
 def test_mastery_counts_every_item_of_the_course(client, db_path):
@@ -118,7 +125,7 @@ def test_mastery_counts_every_item_of_the_course(client, db_path):
 
     text = client.get("/dashboard").text
 
-    assert "hiragana · 1% · 1 / " in text
+    assert "1% mastered" in card(text, "hiragana")
 
 
 def test_dashboard_does_not_save(client, db_path):

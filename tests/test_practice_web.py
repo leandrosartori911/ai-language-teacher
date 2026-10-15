@@ -110,7 +110,7 @@ def test_wrong_practice_answer_demotes_and_shows_teaching(client, ana, db_path):
     response = practise(client, "あ", "o")
 
     assert "Not quite" in response.text
-    assert "Expected: a" in response.text
+    assert "Expected: <strong>a</strong>" in response.text
     assert str(escape(HIRAGANA[0].teaching["あ"].mnemonic)) in response.text
     assert load(db_path).cards["hiragana"]["あ"] == Card(1, TODAY)
 

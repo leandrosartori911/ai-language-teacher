@@ -9,7 +9,7 @@
     {# Choosing a profile posts its name, like creating one (spec 026). #}
     <form method="post" action="/students">
       <input type="hidden" name="name" value="{{ each }}">
-      <button type="submit">{{ each }}</button>
+      <button class="button" type="submit">{{ each }}</button>
     </form>
     <a class="trash" href="/delete?{{ {"name": each}|urlencode }}" aria-label="Delete profile {{ each }}" title="Delete profile">&#128465;</a>
   </li>
@@ -20,7 +20,7 @@
 <form method="post" action="/students">
   <label for="name">New profile</label>
   <input id="name" name="name" required autocomplete="off">
-  <button type="submit">Start</button>
+  <button class="button" type="submit">Start</button>
   {% if error %}<p class="error" role="alert">{{ error }}</p>{% endif %}
 </form>
 {% endblock %}

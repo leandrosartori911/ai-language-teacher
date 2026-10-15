@@ -1,7 +1,7 @@
 import sqlite3
 from collections.abc import Awaitable, Callable, Iterator, Sequence
 from contextlib import closing
-from datetime import date
+from datetime import date, timedelta
 from pathlib import Path
 from typing import Annotated, Any, Literal
 from urllib.parse import quote, unquote
@@ -31,7 +31,7 @@ from ai_language_teacher.core.review import (
     study_queue,
 )
 from ai_language_teacher.core.student import Student
-from ai_language_teacher.language.japanese.course import COURSES, PREREQUISITES
+from ai_language_teacher.language.japanese.course import COURSE_LABELS, COURSES, PREREQUISITES
 from ai_language_teacher.language.japanese.lookup import find_course_words
 from ai_language_teacher.storage import (
     DEFAULT_DB_PATH,
@@ -81,6 +81,31 @@ def question_of(lesson: Lesson, item: str) -> Question:
 def evaluate(skill: str, item: str, answer: str) -> AssessmentResult:
     question = question_of(lesson_of(COURSES[skill], item), item)
     return Assessment.from_question(skill, question).evaluate(answer)
+
+
+def queue_left(student: Student, skill: str, day: date) -> dict[str, int]:
+    # The study queue is the due reviews followed by the new items.
+    reviews = len(due_items(student, skill, day))
+    queue = study_queue(student, skill, COURSES[skill], day)
+    return {"reviews": reviews, "new": len(queue) - reviews}
+
+
+def unlock_progress(student: Student, skill: str) -> tuple[int, list[str]]:
+    unlocked = unlocked_lessons(student, skill, COURSES[skill])
+    return len(unlocked), open_skills(student, COURSES, PREREQUISITES)
+
+
+def unlock_messages(student: Student, skill: str, before: tuple[int, list[str]]) -> list[str]:
+    # Compares unlock_progress before and after an answer; nothing new is stored.
+    lessons_before, opened_before = before
+    lessons_after, opened_after = unlock_progress(student, skill)
+    lessons = COURSES[skill]
+    messages = [
+        f"Lesson {number} unlocked: {lessons[number - 1].title}"
+        for number in range(lessons_before + 1, lessons_after + 1)
+    ]
+    opened = [each for each in opened_after if each not in opened_before]
+    return messages + [f"{each.capitalize()} is now open!" for each in opened]
 
 
 def explain_question(answer: str, expected: str) -> str:
@@ -203,21 +228,43 @@ def create_app(
         # memory, but nothing is saved here.
         opened = open_skills(student, COURSES, PREREQUISITES)
         day = today()
-        skills = [
+
+        def percent(skill: str | None) -> int:
+            if skill is None:
+                return 0
+            return round(course_mastery(student, skill, COURSES[skill]) * 100)
+
+        cards = [
             {
                 "name": skill,
+                "japanese": COURSE_LABELS[skill][0],
+                "sample": COURSE_LABELS[skill][1],
                 "open": skill in opened,
-                "mastery": round(course_mastery(student, skill, lessons) * 100),
+                "mastery": percent(skill),
                 "unlocked": len(unlocked_lessons(student, skill, lessons)),
                 "total": len(lessons),
                 "due": len(due_items(student, skill, day)),
                 "prerequisite": PREREQUISITES[skill],
+                "prerequisite_mastery": percent(PREREQUISITES[skill]),
             }
             for skill, lessons in COURSES.items()
         ]
-        return templates.TemplateResponse(
-            request, "dashboard.html", {"name": student.name, "skills": skills}
-        )
+        # Continue: due reviews first, in course order, then new items.
+        continue_skill = next((each for each in opened if due_items(student, each, day)), None)
+        if continue_skill is None:
+            continue_skill = next(
+                (each for each in opened if study_queue(student, each, COURSES[each], day)), None
+            )
+        dues = [card.due for each in opened for card in student.cards[each].values()]
+        context = {
+            "name": student.name,
+            "courses": opened,
+            "current": "/dashboard",
+            "cards": cards,
+            "continue_skill": continue_skill,
+            "next_review": min(dues, default=None),
+        }
+        return templates.TemplateResponse(request, "dashboard.html", context)
 
     def study_target(conn: sqlite3.Connection, skill: str, request: Request) -> Student:
         student = open_student(conn, request)
@@ -237,6 +284,8 @@ def create_app(
     ) -> Response:
         context |= {
             "name": student.name,
+            "courses": open_skills(student, COURSES, PREREQUISITES),
+            "current": f"/study/{skill}",
             "skill": skill,
             "study_url": f"/study/{skill}",
             "practice_url": f"/practice/{skill}",
@@ -258,7 +307,8 @@ def create_app(
             student = study_target(conn, skill, request)
 
         lessons = COURSES[skill]
-        queue = study_queue(student, skill, lessons, today())
+        day = today()
+        queue = study_queue(student, skill, lessons, day)
         if not queue:
             dues = [card.due for card in student.cards[skill].values()]
             return skill_page(
@@ -268,13 +318,20 @@ def create_app(
                 skill,
                 mode="done",
                 next_review=min(dues, default=None),
+                due_tomorrow=len(due_items(student, skill, day + timedelta(days=1))),
             )
 
         item = queue[0]
         is_new = item not in student.cards[skill]
         mode = "teach" if is_new and step != "quiz" else "quiz"
         return skill_page(
-            request, "study.html", student, skill, mode=mode, **item_context(lessons, item)
+            request,
+            "study.html",
+            student,
+            skill,
+            mode=mode,
+            left=queue_left(student, skill, day),
+            **item_context(lessons, item),
         )
 
     @app.post("/study/{skill}", response_class=HTMLResponse)
@@ -304,11 +361,14 @@ def create_app(
                     400,
                     mode="quiz",
                     error="Please type an answer.",
+                    left=queue_left(student, skill, day),
                     **context,
                 )
 
             result = evaluate(skill, item, answer)
+            before = unlock_progress(student, skill)
             record_answer(student, result, day)
+            unlocks = unlock_messages(student, skill, before)
             save_student(conn, student)
 
         return skill_page(
@@ -317,6 +377,8 @@ def create_app(
             student,
             skill,
             mode="feedback",
+            unlocks=unlocks,
+            left=queue_left(student, skill, day),
             correct=result.correct,
             answer=answer,
             explain=explain_question(answer, context["expected"]),
@@ -410,7 +472,9 @@ def create_app(
                 )
 
             result = evaluate(skill, item, answer)
+            before = unlock_progress(student, skill)
             record_practice(student, result, today())
+            unlocks = unlock_messages(student, skill, before)
             save_student(conn, student)
 
         return skill_page(
@@ -419,6 +483,7 @@ def create_app(
             student,
             skill,
             mode="feedback",
+            unlocks=unlocks,
             correct=result.correct,
             answer=answer,
             explain=explain_question(answer, context["expected"]),
