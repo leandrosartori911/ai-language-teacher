@@ -3,19 +3,29 @@
 {% block content %}
 <h1>{{ name }}</h1>
 
-<ul class="skills">
-  {% for skill in skills %}
-  {% if skill.open %}
-  <li class="open">
-    {{ skill.name }} · {{ skill.mastery }}% · {{ skill.unlocked }} / {{ skill.total }} lessons · {{ skill.due }} due
-    <span>
-      <a class="button" href="/study/{{ skill.name }}">Study</a>
-      <a class="button" href="/practice/{{ skill.name }}">Practice</a>
-    </span>
+{% if continue_skill %}
+<p><a class="button primary" href="/study/{{ continue_skill }}">Continue {{ continue_skill }}</a></p>
+{% else %}
+<p class="all-done">All done for today.{% if next_review %} Next review: {{ next_review.isoformat() }}.{% endif %}</p>
+{% endif %}
+
+<ul class="courses">
+  {% for course in cards %}
+  <li id="course-{{ course.name }}" class="course{% if not course.open %} locked{% endif %}">
+    <p class="sample" lang="ja" aria-hidden="true">{{ course.sample }}</p>
+    <h2>{{ course.name|capitalize }} <span lang="ja">{{ course.japanese }}</span></h2>
+    {% if course.open %}
+    <p><progress max="100" value="{{ course.mastery }}">{{ course.mastery }}%</progress> {{ course.mastery }}% mastered</p>
+    <p>{{ course.unlocked }} / {{ course.total }} lessons unlocked · {{ course.due }} due</p>
+    <p class="actions">
+      <a class="button" href="/study/{{ course.name }}">Study</a>
+      <a class="button" href="/practice/{{ course.name }}">Practice</a>
+    </p>
+    {% else %}
+    <p><progress max="100" value="{{ course.prerequisite_mastery }}">{{ course.prerequisite_mastery }}%</progress></p>
+    <p>Master {{ course.prerequisite }} to open: {{ course.prerequisite_mastery }}%</p>
+    {% endif %}
   </li>
-  {% else %}
-  <li class="locked">{{ skill.name }} · locked: master {{ skill.prerequisite }} first</li>
-  {% endif %}
   {% endfor %}
 </ul>
 {% endblock %}

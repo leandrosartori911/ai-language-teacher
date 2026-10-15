@@ -8,11 +8,19 @@
 </head>
 <body>
   <header>
-    <a href="/">AI Language Teacher</a>
+    <a class="brand" href="/">AI Language Teacher</a>
+    {% if courses %}
+    <nav aria-label="Main">
+      <a href="/dashboard"{% if current == "/dashboard" %} aria-current="page"{% endif %}>Dashboard</a>
+      {% for course in courses %}
+      <a href="/study/{{ course }}"{% if current == "/study/" ~ course %} aria-current="page"{% endif %}>{{ course|capitalize }}</a>
+      {% endfor %}
+    </nav>
+    {% endif %}
     {% if name %}
     <span class="profile">
       {{ name }}
-      <form method="post" action="/logout"><button type="submit">Logout</button></form>
+      <form method="post" action="/logout"><button class="button" type="submit">Logout</button></form>
     </span>
     {% endif %}
   </header>

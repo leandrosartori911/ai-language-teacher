@@ -1,10 +1,8 @@
 {% extends "base.html" %}
 {% block title %}Practice {{ skill }} · {{ name }} · AI Language Teacher{% endblock %}
 {% block content %}
-<p><a href="/dashboard">{{ name }}</a> · <a href="{{ practice_url }}">practice {{ skill }}</a></p>
-
 {% if mode == "list" %}
-<h1>Practise {{ skill }}</h1>
+<h1>Practice {{ skill }}</h1>
 <ul class="lessons">
   {% for lesson in lessons %}
   <li>
@@ -18,8 +16,10 @@
   {% endfor %}
 </ul>
 
-{% elif mode == "quiz" %}
-<p>{{ title }} · item {{ n + 1 }} / {{ count }}</p>
+{% else %}
+<p><a href="{{ practice_url }}">Practice {{ skill }}</a> · {{ title }}{% if mode == "quiz" %} · item {{ n + 1 }} / {{ count }}{% endif %}</p>
+
+{% if mode == "quiz" %}
 <h1>{{ prompt }}</h1>
 <form method="post" action="{{ practice_url }}">
   <input type="hidden" name="lesson" value="{{ number }}">
@@ -27,7 +27,7 @@
   <input type="hidden" name="item" value="{{ item }}">
   <label for="answer">Your answer</label>
   <input id="answer" name="answer" required autofocus autocomplete="off">
-  <button type="submit">Check</button>
+  <button class="button" type="submit">Check</button>
   {% if error %}<p class="error" role="alert">{{ error }}</p>{% endif %}
 </form>
 
@@ -37,12 +37,16 @@
 
 {% elif mode == "complete" %}
 <h1>Practice complete</h1>
-<p>{{ title }}: all {{ count }} learned items practised.</p>
-<p><a href="{{ practice_url }}">Practise another lesson</a> · <a href="{{ study_url }}">Study</a></p>
+<p>All {{ count }} learned items practiced.</p>
+<p class="actions">
+  <a class="button" href="{{ practice_url }}">Practice another lesson</a>
+  <a class="button" href="{{ study_url }}">Study</a>
+</p>
 
 {% else %}
 <h1>Nothing learned in this lesson yet</h1>
-<p>{{ title }}: study it first to learn its items.</p>
-<p><a href="{{ study_url }}">Study</a></p>
+<p>Study it first to learn its items.</p>
+<p><a class="button" href="{{ study_url }}">Study</a></p>
+{% endif %}
 {% endif %}
 {% endblock %}

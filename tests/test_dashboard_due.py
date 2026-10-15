@@ -36,6 +36,11 @@ def dashboard(client):
     return client.get("/dashboard").text
 
 
+def card(text, skill):
+    # The dashboard card of one course (spec 029).
+    return text.split(f'id="course-{skill}"', 1)[1].split("</li>", 1)[0]
+
+
 def test_student_without_cards_sees_zero_due(client, db_path):
     student = Student("Ana")
     student.opened_skills.add("katakana")
@@ -43,8 +48,8 @@ def test_student_without_cards_sees_zero_due(client, db_path):
 
     text = dashboard(client)
 
-    assert "lessons · 0 due" in text.split("hiragana", 1)[1].split("</li>", 1)[0]
-    assert "lessons · 0 due" in text.split("katakana", 1)[1].split("</li>", 1)[0]
+    assert "lessons unlocked · 0 due" in card(text, "hiragana")
+    assert "lessons unlocked · 0 due" in card(text, "katakana")
 
 
 def test_only_cards_due_today_or_earlier_are_counted(client, db_path):
@@ -56,7 +61,7 @@ def test_only_cards_due_today_or_earlier_are_counted(client, db_path):
     }
     save(db_path, student)
 
-    assert "lessons · 2 due" in dashboard(client)
+    assert "lessons unlocked · 2 due" in dashboard(client)
 
 
 def test_counts_are_per_skill(client, db_path):
@@ -67,8 +72,8 @@ def test_counts_are_per_skill(client, db_path):
 
     text = dashboard(client)
 
-    assert "lessons · 1 due" in text.split("hiragana", 1)[1].split("</li>", 1)[0]
-    assert "lessons · 0 due" in text.split("katakana", 1)[1].split("</li>", 1)[0]
+    assert "lessons unlocked · 1 due" in card(text, "hiragana")
+    assert "lessons unlocked · 0 due" in card(text, "katakana")
 
 
 def test_locked_skills_show_no_due_count(client, db_path):
@@ -76,8 +81,8 @@ def test_locked_skills_show_no_due_count(client, db_path):
 
     text = dashboard(client)
 
-    assert text.count(" due") == 1
-    assert "katakana · locked: master hiragana first</li>" in text
+    assert "due" not in card(text, "katakana")
+    assert "Master hiragana to open" in card(text, "katakana")
 
 
 def test_count_uses_the_app_today(db_path):
@@ -89,5 +94,5 @@ def test_count_uses_the_app_today(db_path):
         app = create_app(db_path, today=lambda: day)
         return TestClient(app, base_url="http://127.0.0.1:8000", cookies=ANA).get("/dashboard").text
 
-    assert "lessons · 0 due" in count_on(TODAY)
-    assert "lessons · 1 due" in count_on(TODAY + timedelta(days=2))
+    assert "lessons unlocked · 0 due" in count_on(TODAY)
+    assert "lessons unlocked · 1 due" in count_on(TODAY + timedelta(days=2))

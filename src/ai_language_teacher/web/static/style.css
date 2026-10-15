@@ -19,8 +19,10 @@ body {
 
 header {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+  gap: 0.5rem 1rem;
   padding: 1rem;
   border-bottom: 2px solid var(--accent);
 }
@@ -35,6 +37,25 @@ header a {
   color: var(--accent);
   font-weight: bold;
   text-decoration: none;
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1rem;
+}
+
+nav a {
+  font-weight: normal;
+}
+
+nav a[aria-current="page"] {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+h1 {
+  overflow-wrap: anywhere;
 }
 
 main {
@@ -57,8 +78,47 @@ li {
   border-bottom: 1px solid var(--border);
 }
 
-li.locked {
+.courses {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  gap: 1rem;
+}
+
+.course {
+  position: relative;
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--card);
+}
+
+.course h2 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.course .sample {
+  position: absolute;
+  top: 0.5rem;
+  right: 1rem;
+  margin: 0;
+  font-size: 2rem;
   color: var(--muted);
+}
+
+.course.locked {
+  color: var(--muted);
+}
+
+progress {
+  width: 100%;
+  accent-color: var(--accent);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
 form {
@@ -73,18 +133,33 @@ form {
   color: var(--error);
 }
 
-li.open,
 .profiles li {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
+/* Every action, link or form button, shares this class (spec 029). */
 .button {
+  display: inline-block;
   padding: 0.3rem 0.8rem;
   border: 1px solid var(--accent);
   border-radius: 4px;
+  background: var(--bg);
+  color: var(--accent);
+  font: inherit;
   text-decoration: none;
+  cursor: pointer;
+}
+
+.button.primary {
+  background: var(--accent);
+  color: var(--bg);
+  font-size: 1.1rem;
+}
+
+[hidden] {
+  display: none !important;
 }
 
 .trash {
@@ -109,15 +184,50 @@ li.open,
   color: var(--muted);
 }
 
-.correct {
+.result {
+  padding: 0.5rem 1rem;
+  border-left: 6px solid;
+  border-radius: 6px;
+  background: var(--card);
+}
+
+.result h1 {
+  margin: 0.3rem 0;
+}
+
+.result.correct {
+  border-color: var(--correct);
+}
+
+.result.correct h1 {
   color: var(--correct);
 }
 
-.wrong {
+.result.wrong {
+  border-color: var(--error);
+}
+
+.result.wrong h1 {
   color: var(--error);
 }
 
-.ask {
+.answers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 2rem;
+}
+
+.unlock {
+  font-weight: bold;
+  color: var(--accent);
+}
+
+.left {
+  color: var(--muted);
+}
+
+.ask,
+.explain {
   margin: 1rem 0;
 }
 

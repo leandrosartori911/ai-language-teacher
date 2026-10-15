@@ -1,16 +1,19 @@
-{% if correct %}
-<h1 class="correct">Correct!</h1>
-{% else %}
-<h1 class="wrong">Not quite.</h1>
-{% endif %}
-<p>{{ prompt }}</p>
-<p>Your answer: {{ answer }}</p>
-<p>Expected: {{ expected }}</p>
+<section class="result {{ 'correct' if correct else 'wrong' }}">
+  <h1>{% if correct %}Correct!{% else %}Not quite.{% endif %}</h1>
+  <p>{{ prompt }}</p>
+  <p class="answers">
+    <span>Your answer: <strong>{{ answer }}</strong></span>
+    <span>Expected: <strong>{{ expected }}</strong></span>
+  </p>
+</section>
+{% for message in unlocks %}
+<p class="unlock" role="status">{{ message }}</p>
+{% endfor %}
 {% if not correct %}
 <form method="post" action="/ask/{{ skill }}" class="explain">
   <input type="hidden" name="item" value="{{ item }}">
   <input type="hidden" name="question" value="{{ explain }}">
-  <button type="submit">Explain my mistake</button>
+  <button class="button" type="submit">Explain my mistake</button>
 </form>
 {% include "_teaching.html" %}
 {% endif %}

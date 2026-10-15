@@ -111,3 +111,13 @@
   sentence from Ollama's `/api/chat`, each sentence checked before it is
   sent. First JavaScript in the project (`static/chat.js`, no
   dependencies); without JavaScript the ask page still works.
+- Navigation and a friendlier dashboard (spec 029): a header menu with
+  the dashboard and every open course (current page marked); a Continue
+  button (due reviews first, then new items, else "All done for today");
+  one card per course with its Japanese name, a progress bar, lessons
+  unlocked and reviews due, and locked cards saying what opens them.
+  Study shows how many reviews and new items are left, answers that
+  unlock a lesson or open a course say so, the end screen shows
+  tomorrow's reviews with Practice and Dashboard buttons, feedback shows
+  the result in one block, "Practice" is spelled one way, and every
+  action uses the same button class.

@@ -1,7 +1,7 @@
 # 029: Navigation and a friendlier dashboard
 
-> Approved by the user on 2026-10-14; implementation starts next
-> session. Structure and flow only; the look is spec 030.
+> Approved by the user on 2026-10-14; implemented on 2026-10-15.
+> Structure and flow only; the look is spec 030.
 
 ## Problem
 The user found the profile's main page confusing: one line per course
@@ -60,21 +60,21 @@ the header or the name in a small breadcrumb. A screenshot review on
 - All of this works at 360 px wide with no horizontal scrolling.
 
 ## Acceptance Criteria
-- [ ] Every profile page has the header navigation with the current
+- [x] Every profile page has the header navigation with the current
       page marked.
-- [ ] Continue goes to the first course with due reviews, else the first
+- [x] Continue goes to the first course with due reviews, else the first
       open course with new items, else shows "All done for today" and
       the next review date.
-- [ ] Each course card shows its Japanese name, progress, lessons
+- [x] Each course card shows its Japanese name, progress, lessons
       unlocked and reviews due; locked cards say what opens them and the
       progress toward it.
-- [ ] Study screens show how many reviews and new items are left.
-- [ ] Answering the item that unlocks a lesson or opens a course shows a
+- [x] Study screens show how many reviews and new items are left.
+- [x] Answering the item that unlocks a lesson or opens a course shows a
       message saying so; other answers show none.
-- [ ] The end screen shows the next review, tomorrow's review count, and
+- [x] The end screen shows the next review, tomorrow's review count, and
       links to Practice and the Dashboard.
-- [ ] "Practise" no longer appears; all actions share the button class.
-- [ ] Checked by hand in a browser at 360 px wide: no horizontal
+- [x] "Practise" no longer appears; all actions share the button class.
+- [x] Checked by hand in a browser at 360 px wide: no horizontal
       scrolling, no cut-off headings or buttons.
 
 ## Decisions (user, 2026-10-14)
@@ -83,6 +83,20 @@ the header or the name in a small breadcrumb. A screenshot review on
 - The left counter comes from the existing study queue.
 - End screen without per-session statistics.
 - Unlock messages from a before/after comparison on the feedback page.
+
+## Implementation notes (2026-10-15)
+- Japanese course names and sample characters live in
+  `language/japanese/course.py` (`COURSE_LABELS`), next to `COURSES`.
+- Header course links go to Study; the old breadcrumbs are gone,
+  except the link back to the lesson list on Practice pages.
+- Unlock messages also show after Practice answers, since those raise
+  mastery too.
+- The chat's close icon is the only button without the `button` class.
+- Browser check on 2026-10-15 (claude-in-chrome, pages in a 360 px
+  iframe because resizing the window did not change the viewport): no
+  element past 360 px on home, dashboard, study (quiz, teach, feedback,
+  unlock message), practice (list, quiz, feedback), delete and the open
+  chat; added a margin above "Explain my mistake".
 
 ## Out of Scope
 - Colors, typography, illustrations and animation (spec 030).

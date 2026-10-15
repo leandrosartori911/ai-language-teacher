@@ -126,8 +126,8 @@ def test_wrong_answer_is_saved_and_shows_answer_and_teaching(client, ana, db_pat
 
     assert response.status_code == 200
     assert "Not quite" in response.text
-    assert "Your answer: e" in response.text
-    assert "Expected: a" in response.text
+    assert "Your answer: <strong>e</strong>" in response.text
+    assert "Expected: <strong>a</strong>" in response.text
     assert html(HIRAGANA[0].teaching["あ"].mnemonic) in response.text
     student = load(db_path)
     assert student.knowledge["hiragana"].get_score("あ") == 0.0

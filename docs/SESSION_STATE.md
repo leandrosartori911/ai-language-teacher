@@ -1,10 +1,10 @@
 # Session State — read this first in a new session
 
-Last updated: 2026-10-14. Phases A-D complete. Phase F (polish before
+Last updated: 2026-10-15. Phases A-D complete. Phase F (polish before
 release): specs 026 (profiles as accounts, logout, delete), 027
-(teacher guardrails, word lookup, red-team set) and 028 (chat panel)
-done; 029-030
-are drafts awaiting approval.
+(teacher guardrails, word lookup, red-team set), 028 (chat panel) and
+029 (navigation and dashboard) done; 030 (visual design) is a draft
+awaiting approval.
 
 ## What this project is
 
@@ -454,6 +454,29 @@ Browser check done with the claude-in-chrome tools on 2026-10-14 (the
 user picked "Browser 1"); careful: `document.querySelector("form")`
 hits the header Logout form first.
 
+Navigation and dashboard (spec 029): `skill_page` and the dashboard
+pass `courses` (open skills) and `current` (URL) so `base.html` shows a
+`<nav>` (Dashboard + one Study link per open course, current one has
+`aria-current="page"`). Dashboard: Continue = first open course with
+due reviews, else first with a non-empty `study_queue`, else "All done
+for today" + earliest card due date; one `<li id="course-<skill>">`
+card per course with `COURSE_LABELS` (Japanese name, sample character,
+in `language/japanese/course.py`), `<progress>`, "N / M lessons
+unlocked · N due"; locked cards show "Master <prereq> to open: N%".
+`queue_left` gives the "N reviews, M new left" counter (teach, quiz,
+feedback). `unlock_progress` before and `unlock_messages` after
+`record_answer`/`record_practice` give "Lesson N unlocked: <title>" and
+"<Skill> is now open!" (no stored state). End screen: next review,
+reviews due tomorrow, Practice + Dashboard buttons. Feedback is a
+`<section class="result correct|wrong">` with "Your answer:
+<strong>…</strong>". Every `<button>` and action link has class
+`button` (chat close × excepted); `[hidden]` is forced to
+`display: none` because `.button` sets `display`. Tests split the
+dashboard by `id="course-<skill>"` (helper `card()`). Browser check:
+`resize_window` to 360 px left the viewport at 1920 and froze
+screenshots; load pages into a 360 px same-origin iframe instead and
+measure elements past its right edge.
+
 ## Known issues / deliberate shortcuts (marked `# ponytail:` in code)
 
 1. **Answer matching is exact after normalization** — no fuzzy/typo
@@ -469,7 +492,7 @@ hits the header Logout form first.
 
 ## Test status
 
-1026 tests passing, `ruff check` and `mypy` (strict) clean, as of spec 028.
+1048 tests passing, `ruff check` and `mypy` (strict) clean, as of spec 029.
 
 ```
 tests/test_student.py     — Student creation, skills, mastery aggregation
@@ -504,6 +527,7 @@ tests/test_explain_web.py — explain-my-mistake form, cut answer, new tab
 tests/test_profiles_web.py — profile cookie, logout, delete with confirmation
 tests/test_lookup.py      — romaji from kana tables, course word lookup
 tests/test_chat_web.py    — chat route: streaming, history, checks, panel markup
+tests/test_navigation_web.py — header nav, Continue, course cards, left counter, unlocks, end screen
 ```
 
 ## Progress
@@ -530,7 +554,7 @@ engine, C: web app, D: local LLM teacher, E: release).
   teacher about an item; 025 explain my mistake done.
 - **Phase F (in progress):** 026 profiles as accounts with logout and
   delete done; 027 teacher guardrails, word lookup and red-team set done;
-  028 chat panel done.
+  028 chat panel done; 029 navigation and dashboard done.
 - **Phase E:** v0.1.0 release.
 
 ## Immediate next step for the new session
@@ -541,15 +565,15 @@ engine, C: web app, D: local LLM teacher, E: release).
    presentable (good-looking and working well). Draft specs written
    from the user's review plus a screenshot review and a live probe of
    the teacher (all **not approved yet**; each needs review and approval
-   before tests, open questions inside each spec). **Next: implement
-   spec 029 (approved on 2026-10-14, decisions recorded in the spec):
-   tests first, then code, then a browser check at 360 px like 028.**
+   before tests, open questions inside each spec). **Next: spec 030
+   (web UI design): review the draft with the user, approve, then
+   mockups.**
    - 026 done (profiles as accounts, logout, delete with confirmation);
    - 027 done (guardrails, course word lookup, red-team set 25/26);
    - 028 done (chat panel, sentence-by-sentence streaming, browser-checked);
-   - 029 approved, not implemented: navigation and dashboard (header
-     nav, Continue, course cards, left counter, unlock messages, end
-     screen, phone-width fixes, one button class, "Practice" spelling);
+   - 029 done: navigation and dashboard (header nav, Continue, course
+     cards, left counter, unlock messages, end screen, phone-width
+     fixes, one button class, "Practice" spelling);
    - 030 web UI design, top quality priority, done last: choose a visual
      direction from mockups first, design tokens, offline fonts,
      accessibility. Consider the superpowers brainstorming skill and

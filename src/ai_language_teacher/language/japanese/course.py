@@ -11,6 +11,14 @@ COURSES: dict[str, list[Lesson]] = {
     "vocabulary": VOCABULARY_LESSONS,
 }
 
+# Japanese name and a sample character for each course card (spec 029).
+COURSE_LABELS: dict[str, tuple[str, str]] = {
+    "hiragana": ("ひらがな", "あ"),
+    "katakana": ("カタカナ", "ア"),
+    "kanji": ("漢字", "漢"),
+    "vocabulary": ("語彙", "語"),
+}
+
 PREREQUISITES: dict[str, str | None] = {
     "hiragana": None,
     "katakana": "hiragana",

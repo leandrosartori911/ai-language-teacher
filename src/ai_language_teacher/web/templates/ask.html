@@ -1,8 +1,6 @@
 {% extends "base.html" %}
 {% block title %}{{ item }} · {{ name }} · AI Language Teacher{% endblock %}
 {% block content %}
-<p><a href="/dashboard">{{ name }}</a> · {{ skill }}</p>
-
 {% if error %}
 <p class="error" role="alert">{{ error }}</p>
 {% else %}
