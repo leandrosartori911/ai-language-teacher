@@ -3,8 +3,9 @@
 Last updated: 2026-10-15. Phases A-D complete. Phase F (polish before
 release): specs 026 (profiles as accounts, logout, delete), 027
 (teacher guardrails, word lookup, red-team set), 028 (chat panel) and
-029 (navigation and dashboard) done; 030 (visual design) is a draft
-awaiting approval.
+029 (navigation and dashboard) done. The visual design was split into
+030 (direction and tokens, approved 2026-10-15, not started), 031
+(apply to every page) and 032 (accessibility and final check), drafts.
 
 ## What this project is
 
@@ -97,6 +98,9 @@ Portuguese for conversation with the user in Claude Code.
 - Run tests: `pytest` (or `.venv/Scripts/python.exe -m pytest -q`).
 - Lint: `ruff check .`. Type check: `mypy` (strict, `src/` only, config in
   `pyproject.toml`).
+- Design plugins with project scope in `.claude/settings.json`
+  (`enabledPlugins` + `extraKnownMarketplaces`): `ui-ux-pro-max` and
+  `frontend-design`, for specs 030-032.
 - A `PostToolUse` hook in `.claude/settings.json` already runs
   `ruff check . && mypy && pytest -q` after every Edit/Write tool call
   automatically.
@@ -566,18 +570,28 @@ engine, C: web app, D: local LLM teacher, E: release).
    from the user's review plus a screenshot review and a live probe of
    the teacher (all **not approved yet**; each needs review and approval
    before tests, open questions inside each spec). **Next: spec 030
-   (web UI design): review the draft with the user, approve, then
-   mockups.**
+   (approved 2026-10-15, user chose to start in a later session):
+   invoke the `ui-ux-pro-max:ui-ux-pro-max` and
+   `frontend-design:frontend-design` skills first (installed as
+   project-scope plugins on 2026-10-15, declared in
+   `.claude/settings.json`; if they are not listed, the session was
+   started before the install, or run `claude plugin list`), then make
+   the two mockups (calm and minimal; bold flag) in the scratchpad and
+   show them at 1280 and 360 px. User decisions recorded in the spec:
+   split in 030-032, system fonts only, dark mode automatic (no
+   toggle). Then 031 and 032 need their own approval.**
    - 026 done (profiles as accounts, logout, delete with confirmation);
    - 027 done (guardrails, course word lookup, red-team set 25/26);
    - 028 done (chat panel, sentence-by-sentence streaming, browser-checked);
    - 029 done: navigation and dashboard (header nav, Continue, course
      cards, left counter, unlock messages, end screen, phone-width
      fixes, one button class, "Practice" spelling);
-   - 030 web UI design, top quality priority, done last: choose a visual
-     direction from mockups first, design tokens, offline fonts,
-     accessibility. Consider the superpowers brainstorming skill and
-     agents for the mockups.
+   - 030 approved: mockups (calm, flag), ADR 0005, tokens, dark mode,
+     system fonts, contrast test;
+   - 031 draft: apply the design (components, `<ruby>` readings, "Did
+     you know?" box, feedback animation, chat below the header, favicon);
+   - 032 draft: keyboard and focus, no external URLs test, offline,
+     360/768/1280 light and dark, user approval before the GIF.
    Then Phase E: README already rewritten and committed; demo GIF
    recorded by the user (step-by-step guide was given on 2026-10-14:
    ScreenToGif, private browser window, zoom 125%, 15 fps, save to
