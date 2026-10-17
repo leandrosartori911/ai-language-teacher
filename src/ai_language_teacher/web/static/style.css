@@ -74,6 +74,36 @@ body {
   display: none !important;
 }
 
+/* Keyboard focus (spec 032): a ring in the text color, white inside the
+   red header, where a red ring would vanish. */
+:focus-visible {
+  outline: 3px solid var(--text);
+  outline-offset: 2px;
+}
+
+header :focus-visible {
+  outline-color: var(--on-brand);
+}
+
+/* The first stop for the keyboard: hidden above the page until focused. */
+.skip {
+  position: absolute;
+  top: var(--space-2);
+  left: var(--space-2);
+  z-index: 3;
+  padding: var(--space-2) var(--space-3);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text);
+  font-weight: 700;
+  transform: translateY(-200%);
+}
+
+.skip:focus {
+  outline-color: var(--on-brand); /* it opens over the red header */
+  transform: none;
+}
+
 /* Header: the red band of the flag theme (spec 031, ADR 0005). It stays at
    the top so the chat can open below it. */
 header {
@@ -507,8 +537,9 @@ rt {
   background: var(--surface);
 }
 
+/* Center the page in the space the open chat leaves (main is 44rem). */
 body:has(.chat:not([hidden])) main {
-  margin-right: 25rem;
+  margin-right: max(25rem, calc(25rem + (100% - 69rem) / 2));
 }
 
 .chat-head {
@@ -591,14 +622,12 @@ body:has(.chat:not([hidden])) main {
   }
 }
 
+/* Tablet and phone: the navigation gets its own row and scrolls sideways
+   when it does not fit (user's choice, spec 031). */
 @media (max-width: 64rem) {
   body:has(.chat:not([hidden])) main {
     margin-right: auto;
   }
-}
-
-/* Phone: the navigation is one row that scrolls sideways (user's choice). */
-@media (max-width: 40rem) {
   header {
     gap: var(--space-2);
     padding: var(--space-3);
@@ -611,6 +640,24 @@ body:has(.chat:not([hidden])) main {
     flex-basis: 100%;
     flex-wrap: nowrap;
     overflow-x: auto;
+  }
+}
+
+/* Phone. */
+@media (max-width: 40rem) {
+  /* Only the sun stays visible, so the name and Logout fit beside it;
+     screen readers still read the name. */
+  .brand {
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+  }
+  .brand-name {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
   }
   h1 {
     font-size: var(--step-2);

@@ -268,7 +268,7 @@ def test_end_screen_shows_next_review_tomorrow_and_links(client, db_path):
     assert "Nothing to study right now" in text
     assert (TODAY + timedelta(days=1)).isoformat() in text
     assert "2 reviews due tomorrow" in text
-    main = text.split("<main>", 1)[1]
+    main = text.split("<main id=\"main\">", 1)[1]
     assert re.search(r'<a class="button[^"]*" href="/practice/hiragana">', main)
     assert re.search(r'<a class="button[^"]*" href="/dashboard">', main)
 
