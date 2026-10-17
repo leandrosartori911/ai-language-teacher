@@ -46,14 +46,14 @@ MVP goal: a local, zero-cost AI teacher that really teaches Japanese
 ## Phase F: Polish before release
 The user decided on 2026-10-14 to publish the GIF and the release only
 when the app is presentable. Specs 030-032 (the release's face, split
-on 2026-10-15): 030 done (flag theme), 031-032 drafts. All three use the
+on 2026-10-15): 030 done (flag theme), 031 done, 032 draft. All three use the
 `ui-ux-pro-max` and `frontend-design` skills. Order:
 - [x] Profiles work like accounts, with logout and delete (spec 026)
 - [x] AI teacher guardrails, course word lookup and a red-team test set (spec 027)
 - [x] Chat with the AI teacher, streamed and checked sentence by sentence (spec 028)
 - [x] Navigation and a friendlier dashboard (spec 029)
 - [x] Visual direction from mockups and design tokens, with dark mode (spec 030, ADR 0005)
-- [ ] Apply the design to every page: components, furigana, chat layout, favicon (spec 031)
+- [x] Apply the design to every page: components, furigana, chat layout, favicon (spec 031)
 - [ ] Accessibility, offline and three-width check before the GIF (spec 032)
 
 ## Phase E: Release (after Phase F)

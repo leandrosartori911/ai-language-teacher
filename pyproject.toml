@@ -21,7 +21,7 @@ ai-language-teacher = "ai_language_teacher.main:main"
 where = ["src"]
 
 [tool.setuptools.package-data]
-ai_language_teacher = ["data/**/*.json", "web/templates/*.html", "web/static/*.css", "web/static/*.js"]
+ai_language_teacher = ["data/**/*.json", "web/templates/*.html", "web/static/*.css", "web/static/*.js", "web/static/*.svg"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

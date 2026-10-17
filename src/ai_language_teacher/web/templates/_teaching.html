@@ -1,15 +1,20 @@
+{# The item sits in the red sun disc; a long word stretches it (spec 031). #}
 <section class="card">
-  <p class="item" lang="ja">{{ item }}</p>
-  {% if teaching.reading %}<p lang="ja">Reading: {{ teaching.reading }}</p>{% endif %}
+  {% include "_item.html" %}
   {% if teaching.kun_readings %}<p lang="ja">Kun: {{ teaching.kun_readings|join(", ") }}</p>{% endif %}
   {% if teaching.on_readings %}<p lang="ja">On: {{ teaching.on_readings|join(", ") }}</p>{% endif %}
   <p>{{ teaching.explanation }}</p>
   <p class="mnemonic">{{ teaching.mnemonic }}</p>
   <p class="example">
-    <span lang="ja">{{ teaching.example.word }}</span>
-    ({{ teaching.example.reading }}): {{ teaching.example.meaning }}
+    <ruby><span lang="ja">{{ teaching.example.word }}</span><rt>{{ teaching.example.reading }}</rt></ruby>
+    {{ teaching.example.meaning }}
   </p>
-  {% if teaching.culture_note %}<p class="culture">{{ teaching.culture_note }}</p>{% endif %}
+  {% if teaching.culture_note %}
+  <aside class="culture">
+    <strong>Did you know?</strong>
+    {{ teaching.culture_note }}
+  </aside>
+  {% endif %}
 </section>
 <form method="post" action="/ask/{{ skill }}" class="ask">
   <input type="hidden" name="item" value="{{ item }}">

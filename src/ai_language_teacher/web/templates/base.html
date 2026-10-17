@@ -4,11 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% block title %}AI Language Teacher{% endblock %}</title>
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
   <header>
-    <a class="brand" href="/">AI Language Teacher</a>
+    <a class="brand" href="/"><span class="sun" aria-hidden="true"></span>AI Language Teacher</a>
     {% if courses %}
     <nav aria-label="Main">
       <a href="/dashboard"{% if current == "/dashboard" %} aria-current="page"{% endif %}>Dashboard</a>

@@ -127,3 +127,11 @@
   follows the system, and a system font stack that covers Japanese on
   Windows, macOS and Linux. A test checks WCAG AA contrast for every
   text/background pair in both color schemes.
+- The flag design on every page (spec 031): a red header that stays at
+  the top, pill-shaped navigation and buttons, the item in a red sun
+  disc on teaching and quiz cards, course cards in their course color,
+  readings shown above words with `<ruby>` (romaji over kana), culture
+  notes in a "Did you know?" box, feedback as a full block of color
+  with a short animation (off with reduced motion), a phone header whose
+  menu scrolls sideways, a chat that opens below the header on wide
+  screens, and an SVG favicon.

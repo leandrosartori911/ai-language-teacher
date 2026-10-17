@@ -8,10 +8,11 @@
 {% if mode == "teach" %}
 <h1>New: <span lang="ja">{{ item }}</span></h1>
 {% include "_teaching.html" %}
-<p><a class="button" href="{{ study_url }}?step=quiz">Quiz me</a></p>
+<p><a class="button primary" href="{{ study_url }}?step=quiz">Quiz me</a></p>
 
 {% elif mode == "quiz" %}
-<h1>{{ prompt }}</h1>
+{% include "_item.html" %}
+<h1 class="prompt">{{ prompt }}</h1>
 <form method="post" action="{{ study_url }}">
   <input type="hidden" name="item" value="{{ item }}">
   <label for="answer">Your answer</label>
@@ -22,7 +23,7 @@
 
 {% elif mode == "feedback" %}
 {% include "_feedback.html" %}
-<p><a class="button" href="{{ study_url }}">Next</a></p>
+<p><a class="button primary" href="{{ study_url }}">Next</a></p>
 
 {% else %}
 <h1>Nothing to study right now</h1>

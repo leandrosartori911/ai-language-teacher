@@ -214,7 +214,7 @@ def test_kanji_card_shows_kun_and_on_readings(client, db_path):
     assert "On: イチ, イツ" in text
 
 
-def test_vocabulary_card_shows_word_reading(client, db_path):
+def test_vocabulary_card_shows_a_kana_word_without_a_reading_line(client, db_path):
     student = Student("Ana")
     master(student, "hiragana")
     master(student, "katakana")
@@ -222,7 +222,9 @@ def test_vocabulary_card_shows_word_reading(client, db_path):
 
     text = client.get("/study/vocabulary").text
 
-    assert "Reading: おはようございます" in text
+    # A word written only in kana needs no reading (spec 031); see test_design_web.
+    assert '<p class="item long" lang="ja">おはようございます</p>' in text
+    assert "Reading:" not in text
 
 
 def test_locked_skill_returns_403(client, ana):
