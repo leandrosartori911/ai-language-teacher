@@ -69,7 +69,7 @@ def test_lesson_list_shows_unlocked_lessons_with_learned_counts(client, ana):
     text = client.get(PRACTICE).text
 
     assert HIRAGANA[0].title in text
-    assert f"2 of {len(HIRAGANA[0].items)} learned" in text
+    assert f"2 / {len(HIRAGANA[0].items)} learned" in text
     assert f'href="{PRACTICE}?lesson=1"' in text
     assert HIRAGANA[1].title not in text
 
@@ -79,7 +79,7 @@ def test_lesson_without_learned_items_is_listed_but_not_linked(client, db_path):
 
     text = client.get(PRACTICE).text
 
-    assert f"0 of {len(HIRAGANA[0].items)} learned" in text
+    assert f"0 / {len(HIRAGANA[0].items)} learned" in text
     assert "?lesson=1" not in text
 
 

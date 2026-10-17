@@ -5,8 +5,8 @@ release): specs 026 (profiles as accounts, logout, delete), 027
 (teacher guardrails, word lookup, red-team set), 028 (chat panel), 029
 (navigation and dashboard), 030 (visual direction: flag theme,
 tokens, dark mode, ADR 0005) 031 (flag design on every page) and 032 (accessibility and final
-check) done. The user's review on 2026-10-17 asked for a clearer
-Practice page and for moving the chat; specs for those come next.
+check) done. From the user's review on 2026-10-17: 033 (Practice
+lesson cards) done; 034 (Teacher page) approved, not started.
 
 ## What this project is
 
@@ -539,6 +539,13 @@ claude-in-chrome `javascript_tool`. **That seed sets knowledge to 1.0
 without cards, so its dashboard shows 100% while Practice shows
 0 learned: it confused the user; seed real study instead next time.**
 
+Practice cards (spec 033): `practice.html` list mode is `<ul class="courses
+lessons" style="--course: var(--course-<skill>)">` with `<li
+class="lesson[ unstudied]">`: title, `<progress max=total
+value=learned>`, "N / M learned" (was "N of M"), "· All learned", then a
+primary Practice button or "Not studied yet." + Study button
+(`study_url`). The route is unchanged.
+
 ## Known issues / deliberate shortcuts (marked `# ponytail:` in code)
 
 1. **Answer matching is exact after normalization** — no fuzzy/typo
@@ -552,7 +559,7 @@ without cards, so its dashboard shows 100% while Practice shows
 
 ## Test status
 
-1150 tests passing, `ruff check` and `mypy` (strict) clean, as of spec 032.
+1155 tests passing, `ruff check` and `mypy` (strict) clean, as of spec 033.
 
 ```
 tests/test_student.py     — Student creation, skills, mastery aggregation
@@ -591,6 +598,7 @@ tests/test_navigation_web.py — header nav, Continue, course cards, left counte
 tests/test_design_tokens.py — color tokens light/dark, WCAG AA contrast, system fonts
 tests/test_design_web.py  — favicon, sun disc, ruby readings, Did you know, motion, phone nav
 tests/test_accessibility_web.py — no external URLs, focus ring contrast, skip link, Quiz me order
+tests/test_practice_cards_web.py — Practice lesson cards, Practice/Study actions, All learned
 ```
 
 ## Progress
@@ -627,10 +635,14 @@ engine, C: web app, D: local LLM teacher, E: release).
 1. Read this file plus `docs/ROADMAP.md` and the latest specs.
 2. **Phase F (polish before release) comes first, decided by the user
    on 2026-10-14:** nothing is recorded or published until the app is
-   presentable (good-looking and working well). **Next: draft specs from the user's review of
-   2026-10-17 (Practice page that explains learned/not learned lessons
-   and looks like the rest; chat: drop the duplicate "Chat with the
-   teacher" button, give the chat its own place) and get approval.** Invoke the
+   presentable (good-looking and working well). **Next: spec 034 (approved 2026-10-17, not
+   started): Teacher page in the menu (`GET/POST /teacher`, free
+   conversation grounded on the course word lookup, `<lesson>` "none:
+   free conversation"), remove the "Chat with the teacher" button,
+   rule 6 of `SYSTEM_PROMPT` says "their Japanese study", new
+   free-conversation eval cases. Needs Ollama running (`ollama serve`,
+   `qwen2.5:7b`) to re-run `evals/run_teacher_evals.py` before commit.
+   Then update the GIF guide for the new flow.** Invoke the
    `ui-ux-pro-max:ui-ux-pro-max` and `frontend-design:frontend-design`
    skills first (project-scope plugins in `.claude/settings.json`).
    Build on the tokens from ADR 0005; the flag mockup is described in
@@ -643,6 +655,7 @@ engine, C: web app, D: local LLM teacher, E: release).
      fixes, one button class, "Practice" spelling);
    - 030 done: flag theme chosen, ADR 0005, tokens, dark mode, system
      fonts, contrast test;
+   - 033 done: Practice lesson cards;
    - 032 done: focus ring, skip link, no external URLs, three widths;
    - 031 done: flag design on every page (sun disc, `<ruby>`, "Did you
      know?", feedback animation, phone nav scroll, chat below the
