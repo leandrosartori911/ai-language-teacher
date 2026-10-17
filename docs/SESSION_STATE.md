@@ -3,9 +3,9 @@
 Last updated: 2026-10-17. Phases A-D complete. Phase F (polish before
 release): specs 026 (profiles as accounts, logout, delete), 027
 (teacher guardrails, word lookup, red-team set), 028 (chat panel), 029
-(navigation and dashboard) and 030 (visual direction: flag theme,
-tokens, dark mode, ADR 0005) done. 031 (apply to every page) and 032
-(accessibility and final check) are drafts awaiting approval.
+(navigation and dashboard), 030 (visual direction: flag theme,
+tokens, dark mode, ADR 0005) and 031 (flag design on every page) done.
+032 (accessibility and final check) is a draft awaiting approval.
 
 ## What this project is
 
@@ -500,7 +500,31 @@ blocks, course cards with a colored top border and a faint big
 character). Screenshots: headless Chrome
 (`chrome --headless=new --screenshot --window-size=...`); for 360 px
 put the page in a 360 px iframe (headless clamps narrow windows).
-Known for 031: at 360 px the header nav wraps into a column.
+
+Design applied (spec 031): header is `position: sticky` on `--brand`
+with a `.sun` dot; nav pills, the current page a white pill; on phones
+(`max-width: 40rem`) nav is its own row with `flex-wrap: nowrap;
+overflow-x: auto` (user's choice). `_item.html` (included by
+`_teaching.html`, and above the quiz prompt in Study and Practice)
+renders `<p class="item[ long]" lang="ja">` in the red disc (`long` when
+the item has more than one character), with `<ruby>` when
+`teaching.reading` differs from the item; the old "Reading:" line is
+gone (kana-only words show no reading). Example = `<ruby><span
+lang="ja">word</span><rt>reading</rt></ruby> meaning` (romaji over kana
+for kana lessons, user's choice). Culture note = `<aside
+class="culture"><strong>Did you know?</strong> ...`. `.result.correct`
+/`.wrong` animate (pop/shake), `animation: none` under reduced motion.
+Course color: `#course-<skill> { --course: ... }`. Chat: `top:
+var(--header-height)` (chat.js measures the header on open and resize),
+`body:has(.chat:not([hidden])) main` moves aside above 64rem; full
+screen under 40rem. `p.item` (not `.item`) so it beats `.card p`.
+Favicon `static/favicon.svg` (package-data `web/static/*.svg`, CI wheel
+smoke checks it). Quiz me and Next are `button primary`. Trash icon is
+an inline SVG. Screenshots of real pages: scratchpad
+`export_pages.py` renders pages through TestClient to static files
+(`/static/` made relative) and headless Chrome shoots them; iframes in
+one gallery share sessionStorage, so the chat-open page leaks into the
+others there.
 
 ## Known issues / deliberate shortcuts (marked `# ponytail:` in code)
 
@@ -512,12 +536,10 @@ Known for 031: at 360 px the header nav wraps into a column.
    ("tabemasu", "wasuretai") are not found; needs grammar content.
 4. **Mid-answer timeout ends the chat answer quietly** (`teacher.py`
    `_contents`); show a message if students run into it.
-5. **Chat panel covers the header (and Logout) on wide screens** while
-   open; listed in spec 030.
 
 ## Test status
 
-1103 tests passing, `ruff check` and `mypy` (strict) clean, as of spec 030.
+1120 tests passing, `ruff check` and `mypy` (strict) clean, as of spec 031.
 
 ```
 tests/test_student.py     — Student creation, skills, mastery aggregation
@@ -554,6 +576,7 @@ tests/test_lookup.py      — romaji from kana tables, course word lookup
 tests/test_chat_web.py    — chat route: streaming, history, checks, panel markup
 tests/test_navigation_web.py — header nav, Continue, course cards, left counter, unlocks, end screen
 tests/test_design_tokens.py — color tokens light/dark, WCAG AA contrast, system fonts
+tests/test_design_web.py  — favicon, sun disc, ruby readings, Did you know, motion, phone nav
 ```
 
 ## Progress
@@ -581,7 +604,8 @@ engine, C: web app, D: local LLM teacher, E: release).
 - **Phase F (in progress):** 026 profiles as accounts with logout and
   delete done; 027 teacher guardrails, word lookup and red-team set done;
   028 chat panel done; 029 navigation and dashboard done; 030 visual
-  direction (flag theme) and design tokens done.
+  direction (flag theme) and design tokens done; 031 flag design on
+  every page done.
 - **Phase E:** v0.1.0 release.
 
 ## Immediate next step for the new session
@@ -589,9 +613,9 @@ engine, C: web app, D: local LLM teacher, E: release).
 1. Read this file plus `docs/ROADMAP.md` and the latest specs.
 2. **Phase F (polish before release) comes first, decided by the user
    on 2026-10-14:** nothing is recorded or published until the app is
-   presentable (good-looking and working well). **Next: review spec 031
-   (draft, apply the flag design to every page) with the user and get
-   approval before tests; then 032.** Invoke the
+   presentable (good-looking and working well). **Next: review spec 032
+   (draft: keyboard and focus, no external URLs, offline, 360/768/1280
+   light and dark) with the user and get approval before tests.** Invoke the
    `ui-ux-pro-max:ui-ux-pro-max` and `frontend-design:frontend-design`
    skills first (project-scope plugins in `.claude/settings.json`).
    Build on the tokens from ADR 0005; the flag mockup is described in
@@ -604,8 +628,9 @@ engine, C: web app, D: local LLM teacher, E: release).
      fixes, one button class, "Practice" spelling);
    - 030 done: flag theme chosen, ADR 0005, tokens, dark mode, system
      fonts, contrast test;
-   - 031 draft: apply the design (components, `<ruby>` readings, "Did
-     you know?" box, feedback animation, chat below the header, favicon);
+   - 031 done: flag design on every page (sun disc, `<ruby>`, "Did you
+     know?", feedback animation, phone nav scroll, chat below the
+     header, favicon);
    - 032 draft: keyboard and focus, no external URLs test, offline,
      360/768/1280 light and dark, user approval before the GIF.
    Then Phase E: README already rewritten and committed; demo GIF

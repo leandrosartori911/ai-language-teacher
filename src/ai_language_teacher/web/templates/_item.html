@@ -1,0 +1,2 @@
+{# The item in the sun disc, with its reading above it when that differs (spec 031). #}
+<p class="item{% if item|length > 1 %} long{% endif %}" lang="ja">{% if teaching is defined and teaching.reading and teaching.reading != item %}<ruby><span lang="ja">{{ item }}</span><rt>{{ teaching.reading }}</rt></ruby>{% else %}{{ item }}{% endif %}</p>

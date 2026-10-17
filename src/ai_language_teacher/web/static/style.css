@@ -33,6 +33,7 @@
   --radius: 14px;
   --radius-small: 10px;
   --shadow: 0 2px 10px rgb(188 0 45 / 0.08);
+  --header-height: 4.5rem; /* chat.js measures the real one */
 }
 
 /* Dark mode follows the system; no toggle. The header keeps a deep red. */
@@ -58,6 +59,10 @@
   }
 }
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font: var(--step-0)/1.55 var(--font);
@@ -65,51 +70,84 @@ body {
   color: var(--text);
 }
 
+[hidden] {
+  display: none !important;
+}
+
+/* Header: the red band of the flag theme (spec 031, ADR 0005). It stays at
+   the top so the chat can open below it. */
 header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
   align-items: center;
-  gap: 0.5rem 1rem;
-  padding: 1rem;
-  border-bottom: 2px solid var(--accent);
+  gap: var(--space-2) var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  background: var(--brand);
+  color: var(--on-brand);
 }
 
-.profile {
+.brand {
   display: flex;
-  gap: 0.5rem;
   align-items: center;
+  gap: var(--space-2);
+  color: inherit;
+  font-weight: 700;
+  text-decoration: none;
 }
 
-header a {
-  color: var(--accent);
-  font-weight: bold;
-  text-decoration: none;
+.brand .sun {
+  width: 1.4rem;
+  height: 1.4rem;
+  border-radius: 50%;
+  background: var(--on-brand);
 }
 
 nav {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.25rem 1rem;
+  flex: 1;
+  gap: var(--space-1);
 }
 
 nav a {
-  font-weight: normal;
+  padding: var(--space-1) var(--space-3);
+  border-radius: 999px;
+  color: inherit;
+  text-decoration: none;
+  white-space: nowrap;
 }
 
 nav a[aria-current="page"] {
-  font-weight: bold;
-  text-decoration: underline;
+  background: var(--on-brand);
+  color: var(--brand);
+  font-weight: 700;
 }
 
-h1 {
-  overflow-wrap: anywhere;
+.profile {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+header .button {
+  border-color: var(--on-brand);
+  color: var(--on-brand);
 }
 
 main {
-  max-width: 40rem;
+  max-width: 44rem;
   margin: 0 auto;
-  padding: 1rem;
+  padding: var(--space-4) var(--space-3);
+}
+
+h1 {
+  margin: 0 0 var(--space-3);
+  font-size: var(--step-3);
+  font-weight: 800;
+  line-height: 1.15;
+  overflow-wrap: anywhere;
 }
 
 a {
@@ -121,81 +159,17 @@ ul {
   list-style: none;
 }
 
-li {
-  padding: 0.5rem 0;
-  border-bottom: 1px solid var(--border);
-}
-
-.courses {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
-  gap: 1rem;
-}
-
-.course {
-  position: relative;
-  padding: 1rem;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  background: var(--surface);
-}
-
-.course h2 {
-  margin: 0;
-  font-size: 1.2rem;
-}
-
-.course .sample {
-  position: absolute;
-  top: 0.5rem;
-  right: 1rem;
-  margin: 0;
-  font-size: 2rem;
-  color: var(--muted);
-}
-
-.course.locked {
-  color: var(--muted);
-}
-
-progress {
-  width: 100%;
-  accent-color: var(--accent);
-}
-
-.actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-form {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  align-items: center;
-}
-
-.error {
-  width: 100%;
-  color: var(--wrong);
-}
-
-.profiles li {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
 /* Every action, link or form button, shares this class (spec 029). */
 .button {
-  display: inline-block;
-  padding: 0.3rem 0.8rem;
-  border: 1px solid var(--accent);
-  border-radius: 4px;
-  background: var(--bg);
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  padding: 0.4rem 1.2rem;
+  border: 2px solid var(--accent);
+  border-radius: 999px;
+  background: transparent;
   color: var(--accent);
-  font: inherit;
+  font: 600 var(--step-0) var(--font);
   text-decoration: none;
   cursor: pointer;
 }
@@ -203,151 +177,392 @@ form {
 .button.primary {
   background: var(--accent);
   color: var(--on-accent);
-  font-size: 1.1rem;
 }
 
-[hidden] {
-  display: none !important;
+form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  align-items: center;
 }
 
-.trash {
-  font-size: 1.3rem;
-  text-decoration: none;
-}
-
-.card {
-  padding: 1rem;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  background: var(--surface);
-}
-
-.card .item {
-  font-size: 3rem;
-  margin: 0;
-}
-
-.mnemonic,
-.culture {
+label {
+  width: 100%;
   color: var(--muted);
 }
 
-.result {
+input {
+  flex: 1;
+  min-width: 0;
+  min-height: 2.75rem;
   padding: 0.5rem 1rem;
-  border-left: 6px solid;
-  border-radius: 6px;
+  border: 2px solid var(--border);
+  border-radius: 999px;
   background: var(--surface);
+  color: var(--text);
+  font: inherit;
+}
+
+input::placeholder {
+  color: var(--muted);
+}
+
+.error {
+  width: 100%;
+  color: var(--wrong);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+/* Home and delete pages. */
+.profiles li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-2) 0;
+  border-bottom: 2px solid var(--border);
+}
+
+.trash {
+  display: inline-grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  color: var(--muted);
+}
+
+/* Dashboard. */
+.continue,
+.all-done {
+  padding: var(--space-4);
+  border-radius: var(--radius);
+  background: var(--accent-soft);
+}
+
+.courses {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  gap: var(--space-3);
+}
+
+#course-hiragana { --course: var(--course-hiragana); }
+#course-katakana { --course: var(--course-katakana); }
+#course-kanji { --course: var(--course-kanji); }
+#course-vocabulary { --course: var(--course-vocabulary); }
+
+.course {
+  position: relative;
+  overflow: hidden;
+  padding: var(--space-4) var(--space-3) var(--space-3);
+  border: 2px solid var(--border);
+  border-top: 6px solid var(--course);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.course p {
+  margin: var(--space-2) 0;
+}
+
+.course h2 {
+  position: relative;
+  margin: 0;
+  font-size: var(--step-1);
+  font-weight: 800;
+}
+
+.course h2 span {
+  display: block;
+  color: var(--muted);
+  font-size: var(--step-0);
+  font-weight: 400;
+}
+
+/* Decorative (aria-hidden): faint, so it needs no contrast. */
+.course .sample {
+  position: absolute;
+  top: -0.6rem;
+  right: -0.4rem;
+  margin: 0;
+  font-size: 5rem;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--course);
+  opacity: 0.14;
+}
+
+.course.locked {
+  --course: var(--muted);
+  background: transparent;
+  box-shadow: none;
+}
+
+.course.locked h2 {
+  color: var(--muted);
+}
+
+progress {
+  width: 100%;
+  height: 10px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--border);
+  appearance: none;
+  overflow: hidden;
+}
+
+progress::-webkit-progress-bar {
+  background: var(--border);
+}
+
+progress::-webkit-progress-value {
+  border-radius: 999px;
+  background: var(--course, var(--accent));
+}
+
+progress::-moz-progress-bar {
+  border-radius: 999px;
+  background: var(--course, var(--accent));
+}
+
+/* Study, practice and ask pages. */
+.left {
+  display: inline-block;
+  margin: 0 0 var(--space-3);
+  padding: var(--space-1) var(--space-3);
+  border-radius: 999px;
+  background: var(--accent-soft);
+  font-size: var(--step--1);
+}
+
+.card {
+  margin: var(--space-3) 0;
+  padding: var(--space-4);
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.card p {
+  margin: 0 0 var(--space-3);
+}
+
+/* The item in the sun disc; a long word stretches it into a pill. `p.item`
+   wins over `.card p`, so the disc stays centered. */
+p.item {
+  display: grid;
+  place-items: center;
+  width: fit-content;
+  max-width: 100%;
+  min-width: 9rem;
+  height: 9rem;
+  margin: 0 auto var(--space-3);
+  padding: 0 var(--space-4);
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-size: 5rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.item.long {
+  height: auto;
+  min-height: 6rem;
+  padding: var(--space-3) var(--space-5);
+  font-size: var(--step-3);
+}
+
+.item rt {
+  font-size: var(--step--1);
+  font-weight: 400;
+}
+
+.prompt {
+  font-size: var(--step-2);
+  text-align: center;
+}
+
+.mnemonic {
+  color: var(--muted);
+}
+
+.example {
+  padding: var(--space-3);
+  border: 2px solid var(--border);
+  border-radius: var(--radius-small);
+}
+
+.example ruby {
+  font-size: var(--step-1);
+  font-weight: 700;
+}
+
+rt {
+  color: inherit;
+}
+
+.culture {
+  padding: var(--space-3);
+  border-radius: var(--radius-small);
+  background: var(--accent-soft);
+}
+
+.culture strong {
+  display: block;
+  color: var(--accent);
+}
+
+.lessons li {
+  padding: var(--space-2) 0;
+  border-bottom: 2px solid var(--border);
+}
+
+.ask,
+.explain {
+  margin: var(--space-3) 0;
+}
+
+.teacher {
+  padding: var(--space-3);
+  border-radius: var(--radius-small);
+  background: var(--accent-soft);
+  white-space: pre-line;
+}
+
+/* Feedback: one full block of color, and a short animation that differs
+   for correct and wrong answers. */
+.result {
+  padding: var(--space-4);
+  border-radius: var(--radius);
+  color: var(--on-accent);
 }
 
 .result h1 {
-  margin: 0.3rem 0;
+  margin: 0;
+  font-size: var(--step-2);
+}
+
+.result p {
+  margin: var(--space-1) 0 0;
 }
 
 .result.correct {
-  border-color: var(--correct);
-}
-
-.result.correct h1 {
-  color: var(--correct);
+  background: var(--correct);
+  animation: pop 300ms ease-out;
 }
 
 .result.wrong {
-  border-color: var(--wrong);
+  background: var(--wrong);
+  animation: shake 350ms ease-out;
 }
 
-.result.wrong h1 {
-  color: var(--wrong);
+@keyframes pop {
+  from { transform: scale(0.94); }
+}
+
+@keyframes shake {
+  25% { transform: translateX(-6px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-3px); }
 }
 
 .answers {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem 2rem;
+  gap: var(--space-1) var(--space-5);
 }
 
 .unlock {
-  font-weight: bold;
+  padding: var(--space-3);
+  border: 2px dashed var(--accent);
+  border-radius: var(--radius);
   color: var(--accent);
+  font-weight: 700;
 }
 
-.left {
-  color: var(--muted);
-}
-
-.ask,
-.explain {
-  margin: 1rem 0;
-}
-
-.teacher {
-  padding: 1rem;
-  border-left: 3px solid var(--accent);
-  white-space: pre-line;
-}
-
-/* Chat with the teacher (spec 028): a side panel, full screen on a phone. */
+/* Chat with the teacher (spec 028): a side panel below the header on wide
+   screens, the page moves aside; full screen on a phone. */
 .chat-toggle {
-  margin: 0.5rem 0;
+  margin: var(--space-2) 0;
 }
 
 .chat {
   position: fixed;
-  top: 0;
+  top: var(--header-height);
   right: 0;
   bottom: 0;
+  z-index: 2;
   width: min(24rem, 100%);
   display: flex;
   flex-direction: column;
-  background: var(--bg);
-  border-left: 2px solid var(--accent);
+  border-left: 2px solid var(--border);
+  background: var(--surface);
 }
 
-.chat[hidden] {
-  display: none;
+body:has(.chat:not([hidden])) main {
+  margin-right: 25rem;
 }
 
 .chat-head {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.5rem 1rem;
-  border-bottom: 1px solid var(--border);
+  padding: var(--space-2) var(--space-3);
+  border-bottom: 2px solid var(--border);
 }
 
 .chat-head h2 {
   margin: 0;
-  font-size: 1.1rem;
+  font-size: var(--step-0);
+}
+
+.chat-close {
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font-size: 1.5rem;
+  cursor: pointer;
 }
 
 .messages {
   flex: 1;
+  list-style: none;
   overflow-y: auto;
   margin: 0;
-  padding: 1rem;
-  list-style: none;
+  padding: var(--space-3);
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: var(--space-2);
 }
 
 .messages li {
   max-width: 85%;
-  padding: 0.5rem 0.8rem;
-  border: 1px solid var(--border);
-  border-radius: 12px;
+  padding: var(--space-2) var(--space-3);
+  border-radius: 18px;
   white-space: pre-line;
 }
 
 .messages .user {
   align-self: flex-end;
+  border-bottom-right-radius: 4px;
   background: var(--accent);
-  border-color: var(--accent);
   color: var(--on-accent);
 }
 
 .messages .assistant {
   align-self: flex-start;
-  background: var(--surface);
+  border-bottom-left-radius: 4px;
+  background: var(--accent-soft);
 }
 
 .messages .error {
@@ -356,13 +571,8 @@ form {
 
 .chat-form {
   flex-wrap: nowrap;
-  padding: 0.5rem 1rem;
-  border-top: 1px solid var(--border);
-}
-
-.chat-form input {
-  flex: 1;
-  min-width: 0;
+  padding: var(--space-3);
+  border-top: 2px solid var(--border);
 }
 
 .visually-hidden {
@@ -374,8 +584,44 @@ form {
   white-space: nowrap;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .result.correct,
+  .result.wrong {
+    animation: none;
+  }
+}
+
+@media (max-width: 64rem) {
+  body:has(.chat:not([hidden])) main {
+    margin-right: auto;
+  }
+}
+
+/* Phone: the navigation is one row that scrolls sideways (user's choice). */
 @media (max-width: 40rem) {
+  header {
+    gap: var(--space-2);
+    padding: var(--space-3);
+  }
+  .profile {
+    margin-left: auto;
+  }
+  nav {
+    order: 3;
+    flex-basis: 100%;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+  }
+  h1 {
+    font-size: var(--step-2);
+  }
   .chat {
+    top: 0;
     border-left: none;
+  }
+  p.item {
+    min-width: 7rem;
+    height: 7rem;
+    font-size: 4rem;
   }
 }

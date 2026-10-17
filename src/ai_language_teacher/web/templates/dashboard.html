@@ -4,7 +4,7 @@
 <h1>{{ name }}</h1>
 
 {% if continue_skill %}
-<p><a class="button primary" href="/study/{{ continue_skill }}">Continue {{ continue_skill }}</a></p>
+<p class="continue"><a class="button primary" href="/study/{{ continue_skill }}">Continue {{ continue_skill }}</a></p>
 {% else %}
 <p class="all-done">All done for today.{% if next_review %} Next review: {{ next_review.isoformat() }}.{% endif %}</p>
 {% endif %}

@@ -39,7 +39,15 @@
     return li;
   }
 
+  // On wide screens the panel opens below the sticky header (spec 031).
+  const header = document.querySelector("header");
+  function fitBelowHeader() {
+    document.documentElement.style.setProperty("--header-height", `${header.offsetHeight}px`);
+  }
+  addEventListener("resize", fitBelowHeader);
+
   function show(open, focus = true) {
+    fitBelowHeader();
     chat.hidden = !open;
     toggle.setAttribute("aria-expanded", String(open));
     write(`${KEY}-open`, open);
