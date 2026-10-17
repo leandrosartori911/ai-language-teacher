@@ -180,7 +180,8 @@ def test_feedback_animation_is_off_with_reduced_motion():
 
 def test_phone_navigation_is_one_row_that_scrolls():
     narrow = re.findall(r"@media\s*\(max-width:[^)]*\)\s*\{(.*?)\}\s*\}", CSS, re.S)
-    navs = [nav for block in narrow for nav in re.findall(r"(?:^|\s)nav\s*\{([^}]*)\}", block)]
+    # No closing brace: the last rule of a block loses it to the block regex.
+    navs = [nav for block in narrow for nav in re.findall(r"(?:^|\s)nav\s*\{([^}]*)", block)]
     assert any("overflow-x: auto" in nav and "flex-wrap: nowrap" in nav for nav in navs)
 
 

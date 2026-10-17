@@ -7,8 +7,8 @@
 
 {% if mode == "teach" %}
 <h1>New: <span lang="ja">{{ item }}</span></h1>
+{% set quiz_url = study_url ~ "?step=quiz" %}
 {% include "_teaching.html" %}
-<p><a class="button primary" href="{{ study_url }}?step=quiz">Quiz me</a></p>
 
 {% elif mode == "quiz" %}
 {% include "_item.html" %}

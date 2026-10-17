@@ -16,6 +16,8 @@
   </aside>
   {% endif %}
 </section>
+{# The main action comes before the ask form, also for the keyboard (spec 032). #}
+{% if quiz_url %}<p><a class="button primary" href="{{ quiz_url }}">Quiz me</a></p>{% endif %}
 <form method="post" action="/ask/{{ skill }}" class="ask">
   <input type="hidden" name="item" value="{{ item }}">
   <label for="question">Ask the teacher about <span lang="ja">{{ item }}</span></label>

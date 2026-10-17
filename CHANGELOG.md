@@ -135,3 +135,10 @@
   with a short animation (off with reduced motion), a phone header whose
   menu scrolls sideways, a chat that opens below the header on wide
   screens, and an SVG favicon.
+- Accessibility and final check (spec 032): a visible focus ring
+  (white inside the red header), a "Skip to content" link, "Quiz me"
+  right after the teaching card, a test that no template, stylesheet or
+  script points to another host, and fixes found by checking every page
+  at 360, 768 and 1280 px in light and dark: the page centers beside the
+  open chat, the menu gets its own row up to 1024 px, and on a phone
+  only the sun mark of the brand stays visible.

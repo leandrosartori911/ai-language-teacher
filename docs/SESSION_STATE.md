@@ -4,8 +4,9 @@ Last updated: 2026-10-17. Phases A-D complete. Phase F (polish before
 release): specs 026 (profiles as accounts, logout, delete), 027
 (teacher guardrails, word lookup, red-team set), 028 (chat panel), 029
 (navigation and dashboard), 030 (visual direction: flag theme,
-tokens, dark mode, ADR 0005) and 031 (flag design on every page) done.
-032 (accessibility and final check) is a draft awaiting approval.
+tokens, dark mode, ADR 0005) 031 (flag design on every page) and 032 (accessibility and final
+check) done. The user's review on 2026-10-17 asked for a clearer
+Practice page and for moving the chat; specs for those come next.
 
 ## What this project is
 
@@ -526,6 +527,18 @@ an inline SVG. Screenshots of real pages: scratchpad
 one gallery share sessionStorage, so the chat-open page leaks into the
 others there.
 
+Accessibility (spec 032): `:focus-visible` 3 px `--text` ring, 2 px
+offset, `--on-brand` inside the header and on the skip link; `.skip`
+"Skip to content" first in `<body>`, to `<main id="main">`; "Quiz me"
+lives in `_teaching.html` when `quiz_url` is set (study.html sets it).
+Up to 64rem the nav has its own scrolling row; under 40rem only the
+sun of the brand shows (`.brand-name` visually hidden). Browser check
+pattern: serve a seeded throwaway DB (scratchpad `serve_check.py`, port
+8765) and measure same-origin iframes at 360/768/1280 with
+claude-in-chrome `javascript_tool`. **That seed sets knowledge to 1.0
+without cards, so its dashboard shows 100% while Practice shows
+0 learned: it confused the user; seed real study instead next time.**
+
 ## Known issues / deliberate shortcuts (marked `# ponytail:` in code)
 
 1. **Answer matching is exact after normalization** — no fuzzy/typo
@@ -539,7 +552,7 @@ others there.
 
 ## Test status
 
-1120 tests passing, `ruff check` and `mypy` (strict) clean, as of spec 031.
+1150 tests passing, `ruff check` and `mypy` (strict) clean, as of spec 032.
 
 ```
 tests/test_student.py     — Student creation, skills, mastery aggregation
@@ -577,6 +590,7 @@ tests/test_chat_web.py    — chat route: streaming, history, checks, panel mark
 tests/test_navigation_web.py — header nav, Continue, course cards, left counter, unlocks, end screen
 tests/test_design_tokens.py — color tokens light/dark, WCAG AA contrast, system fonts
 tests/test_design_web.py  — favicon, sun disc, ruby readings, Did you know, motion, phone nav
+tests/test_accessibility_web.py — no external URLs, focus ring contrast, skip link, Quiz me order
 ```
 
 ## Progress
@@ -613,9 +627,10 @@ engine, C: web app, D: local LLM teacher, E: release).
 1. Read this file plus `docs/ROADMAP.md` and the latest specs.
 2. **Phase F (polish before release) comes first, decided by the user
    on 2026-10-14:** nothing is recorded or published until the app is
-   presentable (good-looking and working well). **Next: review spec 032
-   (draft: keyboard and focus, no external URLs, offline, 360/768/1280
-   light and dark) with the user and get approval before tests.** Invoke the
+   presentable (good-looking and working well). **Next: draft specs from the user's review of
+   2026-10-17 (Practice page that explains learned/not learned lessons
+   and looks like the rest; chat: drop the duplicate "Chat with the
+   teacher" button, give the chat its own place) and get approval.** Invoke the
    `ui-ux-pro-max:ui-ux-pro-max` and `frontend-design:frontend-design`
    skills first (project-scope plugins in `.claude/settings.json`).
    Build on the tokens from ADR 0005; the flag mockup is described in
@@ -628,6 +643,7 @@ engine, C: web app, D: local LLM teacher, E: release).
      fixes, one button class, "Practice" spelling);
    - 030 done: flag theme chosen, ADR 0005, tokens, dark mode, system
      fonts, contrast test;
+   - 032 done: focus ring, skip link, no external URLs, three widths;
    - 031 done: flag design on every page (sun disc, `<ruby>`, "Did you
      know?", feedback animation, phone nav scroll, chat below the
      header, favicon);
