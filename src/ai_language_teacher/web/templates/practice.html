@@ -3,15 +3,20 @@
 {% block content %}
 {% if mode == "list" %}
 <h1>Practice {{ skill }}</h1>
-<ul class="lessons">
+<p class="lead">Practice reviews what you already studied. New items come from Study.</p>
+{# One card per unlocked lesson (spec 033), in the course color. #}
+<ul class="courses lessons" style="--course: var(--course-{{ skill }})">
   {% for lesson in lessons %}
-  <li>
+  <li class="lesson{% if not lesson.learned %} unstudied{% endif %}">
+    <h2>{{ lesson.number }}. {{ lesson.title }}</h2>
+    <p><progress max="{{ lesson.total }}" value="{{ lesson.learned }}">{{ lesson.learned }} / {{ lesson.total }}</progress></p>
+    <p>{{ lesson.learned }} / {{ lesson.total }} learned{% if lesson.learned == lesson.total %} · All learned{% endif %}</p>
     {% if lesson.learned %}
-    <a href="{{ practice_url }}?lesson={{ lesson.number }}">{{ lesson.number }}. {{ lesson.title }}</a>
+    <p><a class="button primary" href="{{ practice_url }}?lesson={{ lesson.number }}">Practice</a></p>
     {% else %}
-    {{ lesson.number }}. {{ lesson.title }}
+    <p class="muted">Not studied yet.</p>
+    <p><a class="button" href="{{ study_url }}">Study</a></p>
     {% endif %}
-    · {{ lesson.learned }} of {{ lesson.total }} learned
   </li>
   {% endfor %}
 </ul>

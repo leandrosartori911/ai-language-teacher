@@ -142,3 +142,8 @@
   at 360, 768 and 1280 px in light and dark: the page centers beside the
   open chat, the menu gets its own row up to 1024 px, and on a phone
   only the sun mark of the brand stays visible.
+- Practice page with lesson cards (spec 033): one card per unlocked
+  lesson with a progress bar and "N / M learned", a Practice button
+  when something is learned, and "Not studied yet." with a Study button
+  when nothing is; a line at the top explains that Practice reviews what
+  Study taught.

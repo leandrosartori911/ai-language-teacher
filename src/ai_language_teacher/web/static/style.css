@@ -450,9 +450,34 @@ rt {
   color: var(--accent);
 }
 
-.lessons li {
-  padding: var(--space-2) 0;
-  border-bottom: 2px solid var(--border);
+/* Practice: lesson cards share the course card look (spec 033). */
+.lead,
+.muted {
+  color: var(--muted);
+}
+
+.lesson {
+  padding: var(--space-3);
+  border: 2px solid var(--border);
+  border-top: 6px solid var(--course);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.lesson h2 {
+  margin: 0;
+  font-size: var(--step-1);
+}
+
+.lesson p {
+  margin: var(--space-2) 0;
+}
+
+.lesson.unstudied {
+  border-top-color: var(--border);
+  background: transparent;
+  box-shadow: none;
 }
 
 .ask,
