@@ -1,7 +1,7 @@
 # 030: Visual direction and design tokens
 
-> Status: **approved by the user on 2026-10-15**; work starts in a later
-> session. Reviewed with the user on 2026-10-15 and split in three:
+> Status: **done on 2026-10-17**: the user chose the flag theme (ADR 0005).
+> Approved on 2026-10-15. Reviewed with the user on 2026-10-15 and split in three:
 > 030 (this spec: direction and tokens), 031 (apply them to every page)
 > and 032 (accessibility and the final check). Together they are the release's face, so they come last and
 > are done with care.
@@ -56,14 +56,14 @@ Google Fonts or other downloads), no CSS framework, no new dependency,
 FastAPI + Jinja2 + vanilla JS unchanged.
 
 ## Acceptance Criteria
-- [ ] Two mockups (calm, flag), made with the two design skills, shown
+- [x] Two mockups (calm, flag), made with the two design skills, shown
       to the user at 1280 px and 360 px.
-- [ ] The user's choice and its tokens are recorded in ADR 0005.
-- [ ] `style.css` defines the chosen tokens in `:root`, with a dark set
+- [x] The user's choice and its tokens are recorded in ADR 0005.
+- [x] `style.css` defines the chosen tokens in `:root`, with a dark set
       under `prefers-color-scheme: dark`.
-- [ ] The font stack uses system fonts only and covers Japanese on
+- [x] The font stack uses system fonts only and covers Japanese on
       Windows, macOS and Linux.
-- [ ] A test checks WCAG AA contrast for the text/background token
+- [x] A test checks WCAG AA contrast for the text/background token
       pairs, light and dark.
 
 ## Out of Scope
