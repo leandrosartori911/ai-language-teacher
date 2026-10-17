@@ -1,18 +1,66 @@
-/* Colors live here so a per-language theme only overrides these variables. */
+/* Design tokens (spec 030, ADR 0005): the flag theme. A per-language theme
+   only overrides these variables. tests/test_design_tokens.py checks the
+   text/background pairs for WCAG AA in both color schemes. */
 :root {
   --bg: #ffffff;
-  --text: #1f1f1f;
-  --muted: #6b6b6b;
+  --surface: #ffffff;
+  --text: #222222;
+  --muted: #5c5c5c;
   --accent: #bc002d;
-  --border: #dddddd;
-  --error: #b00020;
+  --on-accent: #ffffff;
+  --accent-soft: #fbe9ec;
+  --border: #e4e4e4;
   --correct: #1b7f3b;
-  --card: #fafafa;
+  --wrong: #bc002d;
+  --brand: #bc002d;
+  --on-brand: #ffffff;
+  --course-hiragana: #bc002d;
+  --course-katakana: #1f4fa3;
+  --course-kanji: #222222;
+  --course-vocabulary: #b25a00;
+
+  --font: "Segoe UI", "Yu Gothic UI", Meiryo, "Hiragino Sans", "Noto Sans CJK JP", system-ui, sans-serif;
+  --step--1: 0.875rem;
+  --step-0: 1rem;
+  --step-1: 1.3rem;
+  --step-2: 1.8rem;
+  --step-3: 2.6rem;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --space-5: 2.5rem;
+  --radius: 14px;
+  --radius-small: 10px;
+  --shadow: 0 2px 10px rgb(188 0 45 / 0.08);
+}
+
+/* Dark mode follows the system; no toggle. The header keeps a deep red. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #181818;
+    --surface: #222222;
+    --text: #f2f2f2;
+    --muted: #b0b0b0;
+    --accent: #ff5c72;
+    --on-accent: #181818;
+    --accent-soft: #3a1c22;
+    --border: #383838;
+    --correct: #6fd38e;
+    --wrong: #ff5c72;
+    --brand: #9e0026;
+    --on-brand: #ffffff;
+    --course-hiragana: #ff5c72;
+    --course-katakana: #84aaf0;
+    --course-kanji: #f2f2f2;
+    --course-vocabulary: #f0a65a;
+    --shadow: none;
+  }
 }
 
 body {
   margin: 0;
-  font-family: system-ui, sans-serif;
+  font: var(--step-0)/1.55 var(--font);
   background: var(--bg);
   color: var(--text);
 }
@@ -89,7 +137,7 @@ li {
   padding: 1rem;
   border: 1px solid var(--border);
   border-radius: 6px;
-  background: var(--card);
+  background: var(--surface);
 }
 
 .course h2 {
@@ -130,7 +178,7 @@ form {
 
 .error {
   width: 100%;
-  color: var(--error);
+  color: var(--wrong);
 }
 
 .profiles li {
@@ -154,7 +202,7 @@ form {
 
 .button.primary {
   background: var(--accent);
-  color: var(--bg);
+  color: var(--on-accent);
   font-size: 1.1rem;
 }
 
@@ -171,7 +219,7 @@ form {
   padding: 1rem;
   border: 1px solid var(--border);
   border-radius: 6px;
-  background: var(--card);
+  background: var(--surface);
 }
 
 .card .item {
@@ -188,7 +236,7 @@ form {
   padding: 0.5rem 1rem;
   border-left: 6px solid;
   border-radius: 6px;
-  background: var(--card);
+  background: var(--surface);
 }
 
 .result h1 {
@@ -204,11 +252,11 @@ form {
 }
 
 .result.wrong {
-  border-color: var(--error);
+  border-color: var(--wrong);
 }
 
 .result.wrong h1 {
-  color: var(--error);
+  color: var(--wrong);
 }
 
 .answers {
@@ -294,16 +342,16 @@ form {
   align-self: flex-end;
   background: var(--accent);
   border-color: var(--accent);
-  color: var(--bg);
+  color: var(--on-accent);
 }
 
 .messages .assistant {
   align-self: flex-start;
-  background: var(--card);
+  background: var(--surface);
 }
 
 .messages .error {
-  color: var(--error);
+  color: var(--wrong);
 }
 
 .chat-form {

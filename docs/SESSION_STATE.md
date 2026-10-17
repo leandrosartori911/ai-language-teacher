@@ -1,11 +1,11 @@
 # Session State — read this first in a new session
 
-Last updated: 2026-10-15. Phases A-D complete. Phase F (polish before
+Last updated: 2026-10-17. Phases A-D complete. Phase F (polish before
 release): specs 026 (profiles as accounts, logout, delete), 027
-(teacher guardrails, word lookup, red-team set), 028 (chat panel) and
-029 (navigation and dashboard) done. The visual design was split into
-030 (direction and tokens, approved 2026-10-15, not started), 031
-(apply to every page) and 032 (accessibility and final check), drafts.
+(teacher guardrails, word lookup, red-team set), 028 (chat panel), 029
+(navigation and dashboard) and 030 (visual direction: flag theme,
+tokens, dark mode, ADR 0005) done. 031 (apply to every page) and 032
+(accessibility and final check) are drafts awaiting approval.
 
 ## What this project is
 
@@ -481,6 +481,27 @@ dashboard by `id="course-<skill>"` (helper `card()`). Browser check:
 screenshots; load pages into a 360 px same-origin iframe instead and
 measure elements past its right edge.
 
+Visual design (spec 030, ADR 0005): the user chose the **flag theme**
+(mockup B) on 2026-10-17 over the calm one. Tokens in `style.css`
+`:root`: `--bg --surface --text --muted --accent --on-accent
+--accent-soft --border --correct --wrong --brand --on-brand` and
+`--course-<skill>`, plus `--font` (system stack with Yu Gothic UI,
+Meiryo, Hiragino Sans, Noto Sans CJK JP), `--step--1..3`,
+`--space-1..5`, `--radius`, `--radius-small`, `--shadow`. Dark set under
+`@media (prefers-color-scheme: dark)` (header `--brand` stays deep red
+`#9e0026`). Old names `--card`/`--error` became `--surface`/`--wrong`;
+pages are not restyled yet (031). `tests/test_design_tokens.py` parses
+the CSS with regexes (`#rrggbb` only) and checks WCAG AA for the
+text/background pairs it lists; **add a pair there when a page puts a
+new text color on a new background**. Mockups were throwaway files in
+the scratchpad: `mockup_flag.html` is the reference for 031 (red header
+band, pill nav and buttons, kana in a red sun disc, full-color feedback
+blocks, course cards with a colored top border and a faint big
+character). Screenshots: headless Chrome
+(`chrome --headless=new --screenshot --window-size=...`); for 360 px
+put the page in a 360 px iframe (headless clamps narrow windows).
+Known for 031: at 360 px the header nav wraps into a column.
+
 ## Known issues / deliberate shortcuts (marked `# ponytail:` in code)
 
 1. **Answer matching is exact after normalization** — no fuzzy/typo
@@ -496,7 +517,7 @@ measure elements past its right edge.
 
 ## Test status
 
-1048 tests passing, `ruff check` and `mypy` (strict) clean, as of spec 029.
+1103 tests passing, `ruff check` and `mypy` (strict) clean, as of spec 030.
 
 ```
 tests/test_student.py     — Student creation, skills, mastery aggregation
@@ -532,6 +553,7 @@ tests/test_profiles_web.py — profile cookie, logout, delete with confirmation
 tests/test_lookup.py      — romaji from kana tables, course word lookup
 tests/test_chat_web.py    — chat route: streaming, history, checks, panel markup
 tests/test_navigation_web.py — header nav, Continue, course cards, left counter, unlocks, end screen
+tests/test_design_tokens.py — color tokens light/dark, WCAG AA contrast, system fonts
 ```
 
 ## Progress
@@ -558,7 +580,8 @@ engine, C: web app, D: local LLM teacher, E: release).
   teacher about an item; 025 explain my mistake done.
 - **Phase F (in progress):** 026 profiles as accounts with logout and
   delete done; 027 teacher guardrails, word lookup and red-team set done;
-  028 chat panel done; 029 navigation and dashboard done.
+  028 chat panel done; 029 navigation and dashboard done; 030 visual
+  direction (flag theme) and design tokens done.
 - **Phase E:** v0.1.0 release.
 
 ## Immediate next step for the new session
@@ -566,28 +589,21 @@ engine, C: web app, D: local LLM teacher, E: release).
 1. Read this file plus `docs/ROADMAP.md` and the latest specs.
 2. **Phase F (polish before release) comes first, decided by the user
    on 2026-10-14:** nothing is recorded or published until the app is
-   presentable (good-looking and working well). Draft specs written
-   from the user's review plus a screenshot review and a live probe of
-   the teacher (all **not approved yet**; each needs review and approval
-   before tests, open questions inside each spec). **Next: spec 030
-   (approved 2026-10-15, user chose to start in a later session):
-   invoke the `ui-ux-pro-max:ui-ux-pro-max` and
-   `frontend-design:frontend-design` skills first (installed as
-   project-scope plugins on 2026-10-15, declared in
-   `.claude/settings.json`; if they are not listed, the session was
-   started before the install, or run `claude plugin list`), then make
-   the two mockups (calm and minimal; bold flag) in the scratchpad and
-   show them at 1280 and 360 px. User decisions recorded in the spec:
-   split in 030-032, system fonts only, dark mode automatic (no
-   toggle). Then 031 and 032 need their own approval.**
+   presentable (good-looking and working well). **Next: review spec 031
+   (draft, apply the flag design to every page) with the user and get
+   approval before tests; then 032.** Invoke the
+   `ui-ux-pro-max:ui-ux-pro-max` and `frontend-design:frontend-design`
+   skills first (project-scope plugins in `.claude/settings.json`).
+   Build on the tokens from ADR 0005; the flag mockup is described in
+   the visual design section above.
    - 026 done (profiles as accounts, logout, delete with confirmation);
    - 027 done (guardrails, course word lookup, red-team set 25/26);
    - 028 done (chat panel, sentence-by-sentence streaming, browser-checked);
    - 029 done: navigation and dashboard (header nav, Continue, course
      cards, left counter, unlock messages, end screen, phone-width
      fixes, one button class, "Practice" spelling);
-   - 030 approved: mockups (calm, flag), ADR 0005, tokens, dark mode,
-     system fonts, contrast test;
+   - 030 done: flag theme chosen, ADR 0005, tokens, dark mode, system
+     fonts, contrast test;
    - 031 draft: apply the design (components, `<ruby>` readings, "Did
      you know?" box, feedback animation, chat below the header, favicon);
    - 032 draft: keyboard and focus, no external URLs test, offline,

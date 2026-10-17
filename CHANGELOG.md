@@ -121,3 +121,9 @@
   tomorrow's reviews with Practice and Dashboard buttons, feedback shows
   the result in one block, "Practice" is spelled one way, and every
   action uses the same button class.
+- Visual direction (spec 030, ADR 0005): the flag theme, chosen from two
+  mockups. `style.css` now defines the design tokens (colors, one color
+  per course, type scale, spacing, radius, shadow), a dark set that
+  follows the system, and a system font stack that covers Japanese on
+  Windows, macOS and Linux. A test checks WCAG AA contrast for every
+  text/background pair in both color schemes.
