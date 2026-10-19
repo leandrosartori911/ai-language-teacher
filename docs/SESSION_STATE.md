@@ -6,7 +6,8 @@ release): specs 026 (profiles as accounts, logout, delete), 027
 (navigation and dashboard), 030 (visual direction: flag theme,
 tokens, dark mode, ADR 0005) 031 (flag design on every page) and 032 (accessibility and final
 check) done. From the user's review on 2026-10-17: 033 (Practice
-lesson cards) and 034 (Teacher page) done. **Phase F is complete;
+lesson cards) and 034 (Teacher page) done; 035 (New conversation,
+shorter memory, from the user's test on 2026-10-19) done. **Phase F is complete;
 next is Phase E (GIF guide update, v0.1.0 release).**
 
 ## What this project is
@@ -442,8 +443,8 @@ pages with a teaching card, never on quiz screens) + `static/chat.js`
 (first JS; shipped via `web/static/*.js` in package-data). JS takes over
 `form.ask`/`form.explain` and the panel form; without JS they post to
 `/ask` (fallback, no new tabs). History lives in `sessionStorage`
-(`teacher-chat`, plus `teacher-chat-open`), last 12 messages sent per
-request. `POST /chat/{skill}` JSON (`ChatRequest`: item, message,
+(`teacher-chat`, plus `teacher-chat-open`); since spec 035 the browser
+keeps 8 messages and the model gets only the last 4 student messages. `POST /chat/{skill}` JSON (`ChatRequest`: item, message,
 history of `ChatTurn` role user|assistant) -> `teacher_target` (profile,
 skill, unlocked item) -> `item_prompt(skill, item, message, earlier)`
 (lookup over the new and earlier student messages) -> `chat_messages`
@@ -566,6 +567,23 @@ without the Chrome extension: scratchpad `check.mjs` drives headless
 Chrome over CDP with Node 24's built-in `WebSocket` (no new deps),
 `serve.py` serves a throwaway DB on 8765.
 
+Chat memory (spec 035): `MAX_STUDENT_MESSAGES = 4` (sent to the model,
+student turns only: with its own answers qwen2.5:7b copied them) and
+`MAX_HISTORY_MESSAGES = 8` (what the server reads and the browser keeps,
+as `data-history` from `templates.env.globals["max_history"]`).
+`chat_messages` drops assistant turns. "New conversation" (`.chat-new`,
+hidden in markup, shown by chat.js) clears that chat's list and storage
+key and focuses the input; ignored while an answer streams. Teacher page
+lesson = `free_conversation_lesson(course_overview())` (`course.py`
+builds "- skill: N lessons, M items" from `COURSES`). Eval cases with
+`history` run through `teacher.chat_messages` + `chat_ollama` +
+`safe_stream`; 35 cases, 34/35. Temperature 0 is not fully repeatable
+across runs (a case passed alone and failed in the full run): repeat
+cases before trusting a single run. `check2.mjs` in the scratchpad is
+the New conversation browser check. `safe_stream` also checks
+`MIXED_RUN` (Latin letters stuck to Japanese, "goesます"): the mix must
+be in the allowed text, like each Japanese run.
+
 ## Known issues / deliberate shortcuts (marked `# ponytail:` in code)
 
 1. **Answer matching is exact after normalization** — no fuzzy/typo
@@ -579,7 +597,7 @@ Chrome over CDP with Node 24's built-in `WebSocket` (no new deps),
 
 ## Test status
 
-1173 tests passing, `ruff check` and `mypy` (strict) clean, as of spec 034.
+1182 tests passing, `ruff check` and `mypy` (strict) clean, as of spec 035.
 
 ```
 tests/test_student.py     — Student creation, skills, mastery aggregation
@@ -620,6 +638,7 @@ tests/test_design_web.py  — favicon, sun disc, ruby readings, Did you know, mo
 tests/test_accessibility_web.py — no external URLs, focus ring contrast, skip link, Quiz me order
 tests/test_practice_cards_web.py — Practice lesson cards, Practice/Study actions, All learned
 tests/test_teacher_page_web.py — Teacher page, free chat route, no chat button on cards
+tests/test_chat_memory_web.py — New conversation button, memory caps, course overview
 ```
 
 ## Progress
@@ -649,7 +668,8 @@ engine, C: web app, D: local LLM teacher, E: release).
   028 chat panel done; 029 navigation and dashboard done; 030 visual
   direction (flag theme) and design tokens done; 031 flag design on
   every page done; 032 accessibility done; 033 Practice cards done;
-  034 Teacher page done. **Phase F is complete.**
+  034 Teacher page done; 035 New conversation and shorter memory done.
+  **Phase F is complete.**
 - **Phase E:** v0.1.0 release.
 
 ## Immediate next step for the new session

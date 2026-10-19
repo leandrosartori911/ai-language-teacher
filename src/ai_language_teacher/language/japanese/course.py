@@ -19,6 +19,15 @@ COURSE_LABELS: dict[str, tuple[str, str]] = {
     "vocabulary": ("語彙", "語"),
 }
 
+
+def course_overview() -> str:
+    """One line per course for the Teacher page prompt (spec 035)."""
+    return "\n".join(
+        f"- {skill}: {len(lessons)} lessons, {sum(len(each.items) for each in lessons)} items"
+        for skill, lessons in COURSES.items()
+    )
+
+
 PREREQUISITES: dict[str, str | None] = {
     "hiragana": None,
     "katakana": "hiragana",

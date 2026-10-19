@@ -82,13 +82,12 @@ def test_model_gets_system_prompt_history_and_current_item(client, ana, chatted)
         "role": "user",
         "content": "<student_message>\nWhat is あ?\n</student_message>",
     }
-    assert messages[2] == {"role": "assistant", "content": "あ is 'a'."}
-    current = messages[3]
+    current = messages[2]
     assert current["role"] == "user"
     assert "Lesson content for あ:" in current["content"]
     assert "食べる (たべる, taberu): to eat" in current["content"]
     assert current["content"].endswith("<student_message>\nAnd taberu?\n</student_message>")
-    assert len(messages) == 4
+    assert len(messages) == 3  # the teacher's answer is not sent back (spec 035)
 
 
 def test_course_words_from_earlier_student_turns_ground_a_follow_up(client, ana, chatted):
@@ -104,7 +103,8 @@ def test_course_words_from_earlier_student_turns_ground_a_follow_up(client, ana,
     assert "食べる (たべる, taberu): to eat" in found
 
 
-def test_history_is_capped_to_12_messages_of_1200_characters(client, ana, chatted):
+def test_history_is_capped_to_4_student_messages_of_1200_characters(client, ana, chatted):
+    # Spec 035: with its own answers the model copied them.
     history = [
         {"role": "user" if n % 2 == 0 else "assistant", "content": f"turn {n} " + "x" * 2000}
         for n in range(20)
@@ -113,8 +113,9 @@ def test_history_is_capped_to_12_messages_of_1200_characters(client, ana, chatte
     chat(client, history=history)
 
     earlier = chatted[0][1:-1]
-    assert len(earlier) == 12
-    assert earlier[0]["content"].startswith("<student_message>\nturn 8 ")
+    assert len(earlier) == 4
+    assert all(m["role"] == "user" for m in earlier)
+    assert earlier[0]["content"].startswith("<student_message>\nturn 12 ")
     assert all(
         len(m["content"]) <= 1200 + len("<student_message>\n\n</student_message>") for m in earlier
     )

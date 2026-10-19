@@ -155,3 +155,12 @@
   back to "their lessons", the fallback answer no longer mentions a
   card, and five free-conversation cases join the eval set (30/31 with
   `qwen2.5:7b`).
+- New conversation and a teacher that drifts less (spec 035): both
+  chats get a "New conversation" button that clears that chat only; the
+  model now gets only the student's last 4 messages, not its own
+  earlier answers (it copied them, deflections included); the Teacher
+  page prompt lists every course with its lessons and items and points
+  to the Dashboard. Eval cases can carry a fixed history and run through
+  the chat API; four multi-turn cases join the set (34/35 with
+  `qwen2.5:7b`). Answers with Latin letters stuck to Japanese
+  ("goesます") are dropped like invented Japanese.

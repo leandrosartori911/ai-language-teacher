@@ -121,6 +121,19 @@ def test_sentence_with_invented_japanese_is_removed():
     assert safe_answer(reply, ALLOWED) == "いぬ means dog. Practise ぬ daily!"
 
 
+def test_sentence_mixing_letters_into_known_japanese_is_removed():
+    # Spec 035: "ありがとう goesます" passed, since both kana runs were allowed.
+    reply = "いぬ means dog. Say いぬgoesぬ. Practise ぬ daily!"
+
+    assert safe_answer(reply, ALLOWED) == "いぬ means dog. Practise ぬ daily!"
+
+
+def test_letters_next_to_japanese_pass_when_the_prompt_has_them():
+    allowed = ALLOWED + "\n- Tシャツ (tiishatsu): T-shirt"
+
+    assert safe_answer("Tシャツ is a T-shirt.", allowed) == "Tシャツ is a T-shirt."
+
+
 def test_answer_with_nothing_left_becomes_the_fallback():
     assert safe_answer("犬が好きです。", ALLOWED) == FALLBACK_ANSWER
 
@@ -241,10 +254,10 @@ def test_chat_messages_tag_student_turns_and_end_with_the_prompt():
 
     messages = chat_messages(history, "PROMPT")
 
+    # The teacher's own answers are not sent back (spec 035).
     assert messages == [
         {"role": "system", "content": SYSTEM_PROMPT},
         {"role": "user", "content": "<student_message>\nHi ‹you›\n</student_message>"},
-        {"role": "assistant", "content": "Hello."},
         {"role": "user", "content": "PROMPT"},
     ]
 

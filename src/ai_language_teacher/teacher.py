@@ -14,7 +14,11 @@ OLLAMA_CHAT_URL = "http://127.0.0.1:11434/api/chat"
 DEFAULT_MODEL = "qwen2.5:7b"
 TIMEOUT_SECONDS = 120
 MAX_ANSWER_LENGTH = 1200
-MAX_HISTORY_MESSAGES = 12  # the last 6 exchanges of a chat (spec 028)
+# Only the student's last 4 messages go to the model: given its own earlier
+# answers, qwen2.5:7b copied them, deflections included (spec 035).
+MAX_STUDENT_MESSAGES = 4
+# What the browser keeps and sends: the same 4 exchanges, answers included.
+MAX_HISTORY_MESSAGES = 2 * MAX_STUDENT_MESSAGES
 
 SYSTEM_PROMPT = """\
 You are a friendly Japanese teacher for absolute beginners, inside a study app. Rules:
@@ -44,8 +48,21 @@ FREE_CONVERSATION = (
     "in <course_words>; any other word is not in the lessons yet."
 )
 
+
+def free_conversation_lesson(overview: str) -> str:
+    # The course overview answers "what are we learning?" truthfully (spec 035).
+    return (
+        f"{FREE_CONVERSATION}\nCourses in this app, in study order:\n{overview}\n"
+        "Each student sees their own lessons and progress on the Dashboard. "
+        "If the student asks what they are learning, name these courses and point to "
+        "the Dashboard."
+    )
+
 # Kana, kanji and the iteration mark 々; Japanese punctuation is not included.
 JAPANESE_RUN = re.compile(r"[぀-ヿ㐀-䶿一-鿿々]+")
+# Latin letters stuck to Japanese ("goesます"): each run alone can be allowed
+# while the mix is invented (spec 035).
+MIXED_RUN = re.compile(r"[A-Za-z]+[぀-ヿ㐀-䶿一-鿿々]+|[぀-ヿ㐀-䶿一-鿿々]+[A-Za-z]+")
 # The prompt's own tags, which the model sometimes copies into its answer.
 PROMPT_TAG = re.compile(r"</?(?:lesson|course_words|student_message)>")
 # A full sentence: "." needs a space after it, so a streamed "1." + "5" stays whole.
@@ -98,13 +115,11 @@ def student_message(text: str) -> str:
 
 
 def chat_messages(history: Sequence[tuple[str, str]], prompt: str) -> list[dict[str, str]]:
-    """Ollama chat messages: rules, the last turns (capped), then the current prompt."""
+    """Ollama chat messages: rules, the student's last messages, then the current prompt."""
+    earlier = [content for role, content in history if role == "user"][-MAX_STUDENT_MESSAGES:]
     messages = [{"role": "system", "content": SYSTEM_PROMPT}]
-    for role, content in history[-MAX_HISTORY_MESSAGES:]:
-        content = content[:MAX_ANSWER_LENGTH]
-        messages.append(
-            {"role": role, "content": student_message(content) if role == "user" else content}
-        )
+    for content in earlier:
+        messages.append({"role": "user", "content": student_message(content[:MAX_ANSWER_LENGTH])})
     messages.append({"role": "user", "content": prompt})
     return messages
 
@@ -128,9 +143,8 @@ def safe_stream(chunks: Iterable[str], allowed: str) -> Iterator[str]:
         sentence = PROMPT_TAG.sub("", sentence)
         if not length:
             sentence = sentence.lstrip()
-        if not sentence.strip() or not all(
-            run in allowed for run in JAPANESE_RUN.findall(sentence)
-        ):
+        runs = JAPANESE_RUN.findall(sentence) + MIXED_RUN.findall(sentence)
+        if not sentence.strip() or not all(run in allowed for run in runs):
             continue
         if length + len(sentence.rstrip()) > MAX_ANSWER_LENGTH:
             if not length:  # a single overlong sentence: cut it hard

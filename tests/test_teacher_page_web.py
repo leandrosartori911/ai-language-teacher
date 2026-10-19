@@ -115,7 +115,7 @@ def test_course_words_from_earlier_messages_ground_a_follow_up(client, chatted):
     prompt = chatted[0][-1]["content"]
     found = prompt[prompt.index("<course_words>") : prompt.index("</course_words>")]
     assert "食べる (たべる, taberu): to eat" in found
-    assert len(chatted[0]) == 4
+    assert len(chatted[0]) == 3  # system, earlier student message, prompt
 
 
 @pytest.mark.parametrize("message", ["", "   ", "x" * 501])

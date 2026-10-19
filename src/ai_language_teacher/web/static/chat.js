@@ -6,7 +6,7 @@
   if (!chat) return;
 
   const KEY = chat.dataset.key || "teacher-chat";
-  const MAX_MESSAGES = 12; // the last 6 exchanges
+  const MAX_MESSAGES = Number(chat.dataset.history); // what the server sends (spec 035)
   const list = chat.querySelector(".messages");
   const input = chat.querySelector("#chat-input");
   const close = chat.querySelector(".chat-close");
@@ -109,6 +109,16 @@
 
   for (const message of history) bubble(message.role, message.content);
   fitBelowHeader();
+  // New conversation clears this chat only; the other one keeps its key.
+  const fresh = chat.querySelector(".chat-new");
+  fresh.hidden = false;
+  fresh.addEventListener("click", () => {
+    if (busy) return; // the answer being streamed would be saved again
+    history = [];
+    write(KEY, history);
+    list.replaceChildren();
+    input.focus();
+  });
   if (close) {
     close.addEventListener("click", () => show(false));
     chat.addEventListener("keydown", (event) => {

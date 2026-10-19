@@ -576,6 +576,11 @@ body:has(.chat:not([hidden])) main {
   font-size: var(--step-0);
 }
 
+/* New conversation sits beside the close button (spec 035). */
+.chat-new {
+  margin-left: auto;
+}
+
 .chat-close {
   width: 2.75rem;
   height: 2.75rem;

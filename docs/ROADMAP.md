@@ -46,7 +46,7 @@ MVP goal: a local, zero-cost AI teacher that really teaches Japanese
 ## Phase F: Polish before release
 The user decided on 2026-10-14 to publish the GIF and the release only
 when the app is presentable. Specs 030-032 (the release's face, split
-on 2026-10-15): 030-034 done (033 and 034 from the user's review on 2026-10-17). All three use the
+on 2026-10-15): 030-034 done (033 and 034 from the user's review on 2026-10-17); 035 from the user's test on 2026-10-19 done. All three use the
 `ui-ux-pro-max` and `frontend-design` skills. Order:
 - [x] Profiles work like accounts, with logout and delete (spec 026)
 - [x] AI teacher guardrails, course word lookup and a red-team test set (spec 027)
@@ -57,6 +57,7 @@ on 2026-10-15): 030-034 done (033 and 034 from the user's review on 2026-10-17).
 - [x] Accessibility, offline and three-width check before the GIF (spec 032)
 - [x] Practice page with lesson cards that say what to study first (spec 033)
 - [x] A Teacher page for free conversation; one way into the item chat (spec 034)
+- [x] New conversation button and a teacher that drifts less (spec 035)
 
 ## Phase E: Release (after Phase F)
 - [ ] v0.1.0 release, demo GIF

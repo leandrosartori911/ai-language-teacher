@@ -8,7 +8,11 @@
 </noscript>
 {# Free conversation (spec 034). chat.js shows it; its history is kept apart
    from the item chat. #}
-<section id="chat" class="chat-page" data-url="/teacher" data-key="teacher-free" aria-label="Chat with the AI teacher" hidden>
+<section id="chat" class="chat-page" data-url="/teacher" data-key="teacher-free" data-history="{{ max_history }}" aria-label="Chat with the AI teacher" hidden>
+  <div class="chat-head">
+    <h2>Conversation</h2>
+    <button type="button" class="button chat-new" hidden>New conversation</button>
+  </div>
   <ol class="messages" aria-live="polite"></ol>
   <form class="chat-form">
     <label for="chat-input" class="visually-hidden">Message to the teacher</label>

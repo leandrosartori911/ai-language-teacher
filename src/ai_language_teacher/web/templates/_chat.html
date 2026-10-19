@@ -1,8 +1,9 @@
 {# Chat with the teacher (spec 028). chat.js takes over the ask forms and
    opens the panel; without JavaScript they post to the ask page instead. #}
-<section id="chat" class="chat" data-url="/chat/{{ skill }}" data-item="{{ item }}" aria-label="Chat with the AI teacher" hidden>
+<section id="chat" class="chat" data-url="/chat/{{ skill }}" data-item="{{ item }}" data-history="{{ max_history }}" aria-label="Chat with the AI teacher" hidden>
   <div class="chat-head">
     <h2>AI teacher</h2>
+    <button type="button" class="button chat-new" hidden>New conversation</button>
     <button type="button" class="chat-close" aria-label="Close the chat">&times;</button>
   </div>
   <ol class="messages" aria-live="polite"></ol>

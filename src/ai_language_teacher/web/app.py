@@ -31,7 +31,12 @@ from ai_language_teacher.core.review import (
     study_queue,
 )
 from ai_language_teacher.core.student import Student
-from ai_language_teacher.language.japanese.course import COURSE_LABELS, COURSES, PREREQUISITES
+from ai_language_teacher.language.japanese.course import (
+    COURSE_LABELS,
+    COURSES,
+    PREREQUISITES,
+    course_overview,
+)
 from ai_language_teacher.language.japanese.lookup import find_course_words
 from ai_language_teacher.storage import (
     DEFAULT_DB_PATH,
@@ -42,13 +47,13 @@ from ai_language_teacher.storage import (
     save_student,
 )
 from ai_language_teacher.teacher import (
-    FREE_CONVERSATION,
     MAX_HISTORY_MESSAGES,
     TeacherUnavailable,
     ask_ollama,
     chat_messages,
     chat_ollama,
     current_model,
+    free_conversation_lesson,
     grounded_prompt,
     safe_answer,
     safe_stream,
@@ -149,6 +154,8 @@ def create_app(
     app = FastAPI(title="AI Language Teacher")
     app.mount("/static", StaticFiles(directory=HERE / "static"), name="static")
     templates = Jinja2Templates(directory=HERE / "templates")
+    # chat.js keeps no more history than the server sends (spec 035).
+    templates.env.globals["max_history"] = MAX_HISTORY_MESSAGES
 
     # Blocks DNS rebinding: another site's domain pointed at 127.0.0.1.
     app.add_middleware(TrustedHostMiddleware, allowed_hosts=ALLOWED_HOSTS)
@@ -586,7 +593,7 @@ def create_app(
 
         def prompt(message: str, earlier: list[str]) -> str:
             words = find_course_words("\n".join([*earlier, message]))
-            return grounded_prompt(FREE_CONVERSATION, message, words)
+            return grounded_prompt(free_conversation_lesson(course_overview()), message, words)
 
         return chat_reply(body, prompt)
 
