@@ -32,11 +32,16 @@ lessons yet and do not guess its meaning.
 5. Never write new Japanese: only use Japanese that appears in <lesson> or \
 <course_words>. Never translate whole sentences into or out of Japanese.
 6. If the message is not about learning Japanese, answer with one friendly sentence \
-bringing the student back to the lesson."""
+bringing the student back to their lessons."""
 
 FALLBACK_ANSWER = (
     "I can only use Japanese from your lessons, and I could not answer that "
-    "without inventing some. Try asking about the words on this card."
+    "without inventing some. Try asking about a word from your lessons."
+)
+# Without the last sentence qwen2.5:7b explained words outside the course (spec 034).
+FREE_CONVERSATION = (
+    "none: free conversation, not about one item. The only course words are the ones "
+    "in <course_words>; any other word is not in the lessons yet."
 )
 
 # Kana, kanji and the iteration mark 々; Japanese punctuation is not included.
@@ -74,9 +79,14 @@ def teacher_prompt(
         lines.append(f"- on readings: {', '.join(teaching.on_readings)}")
     if teaching.culture_note:
         lines.append(f"- culture note: {teaching.culture_note}")
+    return grounded_prompt("\n".join(lines), question, words)
+
+
+def grounded_prompt(lesson: str, question: str, words: Sequence[str] = ()) -> str:
+    # The Teacher page (spec 034) passes FREE_CONVERSATION as the lesson.
     found = "\n".join(f"- {word}" for word in words) or "none"
     return (
-        "<lesson>\n" + "\n".join(lines) + "\n</lesson>\n\n"
+        f"<lesson>\n{lesson}\n</lesson>\n\n"
         f"<course_words>\n{found}\n</course_words>\n\n" + student_message(question)
     )
 

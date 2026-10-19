@@ -17,6 +17,7 @@
       {% for course in courses %}
       <a href="/study/{{ course }}"{% if current == "/study/" ~ course %} aria-current="page"{% endif %}>{{ course|capitalize }}</a>
       {% endfor %}
+      <a href="/teacher"{% if current == "/teacher" %} aria-current="page"{% endif %}>Teacher</a>
     </nav>
     {% endif %}
     {% if name %}

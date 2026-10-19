@@ -1,12 +1,13 @@
 # Session State — read this first in a new session
 
-Last updated: 2026-10-17. Phases A-D complete. Phase F (polish before
+Last updated: 2026-10-19. Phases A-D complete. Phase F (polish before
 release): specs 026 (profiles as accounts, logout, delete), 027
 (teacher guardrails, word lookup, red-team set), 028 (chat panel), 029
 (navigation and dashboard), 030 (visual direction: flag theme,
 tokens, dark mode, ADR 0005) 031 (flag design on every page) and 032 (accessibility and final
 check) done. From the user's review on 2026-10-17: 033 (Practice
-lesson cards) done; 034 (Teacher page) approved, not started.
+lesson cards) and 034 (Teacher page) done. **Phase F is complete;
+next is Phase E (GIF guide update, v0.1.0 release).**
 
 ## What this project is
 
@@ -546,6 +547,25 @@ value=learned>`, "N / M learned" (was "N of M"), "· All learned", then a
 primary Practice button or "Not studied yet." + Study button
 (`study_url`). The route is unchanged.
 
+Teacher page (spec 034): nav link "Teacher" (`/teacher`, after the
+course links). `GET /teacher` renders `teacher.html`: `<section
+id="chat" class="chat-page" data-url="/teacher" data-key="teacher-free"
+hidden>` (no `data-item`, no close button) + `<noscript>`. `POST
+/teacher` takes `TeacherRequest` (message, history; `ChatRequest`
+extends it with `item`); both routes go through `chat_reply(body,
+prompt)` in `create_app`. Free prompt = `grounded_prompt(
+FREE_CONVERSATION, message, words)` (`teacher_prompt` builds the item's
+lesson lines then calls `grounded_prompt`). chat.js: storage key from
+`data-key` (default `teacher-chat`); no close button = page mode (always
+shown, `show()` does nothing); the "Chat with the teacher" toggle is
+gone, closing the panel focuses the ask field. Rule 6 = "back to their
+lessons"; `FALLBACK_ANSWER` ends "Try asking about a word from your
+lessons." Evals: cases without `item` use the free prompt; 31 cases,
+30/31 on 2026-10-19 (known failure: system prompt). Browser check
+without the Chrome extension: scratchpad `check.mjs` drives headless
+Chrome over CDP with Node 24's built-in `WebSocket` (no new deps),
+`serve.py` serves a throwaway DB on 8765.
+
 ## Known issues / deliberate shortcuts (marked `# ponytail:` in code)
 
 1. **Answer matching is exact after normalization** — no fuzzy/typo
@@ -559,7 +579,7 @@ primary Practice button or "Not studied yet." + Study button
 
 ## Test status
 
-1155 tests passing, `ruff check` and `mypy` (strict) clean, as of spec 033.
+1173 tests passing, `ruff check` and `mypy` (strict) clean, as of spec 034.
 
 ```
 tests/test_student.py     — Student creation, skills, mastery aggregation
@@ -599,6 +619,7 @@ tests/test_design_tokens.py — color tokens light/dark, WCAG AA contrast, syste
 tests/test_design_web.py  — favicon, sun disc, ruby readings, Did you know, motion, phone nav
 tests/test_accessibility_web.py — no external URLs, focus ring contrast, skip link, Quiz me order
 tests/test_practice_cards_web.py — Practice lesson cards, Practice/Study actions, All learned
+tests/test_teacher_page_web.py — Teacher page, free chat route, no chat button on cards
 ```
 
 ## Progress
@@ -627,46 +648,23 @@ engine, C: web app, D: local LLM teacher, E: release).
   delete done; 027 teacher guardrails, word lookup and red-team set done;
   028 chat panel done; 029 navigation and dashboard done; 030 visual
   direction (flag theme) and design tokens done; 031 flag design on
-  every page done.
+  every page done; 032 accessibility done; 033 Practice cards done;
+  034 Teacher page done. **Phase F is complete.**
 - **Phase E:** v0.1.0 release.
 
 ## Immediate next step for the new session
 
 1. Read this file plus `docs/ROADMAP.md` and the latest specs.
-2. **Phase F (polish before release) comes first, decided by the user
-   on 2026-10-14:** nothing is recorded or published until the app is
-   presentable (good-looking and working well). **Next: spec 034 (approved 2026-10-17, not
-   started): Teacher page in the menu (`GET/POST /teacher`, free
-   conversation grounded on the course word lookup, `<lesson>` "none:
-   free conversation"), remove the "Chat with the teacher" button,
-   rule 6 of `SYSTEM_PROMPT` says "their Japanese study", new
-   free-conversation eval cases. Needs Ollama running (`ollama serve`,
-   `qwen2.5:7b`) to re-run `evals/run_teacher_evals.py` before commit.
-   Then update the GIF guide for the new flow.** Invoke the
-   `ui-ux-pro-max:ui-ux-pro-max` and `frontend-design:frontend-design`
-   skills first (project-scope plugins in `.claude/settings.json`).
-   Build on the tokens from ADR 0005; the flag mockup is described in
-   the visual design section above.
-   - 026 done (profiles as accounts, logout, delete with confirmation);
-   - 027 done (guardrails, course word lookup, red-team set 25/26);
-   - 028 done (chat panel, sentence-by-sentence streaming, browser-checked);
-   - 029 done: navigation and dashboard (header nav, Continue, course
-     cards, left counter, unlock messages, end screen, phone-width
-     fixes, one button class, "Practice" spelling);
-   - 030 done: flag theme chosen, ADR 0005, tokens, dark mode, system
-     fonts, contrast test;
-   - 033 done: Practice lesson cards;
-   - 032 done: focus ring, skip link, no external URLs, three widths;
-   - 031 done: flag design on every page (sun disc, `<ruby>`, "Did you
-     know?", feedback animation, phone nav scroll, chat below the
-     header, favicon);
-   - 032 draft: keyboard and focus, no external URLs test, offline,
-     360/768/1280 light and dark, user approval before the GIF.
-   Then Phase E: README already rewritten and committed; demo GIF
-   recorded by the user (step-by-step guide was given on 2026-10-14:
-   ScreenToGif, private browser window, zoom 125%, 15 fps, save to
-   `docs/demo.gif` < 8 MB; the guide needs updating after 026-030
-   change the flow); CHANGELOG `0.1.0 - <date>`; ask before tag and
-   GitHub Release.
-3. Later UI: "lesson unlocked" messages, shuffled practice, per-language
+2. **Phase F (polish before release) is complete** (026-034, last one
+   on 2026-10-19). The user decided on 2026-10-14 that nothing is
+   recorded or published until the app is presentable; ask the user
+   whether it now is before starting Phase E.
+3. **Phase E (next):** README already rewritten and committed. Update
+   the GIF guide for the new flow (header menu with Teacher, Practice
+   cards, the ask form opening the side panel, no "Chat with the
+   teacher" button), then the user records the demo GIF (guide from
+   2026-10-14: ScreenToGif, private browser window, zoom 125%, 15 fps,
+   save to `docs/demo.gif` < 8 MB; Ollama running for the chat part).
+   Then CHANGELOG `0.1.0 - <date>`; ask before tag and GitHub Release.
+4. Later UI: shuffled practice, per-language
    theming via CSS variables.

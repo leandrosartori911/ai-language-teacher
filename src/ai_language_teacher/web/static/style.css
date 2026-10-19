@@ -545,10 +545,6 @@ rt {
 
 /* Chat with the teacher (spec 028): a side panel below the header on wide
    screens, the page moves aside; full screen on a phone. */
-.chat-toggle {
-  margin: var(--space-2) 0;
-}
-
 .chat {
   position: fixed;
   top: var(--header-height);
@@ -623,6 +619,16 @@ body:has(.chat:not([hidden])) main {
 
 .messages .error {
   color: var(--wrong);
+}
+
+/* The Teacher page (spec 034): the same chat, filling the page. */
+.chat-page {
+  height: max(20rem, calc(100dvh - var(--header-height) - 14rem));
+  display: flex;
+  flex-direction: column;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
 }
 
 .chat-form {

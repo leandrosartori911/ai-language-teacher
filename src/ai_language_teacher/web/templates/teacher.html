@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Teacher · {{ name }} · AI Language Teacher{% endblock %}
+{% block content %}
+<h1>Teacher</h1>
+<p class="lead">Ask about any word, kana or kanji from your lessons. The teacher only uses Japanese from the course.</p>
+<noscript>
+  <p class="error">This chat needs JavaScript. You can still ask about one item with the ask form on any teaching card.</p>
+</noscript>
+{# Free conversation (spec 034). chat.js shows it; its history is kept apart
+   from the item chat. #}
+<section id="chat" class="chat-page" data-url="/teacher" data-key="teacher-free" aria-label="Chat with the AI teacher" hidden>
+  <ol class="messages" aria-live="polite"></ol>
+  <form class="chat-form">
+    <label for="chat-input" class="visually-hidden">Message to the teacher</label>
+    <input id="chat-input" maxlength="500" autocomplete="off" placeholder="What does taberu mean?">
+    <button class="button primary" type="submit">Send</button>
+  </form>
+</section>
+<script src="/static/chat.js" defer></script>
+{% endblock %}

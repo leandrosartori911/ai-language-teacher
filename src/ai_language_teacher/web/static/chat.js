@@ -1,14 +1,15 @@
-// Chat with the AI teacher (spec 028). Without JavaScript the ask forms on the
-// page still post to the ask page, so this script only builds on them.
+// Chat with the AI teacher: the side panel about one item (spec 028) and the
+// Teacher page (spec 034), which has no close button and is always shown.
+// Without JavaScript the ask forms still post to the ask page.
 (() => {
   const chat = document.getElementById("chat");
   if (!chat) return;
 
-  const KEY = "teacher-chat";
+  const KEY = chat.dataset.key || "teacher-chat";
   const MAX_MESSAGES = 12; // the last 6 exchanges
   const list = chat.querySelector(".messages");
   const input = chat.querySelector("#chat-input");
-  const toggle = document.querySelector(".chat-toggle");
+  const close = chat.querySelector(".chat-close");
   let busy = false;
 
   // sessionStorage keeps the chat while moving between items in this tab. It
@@ -47,11 +48,12 @@
   addEventListener("resize", fitBelowHeader);
 
   function show(open, focus = true) {
+    if (!close) return; // the Teacher page is always open
     fitBelowHeader();
     chat.hidden = !open;
-    toggle.setAttribute("aria-expanded", String(open));
     write(`${KEY}-open`, open);
-    if (focus) (open ? input : toggle).focus();
+    // Closing goes back to the ask form, which reopens the panel.
+    if (focus) (open ? input : document.querySelector("form.ask input[name=question]"))?.focus();
   }
 
   async function send(text) {
@@ -106,12 +108,15 @@
   }
 
   for (const message of history) bubble(message.role, message.content);
-  toggle.hidden = false;
-  toggle.addEventListener("click", () => show(chat.hidden));
-  chat.querySelector(".chat-close").addEventListener("click", () => show(false));
-  chat.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") show(false);
-  });
+  fitBelowHeader();
+  if (close) {
+    close.addEventListener("click", () => show(false));
+    chat.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") show(false);
+    });
+  } else {
+    chat.hidden = false;
+  }
   chat.querySelector(".chat-form").addEventListener("submit", (event) => {
     event.preventDefault();
     send(input.value);

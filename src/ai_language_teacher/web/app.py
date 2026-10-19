@@ -42,12 +42,14 @@ from ai_language_teacher.storage import (
     save_student,
 )
 from ai_language_teacher.teacher import (
+    FREE_CONVERSATION,
     MAX_HISTORY_MESSAGES,
     TeacherUnavailable,
     ask_ollama,
     chat_messages,
     chat_ollama,
     current_model,
+    grounded_prompt,
     safe_answer,
     safe_stream,
     teacher_prompt,
@@ -122,11 +124,14 @@ class ChatTurn(BaseModel):
     content: str
 
 
-class ChatRequest(BaseModel):
+class TeacherRequest(BaseModel):
     # The history comes from the browser tab (spec 028); the server keeps nothing.
-    item: str
     message: str
     history: list[ChatTurn] = []
+
+
+class ChatRequest(TeacherRequest):
+    item: str
 
 
 def current_student(conn: sqlite3.Connection, request: Request) -> Student | None:
@@ -537,16 +542,15 @@ def create_app(
             **context,
         )
 
-    @app.post("/chat/{skill}")
-    def chat_with_teacher(request: Request, skill: str, body: ChatRequest) -> Response:
-        teacher_target(request, skill, body.item)
+    def chat_reply(body: TeacherRequest, prompt: Callable[[str, list[str]], str]) -> Response:
+        # prompt(message, earlier student messages) builds the grounded prompt.
         message = body.message.strip()
         if not message or len(message) > MAX_QUESTION_LENGTH:
             return PlainTextResponse(TOO_LONG, status_code=400)
 
         history = [(turn.role, turn.content) for turn in body.history][-MAX_HISTORY_MESSAGES:]
         earlier = [content for role, content in history if role == "user"]
-        messages = chat_messages(history, item_prompt(skill, body.item, message, earlier))
+        messages = chat_messages(history, prompt(message, earlier))
         try:
             chunks = chat(messages)
         except TeacherUnavailable:
@@ -555,5 +559,35 @@ def create_app(
         # Japanese from earlier turns may be repeated, so it counts as allowed too.
         allowed = "\n".join(each["content"] for each in messages)
         return StreamingResponse(safe_stream(chunks, allowed), media_type="text/plain")
+
+    @app.post("/chat/{skill}")
+    def chat_with_teacher(request: Request, skill: str, body: ChatRequest) -> Response:
+        teacher_target(request, skill, body.item)
+        return chat_reply(
+            body, lambda message, earlier: item_prompt(skill, body.item, message, earlier)
+        )
+
+    @app.get("/teacher", response_class=HTMLResponse)
+    def teacher_page(request: Request) -> Response:
+        with closing(connect(db_path)) as conn:
+            student = open_student(conn, request)
+        context = {
+            "name": student.name,
+            "courses": open_skills(student, COURSES, PREREQUISITES),
+            "current": "/teacher",
+        }
+        return templates.TemplateResponse(request, "teacher.html", context)
+
+    @app.post("/teacher")
+    def free_chat(request: Request, body: TeacherRequest) -> Response:
+        # Free conversation (spec 034): no item, grounded on the course words only.
+        with closing(connect(db_path)) as conn:
+            open_student(conn, request)
+
+        def prompt(message: str, earlier: list[str]) -> str:
+            words = find_course_words("\n".join([*earlier, message]))
+            return grounded_prompt(FREE_CONVERSATION, message, words)
+
+        return chat_reply(body, prompt)
 
     return app

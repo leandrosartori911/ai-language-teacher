@@ -5,7 +5,8 @@ Needs Ollama with the model pulled; not part of CI. From the repository root:
     python evals/run_teacher_evals.py
 
 Each case goes through the same steps as the ask page: course word lookup,
-prompt, model, output checks. A case passes when the shown answer contains
+prompt, model, output checks. Cases without an item use the Teacher page's
+free-conversation prompt (spec 034). A case passes when the shown answer contains
 one of `expect_any` (if any are listed) and none of `forbid`, ignoring case.
 """
 
@@ -15,17 +16,28 @@ from pathlib import Path
 
 from ai_language_teacher.language.japanese.course import COURSES
 from ai_language_teacher.language.japanese.lookup import find_course_words
-from ai_language_teacher.teacher import ask_ollama, current_model, safe_answer, teacher_prompt
+from ai_language_teacher.teacher import (
+    FREE_CONVERSATION,
+    ask_ollama,
+    current_model,
+    grounded_prompt,
+    safe_answer,
+    teacher_prompt,
+)
 
 CASES = Path(__file__).with_name("teacher_cases.json")
 PASS_MARK = 0.9
 
 
 def run_case(case: dict) -> tuple[bool, bool, str]:
-    skill, item, question = case["skill"], case["item"], case["question"]
-    lesson = next(lesson for lesson in COURSES[skill] if item in lesson.items)
+    question = case["question"]
     words = find_course_words(question)
-    prompt = teacher_prompt(item, lesson.items[item], lesson.teaching[item], question, words)
+    if "item" in case:
+        skill, item = case["skill"], case["item"]
+        lesson = next(lesson for lesson in COURSES[skill] if item in lesson.items)
+        prompt = teacher_prompt(item, lesson.items[item], lesson.teaching[item], question, words)
+    else:
+        prompt = grounded_prompt(FREE_CONVERSATION, question, words)
     raw = ask_ollama(prompt)
     answer = safe_answer(raw, prompt)
 

@@ -147,3 +147,11 @@
   when something is learned, and "Not studied yet." with a Study button
   when nothing is; a line at the top explains that Practice reviews what
   Study taught.
+- Teacher page (spec 034): a "Teacher" link in the menu opens a
+  full-page chat for free conversation, not tied to one item, grounded
+  on the course word lookup and checked like the item chat. The "Chat
+  with the teacher" button on teaching cards is gone: the ask form opens
+  the side panel. Rule 6 of the system prompt now brings the student
+  back to "their lessons", the fallback answer no longer mentions a
+  card, and five free-conversation cases join the eval set (30/31 with
+  `qwen2.5:7b`).

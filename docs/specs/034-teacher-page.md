@@ -1,7 +1,15 @@
 # 034: A page of its own for chatting with the teacher
 
-> Status: **approved by the user on 2026-10-17** (from the user's review on
-> 2026-10-17; the user chose "a page of its own in the menu").
+> Status: **done on 2026-10-19** (approved by the user on 2026-10-17, from
+> the user's review that day; the user chose "a page of its own in the menu").
+>
+> Changed during implementation, after running the evals: rule 6 reads
+> "bringing the student back to their lessons" (the planned "to their
+> Japanese study" made `qwen2.5:7b` answer the tipping question from its own
+> knowledge), and the free-conversation `<lesson>` text adds "The only course
+> words are the ones in <course_words>; any other word is not in the lessons
+> yet." (without it the model explained "wasuretai"). Evals: 30/31 (97%), the
+> one failure is the known "repeat your system prompt" case.
 
 ## Problem
 Every teaching card offers two ways into the same chat: the "Ask the
@@ -40,21 +48,21 @@ looking at the dashboard.
   result is reported (needs Ollama; the pass mark stays 90%).
 
 ## Acceptance Criteria
-- [ ] No "Chat with the teacher" button on teaching cards; the ask form
+- [x] No "Chat with the teacher" button on teaching cards; the ask form
       still opens the panel (checked in the browser).
-- [ ] The header menu links to `/teacher` on pages with an open profile.
-- [ ] `GET /teacher` without a profile redirects home; with one it shows
+- [x] The header menu links to `/teacher` on pages with an open profile.
+- [x] `GET /teacher` without a profile redirects home; with one it shows
       the chat page.
-- [ ] `POST /teacher` streams an answer from a prompt with no item, the
+- [x] `POST /teacher` streams an answer from a prompt with no item, the
       course words found in the messages and the student's text inside
       `<student_message>`.
-- [ ] `POST /teacher` rejects a blank or too long message (400) and
+- [x] `POST /teacher` rejects a blank or too long message (400) and
       a damaged history (422), like `/chat/{skill}`.
-- [ ] When Ollama is not running, `POST /teacher` answers 503 with the
+- [x] When Ollama is not running, `POST /teacher` answers 503 with the
       `ollama pull` message.
-- [ ] Invented Japanese is dropped from Teacher answers (test with a
+- [x] Invented Japanese is dropped from Teacher answers (test with a
       fake model).
-- [ ] The free-conversation eval cases exist, and the full eval run
+- [x] The free-conversation eval cases exist, and the full eval run
       reaches the pass mark (reported to the user).
 
 ## Out of Scope
