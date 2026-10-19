@@ -1,6 +1,6 @@
 # Session State — read this first in a new session
 
-Last updated: 2026-10-19. Phases A-D complete. Phase F (polish before
+Last updated: 2026-10-19 (end of day). Phases A-D complete. Phase F (polish before
 release): specs 026 (profiles as accounts, logout, delete), 027
 (teacher guardrails, word lookup, red-team set), 028 (chat panel), 029
 (navigation and dashboard), 030 (visual direction: flag theme,
@@ -685,7 +685,16 @@ engine, C: web app, D: local LLM teacher, E: release).
    opens the side panel, then the Teacher page ("What does arigatou
    mean?"), then Dashboard. Same setup as 2026-10-14: ScreenToGif,
    private browser window, zoom 125%, 15 fps, warm up `qwen2.5:7b`,
-   save to `docs/demo.gif` < 8 MB. **Waiting for the user to record it.**
+   save to `docs/demo.gif` < 8 MB. First take on 2026-10-19
+   (`docs/demogif.gif`, untracked, 1 MB, 52 s, 1867x958, full flow):
+   rejected because the "Activate Windows" watermark shows bottom-right
+   (x 1552-1792, y 866-906); ffmpeg `delogo` cleaned page frames but
+   smeared the chat panel's divider and input border. **The user will
+   re-record** with a ~1280x720 region away from the bottom-right corner,
+   and type "What does taberu mean?" / "Where did this kana come from?".
+   Then rename to `docs/demo.gif`, delete `docs/demogif.gif`, add the
+   GIF to the README, CHANGELOG `0.1.0 - <date>`, commit, push, CI, and
+   ask before tag and GitHub Release.
    Then CHANGELOG `0.1.0 - <date>`; ask before tag and GitHub Release.
 4. Later UI: shuffled practice, per-language
    theming via CSS variables.
