@@ -659,12 +659,13 @@ engine, C: web app, D: local LLM teacher, E: release).
    on 2026-10-19). The user decided on 2026-10-14 that nothing is
    recorded or published until the app is presentable; ask the user
    whether it now is before starting Phase E.
-3. **Phase E (next):** README already rewritten and committed. Update
-   the GIF guide for the new flow (header menu with Teacher, Practice
-   cards, the ask form opening the side panel, no "Chat with the
-   teacher" button), then the user records the demo GIF (guide from
-   2026-10-14: ScreenToGif, private browser window, zoom 125%, 15 fps,
-   save to `docs/demo.gif` < 8 MB; Ollama running for the chat part).
+3. **Phase E (next):** README already rewritten and committed. The GIF
+   guide was updated for the new flow on 2026-10-19 (in chat): profile
+   "Start", Continue hiragana, あ right, い wrong, Explain my mistake
+   opens the side panel, then the Teacher page ("What does arigatou
+   mean?"), then Dashboard. Same setup as 2026-10-14: ScreenToGif,
+   private browser window, zoom 125%, 15 fps, warm up `qwen2.5:7b`,
+   save to `docs/demo.gif` < 8 MB. **Waiting for the user to record it.**
    Then CHANGELOG `0.1.0 - <date>`; ask before tag and GitHub Release.
 4. Later UI: shuffled practice, per-language
    theming via CSS variables.
