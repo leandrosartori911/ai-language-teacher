@@ -11,6 +11,8 @@ data leaves your computer.
 
 > Status: v0.1.0, first release. Japanese only.
 
+![Demo: a new profile studies あ and い, asks the AI teacher to explain a mistake, then chats on the Teacher page](docs/demo.gif)
+
 ## What you can learn
 
 | Course | Content |

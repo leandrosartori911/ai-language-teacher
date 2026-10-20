@@ -60,7 +60,8 @@ on 2026-10-15): 030-034 done (033 and 034 from the user's review on 2026-10-17);
 - [x] New conversation button and a teacher that drifts less (spec 035)
 
 ## Phase E: Release (after Phase F)
-- [ ] v0.1.0 release, demo GIF
+- [x] Demo GIF in the README
+- [ ] v0.1.0 tag and GitHub Release
 
 ## Later
 - Per-language themed interface (e.g. Japanese in flag colors)
