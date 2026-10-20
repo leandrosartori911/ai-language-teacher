@@ -67,10 +67,10 @@ Portuguese for conversation with the user in Claude Code.
   be flagged *before* writing code next time, not after — the user was
   fine with it but asked to be told beforehand going forward.
 - **Small commits, one per spec.** Commit message: short summary + body
-  explaining what changed and why. Always end with:
-  `Co-Authored-By: <model actually running the session> <noreply@anthropic.com>`
-  (e.g. `Claude Opus 5.5`; the user approved naming the real model on
-  2026-09-27 instead of the earlier fixed `Claude Sonnet 5`).
+  explaining what changed and why. No `Co-Authored-By` trailer: on
+  2026-10-20 the user asked to be the only contributor, so the trailer
+  was removed from the whole history and `.claude/settings.json` sets
+  `attribution` to empty.
 - **`git push` after every commit** (remote `origin` is set, `gh` is
   authenticated as `leandrosartori911`), then watch the CI run
   (`gh run watch <id> --exit-status`) and report the result.
