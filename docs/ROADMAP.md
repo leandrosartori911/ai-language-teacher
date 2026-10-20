@@ -61,7 +61,7 @@ on 2026-10-15): 030-034 done (033 and 034 from the user's review on 2026-10-17);
 
 ## Phase E: Release (after Phase F)
 - [x] Demo GIF in the README
-- [ ] v0.1.0 tag and GitHub Release
+- [x] v0.1.0 tag and GitHub Release (2026-10-20)
 
 ## Later
 - Per-language themed interface (e.g. Japanese in flag colors)

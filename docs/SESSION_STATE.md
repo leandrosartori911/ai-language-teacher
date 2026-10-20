@@ -8,7 +8,7 @@ tokens, dark mode, ADR 0005) 031 (flag design on every page) and 032 (accessibil
 check) done. From the user's review on 2026-10-17: 033 (Practice
 lesson cards) and 034 (Teacher page) done; 035 (New conversation,
 shorter memory, from the user's test on 2026-10-19) done. **Phase F is complete;
-Phase E: demo GIF in the README (2026-10-20); next is the v0.1.0 tag and Release.**
+Phase E complete: v0.1.0 released on 2026-10-20.**
 
 ## What this project is
 
@@ -684,7 +684,8 @@ engine, C: web app, D: local LLM teacher, E: release).
    (region stops above it). Flow: profile "Start", あ, い wrong,
    Explain my mistake in the side panel, Teacher page "What does taberu
    mean?" (no Dashboard at the end; fine). Added to the README;
-   CHANGELOG `0.1.0 - 2026-10-20`. **Next: ask the user before the
-   `v0.1.0` tag and GitHub Release**, then the LinkedIn post.
+   CHANGELOG `0.1.0 - 2026-10-20`. Tag `v0.1.0` and the GitHub Release
+   published on 2026-10-20. **Phase E is complete.** Next: LinkedIn post,
+   if the user wants one, then the "Later" list in ROADMAP.md.
 4. Later UI: shuffled practice, per-language
    theming via CSS variables.
