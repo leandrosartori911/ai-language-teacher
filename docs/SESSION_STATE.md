@@ -685,7 +685,9 @@ engine, C: web app, D: local LLM teacher, E: release).
    Explain my mistake in the side panel, Teacher page "What does taberu
    mean?" (no Dashboard at the end; fine). Added to the README;
    CHANGELOG `0.1.0 - 2026-10-20`. Tag `v0.1.0` and the GitHub Release
-   published on 2026-10-20. **Phase E is complete.** Next: LinkedIn post,
-   if the user wants one, then the "Later" list in ROADMAP.md.
+   published on 2026-10-20. **Phase E is complete.** LinkedIn post published
+   (https://www.linkedin.com/feed/update/urn:li:activity:7518416883319201792/),
+   project added to LinkedIn Featured, pinned and featured on the GitHub
+   profile README. Next, if the user returns: the "Later" list in ROADMAP.md.
 4. Later UI: shuffled practice, per-language
    theming via CSS variables.
